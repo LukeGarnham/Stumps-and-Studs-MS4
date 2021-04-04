@@ -117,6 +117,11 @@ The final project is hosted on Heroku and can be found **TBC**
 
 ## Languages
 
+* HTML
+* CSS
+* JavaScript
+* Python
+
 ## Technologies Used
 
 ## Services Used
