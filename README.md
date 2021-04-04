@@ -124,6 +124,10 @@ The final project is hosted on Heroku and can be found **TBC**
 
 ## Technologies Used
 
+ - [Django](https://www.djangoproject.com/)
+ - [Bootstrap](https://getbootstrap.com/)
+ - [jQuery](https://jquery.com/)
+
 ## Services Used
 
 ## Testing
