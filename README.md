@@ -87,6 +87,7 @@ The final project is hosted on Heroku and can be found **TBC**
     -	Store my personal and default delivery address details.
     -	Update my account details.
     -	View my past orders.
+    -   Sign in and out of my account.
 
 * As an administrator of the website, I want to be able to:
     -	Use the admin panel to add products.
