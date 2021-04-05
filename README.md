@@ -110,6 +110,13 @@ The settings.py file is where the global settings for the project are configured
 
 ### File Structure
 
+The project is split into apps.  Each app has files (such as forms, models, urls and html files) which are specific to that app.  However, there are some common files which we want apps to inherit from or which don't necessarily belong within one of the apps.  These are stored in the templates folder.
+
+Each HTML file extends from the base.html file which is saved in the templates folder.
+
+The templates folder contains an 'allauth' subfolder which contains a number of the allauth template html files.  These were copied from the AllAuth site-packages directory using the following command before I then deleted the AllAuth openid and tests templates:
+*   *cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth*
+
 ### Static Files
 
 ## Database Scema
@@ -169,6 +176,9 @@ The project is deployed on Heroku which will need to know which packages to inst
 
 With Django installed, I created my project by running this command:
 *   *django-admin startproject stumps_and_studs .*
+
+To create the various apps, I used the following command:
+*   *python3 manage.py startapp* app_name
 
 ### Environment Variables
 
