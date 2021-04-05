@@ -86,11 +86,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # AllAuth Configuration:
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_AUTHENTICATION_METHOD = 'Email'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_UNIQUE_EMAIL = True
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 
 
 WSGI_APPLICATION = 'stumps_and_studs.wsgi.application'
