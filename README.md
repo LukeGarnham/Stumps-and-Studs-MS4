@@ -103,6 +103,11 @@ The final project is hosted on Heroku and can be found **TBC**
 
 ### Settings
 
+The settings.py file is where the global settings for the project are configured.  Django creates a lot of these by default but there were some changes/additions which needed to be made as I developed the project.
+
+*   **Installed Apps**:  For each new Django app I created, the app name needed to be added to the list of installed apps (INSTALLED_APPS).
+*   **Django AllAuth**:  AllAuth can be configured in the global settings.py file.  Installation instructions for AllAuth can be found [here](https://django-allauth.readthedocs.io/en/latest/installation.html) and configuration instructions can be found [here](https://django-allauth.readthedocs.io/en/latest/configuration.html).
+
 ### File Structure
 
 ### Static Files
@@ -129,6 +134,7 @@ The final project is hosted on Heroku and can be found **TBC**
  - [Django](https://www.djangoproject.com/)
  - [Bootstrap](https://getbootstrap.com/)
  - [jQuery](https://jquery.com/)
+ - [Django AllAuth](https://django-allauth.readthedocs.io/en/latest/)
 
 ## Services Used
 
