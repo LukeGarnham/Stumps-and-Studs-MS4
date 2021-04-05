@@ -38,9 +38,10 @@ The final project is hosted on Heroku and can be found **TBC**
 8. [**Deployment**](#deployment)
     * [**GitPod Environment**](#gitPod-environment)
     * [**Packages Installed**](#packages-installed)
-    * [**Environment Variables**](#environment-variables)
     * [**Create The Django Project**](#create-the-django-project)
+    * [**Environment Variables**](#environment-variables)
     * [**Setting Up The Database**](#setting-up-the-database)
+    * [**Create Admin Superuser**](#create-admin-superuser)
     * [**Deploy Application To Heroku**](#deploy-application-to-heroku)
     * [**Connecting Django Application To Postrgres Database**](#connecting-django-application-to-postrgres-database)
     * [**Using Flask Template Inheritance**](#using-flask-template-inheritance)
@@ -146,13 +147,44 @@ The final project is hosted on Heroku and can be found **TBC**
 
 ### GitPod Environment
 
+I created my GitHub repository (repo) by using the [Code Institute template](https://github.com/Code-Institute-Org/gitpod-full-template).  I named my repo "Stumps-and-Studs-MS4".  I opened this repo in GitPod.
+
+
+
 ### Packages Installed
 
-### Environment Variables
+From within GitPod, I installed a number of packages:
+* Django - *pip3 install django*
+
+The project is deployed on Heroku which will need to know which packages to install in order to correctly host my finished project.  I kept an updated list of all of the installed packages in the requirements.txt file using this command:
+* *pip3 freeze > requirements.txt*
 
 ### Create The Django Project
 
+With Django installed, I created my project by running this command:
+*   *django-admin startproject stumps_and_studs .*
+
+### Environment Variables
+
+The Code Institute GitPod template already comes with a .gitignore file so I did not need to create one.  Any files listed in this document are not pushed to GitHub which ensures environment variables which need to remain private and secure are not made publicly available within my repo.
+
 ### Setting Up The Database
+
+Django comes with a default database file called db.sqlite3.  For security reasons, this file suffix is listed in the .gitignore file to ensure the database isn't pushed to GitHub.
+
+To update the database when a new models was created, I ran the following commands:
+*   *python3 manage.py makemigrations --dry-run* - This tells us what would happen if we actually ran the command.
+*   *python3 manage.py makemigrations* - Django sees that we've added a new model to our app so it creates a new Python file in the migrations folder that contains the code to create that database table based on our model.
+*   *python3 manage.py showmigrations* - Lists all migrations with [X] indicating those that have been done already and [ ] indicating those that need to be migrated.
+*   *python3 manage.py migrate --plan* - Lists all of the changes that will be made to the database and various field settings without executing changes to the database.
+*   *python3 manage.py migrate* - Executes the migration and changes to the database are made.
+
+The db.sqlite3 database was used in the development of my project from within the GitPod environement.
+
+### Create Admin Superuser
+
+Django includes a built-in admin function which enables users to log in and look at the tables in our database and make changes to them.  To create a superuser, I ran the following command:
+*	 *python3 manage.py createsuperuser*
 
 ### Deploy Application To Heroku
 
