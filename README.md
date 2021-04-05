@@ -150,12 +150,11 @@ The final project is hosted on Heroku and can be found **TBC**
 
 I created my GitHub repository (repo) by using the [Code Institute template](https://github.com/Code-Institute-Org/gitpod-full-template).  I named my repo "Stumps-and-Studs-MS4".  I opened this repo in GitPod.
 
-
-
 ### Packages Installed
 
 From within GitPod, I installed a number of packages:
-* Django - *pip3 install django*
+*   [Django](https://www.djangoproject.com/) - *pip3 install django*
+*   [Django AllAuth](https://django-allauth.readthedocs.io/en/latest/) - *pip3 install django-allauth*
 
 The project is deployed on Heroku which will need to know which packages to install in order to correctly host my finished project.  I kept an updated list of all of the installed packages in the requirements.txt file using this command:
 * *pip3 freeze > requirements.txt*
