@@ -30,21 +30,20 @@
         <title>Stumps & Studs {% block extra_title %}{% endblock %}</title>
     </head>
     <body>
-        <header class="container-fluid">
-            <div class="row p-1">
-                <!-- Menu Icon -->
-                <div class="col-2 d-md-none my-auto">
-                    <button class="nav-toggle-button blue-hover" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggle-content" aria-controls="navbar-toggle-content" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+        <header class="container-fluid px-0">
+            <div class="row p-1 mx-0">
                 <!-- Logo -->
                 <div class="d-none d-md-block col-4 order-md-1 my-auto">
-                    <h2>Stumps & Studs</h2>
+                    <a href=""><h1 class="mb-0">Stumps & Studs</h1></a>
                 </div>
                 <!-- Account & Basket -->
-                <div class="col-10 col-md-4 order-md-3 my-auto">
-                    <ul class="list-inline my-auto d-flex justify-content-end align-items-center">
+                <div class="col-12 col-md-4 order-md-3 my-auto">
+                    <ul class="list-inline my-auto d-flex justify-content-between justify-content-md-end align-items-center">
+                        <li class="list-inline-item d-md-none mx-0">
+                            <button class="nav-toggle-button blue-hover" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggle-content" aria-controls="navbar-toggle-content" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                        </li>
                         <li class="list-inline-item d-none d-md-inline mx-0">
                             <a href="" class="p-2"><strong>Register</strong></a>
                         </li>
@@ -53,7 +52,7 @@
                             <a href="" class="p-2"><strong>Login</strong></a>
                         </li>
                         <li class="list-inline-item d-inline d-md-none mx-0">
-                            <div class="text-center d-flex flex-column p-2 blue-hover">
+                            <div id="search-button" class="text-center d-flex flex-column p-2 blue-hover">
                                 <i class="fas fa-search"></i>
                                 <small><strong>Search</strong></small>
                             </div>
@@ -83,7 +82,7 @@
                     </ul>
                 </div>
                 <!-- Search box -->
-                <div class="col-10 offset-1 col-md-4 offset-md-0 order-md-2 my-auto">
+                <div id="nav-search" class="col-10 offset-1 col-md-4 offset-md-0 order-md-2 my-auto py-1 py-md-0">
                     <form class="d-flex" method="GET" action="">
                         <div class="input-group">
                             <input class="form-control border border-dark border-end-0 rounded-0 rounded-end rounded-pill" type="search" name="q" placeholder="Search" aria-label="Search">
@@ -96,10 +95,10 @@
                     </form>
                 </div>
             </div>
-            <nav class="navbar navbar-expand-md">
+            <nav class="navbar navbar-expand-md py-0 mx-0">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbar-toggle-content">
-                        <ul class="navbar-nav mx-auto">
+                        <ul class="navbar-nav mx-auto py-2 py-md-0">
                             <li class="nav-item d-md-none">
                                 <a class="nav-link" href="#"><h5>Stumps & Studs</h5></a>
                             </li>
@@ -140,6 +139,8 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
             <!-- jQuery CDN: https://code.jquery.com/ -->
             <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+            <!-- base.js -->
+            <script src="{% static 'js/base.js' %}"></script>
         {% endblock %}
         
         {% block postload_js %}

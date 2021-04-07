@@ -1,18 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&family=Source+Sans+Pro&display=swap');
+
 body {
-    color: #011627;
+    color: #35393C;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Crimson Text', serif;
 }
 
 header {
-    background-color: #5C80BC;
+    background-color: #35393C;
+    color: #fff;
 }
 
 a {
     text-decoration: none;
-    color: #011627;
+    color: #fff;
 }
 
 .blue-hover:hover,a:hover {
-    color: #fff;
+    color: #B279A7;
 }
 
 .nav-toggle-button {
@@ -23,4 +31,5 @@ a {
     border: 1px solid transparent;
     border-radius: .25rem;
     transition: box-shadow .15s ease-in-out;
+    color: #fff;
 }
