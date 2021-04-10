@@ -52,10 +52,10 @@
                             <a href="" class="p-2"><strong>Login</strong></a>
                         </li>
                         <li class="list-inline-item d-inline d-md-none mx-0">
-                            <div id="search-button" class="text-center d-flex flex-column p-2 purple-hover">
+                            <button id="search-button" class="btn text-center align-items-center d-flex flex-column p-2 purple-hover" type="button" data-bs-toggle="collapse" data-bs-target="#nav-search" aria-expanded="false" aria-controls="nav-search">
                                 <i class="fas fa-search"></i>
                                 <small><strong>Search</strong></small>
-                            </div>
+                            </button>
                         </li>
                         <li class="list-inline-item mx-0">
                             <div class="dropdown">
@@ -82,7 +82,7 @@
                     </ul>
                 </div>
                 <!-- Search box -->
-                <div id="nav-search" class="col-10 offset-1 col-md-4 offset-md-0 order-md-2 my-auto py-1 py-md-0">
+                <div id="nav-search" class="collapse d-md-block col-10 offset-1 col-md-4 offset-md-0 order-md-2 my-auto py-1 py-md-0">
                     <form class="d-flex" method="GET" action="">
                         <div class="input-group">
                             <input class="form-control border border-dark border-end-0 rounded-0 rounded-end rounded-pill" type="search" name="q" placeholder="Search" aria-label="Search">

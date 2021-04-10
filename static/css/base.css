@@ -20,6 +20,11 @@ header {
     width: 100%;
 }
 
+#search-button {
+    color: #fff;
+    box-shadow: none;
+}
+
 a {
     text-decoration: none;
     color: #fff;
