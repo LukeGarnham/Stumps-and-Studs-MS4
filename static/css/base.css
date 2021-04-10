@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text&family=Source+Sans+Pro&display=swap');
 
 body {
-    color: #35393C;
+    color: #04080F;
     font-family: 'Source Sans Pro', sans-serif;
     margin-top: 101px;
     /* Temp style for testing - to be deleted */
@@ -13,7 +13,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 header {
-    background-color: #35393C;
+    background-color: #04080F;
     color: #fff;
     position: fixed;
     top: 0;
@@ -31,7 +31,7 @@ a {
 }
 
 .purple-hover:hover,a:hover {
-    color: #B279A7;
+    color: #B388EB;
 }
 
 /* Bootstrap styling */
