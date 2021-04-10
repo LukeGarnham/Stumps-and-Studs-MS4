@@ -20,7 +20,7 @@ header {
     width: 100%;
 }
 
-#search-button {
+.btn, .btn:focus {
     color: #fff;
     box-shadow: none;
 }
