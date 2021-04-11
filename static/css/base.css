@@ -21,7 +21,6 @@ header {
 }
 
 .btn, .btn:focus {
-    color: #fff;
     box-shadow: none;
 }
 
@@ -30,9 +29,13 @@ a {
     color: #fff;
 }
 
-.purple-hover:hover,a:hover {
+.purple-hover:hover,a:hover, #search-button[aria-expanded="true"], #search-button:hover {
     color: #B388EB;
     font-weight: bold;
+}
+
+#search-button {
+    color: #fff;
 }
 
 /* Bootstrap styling */
@@ -51,6 +54,6 @@ a {
 @media only screen and (max-width: 768px) {
     /* Adjust the top margin to account for smaller header & navbar. */
     body {
-      margin-top: 61px;
+      margin-top: 63px;
     }
   }
