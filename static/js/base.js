@@ -2,9 +2,9 @@ $(document).ready(function() {
 
     var prevScrollpos = window.pageYOffset;
     // Functions to run whenever a page is scrolled.
+    // Referenced this solution: https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
     window.onscroll = function() {
-        // Screenwidth is 17px out from actual screen width so adjustment made.
-        var screenWidth = $(window).width() + 17;
+        var screenWidth = window.innerWidth;
         var currentScrollPos = window.pageYOffset;
         // If user has scrolled up on medium screens upwards.
         if (prevScrollpos > currentScrollPos && screenWidth >= 768) {
@@ -19,7 +19,7 @@ $(document).ready(function() {
 
     // Functions to run whenever the screen is resized.
     $( window ).resize(function() {
-        var screenWidth = $(window).width() + 17;
+        var screenWidth = window.innerWidth;
         // If the screen width is less than 768px:
         if (screenWidth < 768) {
             // The navbar should always be visible when the menu button is clicked.
