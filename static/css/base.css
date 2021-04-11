@@ -7,7 +7,7 @@
 body {
     color: #04080F;
     font-family: 'Open Sans', sans-serif;
-    margin-top: 101px;
+    margin-top: 93px;
     /* Temp style for testing - to be deleted */
     height: 1500vh;
 }
@@ -84,6 +84,10 @@ header {
     color: #fff;
 }
 
+#nav-search .form-control {
+    background-clip:border-box;
+}
+
 /*----------------------------------------------------------------------------------------------------------Home Pages*/
 
 /*------------------------------------------------Carousel*/
@@ -105,7 +109,7 @@ header {
 @media only screen and (max-width: 768px) {
     /* Adjust the top margin to account for smaller header & navbar. */
     body {
-      margin-top: 61px;
+      margin-top: 53px;
     }
     .carousel-item img {
         height: calc(100vh - 61px);
