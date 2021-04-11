@@ -1,4 +1,8 @@
+/*Import fonts from Google Fonts: Open Sans font for body, Crimson Text for headers */
+
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text&family=Open+Sans&display=swap');
+
+/*----------------------------------------------------------------------------------------------------------General rules*/
 
 body {
     color: #04080F;
@@ -10,14 +14,6 @@ body {
 
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Crimson Text', serif;
-}
-
-header {
-    background-color: #04080F;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    width: 100%;
 }
 
 .btn, .btn:focus {
@@ -37,6 +33,17 @@ a {
 #search-button {
     color: #fff;
     border: none;
+}
+
+/*----------------------------------------------------------------------------------------------------------Navbar*/
+
+header {
+    background-color: #04080F;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 .dropdown-menu {
@@ -59,10 +66,25 @@ a {
     color: #fff;
 }
 
+/*----------------------------------------------------------------------------------------------------------Home Pages*/
+
+/*------------------------------------------------Carousel*/
+
+.carousel-item img {
+    width: auto;
+    height: calc(100vh - 101px);
+    object-fit: cover;
+}
+
+/*----------------------------------------------------------------------------------------------------------Media Queries*/
+
 /* Apply to screen sizes up to 768px width */
 @media only screen and (max-width: 768px) {
     /* Adjust the top margin to account for smaller header & navbar. */
     body {
       margin-top: 61px;
+    }
+    .carousel-item img {
+        height: calc(100vh - 61px);
     }
   }

@@ -246,4 +246,12 @@ Django includes a built-in admin function which enables users to log in and look
 
 ### Media
 
+I wanted prominent images to be high resolution so sourced them from sites such as [Pexels](https://www.pexels.com/) and [Unsplash](https://unsplash.com/):
+
+*   [Home Page Cricketer](https://www.pexels.com/photo/cheerful-young-man-sitting-on-cricket-field-4770620/)
+*   [Home Page Golfer](https://www.pexels.com/photo/man-walking-carrying-black-and-red-golf-bag-on-green-grass-field-1325681/)
+*   [Home Page Running Shoes](https://www.pexels.com/photo/people-doing-marathon-618612/)
+*   [Home Page Clothing](https://www.pexels.com/photo/three-women-kneeling-on-floor-866023/)
+
+
 ### Acknowledgements
