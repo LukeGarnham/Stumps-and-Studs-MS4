@@ -50,3 +50,19 @@
         </div>
     </div>
 {% endblock %}
+
+{% block postload_js %}
+<script>
+    $('header').css('background','transparent');
+    $('body').css('margin-top', '0')
+    // Make header transparent when at top of page, black when scrolling down.
+    // Solution sourced from: https://stackoverflow.com/questions/36246878/how-to-make-a-transparent-navbar-visible-when-scrolling
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >= 50) {
+            $('header').css('background','#04080F');
+        } else {
+            $('header').css('background','transparent');
+        }
+    });
+</script>
+{% endblock %}

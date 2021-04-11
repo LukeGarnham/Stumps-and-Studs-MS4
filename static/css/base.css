@@ -55,6 +55,8 @@ header {
     top: 0;
     width: 100%;
     z-index: 999;
+    transition: all 0.6s ease;
+    -webkit-transition: all 0.6s ease;
 }
 
 .dropdown-menu {
@@ -88,7 +90,7 @@ header {
 }
 
 .carousel-caption {
-    top: 1.25rem;
+    top: 10%;
 }
 
 /*----------------------------------------------------------------------------------------------------------Media Queries*/
