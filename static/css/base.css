@@ -41,9 +41,11 @@ a {
 .purple-hover:hover,
 a:hover,
 #search-button[aria-expanded="true"],
-#search-button:hover {
+#search-button:hover,
+.dropdown-item:hover {
     color: #B388EB;
     font-weight: bold;
+    background-color: #04080F;
 }
 
 /*----------------------------------------------------------------------------------------------------------Navbar*/
@@ -61,10 +63,13 @@ header {
 
 .dropdown-menu {
     transform: translate(-50px, 56px);
-    border: 1px solid #04080F;
-    color: #04080F;
+    border: none;
     text-align: center;
     min-width: auto;
+}
+
+.dropdown-item {
+    color: #fff;
 }
 
 /* Bootstrap styling */
@@ -91,6 +96,7 @@ header {
 
 .carousel-caption {
     top: 10%;
+    font-weight: bold;
 }
 
 /*----------------------------------------------------------------------------------------------------------Media Queries*/
