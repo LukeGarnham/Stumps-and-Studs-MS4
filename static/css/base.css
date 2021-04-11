@@ -36,6 +36,15 @@ a {
 
 #search-button {
     color: #fff;
+    border: none;
+}
+
+.dropdown-menu {
+    transform: translate(-50px, 56px);
+    border: 1px solid #04080F;
+    color: #04080F;
+    text-align: center;
+    min-width: auto;
 }
 
 /* Bootstrap styling */
@@ -54,6 +63,6 @@ a {
 @media only screen and (max-width: 768px) {
     /* Adjust the top margin to account for smaller header & navbar. */
     body {
-      margin-top: 63px;
+      margin-top: 61px;
     }
   }
