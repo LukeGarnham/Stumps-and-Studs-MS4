@@ -1,0 +1,64 @@
+<div class="row p-1 mx-0">
+    <!-- Logo -->
+    <div class="d-none d-md-block col-4 order-md-1 my-auto">
+        <a href=""><h1 class="mb-0">Stumps & Studs</h1></a>
+    </div>
+    <!-- Search Button, Account & Basket -->
+    <div class="col-12 col-md-4 order-md-3 my-auto">
+        <ul class="list-inline my-auto d-flex justify-content-between justify-content-md-end align-items-center">
+            <li class="list-inline-item d-md-none mx-0">
+                <button class="nav-toggle-button purple-hover" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggle-content" aria-controls="navbar-toggle-content" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </li>
+            <li class="list-inline-item d-none d-md-inline mx-0">
+                <a href="" class="p-2">Register</a>
+            </li>
+            <li class="list-inline-item d-none d-md-inline mx-0">|</li>
+            <li class="list-inline-item d-none d-md-inline mx-0">
+                <a href="" class="p-2">Login</a>
+            </li>
+            <li class="list-inline-item d-inline d-md-none mx-0">
+                <button id="search-button" class="btn text-center align-items-center d-flex flex-column p-2 purple-hover" type="button" data-bs-toggle="collapse" data-bs-target="#nav-search" aria-expanded="false" aria-controls="nav-search">
+                    <i class="fas fa-search"></i>
+                    <small>Search</small>
+                </button>
+            </li>
+            <li class="list-inline-item mx-0">
+                <div class="dropdown">
+                    <span class="text-center d-flex flex-column p-2 purple-hover" type="button" id="account-options" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                        <small>Account</small>
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="account-options">
+                        <li>
+                            <a href="" class="dropdown-item">Account</a>
+                        </li>
+                        <li>
+                            <a href="" class="dropdown-item">Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="list-inline-item mx-0">
+                <a href="" class="text-center d-flex flex-column p-2">
+                    <i class="fas fa-shopping-cart"></i>
+                    <small>£0.00</small>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Search box -->
+    <div id="nav-search" class="collapse d-md-block col-10 offset-1 col-md-4 offset-md-0 order-md-2 my-auto py-1 py-md-0">
+        <form class="d-flex" method="GET" action="">
+            <div class="input-group">
+                <input class="form-control border border-dark border-end-0 rounded-0 rounded-end rounded-pill" type="search" name="q" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn border border-dark border-start-0 rounded-0 rounded-start rounded-pill pe-3 bg-white purple-hover" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
