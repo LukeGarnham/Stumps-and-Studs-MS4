@@ -18,6 +18,19 @@ h1,h2,h3,h4,h5,h6 {
 
 .btn, .btn:focus {
     box-shadow: none;
+    border-radius: 0;
+    border: none;
+    color: #fff;
+}
+
+.btn-green {
+    background-color: #09814a;
+}
+
+.btn-green:hover {
+    background-color: #04080F;
+    font-weight: bold;
+    color: #B388EB;
 }
 
 a {
@@ -25,14 +38,12 @@ a {
     color: #fff;
 }
 
-.purple-hover:hover,a:hover, #search-button[aria-expanded="true"], #search-button:hover {
+.purple-hover:hover,
+a:hover,
+#search-button[aria-expanded="true"],
+#search-button:hover {
     color: #B388EB;
     font-weight: bold;
-}
-
-#search-button {
-    color: #fff;
-    border: none;
 }
 
 /*----------------------------------------------------------------------------------------------------------Navbar*/
@@ -74,6 +85,10 @@ header {
     width: auto;
     height: calc(100vh - 101px);
     object-fit: cover;
+}
+
+.carousel-caption {
+    top: 1.25rem;
 }
 
 /*----------------------------------------------------------------------------------------------------------Media Queries*/
