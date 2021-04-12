@@ -12,17 +12,38 @@
                 </button>
             </li>
             <li class="list-inline-item d-none d-md-inline mx-0">
-                <a href="" class="p-2">Register</a>
+                <a href="" class="align-items-center d-flex flex-column p-2 purple-hover">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <small>Register</small>
+                </a>
             </li>
-            <li class="list-inline-item d-none d-md-inline mx-0">|</li>
             <li class="list-inline-item d-none d-md-inline mx-0">
-                <a href="" class="p-2">Login</a>
+                <a href="" class="align-items-center d-flex flex-column p-2 purple-hover">
+                    <i class="fas fa-user-plus"></i>
+                    <small>Login</small>
+                </a>
             </li>
             <li class="list-inline-item d-inline d-md-none mx-0">
                 <button id="search-button" class="btn text-center align-items-center d-flex flex-column p-2 purple-hover" type="button" data-bs-toggle="collapse" data-bs-target="#nav-search" aria-expanded="false" aria-controls="nav-search">
                     <i class="fas fa-search"></i>
                     <small>Search</small>
                 </button>
+            </li>
+            <li class="list-inline-item mx-0 d-md-none">
+                <div class="dropdown">
+                    <span class="text-center d-flex flex-column p-2 purple-hover" type="button" id="register-options" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="-11.845,0">
+                        <i class="fas fa-user-plus"></i>
+                        <small>Account</small>
+                    </span>
+                    <ul class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="register-options">
+                        <li>
+                            <a href="" class="dropdown-item">Register</a>
+                        </li>
+                        <li>
+                            <a href="" class="dropdown-item">Login</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li class="list-inline-item mx-0">
                 <div class="dropdown">
@@ -35,7 +56,7 @@
                             <a href="" class="dropdown-item">Account</a>
                         </li>
                         <li>
-                            <a href="" class="dropdown-item">Sign Out</a>
+                            <a href="" class="dropdown-item">Logout</a>
                         </li>
                     </ul>
                 </div>
