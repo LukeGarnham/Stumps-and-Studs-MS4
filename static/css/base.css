@@ -94,7 +94,7 @@ header {
 
 .carousel-item img {
     width: auto;
-    height: calc(100vh - 101px);
+    height: 100vh;
     object-fit: cover;
 }
 
@@ -111,7 +111,8 @@ header {
     body {
       margin-top: 53px;
     }
-    .carousel-item img {
-        height: calc(100vh - 61px);
+
+    .navbar {
+        background-color: #04080F;
     }
-  }
+}
