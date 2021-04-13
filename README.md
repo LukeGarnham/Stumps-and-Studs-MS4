@@ -244,6 +244,8 @@ Django includes a built-in admin function which enables users to log in and look
 
 ### Content
 
+For the About Us section in the footer, I referenced the text on [JD Sports website](https://www.jdsports.my/customer-service/about-us/) but tweaked some elements of my fictional companies history.
+
 ### Media
 
 I wanted prominent images to be high resolution so sourced them from sites such as [Pexels](https://www.pexels.com/) and [Unsplash](https://unsplash.com/):
