@@ -161,7 +161,7 @@ The templates folder contains an 'allauth' subfolder which contains a number of 
 
 ### Bugs Encountered During Development
 
-#### Search
+#### Search Placement
 
 Whilst building the header and navbar, I wanted the search box to be appear and disapear via a toggle button.  However, I only wanted this to apply to small screens; on medium screens (768px) upwards, I wanted the search box to remain visible in the header.  I initially tried to achieve this with jQuery applying jQuery UI effects to achieve a smooth dropdown transition.  The problem I encountered here was getting the search box to not be visible by default on small screens but always be visible on large screens.
 
@@ -258,6 +258,9 @@ I wanted prominent images to be high resolution so sourced them from sites such 
 *   [Home Page Golfer](https://www.pexels.com/photo/man-walking-carrying-black-and-red-golf-bag-on-green-grass-field-1325681/)
 *   [Home Page Running Shoes](https://www.pexels.com/photo/people-doing-marathon-618612/)
 *   [Home Page Clothing](https://www.pexels.com/photo/three-women-kneeling-on-floor-866023/)
+
+Whilst I would idealy have been able to use high resolution images for my products, I struggled to find suitable images for them.  Instead I downloaded them from a variety of ecommerce stores such as [Amazon](https://www.amazon.co.uk/), [American Golf](https://www.americangolf.co.uk/) and [Decathlon](https://www.decathlon.co.uk/):
+
 
 
 ### Acknowledgements
