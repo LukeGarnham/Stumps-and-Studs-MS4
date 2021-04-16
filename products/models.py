@@ -2,6 +2,10 @@ from django.db import models
 
 
 class Category(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
@@ -24,6 +28,7 @@ class Sport(models.Model):
 
 
 class Product(models.Model):
+    sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
     desc = models.TextField()
     sport = models.ForeignKey(
