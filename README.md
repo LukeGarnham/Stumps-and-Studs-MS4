@@ -261,6 +261,6 @@ I wanted prominent images to be high resolution so sourced them from sites such 
 
 Whilst I would idealy have been able to use high resolution images for my products, I struggled to find suitable images for them.  Instead I downloaded them from a variety of ecommerce stores such as [Amazon](https://www.amazon.co.uk/), [American Golf](https://www.americangolf.co.uk/) and [Decathlon](https://www.decathlon.co.uk/):
 
-
+I used Google to find a 'no image' image.  The one I chose was sourced from [this website](https://www.allianceplast.com/no-image/).
 
 ### Acknowledgements
