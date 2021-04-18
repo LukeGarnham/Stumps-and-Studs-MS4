@@ -254,7 +254,7 @@ For the About Us section in the footer, I referenced the text on [JD Sports webs
 
 I wanted prominent images to be high resolution so sourced them from sites such as [Pexels](https://www.pexels.com/) and [Unsplash](https://unsplash.com/):
 
-*   [Home Page Cricketer](https://www.pexels.com/photo/cheerful-young-man-sitting-on-cricket-field-4770620/)
+*   [Home Page Cricketers](https://www.pexels.com/photo/man-people-stadium-game-3718433/)
 *   [Home Page Golfer](https://www.pexels.com/photo/man-walking-carrying-black-and-red-golf-bag-on-green-grass-field-1325681/)
 *   [Home Page Running Shoes](https://www.pexels.com/photo/people-doing-marathon-618612/)
 *   [Home Page Clothing](https://www.pexels.com/photo/three-women-kneeling-on-floor-866023/)
