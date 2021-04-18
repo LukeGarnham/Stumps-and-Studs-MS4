@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid px-5 py-3">
+        <div class="row">
+            <div class="col-12">
+                <!-- Branch Menu -->
+            </div>
+        </div>
+        <!-- Product -->
+        <div class="row">
+            <!-- Product Image -->
+            <div class="col-12 col-md-6 p-3">
+                <h4 class="mb-1 d-md-none">{{ product.name }}</h4>
+                <div class="card border-0 rounded-0">
+                    {% if product.image %}
+                        <img class="card-img-top product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img class="card-img-top product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Product Details -->
+            <div class="col-12 col-md-6 p-3">
+                <div class="card-body">
+                    <h4 class="mb-1 d-none d-md-block">{{ product.name }}</h4>
+                    <div class="d-flex flex-row align-items-center">
+                        <span>£{{ product.price }}</span>
+                        {% if product.price < product.rrp %}
+                            <span class="me-auto"><s>£{{ product.rrp }}</s></span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block postload_js %}
+
+{% endblock %}
