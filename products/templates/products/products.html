@@ -2,35 +2,33 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid px-4 py-2">
+    <div class="container-fluid px-5 py-3">
         <!-- Filter section -->
         <div class="row">
             <div class="col-12">
                 <div class="d-none d-lg-block">
-                    <i class="fas fa-th-large fs-2 purple-hover"></i>
-                    <i class="fas fa-th fs-2 ms-2 purple-hover"></i>
+                    <i id="two-wide" class="fas fa-th-large fs-4 purple-hover"></i>
+                    <i id="three-wide" class="fas fa-th fs-4 ms-2 purple-hover"></i>
                 </div>
             </div>
         </div>
         <!-- Products -->
         <div class="row">
             {% for product in products %}
-                <div id="product-container" class="col-12 col-md-6 col-lg-4 p-3">
-                    <div class="row">
-                        <a href="">
-                            <div class="col-12 text-center">
-                                {% if product.image %}
-                                    <img class="product-image-container" src="{{ product.image.url }}" alt="{{ product.name }}">
-                                {% else %}
-                                    <img class="product-image-container" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                                {% endif %}
-                            </div>
-                            <div class="col-12 text-center pt-3">
+                <div class="product-container col-12 col-md-6 col-lg-4 p-3">
+                    <a href="">
+                        <div class="card border-0">
+                            {% if product.image %}
+                                <img class="card-img-top product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img class="card-img-top product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                            {% endif %}
+                            <div class="card-body text-center">
                                 <h4 class="mb-1">{{ product.name }}</h4>
                                 £{{ product.price }}
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>
@@ -38,5 +36,5 @@
 {% endblock %}
 
 {% block postload_js %}
-
+    
 {% endblock %}
