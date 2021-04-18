@@ -15,9 +15,9 @@
                 <h4 class="d-md-none">{{ product.name }}</h4>
                 <div class="card border-0 rounded-0">
                     {% if product.image %}
-                        <img class="card-img-top product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
                     {% else %}
-                        <img class="card-img-top product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        <img class="product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                     {% endif %}
                 </div>
             </div>

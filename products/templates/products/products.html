@@ -21,9 +21,9 @@
         <!-- Products -->
         <div class="row">
             {% for product in products %}
-                <div class="col-12 col-md-6 col-lg-4 p-3">
+                <div class="product-container col-12 col-md-6 col-lg-4 p-3">
                     <a href="{% url 'product_detail' product.id %}">
-                        <div class="product-container card border-0 rounded-0">
+                        <div class="card border-0 rounded-0">
                             {% if product.image %}
                                 <img class="card-img-top product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
                             {% else %}
