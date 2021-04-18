@@ -14,7 +14,23 @@
                     <h2 class="mb-0">Products</h2>
                 </div>
                 <div>
-                    <!-- Filter section - TBC -->
+                    <div id="sort-options" class="dropdown-toggle purple-hover" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort By:
+                    </div>
+                    <ul id="sort-options-dropdown" class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="sort-options">
+                        <li>
+                            <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price: Low - High</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'products' %}?sort=price&direction=desc" class="dropdown-item">By Price: High - Low</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'products' %}?sort=name&direction=asc" class="dropdown-item" selected>By Name: A - Z</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'products' %}?sort=name&direction=desc" class="dropdown-item">By Name: Z - A</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
