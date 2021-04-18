@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="d-none d-lg-block">
                     <i id="two-wide" class="fas fa-th-large fs-4 purple-hover"></i>
-                    <i id="three-wide" class="fas fa-th fs-4 ms-2 purple-hover"></i>
+                    <i id="three-wide" class="fas fa-th fs-4 purple-hover d-none"></i>
                 </div>
             </div>
         </div>
@@ -36,5 +36,16 @@
 {% endblock %}
 
 {% block postload_js %}
-    
+<script>
+    $( '#two-wide' ).click(function() {
+        $( '.product-container' ).removeClass( 'col-lg-4', 1000 )
+        $( '#three-wide' ).removeClass( 'd-none' )
+        $( '#two-wide' ).addClass( 'd-none' )
+    })
+    $( '#three-wide' ).click(function() {
+        $( '.product-container' ).addClass( 'col-lg-4', 1000 )
+        $( '#two-wide' ).removeClass( 'd-none' )
+        $( '#three-wide' ).addClass( 'd-none' )
+    })
+</script>
 {% endblock %}
