@@ -5,10 +5,16 @@
     <div class="container-fluid px-5 py-3">
         <!-- Filter section -->
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 d-flex justify-content-between align-items-center">
                 <div class="d-none d-lg-block">
                     <i id="two-wide" class="fas fa-th-large fs-4 purple-hover"></i>
                     <i id="three-wide" class="fas fa-th fs-4 purple-hover d-none"></i>
+                </div>
+                <div class="text-center">
+                    <h2 class="mb-0">Products</h2>
+                </div>
+                <div>
+
                 </div>
             </div>
         </div>
@@ -17,7 +23,7 @@
             {% for product in products %}
                 <div class="product-container col-12 col-md-6 col-lg-4 p-3">
                     <a href="">
-                        <div class="card border-0">
+                        <div class="card border-0 rounded-0">
                             {% if product.image %}
                                 <img class="card-img-top product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
                             {% else %}
