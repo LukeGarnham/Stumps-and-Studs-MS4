@@ -68,10 +68,12 @@ header {
 }
 
 .dropdown-menu {
-    transform: translate(-50px, 56px);
     border: none;
-    text-align: center;
     min-width: auto;
+}
+
+#sport-options-dropdown {
+    transform: translate(0px, -2px);
 }
 
 .dropdown-item {

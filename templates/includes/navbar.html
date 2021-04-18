@@ -3,22 +3,48 @@
         <div class="collapse navbar-collapse" id="navbar-toggle-content">
             <ul class="navbar-nav mx-auto py-2 py-md-0">
                 <li class="nav-item d-md-none">
-                    <a class="nav-link" href="#"><h3 class="mb-0">Stumps & Studs</h3></a>
+                    <a class="nav-link" href="{% url 'home' %}"><h3 class="mb-0">Stumps & Studs</h3></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link black-bg-hover" href="{% url 'products' %}">All Products</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link black-bg-hover" href="#">Sports</a>
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown link
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li> -->
+                <li class="nav-item dropdown">
+                    <span class="nav-link dropdown-toggle purple-hover black-bg-hover" role="button" id="sport-options" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sports
+                    </span>
+                    <ul id="sport-options-dropdown" class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="sport-options">
+                        <li>
+                            <a href="{% url 'products' %}?sport=cricket" class="dropdown-item">Cricket</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'products' %}?sport=football" class="dropdown-item">Football</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'products' %}?sport=golf" class="dropdown-item">Golf</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'products' %}?sport=tennis" class="dropdown-item">Tennis</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link black-bg-hover" href="#">Equipment</a>
+                    <a class="nav-link black-bg-hover" href="{% url 'products' %}?category=equipment">Equipment</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link black-bg-hover" href="#">Clothing</a>
+                    <a class="nav-link black-bg-hover" href="{% url 'products' %}?category=clothing">Clothing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link black-bg-hover" href="#">Footwear</a>
+                    <a class="nav-link black-bg-hover" href="{% url 'products' %}?category=footwear">Footwear</a>
                 </li>
             </ul>
         </div>
