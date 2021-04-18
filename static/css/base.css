@@ -33,6 +33,11 @@ h1,h2,h3,h4,h5,h6 {
 
 a {
     text-decoration: none;
+    color: #04080F;
+}
+
+header a, footer a {
+    text-decoration: none;
     color: #fff;
 }
 
@@ -43,6 +48,9 @@ a:hover,
 .dropdown-item:hover {
     color: #B388EB;
     font-weight: bold;
+}
+
+.black-bg-hover:hover {
     background-color: #04080F;
 }
 
