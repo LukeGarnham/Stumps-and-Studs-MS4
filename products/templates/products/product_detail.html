@@ -4,8 +4,14 @@
 {% block content %}
     <div class="container-fluid px-5 py-3">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 p-3">
                 <!-- Branch Menu -->
+                <small>
+                    <a href="{% url 'home' %}">HOME</a> > 
+                    <a href="{% url 'products' %}?category={{ product.category }}">{{ product.category|upper }}</a> > 
+                    <a href="{% url 'products' %}?sport={{ product.sport }}">{{ product.sport|upper }}</a> > 
+                    {{ product.name|upper }}
+                </small>
             </div>
         </div>
         <!-- Product -->
