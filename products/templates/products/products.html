@@ -72,13 +72,18 @@
                     </a>
                 </div>
             {% endfor %}
-        </div>
+        </div> 
     </div>
+    <!-- Scroll to top of page arrow -->
+    <button id="scroll-to-top" class="border-0 p-3" >
+        <i class="fas fa-arrow-circle-up fs-1"></i>
+    </button>
 {% endblock %}
 
 {% block postload_js %}
     {{ block.super}}
     <script type="text/javascript">
+        // Adjust Bootstrap grid on large screens, alternate between 2 or 3 columns
         $( '#two-wide' ).click(function() {
             $( '.product-container' ).removeClass( 'col-lg-4', 1000 )
             $( '#three-wide' ).removeClass( 'd-none' )
@@ -89,6 +94,8 @@
             $( '#two-wide' ).removeClass( 'd-none' )
             $( '#three-wide' ).addClass( 'd-none' )
         })
+        
+        // Update the URL when the sort-options selector changes to enable sort & direction options.
         $('#sort-options').change(function() {
             var selector = $(this);
             var currentUrl = new URL(window.location);
@@ -108,6 +115,19 @@
 
                 window.location.replace(currentUrl)
             }
-        })
+        });
+        // Toggle the visibility of the scroll-to-top button if scrolled down 25% screen height from top.
+        $(window).scroll(function() {
+            var screenHeight = $(window).height();
+            if ($(window).scrollTop() >= (screenHeight/4)) {
+                $('#scroll-to-top').show('fade', 500);
+            } else {
+                $('#scroll-to-top').hide('fade', 500);
+            }
+        });
+        // Add scroll to top button.  Button only appears when user scrolls down page.
+        $('#scroll-to-top').click(function() {
+            window.scrollTo(0,0);
+        });
     </script>
 {% endblock %}
