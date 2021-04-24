@@ -14,23 +14,17 @@
                     <h2 class="mb-0">Products</h2>
                 </div>
                 <div>
-                    <div id="sort-options" class="dropdown-toggle purple-hover" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sort By:
-                    </div>
-                    <ul id="sort-options-dropdown" class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="sort-options">
-                        <li>
-                            <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price: Low - High</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'products' %}?sort=price&direction=desc" class="dropdown-item">By Price: High - Low</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'products' %}?sort=name&direction=asc" class="dropdown-item" selected>By Name: A - Z</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'products' %}?sort=name&direction=desc" class="dropdown-item">By Name: Z - A</a>
-                        </li>
-                    </ul>
+                    <select name="sort-options" id="sort-options" class="border-0">
+                        <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort By: </option>
+                        <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price: Low - High</option>
+                        <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price: High - Low</option>
+                        <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name: A - Z</option>
+                        <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name: Z - A</option>
+                        <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category: A - Z</option>
+                        <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category: Z - A</option>
+                        <option value="sport_asc" {% if current_sorting == 'sport_asc' %}selected{% endif %}>Sport: A - Z</option>
+                        <option value="sport_desc" {% if current_sorting == 'sport_desc' %}selected{% endif %}>Sport: Z - A</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -83,16 +77,37 @@
 {% endblock %}
 
 {% block postload_js %}
-<script>
-    $( '#two-wide' ).click(function() {
-        $( '.product-container' ).removeClass( 'col-lg-4', 1000 )
-        $( '#three-wide' ).removeClass( 'd-none' )
-        $( '#two-wide' ).addClass( 'd-none' )
-    })
-    $( '#three-wide' ).click(function() {
-        $( '.product-container' ).addClass( 'col-lg-4', 1000 )
-        $( '#two-wide' ).removeClass( 'd-none' )
-        $( '#three-wide' ).addClass( 'd-none' )
-    })
-</script>
+    {{ block.super}}
+    <script type="text/javascript">
+        $( '#two-wide' ).click(function() {
+            $( '.product-container' ).removeClass( 'col-lg-4', 1000 )
+            $( '#three-wide' ).removeClass( 'd-none' )
+            $( '#two-wide' ).addClass( 'd-none' )
+        })
+        $( '#three-wide' ).click(function() {
+            $( '.product-container' ).addClass( 'col-lg-4', 1000 )
+            $( '#two-wide' ).removeClass( 'd-none' )
+            $( '#three-wide' ).addClass( 'd-none' )
+        })
+        $('#sort-options').change(function() {
+            var selector = $(this);
+            var currentUrl = new URL(window.location);
+
+            var selectedVal = selector.val();
+            if(selectedVal != "reset"){
+                var sort = selectedVal.split("_")[0];
+                var direction = selectedVal.split("_")[1];
+
+                currentUrl.searchParams.set("sort", sort);
+                currentUrl.searchParams.set("direction", direction);
+
+                window.location.replace(currentUrl);
+            } else {
+                currentUrl.searchParams.delete("sort");
+                currentUrl.searchParams.delete("direction");
+
+                window.location.replace(currentUrl)
+            }
+        })
+    </script>
 {% endblock %}
