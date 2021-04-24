@@ -38,16 +38,44 @@
                             <span class=""><s>RRP: £{{ product.rrp }}</s></span>
                         {% endif %}
                     </div>
-                    <!-- Size -->
-                    <!-- Side -->
-                    <!-- Gender -->
-                    <!-- Qty & Add to Basket -->
                     <!-- Description -->
                     <div class="mb-2">
                         <div><strong>Description:</strong></div>
                         <div>{{ product.desc }}</div>
                     </div>
-                    <!-- Keep Shopping & Checkout Buttons -->
+                    <form action="POST">
+                        {% csrf_token %}
+                        <!-- Size -->
+                        {% if product.has_sizes %}
+                        <div class="input-group">
+                            <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
+                                <strong><label for="size">Size:</label></strong>
+                                
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- Side -->
+                        {% if product.has_side %}
+                        {% endif %}
+                        <!-- Gender -->
+                        {% if product.has_gender %}
+                        {% endif %}
+                        <!-- Qty & Add to Basket -->
+                        <div class="input-group">
+                            <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
+                                <input type="number" id="id_qty_{{ product.id }}" name="qty" value="1" min="1" max="99" class="w-25" data-item_id="{{ product.id }}">
+                                <input type="submit" class="btn btn-green" value="Add to Basket">
+                            </div>
+                        </div>
+                        <!-- Hidden Field -->
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    </form>
+                </div>
+                <!-- Keep Shopping & Checkout Buttons -->
+                    <div class="p-3">
+                        <a href="{% url 'products' %}" class="btn btn-orange"><h5 class="mb-0">Keep Shopping</h5></a>
+                        <a href="{% url 'view_basket' %}" class="btn btn-green float-end"><h5 class="mb-0">Go To Checkout</h5></a>
+                    </div>
                 </div>
             </div>
         </div>

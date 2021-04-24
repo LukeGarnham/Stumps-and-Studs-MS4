@@ -14,6 +14,11 @@ h1,h2,h3,h4,h5,h6 {
     font-family: 'Crimson Text', serif;
 }
 
+input[type=submit] {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.25rem;
+}
+
 .btn, .btn:focus {
     box-shadow: none;
     border-radius: 0;
@@ -25,7 +30,11 @@ h1,h2,h3,h4,h5,h6 {
     background-color: #09814a;
 }
 
-.btn-green:hover {
+.btn-orange {
+    background-color: #FFBF00;
+}
+
+.btn-orange:hover, .btn-green:hover {
     background-color: #04080F;
     font-weight: bold;
     color: #B388EB;
