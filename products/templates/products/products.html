@@ -5,7 +5,7 @@
     <div class="container-fluid px-5 py-3">
         <!-- Title & Filter Options -->
         <div class="row">
-            <div class="col-12 d-flex justify-content-between align-items-center">
+            <div class="col-12 px-3 d-flex flex-wrap justify-content-between align-items-center">
                 <div class="d-none d-lg-block">
                     <i id="two-wide" class="fas fa-th-large fs-4 purple-hover"></i>
                     <i id="three-wide" class="fas fa-th fs-4 purple-hover d-none"></i>
@@ -14,7 +14,7 @@
                     <h2 class="mb-0">Products</h2>
                 </div>
                 <div>
-                    <select name="sort-options" id="sort-options" class="border-0">
+                    <select name="sort-options" id="sort-options" class="border-0 my-3">
                         <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort By: </option>
                         <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price: Low - High</option>
                         <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price: High - Low</option>
@@ -30,7 +30,7 @@
         </div>
         <!-- No. of Results -->
         <div class="row">
-            <div class="col-12 p-3">
+            <div class="col-12 pt-0 pt-sm-3 px-3 pb-3">
                 <!-- Link to All Products -->
                 {% if search_term or current_categories or current_sports or current_sorting != 'None_None' %}
                     <small><strong><a href="{% url 'products' %}"><i class="fas fa-arrow-left"></i> All Products</a></strong> | </small>

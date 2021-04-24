@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid px-5 py-3">
+        <div class="row">
+            <div class="col-12 px-3">
+                <h2>Basket</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 px-3">
+                <small>
+                    <a href="">
+                        <i class="fas fa-arrow-left"></i>
+                        <strong>Continue Shopping</strong>
+                    </a>
+                </small>
+            </div>
+        </div>
+        <!-- Loop needs to start here -->
+        {% if basket_items %}
+            <!-- Product -->
+            <div class="row px-4">
+                <!-- Product Image -->
+                <div class="col-5 col-md-4 col-lg-3 p-3">
+                    <div class="card border-0 rounded-0">
+                        {% if product.image %}
+                            <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img class="product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- Product Details -->
+                <div class="col-7 col-md-8 col-lg-9 p-3">
+                    <div class="card-body">
+                        <h4 class="d-none d-md-block mb-3">{{ product.name }}</h4>
+                        <!-- Price & RRP -->
+                        <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                            <span><strong>Price:</strong> £{{ product.price }}</span>
+                            {% if product.price < product.rrp %}
+                                <span class=""><s>RRP: £{{ product.rrp }}</s></span>
+                            {% endif %}
+                        </div>
+                        <!-- Size -->
+                        <!-- Side -->
+                        <!-- Gender -->
+                        <!-- Qty & Add to Basket -->
+                        <!-- Description -->
+                        <div class="mb-2">
+                            <div><strong>Description:</strong></div>
+                            <div>{{ product.desc }}</div>
+                        </div>
+                        <!-- Keep Shopping & Checkout Buttons -->
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="row px-4">
+                <div class="col-12 p-3">
+                    <p>Your bag is empty.</p>
+                    <a href="{% url 'products' %}" class="btn btn-green mt-3"><h5 class="mb-0">Keep Shopping</h5></a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block postload_js %}
+
+{% endblock %}
