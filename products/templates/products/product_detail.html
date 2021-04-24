@@ -7,10 +7,10 @@
             <div class="col-12 p-3">
                 <!-- Branch Menu -->
                 <small>
-                    <a href="{% url 'home' %}">HOME</a> > 
-                    <a href="{% url 'products' %}?category={{ product.category }}">{{ product.category|upper }}</a> > 
-                    <a href="{% url 'products' %}?sport={{ product.sport }}">{{ product.sport|upper }}</a> > 
-                    {{ product.name|upper }}
+                    <a href="{% url 'home' %}">Home</a> > 
+                    <a href="{% url 'products' %}?category={{ product.category }}">{{ product.category|capfirst }}</a> > 
+                    <a href="{% url 'products' %}?sport={{ product.sport }}">{{ product.sport|capfirst }}</a> > 
+                    {{ product.name|capfirst }}
                 </small>
             </div>
         </div>
@@ -30,9 +30,9 @@
             <!-- Product Details -->
             <div class="col-12 col-md-6 p-3">
                 <div class="card-body">
-                    <h4 class="d-none d-md-block">{{ product.name }}</h4>
+                    <h4 class="d-none d-md-block mb-3">{{ product.name }}</h4>
                     <!-- Price & RRP -->
-                    <div class="d-flex flex-row align-items-center justify-content-between">
+                    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
                         <span><strong>Price:</strong> £{{ product.price }}</span>
                         {% if product.price < product.rrp %}
                             <span class=""><s>RRP: £{{ product.rrp }}</s></span>
@@ -43,7 +43,7 @@
                     <!-- Gender -->
                     <!-- Qty & Add to Basket -->
                     <!-- Description -->
-                    <div>
+                    <div class="mb-2">
                         <div><strong>Description:</strong></div>
                         <div>{{ product.desc }}</div>
                     </div>

@@ -34,6 +34,31 @@
                 </div>
             </div>
         </div>
+        <!-- No. of Results -->
+        <div class="row">
+            <div class="col-12 p-3">
+                <!-- Link to All Products -->
+                {% if search_term or current_categories or current_sports or current_sorting != 'None_None' %}
+                    <small><strong><a href="{% url 'products' %}"><i class="fas fa-arrow-left"></i> All Products</a></strong> | </small>
+                {% endif %}
+                <!-- Product Count -->
+                {% if products|length == 0 %}
+                    <small>No products found.</small>
+                {% else %}
+                    <small>
+                        {{ products|length }} 
+                        {% if products|length == 1 %}
+                            Product
+                        {% else %}
+                            Products
+                        {% endif %}
+                        {% if search_term %}
+                            found for {{ search_term|capfirst }}
+                        {% endif %}
+                    </small>
+                {% endif %}
+            </div>
+        </div>
         <!-- Products -->
         <div class="row">
             {% for product in products %}
