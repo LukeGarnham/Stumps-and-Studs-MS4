@@ -62,9 +62,15 @@
                 </div>
             </li>
             <li class="list-inline-item mx-0">
-                <a href=4" class="text-center d-flex flex-column p-2 black-bg-hover">
+                <a href="{% url 'view_basket' %}" class="text-center d-flex flex-column p-2 black-bg-hover">
                     <i class="fas fa-shopping-cart"></i>
-                    <small>£0.00</small>
+                    <small>
+                        {% if grand_total %}
+                            £{{ grand_total|floatformat:2 }}
+                        {% else %}
+                            £0.00
+                        {% endif %}
+                    </small>
                 </a>
             </li>
         </ul>
