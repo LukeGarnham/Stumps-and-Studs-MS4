@@ -16,15 +16,27 @@ def basket_contents(request):
     # For each item and quantity in basket,
     # retrieve product details from Product model.
     # Then sum up the total (cost), product count and basket_items.
-    for item_id, qty in basket.items():
-        product = get_object_or_404(Product, pk=item_id)
-        total += qty * product.price
-        product_count += qty
-        basket_items.append({
-            'item_id': item_id,
-            'qty': qty,
-            'product': product,
-        })
+    for item_id, item_data in basket.items():
+        if isinstance(item_data, int):
+            product = get_object_or_404(Product, pk=item_id)
+            total += item_data * product.price
+            product_count += item_data
+            basket_items.append({
+                'item_id': item_id,
+                'qty': item_data,
+                'product': product,
+            })
+        else:
+            product = get_object_or_404(Product, pk=item_data)
+            for size, qty in item_data['items_by_size'].items():
+                total += item_data * product.price
+                product_count += item_data
+                basket_items.append({
+                    'item_id': item_id,
+                    'qty': item_data,
+                    'product': product,
+                    'size': size,
+                })
 
     # If there is something in the basket,
     # retrieve delivery cost from global settings.

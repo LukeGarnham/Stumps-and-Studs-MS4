@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-12 px-3">
                 <small>
-                    <a href="">
+                    <a href="{% url 'products' %}">
                         <i class="fas fa-arrow-left"></i>
                         <strong>Continue Shopping</strong>
                     </a>
@@ -19,43 +19,51 @@
             </div>
         </div>
         {% if basket_items %}
-            {{ basket_items }}
+        <!-- Delete below -->
+        {{ basket_items }}
+        <hr>
+        {{ request.session.basket }}
+        <!-- Delete above -->
             {% for item in basket_items %}
                 <!-- Product -->
                 <div class="row px-4">
                     <!-- Product Image -->
                     <div class="col-6  py-3 px-0 px-md-3">
-                        <div class="card border-0 rounded-0">
-                            {% if item.image %}
-                                <img class="product-image-small" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                            {% else %}
-                                <img class="product-image-small" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                            {% endif %}
-                        </div>
+                        <a href="{% url 'product_detail' item.product.id %}">
+                            <div class="card border-0 rounded-0">
+                                {% if item.image %}
+                                    <img class="product-image-small" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                {% else %}
+                                    <img class="product-image-small" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                {% endif %}
+                            </div>
+                        </a>
                     </div>
                     <!-- Product Details -->
                     <div class="col-sm-6 py-3 px-0 px-md-3">
                         <div class="py-0">
-                            <h5 class="mb-1">{{ item.product.name }}</h5>
+                            <a href="{% url 'product_detail' item.product.id %}">
+                                <h5 class="mb-1">{{ item.product.name }}</h5>
+                            </a>
                             <!-- Size -->
                             {% if item.product.has_sizes %}
                                 <div class="my-1 fs-small">
                                     Size:
-                                    <span class="float-end"> # </span>
+                                    <span class="float-end">{{ item.size|capfirst }}</span>
                                 </div>    
                             {% endif %}
                             <!-- Side -->
                             {% if item.product.has_side %}
                                 <div class="my-1 fs-small">
                                     Side:
-                                    <span class="float-end"> # </span>
+                                    <span class="float-end">{{ item.side|capfirst }}</span>
                                 </div>
                             {% endif %}
                             <!-- Gender -->
                             {% if item.product.has_gender %}
                                 <div class="my-1 fs-small">
                                         Gender:
-                                        <span class="float-end"> # </span>
+                                        <span class="float-end">{{ item.gender|capfirst }}</span>
                                 </div>
                             {% endif %}
                             <!-- Price & Quantity -->
