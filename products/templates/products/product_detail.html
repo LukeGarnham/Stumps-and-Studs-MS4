@@ -4,20 +4,18 @@
 {% block content %}
     <div class="container-fluid px-5 py-3">
         <div class="row">
-            <div class="col-12 p-3">
+            <div class="col-12 p-3 fs-small">
                 <!-- Branch Menu -->
-                <small>
-                    <a href="{% url 'home' %}">Home</a> > 
-                    <a href="{% url 'products' %}?category={{ product.category }}">{{ product.category|capfirst }}</a> > 
-                    <a href="{% url 'products' %}?sport={{ product.sport }}">{{ product.sport|capfirst }}</a> > 
-                    {{ product.name|capfirst }}
-                </small>
+                <a href="{% url 'home' %}">Home</a> > 
+                <a href="{% url 'products' %}?category={{ product.category }}">{{ product.category|capfirst }}</a> > 
+                <a href="{% url 'products' %}?sport={{ product.sport }}">{{ product.sport|capfirst }}</a> > 
+                {{ product.name|capfirst }}
             </div>
         </div>
         <!-- Product -->
         <div class="row">
             <!-- Product Image -->
-            <div class="col-12 col-md-6 py-3 px-0 px-md-3">
+            <div class="col-md-6 py-3 px-0 px-md-3">
                 <h4 class="d-md-none">{{ product.name }}</h4>
                 <div class="card border-0 rounded-0">
                     {% if product.image %}
@@ -28,8 +26,8 @@
                 </div>
             </div>
             <!-- Product Details -->
-            <div class="col-12 col-md-6 py-3 px-0 px-md-3">
-                <div class="card-body">
+            <div class="col-md-6 py-3 px-0 px-md-3">
+                <div class="p-3">
                     <h4 class="d-none d-md-block mb-3">{{ product.name }}</h4>
                     <!-- Price & RRP -->
                     <div class="d-flex flex-row align-items-center justify-content-between mb-2">
@@ -84,9 +82,21 @@
                     </form>
                 </div>
                 <!-- Keep Shopping & Checkout Buttons -->
-                <div class="d-flex justify-content-center justify-content-sm-between flex-wrap px-3">
-                    <a href="{% url 'products' %}" class="btn btn-orange my-3 mx-auto mx-sm-0"><h5 class="mb-0">Keep Shopping</h5></a>
-                    <a href="{% url 'view_basket' %}" class="btn btn-green my-3 mx-auto mx-sm-0"><h5 class="mb-0">Go To Checkout</h5></a>
+                <div class="container-fluid px-3">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a href="{% url 'view_basket' %}" class="btn btn-green my-3 w-100"><h5 class="mb-0">
+                                <i class="fas fa-lock pe-1"></i>
+                                Basket & Checkout</h5>
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{% url 'products' %}" class="btn btn-orange my-3 w-100"><h5 class="mb-0">
+                                <i class="fas fa-tag pe-1"></i>
+                                Continue Shopping</h5>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

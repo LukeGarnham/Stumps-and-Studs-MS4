@@ -14,6 +14,10 @@ h1,h2,h3,h4,h5,h6 {
     font-family: 'Crimson Text', serif;
 }
 
+.fs-small {
+    font-size: .875em;
+}
+
 input[type=submit] {
     font-family: 'Crimson Text', serif;
     font-size: 1.25rem;
@@ -151,6 +155,12 @@ footer p, footer li {
 .product-image {
     object-fit: scale-down;
     height: 350px;
+}
+
+.product-image-small {
+    object-fit: scale-down;
+    height: auto;
+    max-height: 150px;
 }
 
 /* Initial CSS from: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp */

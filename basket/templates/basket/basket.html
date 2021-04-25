@@ -24,40 +24,90 @@
                 <!-- Product -->
                 <div class="row px-4">
                     <!-- Product Image -->
-                    <div class="col-5 col-md-4 col-lg-3 p-3">
+                    <div class="col-6  py-3 px-0 px-md-3">
                         <div class="card border-0 rounded-0">
                             {% if item.image %}
-                                <img class="product-image" src="{{ item.image.url }}" alt="{{ item.name }}">
+                                <img class="product-image-small" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                             {% else %}
-                                <img class="product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.name }}">
+                                <img class="product-image-small" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                             {% endif %}
                         </div>
                     </div>
                     <!-- Product Details -->
-                    <div class="col-7 col-md-8 col-lg-9 p-3">
-                        <div class="card-body">
-                            <h4 class="d-none d-md-block mb-3">{{ item.name }}</h4>
-                            <!-- Price & RRP -->
-                            <div class="d-flex flex-row align-items-center justify-content-between mb-2">
-                                <span><strong>Price:</strong> £{{ item.price }}</span>
-                                {% if item.price < item.rrp %}
-                                    <span class=""><s>RRP: £{{ item.rrp }}</s></span>
-                                {% endif %}
-                            </div>
+                    <div class="col-sm-6 py-3 px-0 px-md-3">
+                        <div class="py-0">
+                            <h5 class="mb-1">{{ item.product.name }}</h5>
                             <!-- Size -->
+                            {% if item.product.has_sizes %}
+                                <div class="my-1 fs-small">
+                                    Size:
+                                    <span class="float-end"> # </span>
+                                </div>    
+                            {% endif %}
                             <!-- Side -->
+                            {% if item.product.has_side %}
+                                <div class="my-1 fs-small">
+                                    Side:
+                                    <span class="float-end"> # </span>
+                                </div>
+                            {% endif %}
                             <!-- Gender -->
-                            <!-- Qty & Add to Basket -->
-                            <!-- Description -->
-                            <div class="mb-2">
-                                <div><strong>Description:</strong></div>
-                                <div>{{ product.desc }}</div>
+                            {% if item.product.has_gender %}
+                                <div class="my-1 fs-small">
+                                        Gender:
+                                        <span class="float-end"> # </span>
+                                </div>
+                            {% endif %}
+                            <!-- Price & Quantity -->
+                            <div class="my-1 fs-small">
+                                Quantity:
+                                <span class="float-end">{{ item.qty }} x £{{ item.product.price }}</span>
                             </div>
-                            <!-- Keep Shopping & Checkout Buttons -->
+                            <!-- Grand Total -->
+                            <div class="my-1 fs-small">
+                                <strong>Subtotal:
+                                    <span class="float-end">£ # </span>
+                                </strong>
+                            </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
+                <div class="row px-4">
+                    <div class="col-12 col-md-6 offset-md-6 py-3 px-0 px-md-3">
+                        <hr>
+                        <div class="py-2">
+                            <h5 class="d-inline">Basket Total</h5>
+                            <span class="float-end">£{{ total|floatformat:2 }}</span>
+                        </div>
+                        <div class="py-2">
+                            <h5 class="d-inline">Delivery Total</h5>
+                            <span class="float-end">£{{ delivery|floatformat:2 }}</span>
+                        </div>
+                        <div class="py-2">
+                            <h5 class="d-inline fw-bold">Grand Total</h5>
+                            <strong><span class="float-end">£{{ grand_total|floatformat:2 }}</span></strong>
+                        </div>
+                        <hr>
+                        <!-- Keep Shopping & Checkout Buttons -->
+                        <div class="container-fluid px-0">
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="{% url 'view_basket' %}" class="btn btn-green my-3 w-100"><h5 class="mb-0">
+                                        <i class="fas fa-lock pe-1"></i>
+                                        Go To Checkout</h5>
+                                    </a>
+                                </div>
+                                <div class="col-12">
+                                    <a href="{% url 'products' %}" class="btn btn-orange my-3 w-100"><h5 class="mb-0">
+                                        <i class="fas fa-tag pe-1"></i>
+                                        Continue Shopping</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         {% else %}
             <div class="row px-4">
                 <div class="col-12 p-3">
@@ -67,8 +117,27 @@
             </div>
         {% endif %}
     </div>
+    <!-- Scroll to top of page arrow -->
+    <button id="scroll-to-top" class="border-0 p-3" >
+        <i class="fas fa-arrow-circle-up fs-1"></i>
+    </button>
 {% endblock %}
 
 {% block postload_js %}
-
+    {{ block.super}}
+    <script type="text/javascript">
+        // Toggle the visibility of the scroll-to-top button if scrolled down 25% screen height from top.
+        $(window).scroll(function() {
+            var screenHeight = $(window).height();
+            if ($(window).scrollTop() >= (screenHeight/4)) {
+                $('#scroll-to-top').show('fade', 500);
+            } else {
+                $('#scroll-to-top').hide('fade', 500);
+            }
+        });
+        // Add scroll to top button.  Button only appears when user scrolls down page.
+        $('#scroll-to-top').click(function() {
+            window.scrollTo(0,0);
+        });
+    </script>
 {% endblock %}
