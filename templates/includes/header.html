@@ -14,26 +14,26 @@
             <li class="list-inline-item d-none d-md-inline mx-0">
                 <a href="" class="align-items-center d-flex flex-column p-2 purple-hover black-bg-hover">
                     <i class="fas fa-sign-in-alt"></i>
-                    <small>Register</small>
+                    <span class="fs-small">Register</span>
                 </a>
             </li>
             <li class="list-inline-item d-none d-md-inline mx-0">
                 <a href="" class="align-items-center d-flex flex-column p-2 purple-hover black-bg-hover">
                     <i class="fas fa-user-plus"></i>
-                    <small>Login</small>
+                    <span class="fs-small">Login</span>
                 </a>
             </li>
             <li class="list-inline-item d-inline d-md-none mx-0">
                 <button id="search-button" class="btn text-center align-items-center d-flex flex-column p-2 purple-hover black-bg-hover" type="button" data-bs-toggle="collapse" data-bs-target="#nav-search" aria-expanded="false" aria-controls="nav-search">
                     <i class="fas fa-search"></i>
-                    <small>Search</small>
+                    <span class="fs-small">Search</span>
                 </button>
             </li>
             <li class="list-inline-item mx-0 d-md-none">
                 <div class="dropdown">
                     <span class="text-center d-flex flex-column p-2 purple-hover black-bg-hover" type="button" id="register-options" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="-11.845,0">
                         <i class="fas fa-user-plus"></i>
-                        <small>Account</small>
+                        <span class="fs-small">Account</span>
                     </span>
                     <ul class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="register-options">
                         <li>
@@ -49,7 +49,7 @@
                 <div class="dropdown">
                     <span class="text-center d-flex flex-column p-2 purple-hover black-bg-hover" type="button" id="account-options" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="-13.36,0">
                         <i class="fas fa-user"></i>
-                        <small>Account</small>
+                        <span class="fs-small">Account</span>
                     </span>
                     <ul class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="account-options">
                         <li>
@@ -63,14 +63,20 @@
             </li>
             <li class="list-inline-item mx-0">
                 <a href="{% url 'view_basket' %}" class="text-center d-flex flex-column p-2 black-bg-hover">
-                    <i class="fas fa-shopping-cart"></i>
-                    <small>
+                    <i class="fas fa-shopping-cart">
+                        {% if product_count != 0 %}
+                            <span id="product-count" class="fs-small">
+                                {{ product_count }}
+                            </span>
+                        {% endif %}
+                    </i>
+                    <span class="fs-small">
                         {% if grand_total %}
                             £{{ grand_total|floatformat:2 }}
                         {% else %}
                             £0.00
                         {% endif %}
-                    </small>
+                    </span>
                 </a>
             </li>
         </ul>

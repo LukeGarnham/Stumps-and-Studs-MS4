@@ -110,6 +110,10 @@ header {
     background-clip:border-box;
 }
 
+#product-count {
+    font-family: 'Open Sans', sans-serif;
+}
+
 /*----------------------------------------------------------------------------------------------------------Footer*/
 
 footer {
