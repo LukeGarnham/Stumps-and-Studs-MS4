@@ -44,38 +44,58 @@
                     <form method="POST" action="{% url 'add_to_basket' product.id %}">
                         {% csrf_token %}
                         <!-- Size -->
-                        {% if product.has_sizes %}
-                            <div class="input-group">
-                                <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
-                                    <strong><label for="size">Size:</label></strong>
-                                    
+                        {% with product.has_sizes as sizes %}
+                            {% if  sizes %}
+                                <div class="input-group">
+                                    <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
+                                        <strong><label for="product_size">Size:</label></strong>
+                                        <select name="product_size" id="id_product_size" aria-label="Select product size">
+                                            <option value="jr">Junior</option>
+                                            <option value="xs">Extra Small</option>
+                                            <option value="s">Small</option>
+                                            <option value="m" selected>Medium</option>
+                                            <option value="l">Large</option>
+                                            <option value="xl">Extra Large</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        {% endwith %}
                         <!-- Side -->
-                        {% if product.has_side %}
-                            <div class="input-group">
-                                <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
-                                    <strong><label for="side">Side:</label></strong>
-                                    
+                        {% with product.has_side as side %}
+                            {% if  side %}
+                                <div class="input-group">
+                                    <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
+                                        <strong><label for="product_side">Side:</label></strong>
+                                        <select name="product_side" id="id_product_side" aria-label="Select product side">
+                                            <option value="right" selected>Right-Handed</option>
+                                            <option value="left">Left-Handed</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        {% endwith %}
                         <!-- Gender -->
-                        {% if product.has_gender %}
-                            <div class="input-group">
-                                <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
-                                    <strong><label for="gender">Gender:</label></strong>
-                                    
+                        {% with product.has_gender as gender %}
+                            {% if  gender %}
+                                <div class="input-group">
+                                    <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
+                                        <strong><label for="product_side">Gender:</label></strong>
+                                        <select name="product_side" id="id_product_side" aria-label="Select product side">
+                                            <option value="male" selected>Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        {% endwith %}
                         <!-- Qty & Add to Basket -->
                         <div class="input-group">
                             <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
+                                <strong><label for="qty">Quantity</label></strong>
                                 <input type="number" id="id_qty_{{ product.id }}" name="qty" value="1" min="1" max="99" class="w-25" data-item_id="{{ product.id }}">
-                                <input type="submit" class="btn btn-green py-1" value="Add to Basket">
                             </div>
+                            <input type="submit" id="add-to-basket" class="btn btn-green py-2 w-100 border-0 mt-3 ms-0" value="Add to Basket">
                         </div>
                         <!-- Hidden Field -->
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
@@ -85,13 +105,13 @@
                 <div class="container-fluid px-3">
                     <div class="row">
                         <div class="col-sm-6">
-                            <a href="{% url 'view_basket' %}" class="btn btn-green my-3 w-100"><h5 class="mb-0">
+                            <a href="{% url 'view_basket' %}" class="btn btn-green my-3 py-2 w-100"><h5 class="mb-0">
                                 <i class="fas fa-lock pe-1"></i>
                                 Basket & Checkout</h5>
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="{% url 'products' %}" class="btn btn-orange my-3 w-100"><h5 class="mb-0">
+                            <a href="{% url 'products' %}" class="btn btn-orange my-3 py-2 w-100"><h5 class="mb-0">
                                 <i class="fas fa-tag pe-1"></i>
                                 Continue Shopping</h5>
                             </a>

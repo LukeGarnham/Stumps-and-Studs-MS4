@@ -5,6 +5,7 @@ from products.models import Product
 
 
 def basket_contents(request):
+    """ Make elements of the basket available throughout site. """
 
     basket_items = []
     total = 0
@@ -14,7 +15,7 @@ def basket_contents(request):
 
     # For each item and quantity in basket,
     # retrieve product details from Product model.
-    # Then update the total (cost), produc count and basket_items.
+    # Then sum up the total (cost), product count and basket_items.
     for item_id, qty in basket.items():
         product = get_object_or_404(Product, pk=item_id)
         total += qty * product.price

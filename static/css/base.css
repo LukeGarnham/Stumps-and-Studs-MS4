@@ -167,6 +167,10 @@ footer p, footer li {
     max-height: 150px;
 }
 
+#add-to-basket {
+    line-height: 1.2;
+}
+
 /* Initial CSS from: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp */
 #scroll-to-top {
     display: none;
