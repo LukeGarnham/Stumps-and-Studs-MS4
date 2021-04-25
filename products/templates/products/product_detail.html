@@ -17,7 +17,7 @@
         <!-- Product -->
         <div class="row">
             <!-- Product Image -->
-            <div class="col-12 col-md-6 p-3">
+            <div class="col-12 col-md-6 py-3 px-0 px-md-3">
                 <h4 class="d-md-none">{{ product.name }}</h4>
                 <div class="card border-0 rounded-0">
                     {% if product.image %}
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <!-- Product Details -->
-            <div class="col-12 col-md-6 p-3">
+            <div class="col-12 col-md-6 py-3 px-0 px-md-3">
                 <div class="card-body">
                     <h4 class="d-none d-md-block mb-3">{{ product.name }}</h4>
                     <!-- Price & RRP -->
@@ -43,28 +43,40 @@
                         <div><strong>Description:</strong></div>
                         <div>{{ product.desc }}</div>
                     </div>
-                    <form action="POST">
+                    <form method="POST" action="{% url 'add_to_basket' product.id %}">
                         {% csrf_token %}
                         <!-- Size -->
                         {% if product.has_sizes %}
-                        <div class="input-group">
-                            <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
-                                <strong><label for="size">Size:</label></strong>
-                                
+                            <div class="input-group">
+                                <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
+                                    <strong><label for="size">Size:</label></strong>
+                                    
+                                </div>
                             </div>
-                        </div>
                         {% endif %}
                         <!-- Side -->
                         {% if product.has_side %}
+                            <div class="input-group">
+                                <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
+                                    <strong><label for="side">Side:</label></strong>
+                                    
+                                </div>
+                            </div>
                         {% endif %}
                         <!-- Gender -->
                         {% if product.has_gender %}
+                            <div class="input-group">
+                                <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
+                                    <strong><label for="gender">Gender:</label></strong>
+                                    
+                                </div>
+                            </div>
                         {% endif %}
                         <!-- Qty & Add to Basket -->
                         <div class="input-group">
                             <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
                                 <input type="number" id="id_qty_{{ product.id }}" name="qty" value="1" min="1" max="99" class="w-25" data-item_id="{{ product.id }}">
-                                <input type="submit" class="btn btn-green" value="Add to Basket">
+                                <input type="submit" class="btn btn-green py-1" value="Add to Basket">
                             </div>
                         </div>
                         <!-- Hidden Field -->
@@ -72,10 +84,9 @@
                     </form>
                 </div>
                 <!-- Keep Shopping & Checkout Buttons -->
-                    <div class="p-3">
-                        <a href="{% url 'products' %}" class="btn btn-orange"><h5 class="mb-0">Keep Shopping</h5></a>
-                        <a href="{% url 'view_basket' %}" class="btn btn-green float-end"><h5 class="mb-0">Go To Checkout</h5></a>
-                    </div>
+                <div class="d-flex justify-content-center justify-content-sm-between flex-wrap px-3">
+                    <a href="{% url 'products' %}" class="btn btn-orange my-3 mx-auto mx-sm-0"><h5 class="mb-0">Keep Shopping</h5></a>
+                    <a href="{% url 'view_basket' %}" class="btn btn-green my-3 mx-auto mx-sm-0"><h5 class="mb-0">Go To Checkout</h5></a>
                 </div>
             </div>
         </div>
