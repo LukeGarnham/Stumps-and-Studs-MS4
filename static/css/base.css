@@ -68,6 +68,10 @@ a:hover,
     background-color: #04080F;
 }
 
+.black-border {
+    border-radius: 0;
+    border: 1px solid #04080f;
+}
 /*----------------------------------------------------------------------------------------------------------Header & Navbar*/
 
 header {
@@ -167,9 +171,37 @@ footer p, footer li {
     max-height: 150px;
 }
 
+/* Make add to basket submit button same height as the anchor buttons. */
 #add-to-basket {
     line-height: 1.2;
 }
+
+/*------------------------------------------------Product Details - Inputs*/
+.product-input {
+    min-width: 135px;
+}
+
+.qty-btn {
+    background-color: #04080F;
+    color: #fff;
+    width: 36px;
+}
+
+.qty-btn:disabled {
+    color: #04080F;
+}
+
+/* Remove the spinner from the quantity input. */
+/* Source: https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+.qty_input::-webkit-outer-spin-button,
+.qty_input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.qty_input {
+    -moz-appearance: textfield;
+    width: 59px;
+  }
 
 /* Initial CSS from: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp */
 #scroll-to-top {

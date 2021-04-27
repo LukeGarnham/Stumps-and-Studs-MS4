@@ -48,7 +48,7 @@
                             {% if  sizes %}
                                 <div class="d-flex flex-row align-items-center justify-content-between mb-2">
                                     <strong><label for="product_size">Size:</label></strong>
-                                    <select name="product_size" id="product_size" aria-label="Select product size">
+                                    <select class="product-input black-border" name="product_size" id="product_size" aria-label="Select product size">
                                         <option value="jr">Junior</option>
                                         <option value="xs">Extra Small</option>
                                         <option value="s">Small</option>
@@ -64,7 +64,7 @@
                             {% if  side %}
                                 <div class="d-flex flex-row align-items-center justify-content-between mb-2">
                                     <strong><label for="product_side">Side:</label></strong>
-                                    <select name="product_side" id="id_product_side" aria-label="Select product gender">
+                                    <select class="product-input black-border" name="product_side" id="id_product_side" aria-label="Select product gender">
                                         <option value="right" selected>Right-Handed</option>
                                         <option value="left">Left-Handed</option>
                                     </select>
@@ -76,7 +76,7 @@
                             {% if  gender %}
                                 <div class="d-flex flex-row align-items-center justify-content-between mb-2">
                                     <strong><label for="product_gender">Gender:</label></strong>
-                                    <select name="product_gender" id="id_product_gender" aria-label="Select product gender">
+                                    <select class="product-input black-border" name="product_gender" id="id_product_gender" aria-label="Select product gender">
                                         <option value="male" selected>Male</option>
                                         <option value="female">Female</option>
                                     </select>
@@ -87,16 +87,16 @@
                             <div class="d-flex flex-row align-items-center justify-content-between mb-2">
                                 <strong><label for="qty">Quantity:</label></strong>
                                 <div>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <button class="dec-qty border-0 bg-white" data-item_id="{{ product.id }}" id="dec-qty_{{ product.id }}">
-                                                <i class="fas fa-minus pe-2"></i>
+                                    <div class="input-group black-border">
+                                        <div class="input-group-prepend black-border">
+                                            <button class="dec-qty border-0 qty-btn purple-hover" data-item_id="{{ product.id }}" id="dec-qty_{{ product.id }}">
+                                                <i class="fas fa-minus"></i>
                                             </button>
                                         </div>
-                                        <input type="number" id="id_qty_{{ product.id }}" class="text-center border-0" name="qty" value="1" min="1" max="99" data-item_id="{{ product.id }}">
-                                        <div class="input-group-append">
-                                            <button class="inc-qty border-0 bg-white" data-item_id="{{ product.id }}" id="inc-qty_{{ product.id }}">
-                                                <i class="fas fa-plus ps-2"></i>
+                                        <input class="qty_input border-top-0 border-bottom-0 text-center" type="number" name="qty" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                        <div class="input-group-append black-border">
+                                            <button class="inc-qty border-0 qty-btn purple-hover" data-item_id="{{ product.id }}" id="inc-qty_{{ product.id }}">
+                                                <i class="fas fa-plus"></i>
                                             </button>
                                         </div>
                                     </div>
