@@ -46,57 +46,63 @@
                         <!-- Size -->
                         {% with product.has_sizes as sizes %}
                             {% if  sizes %}
-                                <div class="input-group">
-                                    <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
-                                        <strong><label for="product_size">Size:</label></strong>
-                                        <select name="product_size" id="product_size" aria-label="Select product size">
-                                            <option value="jr">Junior</option>
-                                            <option value="xs">Extra Small</option>
-                                            <option value="s">Small</option>
-                                            <option value="m" selected>Medium</option>
-                                            <option value="l">Large</option>
-                                            <option value="xl">Extra Large</option>
-                                        </select>
-                                    </div>
+                                <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                                    <strong><label for="product_size">Size:</label></strong>
+                                    <select name="product_size" id="product_size" aria-label="Select product size">
+                                        <option value="jr">Junior</option>
+                                        <option value="xs">Extra Small</option>
+                                        <option value="s">Small</option>
+                                        <option value="m" selected>Medium</option>
+                                        <option value="l">Large</option>
+                                        <option value="xl">Extra Large</option>
+                                    </select>
                                 </div>
                             {% endif %}
                         {% endwith %}
                         <!-- Side -->
                         {% with product.has_side as side %}
                             {% if  side %}
-                                <div class="input-group">
-                                    <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
-                                        <strong><label for="product_side">Side:</label></strong>
-                                        <select name="product_side" id="id_product_side" aria-label="Select product gender">
-                                            <option value="right" selected>Right-Handed</option>
-                                            <option value="left">Left-Handed</option>
-                                        </select>
-                                    </div>
+                                <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                                    <strong><label for="product_side">Side:</label></strong>
+                                    <select name="product_side" id="id_product_side" aria-label="Select product gender">
+                                        <option value="right" selected>Right-Handed</option>
+                                        <option value="left">Left-Handed</option>
+                                    </select>
                                 </div>
                             {% endif %}
                         {% endwith %}
                         <!-- Gender -->
                         {% with product.has_gender as gender %}
                             {% if  gender %}
-                                <div class="input-group">
-                                    <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
-                                        <strong><label for="product_gender">Gender:</label></strong>
-                                        <select name="product_gender" id="id_product_gender" aria-label="Select product gender">
-                                            <option value="male" selected>Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                    </div>
+                                <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                                    <strong><label for="product_gender">Gender:</label></strong>
+                                    <select name="product_gender" id="id_product_gender" aria-label="Select product gender">
+                                        <option value="male" selected>Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
                                 </div>
                             {% endif %}
                         {% endwith %}
                         <!-- Qty & Add to Basket -->
-                        <div class="input-group">
-                            <div class="input-group d-flex flex-row align-items-center justify-content-between mb-2">
-                                <strong><label for="qty">Quantity</label></strong>
-                                <input type="number" id="id_qty_{{ product.id }}" name="qty" value="1" min="1" max="99" class="w-25" data-item_id="{{ product.id }}">
+                            <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                                <strong><label for="qty">Quantity:</label></strong>
+                                <div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button class="dec-qty border-0 bg-white" data-item_id="{{ product.id }}" id="dec-qty_{{ product.id }}">
+                                                <i class="fas fa-minus pe-2"></i>
+                                            </button>
+                                        </div>
+                                        <input type="number" id="id_qty_{{ product.id }}" class="text-center border-0" name="qty" value="1" min="1" max="99" data-item_id="{{ product.id }}">
+                                        <div class="input-group-append">
+                                            <button class="inc-qty border-0 bg-white" data-item_id="{{ product.id }}" id="inc-qty_{{ product.id }}">
+                                                <i class="fas fa-plus ps-2"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <input type="submit" id="add-to-basket" class="btn btn-green py-2 w-100 border-0 mt-3 ms-0" value="Add to Basket">
-                        </div>
                         <!-- Hidden Field -->
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </form>
@@ -124,5 +130,6 @@
 {% endblock %}
 
 {% block postload_js %}
-
+    {{ block.super }}
+    {% include 'products/includes/qty_input_script.html' %}
 {% endblock %}
