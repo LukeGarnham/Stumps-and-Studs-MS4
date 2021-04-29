@@ -131,6 +131,8 @@ The templates folder contains an 'allauth' subfolder which contains a number of 
 
 ### Static Files
 
+
+
 ## Database Schema
 
 ### Data Scheme
@@ -140,6 +142,10 @@ The templates folder contains an 'allauth' subfolder which contains a number of 
 ### Existing Features
 
 ### Features Left To Implement
+
+- Add products which are specifically male/female and provide filter i.e. Clothing -> Men, Clothing -> Women.
+- Stock levels including out of stock message 'if stock count == 0'.
+- Subscribe to mailing list feature.
 
 ## Languages
 
