@@ -33,7 +33,7 @@
                     <div class="d-flex flex-row align-items-center justify-content-between mb-2">
                         <span><strong>Price:</strong> £{{ product.price }}</span>
                         {% if product.price < product.rrp %}
-                            <span class=""><s>RRP: £{{ product.rrp }}</s></span>
+                            <span class=""><strong>RRP: </strong><s>£{{ product.rrp }}</s></span>
                         {% endif %}
                     </div>
                     <!-- Description -->

@@ -13,12 +13,13 @@ def basket_contents(request):
     # Get basket from session memory or initiate empty dictionary.
     basket = request.session.get('basket', {})
 
-    # For each item and quantity in basket,
-    # retrieve product details from Product model.
+    # For each item in basket, retrieve product details from Product model.
     # Then sum up the total (cost), product count and basket_items.
     for item_id, item_data in basket.items():
+        # Check if the item data is an integer.
         if isinstance(item_data, int):
-            product = get_object_or_404(Product, pk=item_id)
+            # If so, increment variables accordingly.
+            product = get_object_or_404(Product, pk=item_data)
             total += item_data * product.price
             product_count += item_data
             basket_items.append({
@@ -27,15 +28,19 @@ def basket_contents(request):
                 'product': product,
             })
         else:
-            product = get_object_or_404(Product, pk=item_data)
-            for size, qty in item_data['items_by_size'].items():
-                total += item_data * product.price
-                product_count += item_data
+            # If item data not an integer, it will be a list of dicts.
+            product = get_object_or_404(Product, pk=item_id)
+            for item in item_data:
+                # Cycle through each dict in list, increment variables.
+                total += item['qty'] * product.price
+                product_count += item['qty']
                 basket_items.append({
                     'item_id': item_id,
-                    'qty': item_data,
+                    'qty': item['qty'],
                     'product': product,
-                    'size': size,
+                    'size': item['size'],
+                    'side': item['side'],
+                    'gender': item['gender'],
                 })
 
     # If there is something in the basket,
