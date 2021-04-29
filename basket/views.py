@@ -27,7 +27,7 @@ def add_to_basket(request, item_id):
         gender = request.POST.get('product_gender')
     basket = request.session.get('basket', {})
 
-    # Product with details: {item_id:[
+    # Product with details structure: {item_id:[
     #   {'size':size, 'side':side, 'gender':gender, 'qty':qty},
     # ]}
     if size or side or gender:

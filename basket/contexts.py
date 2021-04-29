@@ -19,29 +19,44 @@ def basket_contents(request):
         # Check if the item data is an integer.
         if isinstance(item_data, int):
             # If so, increment variables accordingly.
-            product = get_object_or_404(Product, pk=item_data)
+            product = get_object_or_404(Product, pk=item_id)
+            print(product)
             total += item_data * product.price
             product_count += item_data
             basket_items.append({
                 'item_id': item_id,
-                'qty': item_data,
                 'product': product,
+                'details': [{
+                    'qty': item_data,
+                }]
             })
+            print(basket_items)
         else:
             # If item data not an integer, it will be a list of dicts.
             product = get_object_or_404(Product, pk=item_id)
+            basket_items.append({
+                'item_id': item_id,
+                'product': product,
+                # Create an empty list to append each
+                # product with it's specific details.
+                'details': [],
+            })
+            # Cycle through each dict in list for this product.
             for item in item_data:
-                # Cycle through each dict in list, increment variables.
+                # Increment total (£) and product count variables.
                 total += item['qty'] * product.price
                 product_count += item['qty']
-                basket_items.append({
-                    'item_id': item_id,
-                    'qty': item['qty'],
-                    'product': product,
-                    'size': item['size'],
-                    'side': item['side'],
-                    'gender': item['gender'],
-                })
+                # Cycle through all basket dicts.
+                for basket_item in basket_items:
+                    # Find the dict for this item.
+                    # Append the product details to in the detail list.
+                    if basket_item['item_id'] == item_id:
+                        basket_item['details'].append({
+                            'qty': item['qty'],
+                            'size': item['size'],
+                            'side': item['side'],
+                            'gender': item['gender'],
+                        })
 
     # If there is something in the basket,
     # retrieve delivery cost from global settings.
