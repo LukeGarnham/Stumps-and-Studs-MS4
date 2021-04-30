@@ -10,9 +10,13 @@ $(document).ready(function() {
         if (prevScrollpos > currentScrollPos && screenWidth >= 768) {
             // Show the navbar.
             $(".navbar").show("blind", 500);
+            // Push any toasts back down below navbar.
+            $(".toast").removeClass("toast-up", 500)
         } else if (prevScrollpos < currentScrollPos && screenWidth >= 768) {
             // If user scrolls down on medium screens upwards hide the navbar.
             $(".navbar").hide("blind", 500);
+            // Bring toasts closer to top when navbar hides.
+            $(".toast").addClass("toast-up", 500)
         }
         prevScrollpos = currentScrollPos;
     };

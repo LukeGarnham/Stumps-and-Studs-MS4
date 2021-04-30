@@ -75,6 +75,11 @@ a:hover,
     border: 1px solid #04080f;
 }
 
+#two-wide, #three-wide,
+.update-link, .remove-item {
+    cursor: pointer;
+}
+
 /*------------------------------------------------Horizontal Rules*/
 
 .hr-black {
@@ -130,12 +135,6 @@ header {
 
 #product-count {
     font-family: 'Open Sans', sans-serif;
-}
-
-/*----------------------------------------------------------------------------------------------------------Basket*/
-
-.update-link, .remove-item {
-    cursor: pointer;
 }
 
 /*----------------------------------------------------------------------------------------------------------Footer*/
@@ -235,6 +234,52 @@ footer p, footer li {
     color: #09814A;
 }
 
+/*----------------------------------------------------------------------------------------------------------Toasts/Messages*/
+
+.toast {
+    position: fixed;
+    top: 93px;
+    z-index: 9999999;
+    border-radius: 0;
+    width: 100%;
+    border: 1px solid #04080F;
+    box-shadow: 0 0.5rem 1rem rgb(4 8 15 / 15%);
+}
+
+.toast-success {
+    background-color: #09814A;
+    color: #fff;
+}
+
+.toast-error {
+    background-color: #FE7F2D;
+    color: #fff;
+}
+
+.toast-info {
+    background-color: #B388EB;
+    color: #000;
+}
+
+.toast-warning {
+    background-color: #FFBF00;
+    color: #000;
+}
+
+.toast-up {
+    top: 53px;
+}
+
+.toast-basket {
+    max-height: 80px;
+}
+
+.toast-image {
+    object-fit: scale-down;
+    height: auto;
+    max-height: 50px;
+}
+
 /*----------------------------------------------------------------------------------------------------------Media Queries*/
 
 /* Apply to screen sizes up to 768px width */
@@ -246,5 +291,10 @@ footer p, footer li {
 
     .navbar {
         background-color: #04080F;
+    }
+
+    /* Reduce distance to top of page on small screens so toast sit under navbar. */
+    .toast {
+        top:53px;
     }
 }

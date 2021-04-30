@@ -1,4 +1,8 @@
-from django.shortcuts import render, redirect, reverse, HttpResponse
+from django.shortcuts import (render, redirect, reverse,
+                              HttpResponse, get_object_or_404)
+from django.contrib import messages
+
+from products.models import Product
 
 
 def view_basket(request):
@@ -10,6 +14,8 @@ def view_basket(request):
 def add_to_basket(request, item_id):
     """ Add a quantity of the product to the basket """
 
+    # Get the product from the Product model.
+    product = get_object_or_404(Product, pk=item_id)
     # Get quantity and redirect_url from the submitted (POST) form.
     qty = int(request.POST.get('qty'))
     redirect_url = request.POST.get('redirect_url')
@@ -69,6 +75,7 @@ def add_to_basket(request, item_id):
             basket[item_id] += qty
         else:
             basket[item_id] = qty
+    messages.success(request, f'Added {product.name} to your basket.')
 
     request.session['basket'] = basket
     return redirect(redirect_url)
@@ -165,4 +172,5 @@ def remove_from_basket(request, item_id):
         request.session['basket'] = basket
         return HttpResponse(status=200)
     except Exception as e:
+        messages.error(request, f'Error removing item: {e}')
         return HttpResponse(status=500)

@@ -1,0 +1,48 @@
+<div class="toast">
+    <div class="row">
+        <!-- Message and Close Button -->
+        <div class="col-12 toast-success d-flex align-items-center px-4">
+            <div class="flex-fill text-center">
+                <span class="pr-2">Success!</span>
+                <span>{{ message }}</span>
+            </div>
+            <button type="button" class="close-toast btn d-inline float-end purple-hover py-0 fs-5" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+            </button>
+        </div>
+    </div>
+    <!-- If there are items in the basket, show preview. -->
+    {% if grand_total %}
+        <div class="row px-5">
+            <div class="col-12 col-sm-9">
+                <div class="container-fluid toast-basket overflow-auto">
+                    {% if basket_items %}
+                        {% for item in basket_items %}
+                            <div class="row">
+                                <!-- Product image -->
+                                <div class="col-6 col-sm-3">
+                                    {% if item.image %}
+                                        <img class="toast-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    {% else %}
+                                        <img class="toast-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                    {% endif %}
+                                </div>
+                                <!-- Product details -->
+                                <div class="col-6 col-sm-9">
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Checkout button -->
+            <div class="col-12 col-sm-3">
+                <a href="{% url 'view_basket' %}" class="btn btn-green py-2 my-3 w-100"><h5 class="mb-0">
+                    <i class="fas fa-lock pe-1"></i>
+                    Basket & Checkout</h5>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>
