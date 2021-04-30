@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load basket_tools %}
 
 {% block content %}
     <div class="container-fluid px-5 py-3">
@@ -102,7 +103,7 @@
                                 </div>
                                 <div class="my-1 fs-small">
                                     <strong>Subtotal:
-                                        <span class="float-end">£{{ item.product.price }}</span>
+                                        <span class="float-end">£{{ item.product.price | calc_subtotal:detail.qty }}</span>
                                     </strong>
                                 </div>
                                 <hr>
