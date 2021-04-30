@@ -154,10 +154,12 @@ def remove_from_basket(request, item_id):
                    item['side'] == side and item['gender'] == gender):
                     # Remove (delete) the dict.
                     basket[item_id].remove(item)
+                    # If the list is empty, remove product from basket.
                     if basket[item_id] == []:
                         basket.pop(item_id)
         else:
-            # If product has no size, side or gender, update quantity.
+            # If product has no size, side or gender,
+            # remove product from basket.
             basket.pop(item_id)
 
         request.session['basket'] = basket
