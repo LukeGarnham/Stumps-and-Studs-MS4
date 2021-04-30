@@ -23,6 +23,8 @@ input[type=submit] {
     font-size: 1.25rem;
 }
 
+/*------------------------------------------------Buttons*/
+
 .btn, .btn:focus {
     box-shadow: none;
     border-radius: 0;
@@ -72,6 +74,18 @@ a:hover,
     border-radius: 0;
     border: 1px solid #04080f;
 }
+
+/*------------------------------------------------Horizontal Rules*/
+
+.hr-black {
+    opacity: 100;
+}
+
+.hr-thick,
+.hr-thick:not([size]) {
+    height: 2px;
+}
+
 /*----------------------------------------------------------------------------------------------------------Header & Navbar*/
 
 header {
@@ -116,6 +130,12 @@ header {
 
 #product-count {
     font-family: 'Open Sans', sans-serif;
+}
+
+/*----------------------------------------------------------------------------------------------------------Basket*/
+
+.update-link, .remove-item {
+    cursor: pointer;
 }
 
 /*----------------------------------------------------------------------------------------------------------Footer*/

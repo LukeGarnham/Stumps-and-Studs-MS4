@@ -13,7 +13,7 @@
                 <small>
                     <a href="{% url 'products' %}">
                         <i class="fas fa-arrow-left"></i>
-                        <strong>Continue Shopping</strong>
+                        <strong class="text-decoration-underline">Continue Shopping</strong>
                     </a>
                 </small>
             </div>
@@ -22,7 +22,7 @@
             {% for item in basket_items %}
                 <!-- Product -->
                 <div class="row px-4">
-                    <hr class="d-none d-sm-block">
+                    <hr class="d-none d-sm-block hr-black">
                     <!-- Product Image -->
                     <div class="col-6  py-3 px-0 px-md-3">
                         <a href="{% url 'product_detail' item.product.id %}">
@@ -66,9 +66,39 @@
                                     </div>
                                 {% endif %}
                                 <!-- Price & Quantity -->
-                                <div class="my-1 fs-small">
+                                <div class="my-1 fs-small d-flex flex-row justify-content-between">
                                     Quantity:
-                                    <span class="float-end">{{ detail.qty }}</span>
+                                    <div>
+                                        <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.item_id %}">
+                                            {% csrf_token %}
+                                            <div class="input-group black-border">
+                                                <div class="input-group-prepend black-border">
+                                                    <button class="dec-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}" id="dec-qty_{{ item.item_id }}">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                                <input class="qty_input border-top-0 border-bottom-0 text-center" type="number" name="qty" value="{{ detail.qty }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                                <div class="input-group-append black-border">
+                                                    <button class="inc-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}" id="inc-qty_{{ item.item_id }}">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                                {% if detail.size %}
+                                                    <input type="hidden" name="product_size" value="{{ detail.size }}">
+                                                {% endif %}
+                                                {% if detail.side %}
+                                                    <input type="hidden" name="product_side" value="{{ detail.side }}">
+                                                {% endif %}
+                                                {% if detail.gender %}
+                                                    <input type="hidden" name="product_gender" value="{{ detail.gender }}">
+                                                {% endif %}
+                                            </div>
+                                        </form>
+                                        <div class="d-flex align-items-center justify-content-between py-1">
+                                            <a class="update-link fs-small text-decoration-underline">Update</a>
+                                            <a class="remove-item fs-small text-decoration-underline" id="remove_{{ item.item_id }}" data-product_size="{{ detail.size }}" data-product_side="{{ detail.side }}" data-product_gender="{{ detail.gender }}">Remove</a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="my-1 fs-small">
                                     <strong>Subtotal:
@@ -83,8 +113,9 @@
                 </div>
             {% endfor %}
                 <div class="row px-4">
+                    <hr class="d-none d-md-block hr-black mb-0">
                     <div class="col-12 col-md-6 offset-md-6 py-3 px-0 px-md-3">
-                        <hr>
+                        <hr class="hr-black hr-thick">
                         <div class="py-2">
                             <h5 class="d-inline">Basket Total</h5>
                             <span class="float-end">£{{ total|floatformat:2 }}</span>
@@ -97,7 +128,7 @@
                             <h5 class="d-inline fw-bold">Grand Total</h5>
                             <strong><span class="float-end">£{{ grand_total|floatformat:2 }}</span></strong>
                         </div>
-                        <hr>
+                        <hr class="hr-black hr-thick">
                         <!-- Keep Shopping & Checkout Buttons -->
                         <div class="container-fluid px-0">
                             <div class="row">
@@ -120,7 +151,7 @@
         {% else %}
             <div class="row px-4">
                 <div class="col-12 p-3">
-                    <p>Your bag is empty.</p>
+                    <p>Your basket is empty.</p>
                     <a href="{% url 'products' %}" class="btn btn-green py-2 mt-3"><h5 class="mb-0">Continue Shopping</h5></a>
                 </div>
             </div>
@@ -134,7 +165,32 @@
 
 {% block postload_js %}
     {{ block.super}}
+    {% include 'products/includes/qty_input_script.html' %}
+
     <script type="text/javascript">
+        // Update quantity on click.
+        $('.update-link').click(function(e) {
+            var form = $(this).parent().prev('.update-form');
+            form.submit();
+            console.log(form);
+        });
+
+        // Remove item and reload on click.
+        $('.remove-item').click(function(e) {
+            var csrfToken = "{{ csrf_token }}";
+            var itemId = $(this).attr('id').split('remove_')[1];
+            var size = $(this).data('product_size');
+            var side = $(this).data('product_side');
+            var gender = $(this).data('product_gender');
+            var url = `/basket/remove/${itemId}/`;
+            var data = {'csrfmiddlewaretoken': csrfToken, 'product_size': size, 'product_side': side, 'product_gender': gender};
+
+            $.post(url, data)
+            .done(function() {
+                location.reload();
+            });
+        });
+
         // Toggle the visibility of the scroll-to-top button if scrolled down 25% screen height from top.
         $(window).scroll(function() {
             var screenHeight = $(window).height();
@@ -149,4 +205,5 @@
             window.scrollTo(0,0);
         });
     </script>
+
 {% endblock %}

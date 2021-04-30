@@ -20,7 +20,6 @@ def basket_contents(request):
         if isinstance(item_data, int):
             # If so, increment variables accordingly.
             product = get_object_or_404(Product, pk=item_id)
-            print(product)
             total += item_data * product.price
             product_count += item_data
             basket_items.append({
@@ -30,7 +29,6 @@ def basket_contents(request):
                     'qty': item_data,
                 }]
             })
-            print(basket_items)
         else:
             # If item data not an integer, it will be a list of dicts.
             product = get_object_or_404(Product, pk=item_id)
