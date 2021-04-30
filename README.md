@@ -131,8 +131,6 @@ The templates folder contains an 'allauth' subfolder which contains a number of 
 
 ### Static Files
 
-
-
 ## Database Schema
 
 ### Data Scheme
@@ -180,6 +178,8 @@ So for products with no size, side or gender, the structure in the basket_items 
 For products which have at least one attribute (either size, side, gender),  the structure in the basket_items list is:
 
 {'item_id': product_id, 'product': Product(object), 'details': [{'qty': quantity, 'size': size, 'side': side, 'gender': gender}]}
+
+The data structure allows for product details, quanities and where applicable, attributes to be unpacked in the basket page using Jinja.
 
 ## Features
 
@@ -248,6 +248,10 @@ Finally, to ensure that no empty lists are left in the basket, I check see if th
 ### Testing Process
 
 *Try to use an Aim, Methodology, Result layout. A user should be able to read the Testing document, carry out the same tests on the live site and get the same results.  Try testing the user stories comprehensively in terms of Features and Responsivity to get a better grade.  Include evaluation of bugs found and their fixes and explanation of any bugs that are left unfixed.  Test the UX thoroughly.*
+
+#### Responsive Design
+
+* Basket page is responsive but the quantity buttons begin to misalign when the screen width is reduced down to 332px wide.  However, I believe this is not an issue since [modern mobiles](http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml#:~:text=Most%20mobile%20phones%20have%20a,CSS%20pixel%20on%20the%20screen.) are wider than this.
 
 ### Bugs Encountered During Testing
 
