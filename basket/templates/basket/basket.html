@@ -28,7 +28,7 @@
                     <div class="col-6  py-3 px-0 px-md-3">
                         <a href="{% url 'product_detail' item.product.id %}">
                             <div class="card border-0 rounded-0">
-                                {% if item.image %}
+                                {% if item.product.image %}
                                     <img class="product-image-small" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                                 {% else %}
                                     <img class="product-image-small" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">

@@ -23,8 +23,8 @@
                         <hr class="hr-black my-1">
                         <div class="row">
                                 <!-- Product image -->
-                                <div class="col-12 col-sm-3">
-                                    {% if item.image %}
+                                <div class="col-12 col-sm-3 text-center">
+                                    {% if item.product.image %}
                                         <img class="toast-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                                     {% else %}
                                         <img class="toast-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">

@@ -187,7 +187,7 @@ footer p, footer li {
 .product-image-small {
     object-fit: scale-down;
     height: auto;
-    max-height: 150px;
+    max-height: 200px;
 }
 
 /* Make add to basket submit button same height as the anchor buttons. */
@@ -277,7 +277,7 @@ footer p, footer li {
 .toast-image {
     object-fit: scale-down;
     height: auto;
-    max-height: 50px;
+    max-height: 80px;
 }
 
 /*----------------------------------------------------------------------------------------------------------Media Queries*/
