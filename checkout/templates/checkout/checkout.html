@@ -23,6 +23,70 @@
             <!-- Checkout Details -->
             <div class="col-12 col-md-6">
                 <h5 class="px-3">Checkout Details</h5>
+                <hr class="hr-black mt-0">
+                <!-- Source: https://getbootstrap.com/docs/5.0/components/navs-tabs/#javascript-behavior -->
+                <ul class="nav nav-tabs nav-justified flex-column flex-sm-row" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link purple-hover active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab" aria-controls="personal" aria-selected="true">Personal Details</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link purple-hover" id="delivery-tab" data-bs-toggle="tab" data-bs-target="#delivery" type="button" role="tab" aria-controls="delivery" aria-selected="false">Delivery Address</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link purple-hover" id="pay-tab" data-bs-toggle="tab" data-bs-target="#pay" type="button" role="tab" aria-controls="pay" aria-selected="false">Summary & Pay</button>
+                    </li>
+                </ul>
+                <!-- Payment Form -->
+                <form action="{% url 'checkout' %}" method="POST" id="payment-form" class="black-border border-top-0 p-4">
+                    <div class="tab-content" id="myTabContent">
+                        {% csrf_token %}
+                        <!-- Personal Details -->
+                        <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+                            <fieldset>
+                                {{ order_form.full_name }}
+                                {{ order_form.email }}
+                                {{ order_form.phone_number }}
+                            </fieldset>
+                        </div>
+                        <!-- Delivery Details -->
+                        <div class="tab-pane fade" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
+                            <fieldset>
+                                {{ order_form.street_address1 }}
+                                {{ order_form.street_address2 }}
+                                {{ order_form.town_or_city }}
+                                {{ order_form.county }}
+                                {{ order_form.postcode }}
+                                {{ order_form.country }}
+
+                            </fieldset>
+                        </div>
+                        <!-- Summary and Payment -->
+                        <div class="tab-pane fade" id="pay" role="tabpanel" aria-labelledby="pay-tab">
+                        </div>
+                        <!-- Save info or Register and Login -->
+                        <div class="form-check">
+                            {% if user.is_authenticated %}
+                                <!-- Save info -->
+                                <div class="py-3">
+                                    <label class="form-check-label" for="id-save-info">
+                                        Save delivery information to my profile.
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" value="" id="id-save-info" name="save-info">
+                                </div>
+                                <!-- Regist and Login -->
+                                <div class="d-flex justify-content-evenly align-items-center py-3">
+                                    <a href="#" class="btn btn-green">
+                                        Register
+                                    </a>
+                                    <a href="#" class="btn btn-orange">
+                                        Login
+                                    </a>
+                                </div>
+                                {% else %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
             </div>
             <!-- Basket Preview -->
             <div class="col-12 col-md-6">
@@ -33,23 +97,19 @@
                         <hr class="hr-black">
                         <!-- Product Image -->
                         <div class="col-12 col-sm-3 col-md-12 col-lg-3 py-3 px-0 px-md-3">
-                            <a href="{% url 'product_detail' item.product.id %}">
-                                <div class="card border-0 rounded-0">
-                                    {% if item.product.image %}
-                                        <img class="toast-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                                    {% else %}
-                                        <img class="toast-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                                    {% endif %}
-                                </div>
-                            </a>
+                            <div class="card border-0 rounded-0">
+                                {% if item.product.image %}
+                                    <img class="toast-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                {% else %}
+                                    <img class="toast-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                {% endif %}
+                            </div>
                         </div>
                         <!-- Product Details -->
                         <div class="col-sm-9 col-md-12 col-lg-9 py-3 px-0 px-md-3">
                             <div class="py-0">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <a href="{% url 'product_detail' item.product.id %}">
-                                        <h5 class="mb-1 d-inline">{{ item.product.name }}</h5>
-                                    </a>
+                                    <h5 class="mb-1 d-inline">{{ item.product.name }}</h5>
                                     <span class="text-end">Price: £{{ item.product.price }}</span>
                                 </div>
                                 <hr>
