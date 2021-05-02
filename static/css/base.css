@@ -293,7 +293,7 @@ footer p, footer li {
         background-color: #04080F;
     }
 
-    /* Reduce distance to top of page on small screens so toast sit under navbar. */
+    /* Reduce distance to top of page on small and medium screens so toast sit under navbar. */
     .toast {
         top:53px;
     }
