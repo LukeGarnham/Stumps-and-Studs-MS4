@@ -24,13 +24,22 @@ def add_to_basket(request, item_id):
     side = None
     gender = None
     # If there is a product size, side or gender in the submitted (POST) form
-    # then assign them to variables.
+    # then assign them to variables. Also create strings for use in messages.
     if 'product_size' in request.POST:
         size = request.POST.get('product_size')
+        size_str = f'Size {size.upper()} '
+    else:
+        size_str = ''
     if 'product_side' in request.POST:
         side = request.POST.get('product_side')
+        side_str = f'{side.capitalize()}-Handed '
+    else:
+        side_str = ''
     if 'product_gender' in request.POST:
         gender = request.POST.get('product_gender')
+        gender_str = f'{gender.capitalize()} '
+    else:
+        gender_str = ''
     basket = request.session.get('basket', {})
 
     # Product with details structure: {item_id:[
@@ -49,6 +58,9 @@ def add_to_basket(request, item_id):
                     # If there is a product with same size, side & gender
                     # increment quantity and break out of loop.
                     item['qty'] += qty
+                    messages.success(request, f'Updated {size_str}{side_str}'
+                                     f'{gender_str}{product.name} quantity to '
+                                     f'{item["qty"]}.')
                     break
             else:
                 # If no match found, apend the product details to the dict.
@@ -58,6 +70,8 @@ def add_to_basket(request, item_id):
                     'gender': gender,
                     'qty': qty,
                 })
+                messages.success(request, f'Added {size_str}{side_str}'
+                                 f'{gender_str}{product.name} to your basket.')
         else:
             # If product is not already in basket, add value to product key.
             # Create a list of dicts with one dict containing product details.
@@ -67,15 +81,19 @@ def add_to_basket(request, item_id):
                 'gender': gender,
                 'qty': qty,
             }]
+            messages.success(request, f'Added {size_str}{side_str}{gender_str}'
+                             f'{product.name} to your basket.')
     else:
         # If the product doesn't have any details we
         # first check if the product is already in the basket.
         if item_id in list(basket.keys()):
             # If so, then we increase the quantity
             basket[item_id] += qty
+            messages.success(request, f'Updated {product.name}'
+                             f' quantity to {basket[item_id]}.')
         else:
             basket[item_id] = qty
-    messages.success(request, f'Added {product.name} to your basket.')
+            messages.success(request, f'Added {product.name} to your basket.')
 
     request.session['basket'] = basket
     return redirect(redirect_url)
@@ -85,6 +103,8 @@ def adjust_basket(request, item_id):
     """ Adjust the quantity of a product in
     the basket from within the basket page """
 
+    # Get the product from the Product model.
+    product = get_object_or_404(Product, pk=item_id)
     # Get quantity and redirect_url from the submitted (POST) form.
     qty = int(request.POST.get('qty'))
 
@@ -92,13 +112,22 @@ def adjust_basket(request, item_id):
     side = None
     gender = None
     # If there is a product size, side or gender in the submitted (POST) form
-    # then assign them to variables.
+    # then assign them to variables. Also create strings for use in messages.
     if 'product_size' in request.POST:
         size = request.POST.get('product_size')
+        size_str = f'Size {size.upper()} '
+    else:
+        size_str = ''
     if 'product_side' in request.POST:
         side = request.POST.get('product_side')
+        side_str = f'{side.capitalize()}-Handed '
+    else:
+        side_str = ''
     if 'product_gender' in request.POST:
         gender = request.POST.get('product_gender')
+        gender_str = f'{gender.capitalize()} '
+    else:
+        gender_str = ''
     basket = request.session.get('basket', {})
 
     if size or side or gender:
@@ -112,19 +141,30 @@ def adjust_basket(request, item_id):
                 if qty > 0:
                     # If new quantity is greater than 0, update quantity.
                     item['qty'] = qty
+                    messages.success(request, f'Updated {size_str}{side_str}'
+                                     f'{gender_str}{product.name} quantity to '
+                                     f'{item["qty"]}.')
                 else:
-                    # Otherwise, delete the item (dict).
-                    del item
+                    # Otherwise, remove (delete) the item (dict).
+                    basket[item_id].remove(item)
+                    # If the list is empty, remove product from basket.
                     if basket[item_id] == []:
                         basket.pop(item_id)
+                    messages.success(request, f'Removed {size_str}'
+                                     f'{side_str}{gender_str}'
+                                     f'{product.name} from your basket.')
     else:
         # If product has no size, side or gender, update quantity.
         if qty > 0:
             # If new quantity greater than 0, update quantity.
             basket[item_id] = qty
+            messages.success(request, f'Updated {product.name}'
+                             f' quantity to {basket[item_id]}.')
         else:
             # Otherwise, remove (pop) item from list.
             basket.pop(item_id)
+            messages.success(request, f'Removed {product.name}'
+                             ' from your basket.')
 
     request.session['basket'] = basket
     return redirect(reverse('view_basket'))
@@ -133,20 +173,28 @@ def adjust_basket(request, item_id):
 def remove_from_basket(request, item_id):
     """ Remove a product from basket within the basket page """
 
+    # Get the product from the Product model.
+    product = get_object_or_404(Product, pk=item_id)
     # If there is a product size, side or gender in the submitted (POST) form
-    # then assign them to variables.
+    # then assign them to variables. Also create strings for use in messages.
     size = request.POST.get('product_size')
+    size_str = f'Size {size.upper()} '
     side = request.POST.get('product_side')
+    side_str = f'{side.capitalize()}-Handed '
     gender = request.POST.get('product_gender')
+    gender_str = f'{gender.capitalize()} '
 
     # If there is no data, JS passes through the variable as None in string
-    # format.  Change to the None object.
+    # format.  Change to the None object.  Change strings for use in messages.
     if size == 'None':
         size = None
+        size_str = ''
     if side == 'None':
         side = None
+        side_str = ''
     if gender == 'None':
         gender = None
+        gender_str = ''
 
     basket = request.session.get('basket', {})
 
@@ -164,10 +212,15 @@ def remove_from_basket(request, item_id):
                     # If the list is empty, remove product from basket.
                     if basket[item_id] == []:
                         basket.pop(item_id)
+                    messages.success(request, f'Removed {size_str}'
+                                     f'{side_str}{gender_str}'
+                                     f'{product.name} from your basket.')
         else:
             # If product has no size, side or gender,
             # remove product from basket.
             basket.pop(item_id)
+            messages.success(request, f'Removed {product.name}'
+                             ' from your basket.')
 
         request.session['basket'] = basket
         return HttpResponse(status=200)
