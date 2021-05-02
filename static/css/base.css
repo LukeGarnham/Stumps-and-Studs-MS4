@@ -280,6 +280,17 @@ footer p, footer li {
     max-height: 80px;
 }
 
+/*----------------------------------------------------------------------------------------------------------Checkout*/
+
+#basket-preview {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.stripe-style-input {
+
+}
+
 /*----------------------------------------------------------------------------------------------------------Media Queries*/
 
 /* Apply to screen sizes up to 768px width */

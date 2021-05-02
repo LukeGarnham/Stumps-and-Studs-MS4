@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+{% load basket_tools %}
+
+{% block content %}
+    <div class="container-fluid px-5 py-3">
+        <div class="row">
+            <div class="col-12 px-3">
+                <h2>Checkout</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 p-3">
+                <small>
+                    <a href="{% url 'products' %}">
+                        <i class="fas fa-arrow-left"></i>
+                        <strong class="text-decoration-underline">Continue Shopping</strong>
+                    </a>
+                </small>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Checkout Details -->
+            <div class="col-12 col-md-6">
+                <h5 class="px-3">Checkout Details</h5>
+            </div>
+            <!-- Basket Preview -->
+            <div class="col-12 col-md-6">
+                <h5 class="px-3">Basket</h5>
+                <!-- Products -->
+                <div id="basket-preview" class="row px-4">
+                    {% for item in basket_items %}
+                        <hr class="hr-black">
+                        <!-- Product Image -->
+                        <div class="col-12 col-sm-3 col-md-12 col-lg-3 py-3 px-0 px-md-3">
+                            <a href="{% url 'product_detail' item.product.id %}">
+                                <div class="card border-0 rounded-0">
+                                    {% if item.product.image %}
+                                        <img class="toast-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    {% else %}
+                                        <img class="toast-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Product Details -->
+                        <div class="col-sm-9 col-md-12 col-lg-9 py-3 px-0 px-md-3">
+                            <div class="py-0">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <a href="{% url 'product_detail' item.product.id %}">
+                                        <h5 class="mb-1 d-inline">{{ item.product.name }}</h5>
+                                    </a>
+                                    <span class="text-end">Price: £{{ item.product.price }}</span>
+                                </div>
+                                <hr>
+                                {% for detail in item.details %}
+                                    <!-- Size -->
+                                    {% if detail.size %}
+                                        <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                            Size:
+                                            <span>{{ detail.size|upper }}</span>
+                                        </div>    
+                                    {% endif %}
+                                    <!-- Side -->
+                                    {% if detail.side %}
+                                        <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                            Side:
+                                            <span>{{ detail.side|capfirst }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <!-- Gender -->
+                                    {% if detail.gender %}
+                                        <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                                Gender:
+                                                <span>{{ detail.gender|capfirst }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <!-- Price & Quantity -->
+                                    <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                        Quantity:
+                                        <span>{{ detail.qty }}</span>
+                                    </div>
+                                    <div class="my-1 fs-small">
+                                        <strong>Subtotal:
+                                            <span class="float-end">£{{ item.product.price | calc_subtotal:detail.qty }}</span>
+                                        </strong>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Grand Total -->
+                <div class="row px-4">
+                    <hr class="d-none d-md-block hr-black mb-0">
+                    <div class="col-12 py-3 px-0">
+                        <hr class="hr-black hr-thick">
+                        <div class="py-2">
+                            <h5 class="d-inline">Basket Total</h5>
+                            <span class="float-end">£{{ total|floatformat:2 }}</span>
+                        </div>
+                        <div class="py-2">
+                            <h5 class="d-inline">Delivery Total</h5>
+                            <span class="float-end">£{{ delivery|floatformat:2 }}</span>
+                        </div>
+                        <div class="py-2">
+                            <h5 class="d-inline fw-bold">Grand Total</h5>
+                            <strong><span class="float-end">£{{ grand_total|floatformat:2 }}</span></strong>
+                        </div>
+                        <hr class="hr-black hr-thick">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scroll to top of page arrow -->
+    <button id="scroll-to-top" class="border-0 p-3" >
+        <i class="fas fa-arrow-circle-up fs-1"></i>
+    </button>
+{% endblock %}
+
+{% block postload_js %}
+    {{ block.super}}
+    {% include 'products/includes/qty_input_script.html' %}
+
+    <script type="text/javascript">
+        // Toggle the visibility of the scroll-to-top button if scrolled down 25% screen height from top.
+        $(window).scroll(function() {
+            var screenHeight = $(window).height();
+            if ($(window).scrollTop() >= (screenHeight/4)) {
+                $('#scroll-to-top').show('fade', 500);
+            } else {
+                $('#scroll-to-top').hide('fade', 500);
+            }
+        });
+        // Add scroll to top button.  Button only appears when user scrolls down page.
+        $('#scroll-to-top').click(function() {
+            window.scrollTo(0,0);
+        });
+    </script>
+
+{% endblock %}

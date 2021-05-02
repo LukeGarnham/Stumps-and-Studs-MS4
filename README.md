@@ -232,6 +232,8 @@ The data structure allows for product details, quanities and where applicable, a
  - [Bootstrap](https://getbootstrap.com/)
  - [jQuery](https://jquery.com/)
  - [Django AllAuth](https://django-allauth.readthedocs.io/en/latest/)
+ - Pillow
+ - Crispy Forms
 
 ## Services Used
 
