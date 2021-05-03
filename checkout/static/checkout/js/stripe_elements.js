@@ -1,8 +1,8 @@
 // Source: https://github.com/Code-Institute-Solutions/boutique_ado_v1/blob/a75791ce63bfce9a05f614d7712199c893063ed9/checkout/static/checkout/js/stripe_elements.js
 
-var stripe_public_key = $('#id_stripe_public_key').text().slice(1, -1);
-var client_secret = $('#id_client_secret').text().slice(1, -1);
-var stripe = Stripe(stripe_public_key);
+var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+var clientSecret = $('#id_client_secret').text().slice(1, -1);
+var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
 var style = {
     base: {
@@ -21,3 +21,60 @@ var style = {
 };
 var card = elements.create('card', {style: style});
 card.mount('#card-element');
+
+// Handle validation errors on the card element.
+card.addEventListener('change', function(e) {
+    var errorDiv = $('#card-errors');
+    if (e.error) {
+        var html = `
+            <i class="fas fa-exclamation-triangle" style="color: #FE7F2D;"></i>
+            <span class="fs-small" style="color: #FE7F2D;">
+                ${e.error.message}
+            </span>
+        `;
+        $(errorDiv).html(html);
+        $('#submit-button').prop('disabled', true);
+    } else {
+        errorDiv.textContent = '';
+        $('#submit-button').prop('disabled', false);
+    };
+});
+
+// Handle Stripe payment when form is submitted.
+// https://stripe.com/docs/payments/accept-a-payment?platform=web&ui=elements#web-submit-payment
+var form = document.getElementById('payment-form');
+
+form.addEventListener('submit', function(ev) {
+    // Prevent default event when form is submitted.
+    ev.preventDefault();
+    // Disable the card so no more changes can be made.
+    card.update({'disabled': true});
+    $('#submit-button').prop('disabled', true);
+    // Call the Stripe confirmCardPayment function, passing the client secret and card details.
+    stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+            card: card,
+        }
+    // Check the result of the confirmCardPayment function.
+    }).then(function(result) {
+            // If there's an error, show error to the customer in the #card-errors div.
+            if (result.error) {
+                var errorDiv = $('#card-errors');
+                var html = `
+                    <i class="fas fa-exclamation-triangle" style="color: #FE7F2D;"></i>
+                    <span class="fs-small" style="color: #FE7F2D;">
+                        ${result.error.message}
+                    </span>
+                `;
+                $(errorDiv).html(html);
+                // We also need to re-enable card field and submit-form button so users can try again.
+                card.update({'disabled': false});
+                $('#submit-button').prop('disabled', false);
+            // If the payment is successfully processed, submit the form.
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    form.submit();
+                }
+            }
+    });
+});

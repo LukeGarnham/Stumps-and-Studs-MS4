@@ -308,6 +308,10 @@ I created my GitHub repository (repo) by using the [Code Institute template](htt
 From within GitPod, I installed a number of packages:
 *   [Django](https://www.djangoproject.com/) - *pip3 install django*
 *   [Django AllAuth](https://django-allauth.readthedocs.io/en/latest/) - *pip3 install django-allauth*
+*   [Pillow](https://pillow.readthedocs.io/en/stable/index.html) - *pip3 install pillow*
+*   [Crispy Forms](https://github.com/django-crispy-forms/crispy-bootstrap5) - *pip3 install django-crispy-forms*
+*   [Crispy Forms for Bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5) - *pip3 install crispy-bootstrap5*
+*   [Stripe](https://stripe.com/docs/api) - *pip3 install stripe*
 
 The project is deployed on Heroku which will need to know which packages to install in order to correctly host my finished project.  I kept an updated list of all of the installed packages in the requirements.txt file using this command:
 * *pip3 freeze > requirements.txt*
