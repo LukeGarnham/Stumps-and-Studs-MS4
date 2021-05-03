@@ -229,11 +229,11 @@ The data structure allows for product details, quanities and where applicable, a
 ## Technologies Used
 
  - [Django](https://www.djangoproject.com/)
- - [Bootstrap](https://getbootstrap.com/)
+ - [Bootstrap5](https://getbootstrap.com/)
  - [jQuery](https://jquery.com/)
  - [Django AllAuth](https://django-allauth.readthedocs.io/en/latest/)
  - Pillow
- - Crispy Forms
+ - [Crispy Forms for Bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5)
 
 ## Services Used
 

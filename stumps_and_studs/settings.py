@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'checkout',
     # Other
     'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'stumps_and_studs.urls'
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 TEMPLATES = [

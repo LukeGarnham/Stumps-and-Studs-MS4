@@ -6,23 +6,13 @@
     <div class="container-fluid px-5 py-3">
         <div class="row">
             <div class="col-12 px-3">
-                <h2>Checkout</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 p-3">
-                <small>
-                    <a href="{% url 'products' %}">
-                        <i class="fas fa-arrow-left"></i>
-                        <strong class="text-decoration-underline">Continue Shopping</strong>
-                    </a>
-                </small>
+                <h2 class="mb-4">Checkout</h2>
             </div>
         </div>
         <div class="row">
             <!-- Checkout Details -->
             <div class="col-12 col-md-6">
-                <h5 class="px-3">Checkout Details</h5>
+                <h5 class="px-1">Checkout Details</h5>
                 <hr class="hr-black mt-0">
                 <!-- Source: https://getbootstrap.com/docs/5.0/components/navs-tabs/#javascript-behavior -->
                 <ul class="nav nav-tabs nav-justified flex-column flex-sm-row" id="myTab" role="tablist">
@@ -37,60 +27,84 @@
                     </li>
                 </ul>
                 <!-- Payment Form -->
-                <form action="{% url 'checkout' %}" method="POST" id="payment-form" class="black-border border-top-0 p-4">
+                <form action="{% url 'checkout' %}" method="POST" id="payment-form" class="black-border border-top-0 p-2 p-sm-4">
                     <div class="tab-content" id="myTabContent">
                         {% csrf_token %}
                         <!-- Personal Details -->
                         <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
                             <fieldset>
-                                {{ order_form.full_name }}
-                                {{ order_form.email }}
-                                {{ order_form.phone_number }}
+                                {{ order_form.full_name | as_crispy_field }}
+                                {{ order_form.email | as_crispy_field }}
+                                {{ order_form.phone_number | as_crispy_field }}
                             </fieldset>
+                            <div class="text-end">
+                                <button id="personal-to-delivery" class="btn btn-green">
+                                    Next
+                                </button>
+                            </div>
                         </div>
                         <!-- Delivery Details -->
-                        <div class="tab-pane fade" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
+                        <div class="tab-pane fade" id="delivery" role="tabpanel" aria-labelledby="delivery-tab" >
                             <fieldset>
-                                {{ order_form.street_address1 }}
-                                {{ order_form.street_address2 }}
-                                {{ order_form.town_or_city }}
-                                {{ order_form.county }}
-                                {{ order_form.postcode }}
-                                {{ order_form.country }}
-
+                                {{ order_form.street_address1 | as_crispy_field }}
+                                {{ order_form.street_address2 | as_crispy_field }}
+                                {{ order_form.town_or_city | as_crispy_field }}
+                                {{ order_form.county | as_crispy_field }}
+                                {{ order_form.postcode | as_crispy_field }}
+                                {{ order_form.country | as_crispy_field }}
                             </fieldset>
                         </div>
                         <!-- Summary and Payment -->
                         <div class="tab-pane fade" id="pay" role="tabpanel" aria-labelledby="pay-tab">
+                            <!-- A Stripe card element goes here -->
+                            <div id="card-element" class="mb-3"></div>
+                            <!-- Div to display form errors -->
+                            <div id="card-errors" class="mb-3" role="alert"></div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <button class="btn btn-orange">Previous</button>
+                                <button id="submit-button" class="btn btn-green">
+                                    <i class="fas fa-lock pe-1"></i>
+                                    Complete Order
+                                </button>
+                            </div>
                         </div>
                         <!-- Save info or Register and Login -->
-                        <div class="form-check">
+                        <div class="form-check p-0">
                             {% if user.is_authenticated %}
+                            {% else %}
                                 <!-- Save info -->
-                                <div class="py-3">
-                                    <label class="form-check-label" for="id-save-info">
-                                        Save delivery information to my profile.
+                                <div class="py-3 text-center">
+                                    <label class="form-check-label fs-small" for="id-save-info">
+                                        Save delivery information to my profile?:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" value="" id="id-save-info" name="save-info">
+                                    <input class="form-check-input ms-1" type="checkbox" value="" id="id-save-info" name="save-info" checked>
                                 </div>
+                            
                                 <!-- Regist and Login -->
                                 <div class="d-flex justify-content-evenly align-items-center py-3">
                                     <a href="#" class="btn btn-green">
+                                        <i class="fas fa-sign-in-alt"></i>
                                         Register
                                     </a>
                                     <a href="#" class="btn btn-orange">
+                                        <i class="fas fa-user-plus"></i>
                                         Login
                                     </a>
                                 </div>
-                                {% else %}
                             {% endif %}
                         </div>
                     </div>
                 </form>
             </div>
             <!-- Basket Preview -->
-            <div class="col-12 col-md-6">
-                <h5 class="px-3">Basket</h5>
+            <div class="col-12 col-md-6 mt-5 mt-md-0">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="px-3">Basket</h5>
+                    <a href="{% url 'view_basket' %}" class="purple-hover fs-small mb-2">
+                        <i class="fas fa-arrow-left"></i>
+                        <strong class="text-decoration-underline">Adjust Basket</strong>
+                    </a>
+                </div>
                 <!-- Products -->
                 <div id="basket-preview" class="row px-4">
                     {% for item in basket_items %}
@@ -182,7 +196,7 @@
 
 {% block postload_js %}
     {{ block.super}}
-    {% include 'products/includes/qty_input_script.html' %}
+    {% include 'checkout/includes/checkout_form_script.html' %}
 
     <script type="text/javascript">
         // Toggle the visibility of the scroll-to-top button if scrolled down 25% screen height from top.
