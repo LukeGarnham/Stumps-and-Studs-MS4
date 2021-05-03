@@ -3,7 +3,7 @@
 {% load basket_tools %}
 
 {% block content %}
-    <div class="container-fluid px-5 py-3">
+    <div class="container-fluid px-3 px-sm-5 py-3">
         <div class="row">
             <div class="col-12 px-3">
                 <h2 class="mb-4">Checkout</h2>
@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <!-- Checkout Details -->
-            <div class="col-12 col-md-6">
+            <div id="checkout" class="col-12 col-md-6">
                 <h5 class="px-1">Checkout Details</h5>
                 <hr class="hr-black mt-0">
                 <!-- Source: https://getbootstrap.com/docs/5.0/components/navs-tabs/#javascript-behavior -->
@@ -202,7 +202,11 @@
 
 {% block postload_js %}
     {{ block.super}}
-    {% include 'checkout/includes/checkout_form_script.html' %}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+
+    <script src="{% static 'checkout/js/checkout_form_buttons.js' %}"></script>
 
     <script type="text/javascript">
         // Toggle the visibility of the scroll-to-top button if scrolled down 25% screen height from top.

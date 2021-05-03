@@ -298,20 +298,20 @@ footer p, footer li {
     overflow: auto;
 }
 
-.nav-tabs {
+#checkout .nav-tabs {
     border-bottom: 1px solid #04080F;
 }
 
 /* Overwrite Bootstrap to prevent rounded corners. */
-.nav-tabs .nav-link {
+#checkout .nav-tabs .nav-link {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     height: 66px;
 }
 
 /* Overwrite Bootstrap active nav-link style. */
-.nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active {
+#checkout .nav-tabs .nav-item.show .nav-link,
+#checkout .nav-tabs .nav-link.active {
     color: #fff;
     background-color: #09814A;
     border-color: #04080F #04080F #fff;
@@ -319,21 +319,44 @@ footer p, footer li {
 }
 
 /* Overwrite Bootstrap check input. */
-.form-check .form-check-input {
+#payment-form .form-check .form-check-input {
     border-radius: 0;
     border: 1px solid #04080F;
     float: none;
 }
 
-.form-check-input:checked {
+#payment-form .form-check-input:checked {
     background-color: #09814A;
     border-color: #09814A;
 }
 
-.stripe-style-input {
-    border-radius: 0;
+
+/*------------------------------------------------Stripe*/
+
+.stripe-style-input, .StripeElement {
+    box-sizing: border-box;
+    height: 40px;
+    padding: 10px 12px;
     border: 1px solid #04080F;
+    border-radius: 0;
+    background-color: #fff;
+    box-shadow: 0 1px 3ox 0 #04080F;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
 }
+
+.stripe-style-input:focus,
+.stripe-style-input:active,
+.StripeElement--focus {
+    border: 2px solid #04080F;
+    box-shadow: 0 1px 3px 0 #04080F;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fff;
+}
+
+
 
 /*----------------------------------------------------------------------------------------------------------Media Queries*/
 
