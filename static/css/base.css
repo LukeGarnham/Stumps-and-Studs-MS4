@@ -75,6 +75,17 @@ a:hover,
     border: 1px solid #04080f;
 }
 
+.btn:disabled {
+    pointer-events: none;
+    opacity: 0.4;
+    background-color: white;
+    color: #B388EB;
+    border: 1px solid #B388EB;
+    font-weight: bold;
+}
+
+
+
 #two-wide, #three-wide,
 .update-link, .remove-item {
     cursor: pointer;
