@@ -2,6 +2,7 @@ import uuid
 
 from django.db import models
 from django.db.models import Sum
+from decimal import Decimal
 from django.conf import settings
 
 from products.models import Product
@@ -28,15 +29,15 @@ class Order(models.Model):
 
     def _generate_order_number(self):
         """ Generate a random and unique order number using UUID. """
-        return uuid.uuid4.hex.upper()
+        return uuid.uuid4().hex.upper()
 
     def update_total(self):
         """ Update order total & grand total of order
         each time a new item is added to order. """
         self.order_total = self.lineitems.aggregate(
-            Sum('lineitem_total'))['lineitem_total__sum']
+            Sum('lineitem_total'))['lineitem_total__sum'] or 0
         self.delivery_cost = settings.STANDARD_DELIVERY_COST
-        self.grand_total = self.order_total + self.delivery_cost
+        self.grand_total = self.order_total + Decimal(self.delivery_cost)
         self.save()
 
     def save(self, *args, **kwargs):
@@ -51,21 +52,45 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
+    size_choices = [
+        (None, 'No Side'),
+        ('jr', 'Junior'),
+        ('xs', 'Extra Small'),
+        ('s', 'Small'),
+        ('m', 'Medium'),
+        ('l', 'Large'),
+        ('xl', 'Extra Large'),
+    ]
+    side_choices = [
+        (None, 'No Side'),
+        ('right', 'Right-Handed'),
+        ('left', 'Left-Handed'),
+    ]
+
+    gender_choices = [
+        (None, 'No Gender'),
+        ('male', 'Male'),
+        ('female', 'Female'),
+    ]
+
     order = models.ForeignKey(
         Order, null=False, blank=False,
         on_delete=models.CASCADE, related_name='lineitems')
     product = models.ForeignKey(
         Product, null=False, blank=False, on_delete=models.CASCADE)
     product_size = models.CharField(
-        max_length=2, null=True, blank=True)  # JR, XS, S, M, L, XL
+        max_length=2, choices=size_choices,
+        default=None, blank=True, null=True)  # "", JR, XS, S, M, L, XL
     product_side = models.CharField(
-        max_length=5, null=True, blank=True)  # right, left
+        max_length=12, choices=side_choices,
+        default=None, blank=True, null=True)  # "", right, left
     product_gender = models.CharField(
-        max_length=6, null=True, blank=True)  # male, female
+        max_length=10, choices=gender_choices,
+        default=None, blank=True, null=True)  # "", male, female
     qty = models.IntegerField(null=False, blank=False, default=0)
     lineitem_total = models.DecimalField(
-        max_digits=6, decimal_places=2,
-        null=False, blank=False, editable=False)
+        max_digits=6, decimal_places=2, null=False,
+        blank=False, editable=False)
 
     def save(self, *args, **kwargs):
         """ Overide the original save method to set the
@@ -74,4 +99,4 @@ class OrderLineItem(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'SKU {self.product.sku} on order {self.order_number}'
+        return f'SKU {self.product.sku} on order {self.order.order_number}'
