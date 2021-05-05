@@ -50,6 +50,9 @@ form.addEventListener('submit', function(ev) {
     // Disable the card so no more changes can be made.
     card.update({'disabled': true});
     $('#submit-button').prop('disabled', true);
+    // Hide the form and show the loading-overlay.
+    $('#payment-form').fadeToggle(100);
+    $('#loading-overlay').fadeToggle(100);
     // Call the Stripe confirmCardPayment function, passing the client secret and card details.
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -67,6 +70,9 @@ form.addEventListener('submit', function(ev) {
                     </span>
                 `;
                 $(errorDiv).html(html);
+                // Hide the loading-overlay and show the form.
+                $('#payment-form').fadeToggle(100);
+                $('#loading-overlay').fadeToggle(100);
                 // We also need to re-enable card field and submit-form button so users can try again.
                 card.update({'disabled': false});
                 $('#submit-button').prop('disabled', false);

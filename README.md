@@ -403,4 +403,6 @@ Whilst I would idealy have been able to use high resolution images for my produc
 
 I used Google to find a 'no image' image.  The one I chose was sourced from [this website](https://www.allianceplast.com/no-image/).
 
+The loading gif used when users submit the checkout form was sourced from [icons8.com](https://icons8.com/preloaders/en/search/sport).
+
 ### Acknowledgements
