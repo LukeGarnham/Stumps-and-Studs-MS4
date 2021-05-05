@@ -232,7 +232,7 @@ The data structure allows for product details, quanities and where applicable, a
  - [Bootstrap5](https://getbootstrap.com/)
  - [jQuery](https://jquery.com/)
  - [Django AllAuth](https://django-allauth.readthedocs.io/en/latest/)
- - Pillow
+ - [Pillow](https://pillow.readthedocs.io/en/stable/index.html)
  - [Crispy Forms for Bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5)
 
 ## Services Used
@@ -301,7 +301,19 @@ When converting the delivery cost to a string and then a decimal this was the ou
 
 I decided it was best practice to convert the delivery cost to a string and and then a decimal.  With the delivery cost now the same variable type as the total cost, both decimal, I was able to successfully add the two variables together.
 
+#### Checkout Success
 
+On the checkout success page, the product details (side, size and gender) all appeared as the value entered into the basket when a user adds a product in the product details page.  For example, the sides were left or right, rather than left-handed or right-handed.  Furthermore, in the admin panel, these 3 detail fields were free text fields meaning a user with access to the admin panel could enter any value.
+
+To overcome this, I changed the product_size, product_side and product_gender in the OrderLineItem models within the checkout models.py file.  I changed these fields from Charfields with a maximum length of characters to fields with choices referring to the [Django documentation](https://docs.djangoproject.com/en/3.2/ref/models/fields/#choices).  After making the migrations, when adding a line item to an order from within the admin panel, users are now restricted to only select from the choices defined:
+
+![Admin panel showing the line item choices](media/readme/images/admin-choices.png)
+
+One drawback with this approach is that not all products have sizes, sides or gender but these inputs are not restricted in the admin model.  For example, an admin user could apply a gender of male to a product which doesn't have this attribute such as a cricket ball.
+
+Secondly, I used the get_FOO_display method to display the 'human-readable' value of the choices field - again I reffered to the [Django document](https://docs.djangoproject.com/en/3.2/ref/models/instances/#django.db.models.Model.get_FOO_display) for a solution.  Here is the checkout success page before and then after these changes were made:
+
+![Checkout success page before and after changes made to the display of product details](media/readme/images/checkout-success-before-after.png)
 
 ### Testing Process
 

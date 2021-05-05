@@ -2,21 +2,142 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid px-5 py-3">
+    <div class="container-fluid px-3 px-sm-5 py-5">
         <div class="row">
             <div class="col-12 px-3">
-                <h2>Thank You</h2>
+                <h2 class="mb-4">Thank You</h2>
             </div>
         </div>
         <div class="row">
-            <!-- Order Confirmation Message -->
             <div class="col-12 p-3 fs-small">
-                Order Number: {{ order.order_number }}
+                Summary for Order Number {{ order.order_number }} placed {{ order.order_date|date:'H:i d/m/Y' }}
             </div>
         </div>
-        
-        
-        
+        <div class="row">
+            <!-- Order Details -->
+            <div id="checkout" class="col-12 col-md-6">
+                <h5 class="px-3">Delivery Details</h5>
+                <div class="px-2">
+                    <hr class="hr-black mt-0">
+                </div>
+                <!-- Delivery Details -->
+                <div class="row px-4">
+                    <div class="col-12 px-0 px-md-3">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <strong>Deliver To: </strong>
+                            <span class="text-end">{{ order.full_name }}</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <strong>Delivery Address: </strong>
+                            <span class="text-end">{{ order.street_address1 }}</span>
+                        </div>
+                        {% if order.street_address2 %}
+                            <div class="text-end mb-2">
+                                {{ order.street_address2 }}
+                            </div>
+                        {% endif %}
+                        <div class="text-end mb-2">{{ order.town_or_city }}</div>
+                        {% if order.postcode %}
+                            <div class="text-end mb-2">
+                                {{ order.postcode }}
+                            </div>
+                        {% endif %}
+                        <div class="text-end mb-2">{{ order.country }}</div>
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <strong>Email: </strong>
+                            <span class="text-end">{{ order.email }}</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <strong>Phone: </strong>
+                            <span class="text-end">{{ order.phone_number }}</span>
+                        </div>
+                        <div class="pt-3">
+                            <a href="{% url 'products' %}" class="btn btn-green py-2 w-100"><h5 class="mb-0">
+                                <i class="fas fa-tag pe-1"></i>
+                                Find More Deals</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Ordered Items -->
+            <div class="col-12 col-md-6 mt-5 mt-md-0">
+                    <h5 class="px-3">Ordered Items</h5>
+                <!-- Products -->
+                <div id="basket-preview" class="row px-4">
+                    {% for item in order.lineitems.all %}
+                        <hr class="hr-black">
+                        <!-- Product Image -->
+                        <div class="col-12 col-sm-3 col-md-12 col-lg-3 py-3 px-0 px-md-3">
+                            <div class="card border-0 rounded-0">
+                                {% if item.product.image %}
+                                    <img class="toast-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                {% else %}
+                                    <img class="toast-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- Product Details -->
+                        <div class="col-sm-9 col-md-12 col-lg-9 py-3 px-0 px-md-3">
+                            <div class="py-0">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h5 class="mb-1 d-inline">{{ item.product.name }}</h5>
+                                    <span class="text-end">Price: £{{ item.product.price }}</span>
+                                </div>
+                                <hr>
+                                    <!-- Size -->
+                                    {% if item.product_size %}
+                                        <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                            Size:
+                                            <span>{{ item.get_product_size_display|capfirst }}</span>
+                                        </div>    
+                                    {% endif %}
+                                    <!-- Side -->
+                                    {% if item.product_side %}
+                                        <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                            Side:
+                                            <span>{{ item.get_product_side_display|capfirst }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <!-- Gender -->
+                                    {% if item.product_gender %}
+                                        <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                                Gender:
+                                                <span>{{ item.get_product_gender_display|capfirst }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <!-- Price & Quantity -->
+                                    <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                        Quantity:
+                                        <span>{{ item.qty }}</span>
+                                    </div>
+                                    <hr>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Grand Total -->
+                <div class="row px-4">
+                    <hr class="d-none d-md-block hr-black mb-0">
+                    <div class="col-12 py-3 px-0">
+                        <hr class="hr-black hr-thick">
+                        <div class="py-2">
+                            <h5 class="d-inline">Order Total</h5>
+                            <span class="float-end">£{{ order.order_total|floatformat:2 }}</span>
+                        </div>
+                        <div class="py-2">
+                            <h5 class="d-inline">Delivery Total</h5>
+                            <span class="float-end">£{{ order.delivery_cost|floatformat:2 }}</span>
+                        </div>
+                        <div class="py-2">
+                            <h5 class="d-inline fw-bold">Grand Total</h5>
+                            <strong><span class="float-end">£{{ order.grand_total|floatformat:2 }}</span></strong>
+                        </div>
+                        <hr class="hr-black hr-thick">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Scroll to top of page arrow -->
     <button id="scroll-to-top" class="border-0 p-3" >
@@ -26,9 +147,13 @@
 
 {% block postload_js %}
     {{ block.super}}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+
+    <script src="{% static 'checkout/js/checkout_form_buttons.js' %}"></script>
 
     <script type="text/javascript">
-
         // Toggle the visibility of the scroll-to-top button if scrolled down 25% screen height from top.
         $(window).scroll(function() {
             var screenHeight = $(window).height();
