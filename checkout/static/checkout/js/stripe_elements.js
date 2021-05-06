@@ -53,34 +53,75 @@ form.addEventListener('submit', function(ev) {
     // Hide the form and show the loading-overlay.
     $('#payment-form').fadeToggle(100);
     $('#loading-overlay').fadeToggle(100);
-    // Call the Stripe confirmCardPayment function, passing the client secret and card details.
-    stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-            card: card,
-        }
-    // Check the result of the confirmCardPayment function.
-    }).then(function(result) {
-            // If there's an error, show error to the customer in the #card-errors div.
-            if (result.error) {
-                var errorDiv = $('#card-errors');
-                var html = `
-                    <i class="fas fa-exclamation-triangle" style="color: #FE7F2D;"></i>
-                    <span class="fs-small" style="color: #FE7F2D;">
-                        ${result.error.message}
-                    </span>
-                `;
-                $(errorDiv).html(html);
-                // Hide the loading-overlay and show the form.
-                $('#payment-form').fadeToggle(100);
-                $('#loading-overlay').fadeToggle(100);
-                // We also need to re-enable card field and submit-form button so users can try again.
-                card.update({'disabled': false});
-                $('#submit-button').prop('disabled', false);
-            // If the payment is successfully processed, submit the form.
-            } else {
-                if (result.paymentIntent.status === 'succeeded') {
-                    form.submit();
+
+    // Create boolean variable for whether user has checked the save info box.
+    var saveInfo = Boolean($('#id-save-info').attr('checked'));
+    // Get the csrf token from the form.
+    var csrfToken = $('input[name="csrfmiddlewaretoken').val();
+    var postData = {
+        'csrfmiddlewaretoken': csrfToken,
+        'client_secret': clientSecret,
+        'save_info': saveInfo,
+    }
+    var url = '/checkout/cache_checkout_data/';
+    $.post(url, postData).done(function() {
+        // Call the Stripe confirmCardPayment function, passing the client secret and card details.
+        stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: $.trim(form.full_name.value),
+                    email: $.trim(form.email.value),
+                    phone: $.trim(form.phone_number.value),
+                    address: {
+                        line1: $.trim(form.street_address1.value),
+                        line2: $.trim(form.street_address2.value),
+                        city: $.trim(form.town_or_city.value),
+                        state: $.trim(form.county.value),
+                        country: $.trim(form.country.value),
+                    }
                 }
-            }
+            },
+            shipping: {
+                name: $.trim(form.full_name.value),
+                phone: $.trim(form.phone_number.value),
+                address: {
+                    line1: $.trim(form.street_address1.value),
+                    line2: $.trim(form.street_address2.value),
+                    city: $.trim(form.town_or_city.value),
+                    state: $.trim(form.county.value),
+                    postal_code: $.trim(form.postcode.value),
+                    country: $.trim(form.country.value),
+                }
+            },
+        // Check the result of the confirmCardPayment function.
+        }).then(function(result) {
+                // If there's an error, show error to the customer in the #card-errors div.
+                if (result.error) {
+                    var errorDiv = $('#card-errors');
+                    var html = `
+                        <i class="fas fa-exclamation-triangle" style="color: #FE7F2D;"></i>
+                        <span class="fs-small" style="color: #FE7F2D;">
+                            ${result.error.message}
+                        </span>
+                    `;
+                    $(errorDiv).html(html);
+                    // Hide the loading-overlay and show the form.
+                    $('#payment-form').fadeToggle(100);
+                    $('#loading-overlay').fadeToggle(100);
+                    // We also need to re-enable card field and submit-form button so users can try again.
+                    card.update({'disabled': false});
+                    $('#submit-button').prop('disabled', false);
+                // If the payment is successfully processed, submit the form.
+                } else {
+                    if (result.paymentIntent.status === 'succeeded') {
+                        form.submit();
+                    }
+                }
+        });
+    }).fail(function() {
+        // Reload the page, the error will be in Django messages.
+        location.reload();
     });
+
 });
