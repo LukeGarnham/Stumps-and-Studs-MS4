@@ -234,6 +234,7 @@ The data structure allows for product details, quanities and where applicable, a
  - [Django AllAuth](https://django-allauth.readthedocs.io/en/latest/)
  - [Pillow](https://pillow.readthedocs.io/en/stable/index.html)
  - [Crispy Forms for Bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5)
+ - [Django Countries](https://pypi.org/project/django-countries/)
 
 ## Services Used
 
@@ -347,6 +348,7 @@ From within GitPod, I installed a number of packages:
 *   [Crispy Forms](https://github.com/django-crispy-forms/crispy-bootstrap5) - *pip3 install django-crispy-forms*
 *   [Crispy Forms for Bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5) - *pip3 install crispy-bootstrap5*
 *   [Stripe](https://stripe.com/docs/api) - *pip3 install stripe*
+*   [Django Countries](https://pypi.org/project/django-countries/) - *pip3 install django-countries*
 
 The project is deployed on Heroku which will need to know which packages to install in order to correctly host my finished project.  I kept an updated list of all of the installed packages in the requirements.txt file using this command:
 * *pip3 freeze > requirements.txt*

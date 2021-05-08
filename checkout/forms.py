@@ -24,7 +24,6 @@ class OrderForm(forms.ModelForm):
             'town_or_city': 'Town/City',
             'county': 'County',
             'postcode': 'Postcode',
-            'country': 'Country',
         }
 
         # Set the autofocus to the full name field
@@ -32,13 +31,15 @@ class OrderForm(forms.ModelForm):
 
         # Loop through all fields.
         for field in self.fields:
-            # If the field is required, add asterix to placeholder.
-            if self.fields[field].required:
-                placeholder = f'{placeholders[field]} *'
-            else:
-                placeholder = f'{placeholders[field]}'
-            # Set the placeholder attribute to the placeholder created above.
-            self.fields[field].widget.attrs['placeholder'] = placeholder
+            if field != 'country':
+                # If the field is required, add asterix to placeholder.
+                if self.fields[field].required:
+                    placeholder = f'{placeholders[field]} *'
+                else:
+                    placeholder = f'{placeholders[field]}'
+                # Set the placeholder attribute to
+                # the placeholder created above.
+                self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             # Remove the field labels.
             self.fields[field].label = False

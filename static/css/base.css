@@ -330,6 +330,19 @@ footer p, footer li {
     border-color: #09814A;
 }
 
+#div_id_country select {
+    padding: 5px 12px;
+}
+
+#div_id_country select, #div_id_country select option {
+    color: #04080F;
+}
+
+#div_id_country select:invalid,
+#div_id_country select option[value=""] {
+    color: #aab7c4;
+}
+
 /*------------------------------------------------Stripe*/
 
 .stripe-style-input, .StripeElement {
