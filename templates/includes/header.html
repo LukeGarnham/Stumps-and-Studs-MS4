@@ -6,61 +6,71 @@
     <!-- Search Button, Account & Basket -->
     <div class="col-12 col-md-4 order-md-3 my-auto">
         <ul class="list-inline my-auto d-flex justify-content-between align-items-center">
+            <!-- Nav Toggle Button - Small screens only -->
             <li class="list-inline-item d-md-none mx-0">
                 <button class="nav-toggle-button purple-hover black-bg-hover" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggle-content" aria-controls="navbar-toggle-content" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
                 </button>
             </li>
-            <li class="list-inline-item d-none d-md-inline mx-0">
-                <a href="" class="align-items-center d-flex flex-column p-2 purple-hover black-bg-hover">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span class="fs-small">Register</span>
-                </a>
-            </li>
-            <li class="list-inline-item d-none d-md-inline mx-0">
-                <a href="" class="align-items-center d-flex flex-column p-2 purple-hover black-bg-hover">
-                    <i class="fas fa-user-plus"></i>
-                    <span class="fs-small">Login</span>
-                </a>
-            </li>
+            <!-- Search Bar Button - Small screens only -->
             <li class="list-inline-item d-inline d-md-none mx-0">
                 <button id="search-button" class="btn text-center align-items-center d-flex flex-column p-2 purple-hover black-bg-hover" type="button" data-bs-toggle="collapse" data-bs-target="#nav-search" aria-expanded="false" aria-controls="nav-search">
                     <i class="fas fa-search"></i>
                     <span class="fs-small">Search</span>
                 </button>
             </li>
-            <li class="list-inline-item mx-0 d-md-none">
-                <div class="dropdown">
-                    <span class="text-center d-flex flex-column p-2 purple-hover black-bg-hover" type="button" id="register-options" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="-11.845,0">
+            {% if not request.user.is_authenticated %}
+                <!-- Register Link - +Medium screens only -->
+                <li class="list-inline-item d-none d-md-inline mx-0">
+                    <a href="{% url 'account_signup' %}" class="align-items-center d-flex flex-column p-2 purple-hover black-bg-hover">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span class="fs-small">Register</span>
+                    </a>
+                </li>
+                <!-- Login Link - +Medium screens only -->
+                <li class="list-inline-item d-none d-md-inline mx-0">
+                    <a href="{% url 'account_login' %}" class="align-items-center d-flex flex-column p-2 purple-hover black-bg-hover">
                         <i class="fas fa-user-plus"></i>
-                        <span class="fs-small">Account</span>
-                    </span>
-                    <ul class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="register-options">
-                        <li>
-                            <a href="" class="dropdown-item">Register</a>
-                        </li>
-                        <li>
-                            <a href="" class="dropdown-item">Login</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="list-inline-item mx-0">
-                <div class="dropdown">
-                    <span class="text-center d-flex flex-column p-2 purple-hover black-bg-hover" type="button" id="account-options" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="-13.36,0">
-                        <i class="fas fa-user"></i>
-                        <span class="fs-small">Account</span>
-                    </span>
-                    <ul class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="account-options">
-                        <li>
-                            <a href="" class="dropdown-item">Account</a>
-                        </li>
-                        <li>
-                            <a href="" class="dropdown-item">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+                        <span class="fs-small">Login</span>
+                    </a>
+                </li>
+                <!-- Register/Login Dropdown - Small screens only -->
+                <li class="list-inline-item mx-0 d-md-none">
+                    <div class="dropdown">
+                        <span class="text-center d-flex flex-column p-2 purple-hover black-bg-hover" type="button" id="register-options" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="-11.845,0">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="fs-small">Account</span>
+                        </span>
+                        <ul class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="register-options">
+                            <li>
+                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            {% else %}
+                <!-- Account and Logout Dropdown - All screens -->
+                <li class="list-inline-item mx-0">
+                    <div class="dropdown">
+                        <span class="text-center d-flex flex-column p-2 purple-hover black-bg-hover" type="button" id="account-options" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="-13.36,0">
+                            <i class="fas fa-user"></i>
+                            <span class="fs-small">Account</span>
+                        </span>
+                        <ul class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="account-options">
+                            <li>
+                                <a href="" class="dropdown-item">Account</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            {% endif %}
+            <!-- Basket Link - All screens -->
             <li class="list-inline-item mx-0">
                 <a href="{% url 'view_basket' %}" class="text-center d-flex flex-column p-2 black-bg-hover">
                     <i class="fas fa-shopping-cart">
