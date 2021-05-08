@@ -10,13 +10,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 p-3">
-                <small>
-                    <a href="{% url 'products' %}">
-                        <i class="fas fa-arrow-left"></i>
-                        <strong class="text-decoration-underline">Continue Shopping</strong>
-                    </a>
-                </small>
+            <div class="col-12 p-3 fs-small">
+                <a href="{% url 'products' %}">
+                    <i class="fas fa-arrow-left"></i>
+                    <strong class="text-decoration-underline">Continue Shopping</strong>
+                </a>
             </div>
         </div>
         {% if basket_items %}
