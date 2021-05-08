@@ -78,6 +78,8 @@
                                 <i>Your card will be charged £{{ grand_total|floatformat:2 }}</i>
                             </div>
                         </div>
+                        <!-- Hidden Inputs -->
+                        <input type="hidden" value="{{ client_secret }}" name="client_secret">
                         <!-- Save info or Register and Login -->
                         <div class="form-check p-0">
                             {% if user.is_authenticated %}

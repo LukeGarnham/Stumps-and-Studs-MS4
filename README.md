@@ -323,6 +323,11 @@ Secondly, I used the get_FOO_display method to display the 'human-readable' valu
 
 * Basket page is responsive but the quantity buttons begin to misalign when the screen width is reduced down to 332px wide.  However, I believe this is not an issue since [modern mobiles](http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml#:~:text=Most%20mobile%20phones%20have%20a,CSS%20pixel%20on%20the%20screen.) are wider than this.
 
+#### Checkout Form
+
+Test what happens if users refresh or closes page after clicking Complete Order (submitting form).
+Try using different Stripe payment card numbers.
+
 ### Bugs Encountered During Testing
 
 ## Deployment
