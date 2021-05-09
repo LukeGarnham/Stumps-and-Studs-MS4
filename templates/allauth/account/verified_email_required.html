@@ -2,22 +2,38 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block head_title %}{% trans "- Verify Your E-mail Address" %}{% endblock %}
 
-{% block content %}
-<h1>{% trans "Verify Your E-mail Address" %}</h1>
+{% block inner_content %}
+    <div class="row">
+        <div class="col-12 px-3">
+            <h2>{% trans "Verify Your E-mail Address" %}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 p-3 fs-small">
+            <a href="{% url 'products' %}">
+                <i class="fas fa-arrow-left"></i>
+                <strong class="text-decoration-underline">Home</strong>
+            </a>
+        </div>
+    </div>
 
-{% url 'account_email' as email_url %}
+    <div class="row">
+        <div class="col-12">
 
-<p>{% blocktrans %}This part of the site requires us to verify that
-you are who you claim to be. For this purpose, we require that you
-verify ownership of your e-mail address. {% endblocktrans %}</p>
+            {% url 'account_email' as email_url %}
 
-<p>{% blocktrans %}We have sent an e-mail to you for
-verification. Please click on the link inside this e-mail. Please
-contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+            <p>{% blocktrans %}This part of the site requires us to verify that
+            you are who you claim to be. For this purpose, we require that you
+            verify ownership of your e-mail address. {% endblocktrans %}</p>
 
-<p>{% blocktrans %}<strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail address</a>.{% endblocktrans %}</p>
+            <p>{% blocktrans %}We have sent an e-mail to you for
+            verification. Please click on the link inside this e-mail. Please
+            contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
 
+            <p>{% blocktrans %}<strong>Note:</strong> you can still <a href="{{ email_url }}">change your e-mail address</a>.{% endblocktrans %}</p>
+        </div>
+    </div>
 
 {% endblock %}

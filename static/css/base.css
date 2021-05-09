@@ -144,6 +144,10 @@ header {
     background-clip:border-box;
 }
 
+#nav-search input::placeholder {
+    color: #aab7c4;
+}
+
 #product-count {
     font-family: 'Open Sans', sans-serif;
 }
@@ -387,6 +391,55 @@ footer p, footer li {
     left: 50%;
     margin-left: -60px;
     margin-top: -60px;
+}
+
+/*----------------------------------------------------------------------------------------------------------AllAuth Pages*/
+
+.allauth-form-inner-content p {
+    padding-top: 16px;
+}
+
+/* Give all AllAuth inputs the same style as the stripe-style-input class */
+.allauth-form-inner-content input {
+    box-sizing: border-box;
+    height: 40px;
+    padding: 10px 12px;
+    border: 1px solid #04080F;
+    border-radius: 0;
+    background-color: #fff;
+    box-shadow: 0 1px 3ox 0 #04080F;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+
+.allauth-form-inner-content input:focus,
+.allauth-form-inner-content input:active {
+    border: 2px solid #04080F;
+    box-shadow: 0 1px 3px 0 #04080F;
+}
+
+
+.allauth-form-inner-content input::placeholder {
+    color: #aab7c4;
+}
+
+/* Style checkbox inputs to mirror the one on the Checkout form */
+.allauth-form-inner-content .form-check .form-check-input {
+    border-radius: 0;
+    border: 1px solid #04080F;
+    float: none;
+    height: 16px;
+    width: 16px;
+    padding: 0;
+}
+
+.allauth-form-inner-content .form-check-input:checked {
+    background-color: #09814A;
+    border-color: #09814A;
+}
+
+.allauth-form-inner-content .form-check {
+    text-align: center;
 }
 
 /*----------------------------------------------------------------------------------------------------------Media Queries*/

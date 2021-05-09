@@ -3,7 +3,7 @@
   {% load i18n %}
   {% load account socialaccount %}
 
-  {% block head_title %}{% trans "Sign In" %}{% endblock %}
+  {% block head_title %}{% trans "- Login" %}{% endblock %}
 
   {% block inner_content %}
 
@@ -27,7 +27,7 @@
 
         {% if socialaccount_providers %}
           <p>{% blocktrans with site.name as site_name %}Please sign in with one
-          of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+          of your existing third party accounts. Or, <a class="text-decoration-underline" href="{{ signup_url }}">sign up</a>
           for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
           <div class="socialaccount_ballot">
@@ -44,7 +44,7 @@
 
       {% else %}
         <p>{% blocktrans %}If you have not created an account yet, then please
-        <a class="text-decoration-underline" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+        <a class="text-decoration-underline" href="{{ signup_url }}">register</a> first.{% endblocktrans %}</p>
       {% endif %}
 
       <form class="login" method="POST" action="{% url 'account_login' %}">
@@ -53,15 +53,15 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <div class="d-flex justify-content-evenly align-items-center py-3">
-          <a class="btn btn-orange" href="{% url 'account_reset_password' %}">
-            {% trans "Forgotten Password" %}
-            <i class="fas fa-question"></i>
-          </a>
-          <button class="btn btn-green" type="submit">
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
+          <button class="btn btn-green my-2" type="submit">
             <i class="fas fa-user-plus"></i>
             {% trans "Login" %}
           </button>
+          <a class="btn btn-orange my-2" href="{% url 'account_reset_password' %}">
+            {% trans "Forgotten Password" %}
+            <i class="fas fa-question"></i>
+          </a>
         </div>
       </form>
     </div>
