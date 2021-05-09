@@ -132,6 +132,7 @@ def checkout(request):
                     'town_or_city': profile.default_town_or_city,
                     'county': profile.default_county,
                     'postcode': profile.default_postcode,
+                    'country': profile.default_country,
                 })
             except UserProfile.DoesNotExist:
                 order_form = OrderForm()
