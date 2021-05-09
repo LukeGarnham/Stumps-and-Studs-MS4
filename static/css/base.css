@@ -72,7 +72,7 @@ a:hover,
 
 .black-border {
     border-radius: 0;
-    border: 1px solid #04080f;
+    border: 1px solid #04080F;
 }
 
 .btn:disabled {
@@ -155,7 +155,7 @@ header {
 /*----------------------------------------------------------------------------------------------------------Footer*/
 
 footer {
-    background-color: #04080f;
+    background-color: #04080F;
     color: #fff;
 }
 
@@ -334,11 +334,13 @@ footer p, footer li {
     border-color: #09814A;
 }
 
-#div_id_country select {
+#div_id_country select,
+#div_id_default_country select {
     padding: 5px 12px;
 }
 
-#div_id_country select, #div_id_country select option {
+#div_id_country select,
+#div_id_country select option {
     color: #04080F;
 }
 
@@ -391,6 +393,21 @@ footer p, footer li {
     left: 50%;
     margin-left: -60px;
     margin-top: -60px;
+}
+
+/*----------------------------------------------------------------------------------------------------------User Profile*/
+
+#profile-update-form input::placeholder {
+    color: #aab7c4;
+}
+
+#id_default_country,
+#id_default_country option:not(:first-child) {
+    color: #04080F;
+}
+
+#id_default_country option:first-child {
+    color: #aab7c4;
 }
 
 /*----------------------------------------------------------------------------------------------------------AllAuth Pages*/

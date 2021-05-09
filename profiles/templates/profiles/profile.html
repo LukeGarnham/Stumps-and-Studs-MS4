@@ -5,11 +5,50 @@
     <div class="container-fluid px-3 px-sm-5 py-5">
         <div class="row">
             <div class="col-12 px-3">
-                <h2 class="mb-4">My Profile - {{ profile }}</h2>
+                <h2 class="mb-4">My Account</h2>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Default Delivery Information -->
+            <div class="col-12 col-md-6">
+                <h5 class="px-3">Default Delivery Information</h5>
+                <div class="px-2">
+                    <hr class="hr-black mt-0">
+                </div>
+                <form action="{% url 'profile' %}" method="POST" id="profile-update-form" class="black-border p-2 p-sm-4">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
+                        <button class="btn btn-green my-2 mx-3" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Order History -->
+            <div class="col-12 col-md-6 mt-5 mt-md-0">
+                <h5 class="px-3">Order History</h5>
+                <div class="px-2">
+                    <hr class="hr-black mt-0">
+                </div>
+                {{ orders }}
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block postload_js %}
+    {{ block.super }}
+    <script type="text/javascript">
+        let countrySelected = $('#id_default_country').val();
+        if(!countrySelected) {
+            $('#id_default_country').css('color', '#aab7c4');
+        };
+        $('#id_default_country').change(function() {
+            countrySelected = $(this).val();
+            if(!countrySelected) {
+                $(this).css('color', '#aab7c4');
+            } else {
+                $(this).css('color', '#04080F');
+            };
+        });
+    </script>
 {% endblock %}

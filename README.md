@@ -131,7 +131,7 @@ However, I did decide that there are some navigation elements which should alway
 
 The toast success message includes a preview of the basket and a link to the basket page for users to quickly checkout.  I fixed the height of the toast basket and gave it the Bootstrap overflow-auto class.  This means users have a preview of their basket they can scroll through without too much screen real estate being used up.  I used Bootstrap's grid layout to make the basket preview responsive.  The success message is used to show users when an item has been added to their basket, a quantity amended or an item has been removed from their basket.
 
-I decided that for warning, info and error messages, it was not necessary to show users the contents of their basket.  Furthermore, for the success toast, I decided there was no need to show users the basket preview if they are already on the basket page since they can see the full basket.  Instead I chose to simply display a message to users without the basket preview underneath:
+I decided that for warning, info and error messages, it was not necessary to show users the contents of their basket.  Furthermore, I also chose to only display the basket preview in the success toast to users when they are on a Product page.  When amending basket items from within the Checkout, there is no need to display a basket preview in the toast as it is already displayed in the Checkout page.  Elsewhere, success messages are generated when users update details related to their account and though they may have items in their basket, I decided it was not appropriate to show a preview within the toast.  Instead, the success messages displays according to the action they've successfully undertaken:
 
 ![Toasts basket preview shows except from when on the basket page already](media/readme/gifs/toasts.gif)
 
@@ -285,6 +285,10 @@ When creating the toast messages, I decided I wanted them to appear beneath the 
 To resolve this, I utilised jQuery and CSS.  Within my base.css file, I set the toast position to 93 pixels from the top but used a media query to reduce this to 53 pixels on screen sizes up to 768px wide.  Then, using the jQuery functions I created to hide and show the navbar on large screens, I add and remove a class to the toasts called 'toast-up' which changes the position to the top of the page to 53 pixels.  By setting the same transition speed to the navbar hide/show and the toast add/remove class, the toasts move up and down in line with the navbar on large screens but sit under the header on small and medium screens:
 
 ![Toast messages position synced to the bottom of header](media/readme/gifs/toasts-up-down.gif)
+
+#### Toasts - Display Basket Preview
+
+
 
 #### Order Grand Total
 
