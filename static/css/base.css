@@ -410,6 +410,16 @@ footer p, footer li {
     color: #aab7c4;
 }
 
+.view-order .fa-caret-down {
+    line-height: 0.25;
+    font-size: xxx-large;
+}
+
+.view-order .fa-caret-up {
+    line-height: 0.3;
+    font-size: xxx-large;
+}
+
 /*----------------------------------------------------------------------------------------------------------AllAuth Pages*/
 
 .allauth-form-inner-content p {
