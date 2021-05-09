@@ -71,6 +71,7 @@ def product_detail(request, product_id):
 
     context = {
         'product': product,
+        'toast_basket_preview': True,
     }
 
     return render(request, 'products/product_detail.html', context)
