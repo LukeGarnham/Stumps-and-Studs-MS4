@@ -1,0 +1,1 @@
+Stumps & Studs | Confirmation of Order: {{ order.order_number }}
