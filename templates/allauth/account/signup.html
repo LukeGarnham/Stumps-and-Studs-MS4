@@ -2,7 +2,7 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "- Register" %}{% endblock %}
+{% block head_title %}{% trans "| Register" %}{% endblock %}
 
 {% block inner_content %}
   <div class="row">
@@ -12,7 +12,7 @@
   </div>
   <div class="row">
     <div class="col-12 p-3 fs-small">
-        <a href="{% url 'products' %}">
+        <a href="{% url 'home' %}">
             <i class="fas fa-arrow-left"></i>
             <strong class="text-decoration-underline">Home</strong>
         </a>
@@ -30,8 +30,8 @@
         {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <div class="d-flex justify-content-evenly align-items-center py-3">
-          <button class="btn btn-green my-2" type="submit">
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
+          <button class="btn btn-green my-2 mx-3" type="submit">
             {% trans "Register" %}
             <i class="fas fa-sign-in-alt"></i>
           </button>

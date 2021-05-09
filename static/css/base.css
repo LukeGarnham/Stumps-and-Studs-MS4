@@ -423,6 +423,10 @@ footer p, footer li {
     color: #aab7c4;
 }
 
+.allauth-form-inner-content input[type=radio] {
+    height: auto;
+}
+
 /* Style checkbox inputs to mirror the one on the Checkout form */
 .allauth-form-inner-content .form-check .form-check-input {
     border-radius: 0;

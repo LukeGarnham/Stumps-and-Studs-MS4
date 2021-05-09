@@ -2,7 +2,7 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "- Registration Closed" %}{% endblock %}
+{% block head_title %}{% trans "| Registration Closed" %}{% endblock %}
 
 {% block inner_content %}
     <div class="row">
@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class="col-12 p-3 fs-small">
-            <a href="{% url 'products' %}">
+            <a href="{% url 'home' %}">
                 <i class="fas fa-arrow-left"></i>
                 <strong class="text-decoration-underline">Home</strong>
             </a>
