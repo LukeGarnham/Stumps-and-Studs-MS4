@@ -29,7 +29,31 @@
                 <div class="px-2">
                     <hr class="hr-black mt-0">
                 </div>
-                {{ orders }}
+                {% for order in orders %}
+                    <!-- Order Number -->
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-1 d-inline">Oder:</h5>
+                        <a class="text-decoration-underline text-end" href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
+                            <span>{{ order.order_number|truncatechars:6 }}</span>
+                        </a>
+                    </div>
+                    <hr>
+                    <!-- Order Date -->
+                    <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                        Date:
+                        <span>{{ order.date }}</span>
+                    </div>
+                    <!-- Order Quantity -->
+                    {% for item in order.lineitems.all %}
+                    
+                    {% endfor %}
+                    <!-- Order Total -->
+                    <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                        Grand Total:
+                        <span>£{{ order.grand_total }}</span>
+                    </div>
+                    <hr>
+                {% endfor %}
             </div>
         </div>
     </div>
