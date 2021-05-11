@@ -74,13 +74,13 @@
                                             {% csrf_token %}
                                             <div class="input-group black-border">
                                                 <div class="input-group-prepend black-border">
-                                                    <button class="dec-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}" id="dec-qty_{{ item.item_id }}">
+                                                    <button class="dec-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}_{{ forloop.counter }}" id="dec-qty_{{ item.item_id }}_{{ forloop.counter }}">
                                                         <i class="fas fa-minus"></i>
                                                     </button>
                                                 </div>
-                                                <input class="qty_input border-top-0 border-bottom-0 text-center" type="number" name="qty" value="{{ detail.qty }}" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                                <input class="qty_input border-top-0 border-bottom-0 text-center" type="number" name="qty" value="{{ detail.qty }}" min="1" max="99" data-item_id="{{ item.item_id }}_{{ forloop.counter }}" id="id_qty_{{ item.item_id }}_{{ forloop.counter }}">
                                                 <div class="input-group-append black-border">
-                                                    <button class="inc-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}" id="inc-qty_{{ item.item_id }}">
+                                                    <button class="inc-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}_{{ forloop.counter }}" id="inc-qty_{{ item.item_id }}_{{ forloop.counter }}">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
                                                 </div>
