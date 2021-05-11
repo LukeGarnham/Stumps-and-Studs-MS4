@@ -322,6 +322,19 @@ Secondly, I used the get_FOO_display method to display the 'human-readable' valu
 
 ![Checkout success page before and after changes made to the display of product details](media/readme/images/checkout-success-before-after.png)
 
+#### Basket Quantity
+
+The quantity of each item can be increased or decreased from the Basket page through increment and decrement buttons.  The behaviour and functionality is controlled using JavaScript, specifically the qty_input_script.html file within the includes folder in the products app (this script also provides the same functionality in the Product page).  The bug I encountered on this page was that the disable and increment buttons would only be enabled/disabled as expected on the first item of a product type.  In the screenshot below, there are multiple Cricket Stump items and multiple Batting Glove items within the basket.  There is 1 of each item meaning the decrement button should be disabled.  This is only the case for the first instance of each product:
+
+![Basket page with decrement buttons not working correctly.](media/readme/images/checkout-quanity-before.png)
+
+Upon closer inspection, I identified that the cause of the issue was the id of each quantity input (with class .qty_input).  The id was *id_qty_* followed by the product id number.  This meant that where multiple items for the same product were in the basket, there would be multiple inputs with the same id.  Since the JavaScript utilised the id to target the element and enable/disable the decrement and increment buttons, only the first instance had the proper functionality applied, hence the result in the above screenshot.  Since the Products page only have only product on them, this wasn't an issue on that page but in the Basket page, this needed addressing.
+
+To resolve this, I needed to make the id of each input element unique.  Since each item it displayed to the Basket page using a Jinja for loop, I found a [solution online](https://stackoverflow.com/questions/35343881/jinja-loop-index-does-not-print) which enabled me to easily add the loops iteration number to the end of the id such that each one is now unique (*id_qty_{{ item.item_id }}_{{ forloop.counter }}*).  I needed to amend the data-item_id attribute of the input.  Having made these changes to the input, I replicated them on the decrement and increment button to ensure each had a unique id and the correct element is targetted by JavaScript.  This enabled me to get the desired end result:
+
+![Basket page with decrement buttons now working correctly.](media/readme/images/checkout-quanity-after.png)
+
+
 ### Testing Process
 
 *Try to use an Aim, Methodology, Result layout. A user should be able to read the Testing document, carry out the same tests on the live site and get the same results.  Try testing the user stories comprehensively in terms of Features and Responsivity to get a better grade.  Include evaluation of bugs found and their fixes and explanation of any bugs that are left unfixed.  Test the UX thoroughly.*
