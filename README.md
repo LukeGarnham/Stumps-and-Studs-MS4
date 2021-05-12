@@ -252,6 +252,16 @@ I ended up utilising [Bootstrap's collapse](https://getbootstrap.com/docs/5.0/co
 
 ![Navbar search functionality](media/readme/gifs/navbar-search.gif)
 
+#### Header Account Button Position on +Medium Screens
+
+On medium screens upwards, the header contains a Stumps and Studs anchor link, the search bar and links to enable users to login, logout, access their account page and view their basket.  I wanted to keep the basket visible always in the top-right corner of the header.  The other links between the search bar and basket link vary depending on whether a user is logged in or not.  When the user is not logged in, there are 3 links; Register, Login and the Basket.  I want to entice users to either register for an account or login so opted to have these visible in the header at all time.  When the user is logged in, there are 2 links; Account and Basket.  The Account link is actually a dropdown which has two links; one for My Account and one for Logout.  I could have had these as two separate links but I don't want the Logout link to be visible as I don't want to entice users to logout.  Below is a screenshot showing the header including the navbar on medium screens, firstly when a user is logged in and then when a user is **not** logged in:
+
+![Navbar search functionality](media/readme/images/header-layout-before.png)
+
+The container for the links is a flex box utilising [Bootstrap's flex classes](https://getbootstrap.com/docs/5.0/utilities/flex/#justify-content).  I use the class 'justify-content-between' to space the links out.  When they are logged out, the 3 links are evenly spread out but when users are logged in, I felt that the Account link was spaced too closely to the search bar.  I considered adding some margin to the left of the Account link but this didn't create the desired effect.  I wanted to center the Account link between the search bar and Basket link.  The simple solution I utilised was to create an empty div before the Account link which means the flex box evenly spaces 3 elements out thus pushing the Account link into the center.  To ensure the layout on small screens isn't effected, I used Bootstrap classes 'd-none d-md-block' to ensure it doesn't displace any links on small screens.  The end result is below with the change being seen in the header when users are logged:
+
+![Navbar search functionality](media/readme/images/header-layout-after.png)
+
 #### Navbar JavaScript
 
 On medium screens upwards, the navbar sits below the header whilst on small screens, it is shown/hidden using the menu button in the header.  On medium screens, I wanted the navbar to disappear when users scrolled down and then reappear when they scroll up.  The reason I wanted to do this was to preserve real estate space on screen.  To help achieve this, I referenced a solution on [w3schools.com](https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp).
