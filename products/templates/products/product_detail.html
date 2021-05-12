@@ -20,12 +20,14 @@
             <div class="col-md-6 py-3 px-0 px-md-3">
                 <h4 class="d-md-none">{{ product.name }}</h4>
                 <div class="card border-0 rounded-0">
-                    {% if product.image %}
-                        <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
-                    {% else %}
-                        <img class="product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                        <!-- {% static 'css/base.css' %} -->
-                    {% endif %}
+                    <a class="text-center" href="{{ product.image.url }}" target="_blank">
+                        {% if product.image %}
+                            <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img class="product-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                            <!-- {% static 'css/base.css' %} -->
+                        {% endif %}
+                    </a>
                 </div>
             </div>
             <!-- Product Details -->
