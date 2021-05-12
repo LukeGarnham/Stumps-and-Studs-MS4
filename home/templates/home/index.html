@@ -64,17 +64,33 @@
 {% block postload_js %}
     {{ block.super}}
     <script type="text/javascript">
+
         // Make header background transparent by default and remove top margin from body.
-        $('header').css('background','transparent');
+        $('header').addClass('header-transparent');
         $('body').css('margin-top', '0')
+
         // Make header transparent when at top of page, black when scrolling down.
         // Solution sourced from: https://stackoverflow.com/questions/36246878/how-to-make-a-transparent-navbar-visible-when-scrolling
         $(window).scroll(function () {
+            // When scrolling down from top, remove transparency.
             if ($(window).scrollTop() >= 50) {
-                $('header').css('background','#04080F');
-            } else {
-                $('header').css('background','transparent');
+                $('header').removeClass('header-transparent');
+            // When scrolling to top of page, add transparency only if menu is collapsed.
+            } else if (($(window).scrollTop() < 50) && ($('#mob-nav-toggle').hasClass('collapsed')))  {
+                $('header').addClass('header-transparent');
             }
         });
+
+        // Ensure header background is black when nav toggle is open i.e. not collapsed.
+        $('#mob-nav-toggle').click(function() {
+            // When clicked, if nav menu not collapsed, remove transparency.
+            if (!$('#mob-nav-toggle').hasClass('collapsed')) {
+                $('header').removeClass('header-transparent');
+            // When clicked, if nav menu is collapsed, add transparency only if scrolled to top of page.
+            } else if (($('#mob-nav-toggle').hasClass('collapsed')) && ($(window).scrollTop() < 50)) {
+                $('header').addClass('header-transparent');
+            };
+        });
+
     </script>
 {% endblock %}

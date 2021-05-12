@@ -115,6 +115,10 @@ header {
     -webkit-transition: all 0.6s ease;
 }
 
+.header-transparent {
+    background: transparent;
+}
+
 .dropdown-menu {
     border: none;
     min-width: auto;
