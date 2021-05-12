@@ -218,6 +218,10 @@ The data structure allows for product details, quanities and where applicable, a
 - Add products which are specifically male/female and provide filter i.e. Clothing -> Men, Clothing -> Women.
 - Stock levels including out of stock message 'if stock count == 0'.
 - Subscribe to mailing list feature.
+- On Products page in large screens, users can switch between a width of 2 or 3 products per row.  When refreshing or using any of the sort by methods, the width reverts to the default which is 3 products per row.
+- Make the Account and Sports Dropdowns smooth i.e. reveal like a jQuery blind.
+- On the Products page, the sort-options are styled to look like the other dropdowns except the hover effect is different.  This is because *<option>*'s cannot be styled in CSS.
+- On the Product Details page, I would have liked to have the dropdown start with 'Please Select' rather than a default selection such as Medium for size.
 
 ## Languages
 

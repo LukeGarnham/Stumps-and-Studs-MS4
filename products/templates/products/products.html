@@ -15,16 +15,16 @@
                     <h2 class="mb-0">Products</h2>
                 </div>
                 <div>
-                    <select name="sort-options" id="sort-options" class="border-0 my-3">
-                        <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort By: </option>
-                        <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price: Low - High</option>
-                        <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price: High - Low</option>
-                        <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name: A - Z</option>
-                        <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name: Z - A</option>
-                        <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category: A - Z</option>
-                        <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category: Z - A</option>
-                        <option value="sport_asc" {% if current_sorting == 'sport_asc' %}selected{% endif %}>Sport: A - Z</option>
-                        <option value="sport_desc" {% if current_sorting == 'sport_desc' %}selected{% endif %}>Sport: Z - A</option>
+                    <select name="sort-options" id="sort-options" class="border-0 my-3 dropdown-menu show position-relative bg-dark text-white rounded-0 py-0">
+                        <option class="dropdown-item" value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort By: </option>
+                        <option class="dropdown-item" value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price: Low - High</option>
+                        <option class="dropdown-item" value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price: High - Low</option>
+                        <option class="dropdown-item" value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name: A - Z</option>
+                        <option class="dropdown-item" value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name: Z - A</option>
+                        <option class="dropdown-item" value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category: A - Z</option>
+                        <option class="dropdown-item" value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category: Z - A</option>
+                        <option class="dropdown-item" value="sport_asc" {% if current_sorting == 'sport_asc' %}selected{% endif %}>Sport: A - Z</option>
+                        <option class="dropdown-item" value="sport_desc" {% if current_sorting == 'sport_desc' %}selected{% endif %}>Sport: Z - A</option>
                     </select>
                 </div>
             </div>
@@ -130,5 +130,6 @@
         $('#scroll-to-top').click(function() {
             window.scrollTo(0,0);
         });
+
     </script>
 {% endblock %}
