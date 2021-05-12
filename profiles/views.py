@@ -25,7 +25,9 @@ def profile(request):
     else:
         form = UserProfileForm(instance=profile)
 
-    orders = profile.orders.all()
+    # Retrieve all orders linked to this profile and sort by order date
+    # with the most recent orders first (newest to oldest).
+    orders = profile.orders.all().order_by('-order_date')
 
     template = 'profiles/profile.html'
     context = {

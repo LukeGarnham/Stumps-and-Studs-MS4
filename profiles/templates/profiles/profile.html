@@ -33,7 +33,7 @@
                 {% for order in orders %}
                     <!-- Order Number -->
                     <div class="d-flex align-items-center justify-content-between">
-                        <h5 class="mb-1 d-inline">Order:</h5>
+                        <h5 class="mb-1 d-inline">View Order:</h5>
                         <a class="text-decoration-underline text-end" href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
                             <span>{{ order.order_number|truncatechars:16 }}</span>
                         </a>
