@@ -16,13 +16,21 @@
                 <div class="px-2">
                     <hr class="hr-black mt-0">
                 </div>
-                <form action="{% url 'profile' %}" method="POST" id="profile-update-form" class="black-border p-2 p-sm-4">
+                <form action="{% url 'profile' %}" method="POST" id="profile-update-form" class="black-border p-2 p-sm-4 mb-5 mb-md-4">
                     {% csrf_token %}
                     {{ form|crispy }}
                     <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
                         <button class="btn btn-green my-2 mx-3" type="submit">Update</button>
                     </div>
                 </form>
+                <h5 class="px-3">Change Account Password</h5>
+                <div class="px-2">
+                    <hr class="hr-black mt-0">
+                </div>
+                <p class="fs-small">Need to change your password?:</p>
+                <div class="text-center">
+                    <a class="btn btn-green " href="{% url 'account_change_password' %}">Change Password</a>
+                </div>
             </div>
             <!-- Order History -->
             <div class="col-12 col-md-6 mt-5 mt-md-0">
