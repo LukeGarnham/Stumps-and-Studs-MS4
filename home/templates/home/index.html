@@ -75,19 +75,22 @@
             // When scrolling down from top, remove transparency.
             if ($(window).scrollTop() >= 50) {
                 $('header').removeClass('header-transparent');
-            // When scrolling to top of page, add transparency only if menu is collapsed.
-            } else if (($(window).scrollTop() < 50) && ($('#mob-nav-toggle').hasClass('collapsed')))  {
+            } else if ($(window).scrollTop() < 50) {
                 $('header').addClass('header-transparent');
-            }
+            };
         });
 
         // Ensure header background is black when nav toggle is open i.e. not collapsed.
         $('#mob-nav-toggle').click(function() {
-            // When clicked, if nav menu not collapsed, remove transparency.
-            if (!$('#mob-nav-toggle').hasClass('collapsed')) {
+            // When the mob-nav-tobble button is clicked and the menu is opened, the collapsed class is removed.
+            // When the mob-nav-tobble button is clicked and the menu is closed, the collapsed class is added.
+            // Create expanded variable: true if not collapsed (e.g. expanded), false if collapsed.
+            var expanded = !$('#mob-nav-toggle').hasClass('collapsed')
+            // When clicked, if nav menu expanded (not collapsed), remove transparency.
+            if (expanded) {
                 $('header').removeClass('header-transparent');
             // When clicked, if nav menu is collapsed, add transparency only if scrolled to top of page.
-            } else if (($('#mob-nav-toggle').hasClass('collapsed')) && ($(window).scrollTop() < 50)) {
+            } else if ((!expanded) && ($(window).scrollTop() < 50)) {
                 $('header').addClass('header-transparent');
             };
         });
