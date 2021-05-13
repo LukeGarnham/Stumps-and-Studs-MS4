@@ -213,7 +213,7 @@ The data structure allows for product details, quanities and where applicable, a
 
 ### Existing Features
 
-### Features Left To Implement
+### Features Left To Implement / Known Bugs
 
 - Add products which are specifically male/female and provide filter i.e. Clothing -> Men, Clothing -> Women.
 - Stock levels including out of stock message 'if stock count == 0'.
@@ -222,6 +222,7 @@ The data structure allows for product details, quanities and where applicable, a
 - Make the Account and Sports Dropdowns smooth i.e. reveal like a jQuery blind.
 - On the Products page, the sort-options are styled to look like the other dropdowns except the hover effect is different.  This is because *<option>*'s cannot be styled in CSS.
 - On the Product Details page, I would have liked to have the dropdown start with 'Please Select' rather than a default selection such as Medium for size.
+- On the Home page on small screens, the header turns black when the user clicks the menu button when the navbar is at the top of the page.  If the user scrolls down, clicks the menu button and then scrolls up, the header goes transparent again.
 
 ## Languages
 
