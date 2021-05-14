@@ -20,7 +20,7 @@ class ContactForm(forms.ModelForm):
         }
 
         # Set the autofocus to the full name field
-        self.fields['default_phone_number'].widget.attrs['autofocus'] = True
+        self.fields['full_name'].widget.attrs['autofocus'] = True
 
         # Loop through all fields.
         for field in self.fields:

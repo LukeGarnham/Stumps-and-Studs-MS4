@@ -477,6 +477,17 @@ footer p, footer li {
     text-align: center;
 }
 
+/*----------------------------------------------------------------------------------------------------------Contact*/
+
+#id_message {
+    min-height: 150px;
+}
+
+#id_message::placeholder,
+#contact-form input::placeholder {
+    color: #aab7c4;
+}
+
 /*----------------------------------------------------------------------------------------------------------Media Queries*/
 
 /* Apply to screen sizes up to 768px width */
