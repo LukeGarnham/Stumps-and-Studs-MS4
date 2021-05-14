@@ -24,6 +24,80 @@
                     </div>
                 </form>
             </div>
+            <!-- Order History -->
+            <div class="col-12 col-md-6 mt-5 mt-md-0 px-md-4">
+                <h5 class="px-3">Order History</h5>
+                <div class="px-2">
+                    <hr class="hr-black mt-0">
+                </div>
+                {% for order in orders %}
+                    <!-- Order Number -->
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="mb-1 d-inline">View Order:</h5>
+                        <a class="text-decoration-underline text-end" href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
+                            <span>{{ order.order_number|truncatechars:16 }}</span>
+                        </a>
+                    </div>
+                    <!-- Order Date -->
+                    <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                        Order Date:
+                        <span>{{ order.order_date|date:'H:i d/m/Y' }}</span>
+                    </div>
+                    <!-- Order Total -->
+                    <div class="d-flex align-items-center justify-content-between mt-1 mb-3 fs-small">
+                        Grand Total:
+                        <span>£{{ order.grand_total }}</span>
+                    </div>
+                    <!-- Order Details -->
+                    <div id="collapse_{{ order.order_number }}" class="collapse">
+                        <!-- Order Quantity -->
+                        <hr class="hr-black mt-0 mb-3">
+                        {% for item in order.lineitems.all %}
+                            <div class="mb-3">
+                                <!-- Item Details -->
+                                <div class="d-flex align-items-center justify-content-between">
+                                    {{ item.product.name }}
+                                    <span class="text-end fs-small">Price: £{{ item.product.price }}</span>
+                                </div>
+                                <!-- Size -->
+                                {% if item.product_size %}
+                                    <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                        Size:
+                                        <span>{{ item.get_product_size_display|capfirst }}</span>
+                                    </div>    
+                                {% endif %}
+                                <!-- Side -->
+                                {% if item.product_side %}
+                                    <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                        Side:
+                                        <span>{{ item.get_product_side_display|capfirst }}</span>
+                                    </div>
+                                {% endif %}
+                                <!-- Gender -->
+                                {% if item.product_gender %}
+                                    <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                            Gender:
+                                            <span>{{ item.get_product_gender_display|capfirst }}</span>
+                                    </div>
+                                {% endif %}
+                                <!-- Price & Quantity -->
+                                <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                    Quantity:
+                                    <span>{{ item.qty }}</span>
+                                </div>
+                                {% if not forloop.last %}
+                                    <hr class="mt-3 mb-0">
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="view-order m-0 p-0 border-0 bg-white d-block w-100 purple-hover" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ order.order_number }}" aria-expanded="false" aria-controls="collapse_{{ order.order_number }}">
+                        <hr class="hr-black m-0">
+                        <i class="fas fa-caret-down"></i>
+                        <i class="fas fa-caret-up d-none"></i>
+                    </button>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
