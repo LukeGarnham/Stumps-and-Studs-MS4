@@ -1,6 +1,6 @@
 // Script to handle checkout form next and previous buttons.
 
-// Check the required input fields on the personal tab are complete and enable/disable delivery.
+// Check the required input fields on the personal tab are complete when there is an input on any one of them and enable/disable delivery.
 $('#personal :input[required]').on('input', function() {
     if (($('#id_full_name').val() != "") && ($('#id_email').val() != "") && ($('#id_phone_number').val() != "")) {
         $('#personal-to-delivery').prop('disabled', false);
@@ -35,7 +35,18 @@ $('#delivery-to-personal').click(function(e) {
     $('#personal-tab').addClass("active").attr("aria-selected", "true");
 });
 
-// Check the required input fields on the delivery tab are complete and enable/disable pay.
+// Check the required input fields on the delivery tab are complete when page loads and enable/disable pay.
+$('#delivery :input[required]').on('load', function() {
+    if (($('#id_street_address1').val() != "") && ($('#id_town_or_city').val() != "") && ($('#id_country').val() != "")) {
+        $('#delivery-to-pay').prop('disabled', false);
+        $('#pay-tab').removeClass('disabled');
+    } else {
+        $('#delivery-to-pay').prop('disabled', true);
+        $('#pay-tab').addClass('disabled');
+    };
+});
+
+// Check the required input fields on the delivery tab are complete when there is an input on any one of them and enable/disable pay.
 $('#delivery :input[required]').on('input', function() {
     if (($('#id_street_address1').val() != "") && ($('#id_town_or_city').val() != "") && ($('#id_country').val() != "")) {
         $('#delivery-to-pay').prop('disabled', false);
