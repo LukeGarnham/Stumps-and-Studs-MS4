@@ -1,0 +1,20 @@
+Hello {{ contact_message.full_name }},
+
+Thank you for your message:
+
+****************************************************************
+
+{{ contact_message.message }}
+
+****************************************************************
+
+A member of the Stumps & Studs team will contact you at {{ contact_message.email }} soon.
+
+Yours sincerely,
+
+
+Stumps & Studs
+{{ contact_email }}
+0208 123 4567
+123 London Road,
+London, SW99 9ZZ
