@@ -22,8 +22,8 @@ class UserProfileForm(forms.ModelForm):
             'default_postcode': 'Postcode',
         }
 
-        # Set the autofocus to the full name field
-        # self.fields['default_phone_number'].widget.attrs['autofocus'] = True
+        # Set the autofocus to the phone number field
+        self.fields['default_phone_number'].widget.attrs['autofocus'] = True
 
         # Loop through all fields.
         for field in self.fields:
