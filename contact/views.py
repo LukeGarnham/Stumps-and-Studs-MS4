@@ -18,9 +18,8 @@ def contact(request):
         else:
             messages.error(request, 'Message failed.  Please ensure the \
                 form is valid.')
-    else:
-        form = ContactForm()
 
+    form = ContactForm()
     template = 'contact/contact.html'
     context = {
         'form': form,
