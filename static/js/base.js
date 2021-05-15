@@ -31,4 +31,18 @@ $(document).ready(function() {
         }
     });
 
+    // Toggle the visibility of the scroll-to-top button if scrolled down 25% screen height from top.
+    $(window).scroll(function() {
+        var screenHeight = $(window).height();
+        if ($(window).scrollTop() >= (screenHeight/4)) {
+            $('#scroll-to-top').show('fade', 500);
+        } else {
+            $('#scroll-to-top').hide('fade', 500);
+        }
+    });
+    // Add scroll to top button.  Button only appears when user scrolls down page.
+    $('#scroll-to-top').click(function() {
+        window.scrollTo(0,0);
+    });
+
 });
