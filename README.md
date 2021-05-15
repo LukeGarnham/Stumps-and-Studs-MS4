@@ -240,6 +240,8 @@ The data structure allows for product details, quanities and where applicable, a
  - [Pillow](https://pillow.readthedocs.io/en/stable/index.html)
  - [Crispy Forms for Bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5)
  - [Django Countries](https://pypi.org/project/django-countries/)
+ - [DJ Database URL](https://pypi.org/project/dj-database-url/)
+ - [Psycopg2](https://pypi.org/project/psycopg2-binary/)
 
 ## Services Used
 
@@ -395,6 +397,8 @@ From within GitPod, I installed a number of packages:
 *   [Crispy Forms for Bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5) - *pip3 install crispy-bootstrap5*
 *   [Stripe](https://stripe.com/docs/api) - *pip3 install stripe*
 *   [Django Countries](https://pypi.org/project/django-countries/) - *pip3 install django-countries*
+*   [DJ Database URL](https://pypi.org/project/dj-database-url/) - *pip3 install dj_database_url*
+*   [Psycopg2](https://pypi.org/project/psycopg2-binary/) - *pip3 install psycopg2-binary*
 
 The project is deployed on Heroku which will need to know which packages to install in order to correctly host my finished project.  I kept an updated list of all of the installed packages in the requirements.txt file using this command:
 * *pip3 freeze > requirements.txt*
@@ -431,9 +435,36 @@ Django includes a built-in admin function which enables users to log in and look
 
 ### Deploy Application To Heroku
 
+In [Heroku](https://heroku.com/), I created a new app called 'stumps-and-studs'.  
+
 ### Connecting Django Application To Postrgres Database
 
-### Using Flask Template Inheritance
+Within the resources tab in Heroku, I added Heroku Postgres to attach a Postgres database to my app.  Back in my Gitpod environment, I installed dj_databse_url (*pip3 install dj_database_url*) and psycopg (*pip3 install psycopg2-binary*) and added both to the requirements.txt file (*pip3 freeze > requirements.txt*).
+
+In the global settings file, I imported dj_database_url.
+
+### Creating An Amazon S3 Bucket
+
+Having previously signed up to Amazon's AWS Service, I logged into my account and created a new S3 bucket called 'stumps-and-studs'.  Under the Properties tab, I turned off the default option which blocks public access.  Next I enabled static website hosting.
+
+Under the permissions tab, I added a CORS configuration which was taken from the instructions provided in the [Code Institute Boutique-Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/d90bfac64e564b41a177b65c34a63502/?child=first).  Next, under the bucket policy section, I generated a security policy with the following settings:
+
+Select Type of Policy: S3 Bucket Policy
+Principal: *
+Actions: GetObject
+Bucket ARN:  arn:aws:s3:::stumps-and-studs
+
+Next I clicked Add Statement and then Generate Policy.  I copied the policy into the bucket policy editor.  I modified the Resource value by adding '/*' onto the end.  Then I clicked Save Changes.
+
+Still under the Permissions tab, the next step I took was to configure the access control list.  I selected the list objects permission to be for everyone (public access), then clicked Save Changes.
+
+From the Amazon Services menu, I selected IAM.  I created a new User Group called 'manage-stumps-and-studs'.  In the Policies section, I created a new policy.  I selected JSON, clicked Import Managed Policy, the selecting and importing the pre-built AmazonS3FullAccess policy.  For the Resource key, I changed the default value to a list containing the ARN (as seen above) and the ARN followed by '/*'.  I proceeded to the Review Policy stage of the process where I gave it a name (stumps-and-studs-policy) and description before clicking Create Policy.
+
+Back in the 'manage-stumps-and-studs' group I created earlier, under the Permission tab, I clicked Add Permissions and Attach Policies.  I selected the policy I just created (stumps-and-studs-policy) and clicked Add Policy.
+
+In the Users section, I clicked Add User and created a user called 'stumps-and-studs-staticfiles-user'.  I granted the user Progromatic Access and then proceeded to add them to my group, 'manage-stumps-and-studs'.  I proceeded to the end to Create User.  I downloaded the CSV file which contains the Access Key ID and Secret Access Key.
+
+
 
 ## Credits
 
