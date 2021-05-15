@@ -1,0 +1,1 @@
+web: gunicorn stumps-and-studs.wsgi:application

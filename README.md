@@ -242,6 +242,9 @@ The data structure allows for product details, quanities and where applicable, a
  - [Django Countries](https://pypi.org/project/django-countries/)
  - [DJ Database URL](https://pypi.org/project/dj-database-url/)
  - [Psycopg2](https://pypi.org/project/psycopg2-binary/)
+ - [Gunicorn](https://pypi.org/project/gunicorn/)
+ - [Heroku](https://heroku.com/)
+ - [Postgresql](https://www.postgresql.org/)
 
 ## Services Used
 
@@ -399,6 +402,7 @@ From within GitPod, I installed a number of packages:
 *   [Django Countries](https://pypi.org/project/django-countries/) - *pip3 install django-countries*
 *   [DJ Database URL](https://pypi.org/project/dj-database-url/) - *pip3 install dj_database_url*
 *   [Psycopg2](https://pypi.org/project/psycopg2-binary/) - *pip3 install psycopg2-binary*
+*   [Gunicorn](https://pypi.org/project/gunicorn/) - *pip3 install gunicorn*
 
 The project is deployed on Heroku which will need to know which packages to install in order to correctly host my finished project.  I kept an updated list of all of the installed packages in the requirements.txt file using this command:
 * *pip3 freeze > requirements.txt*
@@ -413,7 +417,11 @@ To create the various apps, I used the following command:
 
 ### Environment Variables
 
-The Code Institute GitPod template already comes with a .gitignore file so I did not need to create one.  Any files listed in this document are not pushed to GitHub which ensures environment variables which need to remain private and secure are not made publicly available within my repo.
+The Code Institute GitPod template already comes with a .gitignore file so I did not need to create one.  Any files listed in this document are not pushed to GitHub which ensures environment variables and the Django default sqlite3 database which need to remain private and secure are not made publicly available within my repo.
+
+Environment variables to connect to Stripe are saved in the Heroku environment and GitPod settings.  By retrieving these values from the environment (os.environ.get), I can ensure they are not saved within any code which would be visible to others on my GitHub account.
+
+Equally, environment variables for connecting to the Postgres database are also saved in the Heroku environment but are not needed in the GitPod settings.
 
 ### Setting Up The Database
 
@@ -435,13 +443,23 @@ Django includes a built-in admin function which enables users to log in and look
 
 ### Deploy Application To Heroku
 
-In [Heroku](https://heroku.com/), I created a new app called 'stumps-and-studs'.  
+In [Heroku](https://heroku.com/), I created a new app called 'stumps-and-studs'.  To deploy to Heroku, I installed gunicorn (*pip3 install gunicorn*).  I then created a Procfile which instructs Heroku to run gunicorn and serve the Django app.
 
-### Connecting Django Application To Postrgres Database
+Next, using the command *heroku login -i*, I logged into Heroku using my account credentials.  Then I disabled collect static so Heroku didn't try to collect static files when deploying using the command *heroku config:set DISABLE_COLLECTSTATIC=1 --app stumps-and-studs*.
+
+Within the global settings file, I added 'stumps-and-studs.herokuapp.com' to the list of allowed hosts (ALLOWED_HOSTS).
+
+### Connecting Django Application To Postgres Database
 
 Within the resources tab in Heroku, I added Heroku Postgres to attach a Postgres database to my app.  Back in my Gitpod environment, I installed dj_databse_url (*pip3 install dj_database_url*) and psycopg (*pip3 install psycopg2-binary*) and added both to the requirements.txt file (*pip3 freeze > requirements.txt*).
 
-In the global settings file, I imported dj_database_url.
+In order to recreate the Django default sqlite3 database in the Heroku Postgres database, I followed the instructions included in the [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/d90bfac64e564b41a177b65c34a63502/?child=last).  Whilst still connected to the Django default sqlite3 database, I backed it up into a JSON file (db.json) using the command *./manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json*.
+
+Next, in the global settings file, I imported dj_database_url.  I then commented out the default database configuration within the global settings file and connected my app to my Postgres database.  I checked this had worked correctly using the command *python3 manage.py showmigrations* which showed that all of the models were waiting to be migrated to the newly connected Postgres database.  I then ran the migrations (*python3 manage.py migrate*).
+
+To then import all of the data from the db.json file, I used the command *./manage.py loaddata db.json* which loaded all of the data into the Postgres database.
+
+Within the global settings file, I then created an if statement which checks for the environment variable DATABASE_URL and if it exists, uses it to connect to the Postgres database, otherwise it connects to the Django default sqlite3 database.  Since the DATABASE_URL only exists in the Heroku environment, when the app is launched from Heroku the Postgres database is used but when working in GitPod (or any other environment), the  default sqlite3 database is used.
 
 ### Creating An Amazon S3 Bucket
 
