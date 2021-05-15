@@ -20,7 +20,7 @@
                     {% csrf_token %}
                     {{ form|crispy }}
                     <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
-                        <button class="btn btn-green my-2 mx-3" type="submit">
+                        <button class="btn btn-green my-2 mx-3 w-100" type="submit">
                             <h5 class="mb-0">Update</h5>
                         </button>
                     </div>
@@ -32,7 +32,7 @@
                 </div>
                 <p class="fs-small">Need to change your password?:</p>
                 <div class="text-center">
-                    <a class="btn btn-green " href="{% url 'account_change_password' %}">
+                    <a class="btn btn-green w-100" href="{% url 'account_change_password' %}">
                         <h5 class="mb-0">Change Password</h5>
                     </a>
                 </div>
@@ -114,11 +114,11 @@
                         {% endfor %}
                     {% else %}
                             <p class="fs-small">You have not placed any orders yet.</p>
-                            <div class="text-center">
-                                <a href="{% url 'products' %}" class="btn btn-green py-2 mt-3">
-                                    <h5 class="mb-0">Continue Shopping</h5>
-                                </a>
-                            </div>
+                            <a href="{% url 'products' %}" class="btn btn-green py-2 mt-3 w-100">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-tag pe-1"></i>Continue Shopping
+                                </h5>
+                            </a>
                     {% endif %}
                 </div>
             </div>
