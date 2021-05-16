@@ -188,6 +188,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Static files configuration
 # Only use the below when in the Heroku environment
 if 'USE_AWS' in os.environ:
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+    
     AWS_STORAGE_BUCKET_NAME = 'stumps-and-studs'
     AWS_S3_REGION_NAME = 'eu-west-2'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
