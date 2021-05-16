@@ -243,6 +243,8 @@ The data structure allows for product details, quanities and where applicable, a
  - [DJ Database URL](https://pypi.org/project/dj-database-url/)
  - [Psycopg2](https://pypi.org/project/psycopg2-binary/)
  - [Gunicorn](https://pypi.org/project/gunicorn/)
+ - [Boto3](https://pypi.org/project/boto3/)
+ - [Django Storages](https://pypi.org/project/django-storages/)
  - [Heroku](https://heroku.com/)
  - [Postgresql](https://www.postgresql.org/)
 
@@ -403,6 +405,8 @@ From within GitPod, I installed a number of packages:
 *   [DJ Database URL](https://pypi.org/project/dj-database-url/) - *pip3 install dj_database_url*
 *   [Psycopg2](https://pypi.org/project/psycopg2-binary/) - *pip3 install psycopg2-binary*
 *   [Gunicorn](https://pypi.org/project/gunicorn/) - *pip3 install gunicorn*
+*   [Boto3](https://pypi.org/project/boto3/) - *pip3 install boto3*
+*   [Django Storages](https://pypi.org/project/django-storages/) - *pip3 install django-storages*
 
 The project is deployed on Heroku which will need to know which packages to install in order to correctly host my finished project.  I kept an updated list of all of the installed packages in the requirements.txt file using this command:
 * *pip3 freeze > requirements.txt*
@@ -421,7 +425,7 @@ The Code Institute GitPod template already comes with a .gitignore file so I did
 
 Environment variables to connect to Stripe are saved in the Heroku environment and GitPod settings.  By retrieving these values from the environment (os.environ.get), I can ensure they are not saved within any code which would be visible to others on my GitHub account.
 
-Equally, environment variables for connecting to the Postgres database are also saved in the Heroku environment but are not needed in the GitPod settings.
+Equally, environment variables for connecting to the Postgres database and the AWS S3 Bucket are also saved in the Heroku environment but are not needed in the GitPod settings.
 
 ### Setting Up The Database
 
@@ -445,9 +449,13 @@ Django includes a built-in admin function which enables users to log in and look
 
 In [Heroku](https://heroku.com/), I created a new app called 'stumps-and-studs'.  To deploy to Heroku, I installed gunicorn (*pip3 install gunicorn*).  I then created a Procfile which instructs Heroku to run gunicorn and serve the Django app.
 
-Next, using the command *heroku login -i*, I logged into Heroku using my account credentials.  Then I disabled collect static so Heroku didn't try to collect static files when deploying using the command *heroku config:set DISABLE_COLLECTSTATIC=1 --app stumps-and-studs*.
+Next, using the command *heroku login -i*, I logged into Heroku using my account credentials.  Then I disabled collect static so Heroku didn't try to collect static files when deploying using the command *heroku config:set DISABLE_COLLECTSTATIC=1 --app stumps-and-studs*.  Within the global settings file, I added 'stumps-and-studs.herokuapp.com' to the list of allowed hosts (ALLOWED_HOSTS).
 
-Within the global settings file, I added 'stumps-and-studs.herokuapp.com' to the list of allowed hosts (ALLOWED_HOSTS).
+I then commited my changes and pushed them to GitHub before then pushing them to the Heroku master branch using the commands *heroku git:remote -a stumps-and-studs* and then *git push heroku master*.
+
+On the Heroku app dashboard, under the Deploy section, I connected to the main branch of my GitHub repository for this project and set it to automatically deploy so that whenever I push an update to my GitHub repository, it is also updated in Heroku.
+
+Finally, I updated the secret key (SECRET_KEY) in my GitPod environment and added it to the Heroku environment.  I changed the global settings file to retrieve this from the environment and updated DEBUG.
 
 ### Connecting Django Application To Postgres Database
 
@@ -482,6 +490,25 @@ Back in the 'manage-stumps-and-studs' group I created earlier, under the Permiss
 
 In the Users section, I clicked Add User and created a user called 'stumps-and-studs-staticfiles-user'.  I granted the user Progromatic Access and then proceeded to add them to my group, 'manage-stumps-and-studs'.  I proceeded to the end to Create User.  I downloaded the CSV file which contains the Access Key ID and Secret Access Key.
 
+### Connecting To My Amazon S3 Bucket
+
+To connect my Django project to the AWS S3 bucket, I installed two more packages; boto3 (*pip3 install boto3*) and Django storages (*pip3 install django-storages*).  In the global settings file, I added storages to the list of installed apps (INSTALLED_APPS).
+
+Since the S3 bucket is only needed when the site is deployed to Heroku, I have a variable in the global settings file called USE_AWS which only exists in the Heroku environment where it has a value of True.  Where the is satisfied (i.e. the environment is Heroku), I retrieve the following variables:
+
+ - AWS_STORAGE_BUCKET_NAME = bucket name
+ - AWS_S3_REGION_NAME = region name
+ - AWS_S3_CUSTOM_DOMAIN = bucket directory
+ - AWS_ACCESS_KEY_ID = access key ID
+ - AWS_SECRET_ACCESS_KEY = secret access key
+ 
+The values for the last two variables above are retrieved from the Heroku environment to ensure they are not disclosed in my code.
+
+Next, I created a new file called custom_storages.py and created variables in the global settings to override the default location of the static and media files when in the Heroku environment.  These tell Django that in production, I want to use the S3 bucket to store the static files whenever collectstatic runs i.e. when the project is deployed to Heroku.
+
+Having made these changes, the next time I committed and pushed to GitHub, the static files were automatically collected and saved in my S3 bucket where they can be accessed when the project is hosted in the Heroku environment.  A static folder was automatically created in the S3 bucket.
+
+Lastly, I manually created a media folder in the S3 bucket and uploaded all of the site images into it, ensuring that I granted public-read access to all of the images.
 
 
 ## Credits
