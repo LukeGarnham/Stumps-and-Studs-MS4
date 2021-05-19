@@ -247,6 +247,7 @@ The data structure allows for product details, quanities and where applicable, a
  - [Django Storages](https://pypi.org/project/django-storages/)
  - [Heroku](https://heroku.com/)
  - [Postgresql](https://www.postgresql.org/)
+ - [Gmail](https://mail.google.com/mail/)
 
 ## Services Used
 
@@ -510,6 +511,11 @@ Having made these changes, the next time I committed and pushed to GitHub, the s
 
 Lastly, I manually created a media folder in the S3 bucket and uploaded all of the site images into it, ensuring that I granted public-read access to all of the images.
 
+### Connecting To Gmail For Email
+
+In my gmail account, I created a new app called ms4-stumps-and-studs.  A new password was generated for the app which I saved as a value in the Heroku environment for the variable EMAIL_HOST_PASS.  I also created a variable called EMAIL_HOST_USER to which I assigned my gmail account lgarnham2@gmail.com.
+
+In the global settings, 
 
 ## Credits
 
