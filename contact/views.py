@@ -23,17 +23,17 @@ def contact(request):
             # Send the user an email acknowledging their message.
             cust_email = request.POST['email'],
             subject = render_to_string(
-                'contact/confirmation_emails/confirmation_email_subject.txt',
-                {'contact_message': contact_message})
+                'contact/confirmation_emails/confirmation_email_subject.txt')
             body = render_to_string(
                 'contact/confirmation_emails/confirmation_email_body.txt',
-                {'contact_message': contact_message,
-                 'contact_email': settings.DEFAULT_FROM_EMAIL})
+                {'contact_message': contact_message})
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = cust_email
             send_mail(
                 subject,
                 body,
-                settings.DEFAULT_FROM_EMAIL,
-                [cust_email]
+                email_from,
+                recipient_list,
             )
 
             messages.success(request, 'Thank you for your message.  \
