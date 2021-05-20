@@ -155,9 +155,9 @@ The settings.py file is where the global settings for the project are configured
 
 *   **Installed Apps**:  For each new Django app I created, the app name needed to be added to the list of installed apps (INSTALLED_APPS).  Other apps such as Crispy Forms and Django Storages have also been added to the list so Django knows they are trusted apps which can be used.
 *   **Django AllAuth**:  AllAuth can be configured in the global settings.py file.  Installation instructions for AllAuth can be found [here](https://django-allauth.readthedocs.io/en/latest/installation.html) and configuration instructions can be found [here](https://django-allauth.readthedocs.io/en/latest/configuration.html).
-*   **Stripe**:  I followed the [Stripe documentatin](https://stripe.com/docs/payments/accept-a-payment) and the detailed [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/90cda137ebaa461894ba8c89cd83291a/) instructional videos to set up the payment system.  This is a test set up (rather than live) so cards will not actually be charged.  There are a variety of test payment card numbers provided in [Stripe's documentation](https://stripe.com/docs/testing#international-cards) which can be used to simulate a successful payment.  A STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY & STRIPE_WH_SECRET are required to connect to Stripe but these are all stored as environment variables in both GitPod and Heroku as I don't want to share these publicly.
-*   **AWS**:  I use Amazon Web Services (AWS) to host my static and media files for the deployed site (on Heroku).  I have configured my global settings to enable my app to connect to it when deployed.  In Heroku, I have created a number of environment variables including USE_AWS which is set to True.  An 'if' statement in my global settings checks if this exists in the environment and if so, configures my app to use AWS.  I closely followed the videos in the Deployment section of the [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/d90bfac64e564b41a177b65c34a63502/) to set this configuration up - more detailed steps are explained in my deployment section below.
-*   **Gmail Email Account**:  In order to actually send emails to users, I have configured the global settings to connect to my Gmail account.  The email address (EMAIL_HOST_USER) and gmail app password (EMAIL_HOST_PASS) enable my app to connect to my gmail account and these are set up as variables which are retireved from the Heroku environment so as to keep them private.  They are only required in the Heroku environment since I have configured the global settings to use the default Django email confifuration if in a development environment such as GitPod.
+*   **Stripe**:  I followed the [Stripe documentatin](https://stripe.com/docs/payments/accept-a-payment) and the detailed [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/90cda137ebaa461894ba8c89cd83291a/) instructional videos to set up the payment system.  This is a test set up (rather than live) so cards will not actually be charged.  There are a variety of test payment card numbers provided in [Stripe's documentation](https://stripe.com/docs/testing#international-cards) which can be used to simulate a successful payment.  A Stripe public key (STRIPE_PUBLIC_KEY), Stripe secret key (STRIPE_SECRET_KEY) & Stripe webhook secret (STRIPE_WH_SECRET) are required to connect to Stripe but these are all stored as environment variables in both GitPod and Heroku as I don't want to share these publicly.
+*   **AWS**:  I use Amazon Web Services (AWS) to host my static and media files for the deployed site (on Heroku) in an S3 bucket.  I have configured my global settings to enable my app to connect to it when deployed.  In Heroku, I have created a number of environment variables including USE_AWS which is set to True.  An 'if' statement in my global settings checks if this exists in the environment and if so, configures my app to use the AWS S3 bucket for static and media files.  I closely followed the videos in the Deployment section of the [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/d90bfac64e564b41a177b65c34a63502/) to set this configuration up - more detailed steps are explained in my [Deployment](#deployment) section below.
+*   **Gmail Email Account**:  In order to actually send emails to users, I have configured the global settings to connect to my Gmail account.  The email address (EMAIL_HOST_USER) and Gmail app password (EMAIL_HOST_PASS) enable my app to connect to my Gmail account and these are set up as variables which are retireved from the Heroku environment so as to keep them private.  They are only required in the Heroku environment since I have configured the global settings to use the default Django email confifuration if in a development environment such as GitPod, otherwise the Gmail settings are used.
 
 ### File Structure
 
@@ -166,7 +166,8 @@ The project is split into apps.  Each app has files (such as forms, models, urls
 Each HTML file extends from the base.html file which is saved in the templates folder.  Toast templates are also stored within the templates folder.
 
 The templates folder contains an 'allauth' subfolder which contains a number of the allauth template html files.  These were copied from the AllAuth site-packages directory using the following command before I then deleted the AllAuth openid and tests templates:
-*   *cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth*
+
+*cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth*
 
 I subsequently modified the base.html AllAuth template so that the style of my website is inherited through all of the AllAuth templates.  I further modified some of the individual AllAuth templates to ensure my desired styling on all pages.
 
@@ -176,17 +177,19 @@ I have an app (folder) called static which stores the base.css and base.js files
 
 I could have created a static folder within each app and created a CSS and JavaScript file within it, specifically targetting each app.  For the CSS, I try to re-use rules and class names and thus found it easier to contain all of my custom CSS in the base.css file within the static app.  I have used comments to partition the base.css file so that I can easily identify rules which are specific to each app.  Whilst I could have split this out across multiple lines, it was my personal preference not to do this.
 
-However, for the JavaScript I found it easier to partition this between each app.  There are a couple of ways I have done this; sometimes I have included a script within the html which extends the postload_js block from the base HTML template whilst in other apps, I have created a static folder within the app containing JavaScript files.
+However, for the JavaScript I found it easier to partition this between each app.  There are a couple of ways I have done this; sometimes I have included a script within html files which extends the postload_js block from the base HTML template whilst in other apps, I have created a static folder within the app containing JavaScript files.
 
-For example, I wrote some custom JavaScript in the basket app to allow users to update quantities or remove items from their basket.  This is included in the postload_js block within the basket.html file.  However, for the checkout app, there is a bit more custom JavaScript to control the checkout form buttons (which enables users to click through the various tabs) and to process the Stripe elements of the form.  Since there is a considerable amount of JavaScript, I opted to include this in two files housed within a static folder in the checkout app.
+For example, I wrote some custom JavaScript in the basket app to allow users to update quantities or remove items from their basket.  This is included in the postload_js block within the basket.html file.  However, for the checkout app, there is custom JavaScript to control the checkout form buttons (which enables users to click through the various tabs) and to process the Stripe elements of the form.  Since there is a considerable amount of JavaScript, I opted to include this in two files housed within a static folder in the checkout app.
 
-All static folders are collected (by collectstatic) when the project is pushed to Heroku and they are stored in my AWS S3 bucket.
+All static folders are collected (by collectstatic) when the project is pushed to Heroku and they are stored in my AWS S3 bucket in the deployed version.
 
 ## Database Schema
 
 [**Back to Contents**](#Contents)
 
 ### Data Scheme
+
+![Navbar search functionality](media/readme/images/ms4-db-plan.png)
 
 #### Basket Variable in Session Memory
 
