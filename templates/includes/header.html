@@ -62,6 +62,11 @@
                             <span class="fs-small">Account</span>
                         </span>
                         <ul class="dropdown-menu bg-dark rounded-0 py-0" aria-labelledby="account-options">
+                            {% if request.user.is_superuser %}
+                                <li>
+                                    <a href="{% url 'admin:index' %}" class="dropdown-item">Site Admin</a>
+                                </li>
+                            {% endif %}
                             <li>
                                 <a href="{% url 'profile' %}" class="dropdown-item">My Account</a>
                             </li>
