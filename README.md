@@ -588,11 +588,15 @@ In the global settings, I created an if statement so that when in the developmen
 
 [**Back to Contents**](#Contents)
 
-### Inspiration
-
 ### Content
 
 For the About Us section in the footer, I referenced the text on [JD Sports website](https://www.jdsports.my/customer-service/about-us/) but tweaked some elements of my fictional companies history.
+
+### Products
+
+Whilst I would idealy have been able to use high resolution images for my products, I struggled to find suitable images for them.  I sourced the product images from a variety of other ecommerce websites such as [Amazon](https://www.amazon.co.uk/), [American Golf](https://www.americangolf.co.uk/) and [Decathlon](https://www.decathlon.co.uk/).  This [Excel spreadsheet](media/readme/products-source.xlsx) contains the list of products included in my project along with the source of them.
+
+For the product descriptions, I generally copied the text that I found on the websites where I downloaded the images although in some cases I edited the text to a shorter length.  The descriptions I copied from the source websites are in the spreadsheet above.
 
 ### Media
 
@@ -603,10 +607,10 @@ I wanted prominent images to be high resolution so sourced them from sites such 
 *   [Home Page Running Shoes](https://www.pexels.com/photo/people-doing-marathon-618612/)
 *   [Home Page Clothing](https://www.pexels.com/photo/three-women-kneeling-on-floor-866023/)
 
-Whilst I would idealy have been able to use high resolution images for my products, I struggled to find suitable images for them.  Instead I downloaded them from a variety of ecommerce stores such as [Amazon](https://www.amazon.co.uk/), [American Golf](https://www.americangolf.co.uk/) and [Decathlon](https://www.decathlon.co.uk/):
-
 I used Google to find a 'no image' image.  The one I chose was sourced from [this website](https://www.allianceplast.com/no-image/).
 
 The loading gif used when users submit the checkout form was sourced from [icons8.com](https://icons8.com/preloaders/en/search/sport).
 
 ### Acknowledgements
+
+I closely followed the [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/d3188bf68530497aa5fba55d07a9d7d7/) tutorial in order to complete this project.  The guidance and instructions throughout enabled me to complete this project.
