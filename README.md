@@ -45,8 +45,10 @@ My GitHub repository can be found [here](https://github.com/LukeGarnham/Stumps-a
     * [**Setting Up The Database**](#setting-up-the-database)
     * [**Create Admin Superuser**](#create-admin-superuser)
     * [**Deploy Application To Heroku**](#deploy-application-to-heroku)
-    * [**Connecting Django Application To Postrgres Database**](#connecting-django-application-to-postrgres-database)
-    * [**Using Flask Template Inheritance**](#using-flask-template-inheritance)
+    * [**Connecting Django Application To Postgres Database**](#connecting-django-application-to-postgres-database)
+    * [**Creating An Amazon S3 Bucket**](#creating-an-amazon-s3-bucket)
+    * [**Connecting To My Amazon S3 Bucket**](#connecting-to-my-amazon-s3-bucket)
+    * [**Connecting To Gmail For Email**](#connecting-to-gmail-for-email)
 
 9. [**Credits**](#credits)
     * [**Inspiration**](#inspiration)
@@ -449,8 +451,6 @@ Try using different Stripe payment card numbers.
 
 [**Back to Contents**](#Contents)
 
-*Fully document the deployment procedure in a section in a README file.  Explain all steps taken to deploy project on both GitPod and Heroku.*
-
 ### GitPod Environment
 
 I created my GitHub repository (repo) by using the [Code Institute template](https://github.com/Code-Institute-Org/gitpod-full-template).  I named my repo "Stumps-and-Studs-MS4".  I opened this repo in GitPod.
@@ -471,7 +471,9 @@ From within GitPod, I installed a number of packages:
 *   [Boto3](https://pypi.org/project/boto3/) - *pip3 install boto3*
 *   [Django Storages](https://pypi.org/project/django-storages/) - *pip3 install django-storages*
 
-The project is deployed on Heroku which will need to know which packages to install in order to correctly host my finished project.  I kept an updated list of all of the installed packages in the requirements.txt file using this command:
+Not all of the above packages were installed immediately upon opening my GitPod but rather they were installed when required during the various development stages of my project.
+
+The project is deployed on Heroku which needs to know which packages to install in order to correctly host my finished project.  I kept an updated list of all of the installed packages in the requirements.txt file using this command:
 * *pip3 freeze > requirements.txt*
 
 ### Create The Django Project
@@ -488,7 +490,7 @@ The Code Institute GitPod template already comes with a .gitignore file so I did
 
 Environment variables to connect to Stripe are saved in the Heroku environment and GitPod settings.  By retrieving these values from the environment (os.environ.get), I can ensure they are not saved within any code which would be visible to others on my GitHub account.
 
-Equally, environment variables for connecting to the Postgres database and the AWS S3 Bucket are also saved in the Heroku environment but are not needed in the GitPod settings.
+Equally, environment variables for connecting to the Postgres database, the AWS S3 Bucket and my Gmail email account are saved in the Heroku environment only as they are not needed in the GitPod environment.
 
 ### Setting Up The Database
 
@@ -501,11 +503,11 @@ To update the database when a new models was created, I ran the following comman
 *   *python3 manage.py migrate --plan* - Lists all of the changes that will be made to the database and various field settings without executing changes to the database.
 *   *python3 manage.py migrate* - Executes the migration and changes to the database are made.
 
-The db.sqlite3 database was used in the development of my project from within the GitPod environement.
+The db.sqlite3 database was used in the development of my project from within the GitPod environement.  The deployed project connects to a Postrgres database.
 
 ### Create Admin Superuser
 
-Django includes a built-in admin function which enables users to log in and look at the tables in our database and make changes to them.  To create a superuser, I ran the following command:
+Django includes a built-in admin feature which enables authorised users (superusers) to log in and look at the models (tables) in our database and make changes to the data in them.  To create a superuser, I ran the following command:
 *	 *python3 manage.py createsuperuser*
 
 ### Deploy Application To Heroku
@@ -518,7 +520,7 @@ I then commited my changes and pushed them to GitHub before then pushing them to
 
 On the Heroku app dashboard, under the Deploy section, I connected to the main branch of my GitHub repository for this project and set it to automatically deploy so that whenever I push an update to my GitHub repository, it is also updated in Heroku.
 
-Finally, I updated the secret key (SECRET_KEY) in my GitPod environment and added it to the Heroku environment.  I changed the global settings file to retrieve this from the environment and updated DEBUG.
+Finally, I updated the secret key (SECRET_KEY) in my GitPod environment and added it to the Heroku environment.  I changed the global settings file to retrieve this from the environment and updated DEBUG so that it is True in the development (GitPod) environment but False in the deployed (Heroku) environment.
 
 ### Connecting Django Application To Postgres Database
 
@@ -530,17 +532,20 @@ Next, in the global settings file, I imported dj_database_url.  I then commented
 
 To then import all of the data from the db.json file, I used the command *./manage.py loaddata db.json* which loaded all of the data into the Postgres database.
 
-Within the global settings file, I then created an if statement which checks for the environment variable DATABASE_URL and if it exists, uses it to connect to the Postgres database, otherwise it connects to the Django default sqlite3 database.  Since the DATABASE_URL only exists in the Heroku environment, when the app is launched from Heroku the Postgres database is used but when working in GitPod (or any other environment), the  default sqlite3 database is used.
+Within the global settings file, I then created an if statement which checks for the environment variable DATABASE_URL and if it exists, uses it to connect to the Postgres database, otherwise it connects to the Django default sqlite3 database.  Since the DATABASE_URL only exists in the Heroku environment (where it is set to True), when the app is launched from Heroku the Postgres database is used but when working in GitPod, the  default sqlite3 database is used.
 
 ### Creating An Amazon S3 Bucket
 
-Having previously signed up to Amazon's AWS Service, I logged into my account and created a new S3 bucket called 'stumps-and-studs'.  Under the Properties tab, I turned off the default option which blocks public access.  Next I enabled static website hosting.
+Having previously signed up to Amazon's AWS Service, I logged into my account and created a new S3 bucket called 'stumps-and-studs'.  Under the Properties tab, I turned off the default option which usually blocks public access.  Next I enabled static website hosting.
 
 Under the permissions tab, I added a CORS configuration which was taken from the instructions provided in the [Code Institute Boutique-Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/d90bfac64e564b41a177b65c34a63502/?child=first).  Next, under the bucket policy section, I generated a security policy with the following settings:
 
 Select Type of Policy: S3 Bucket Policy
+
 Principal: *
+
 Actions: GetObject
+
 Bucket ARN:  arn:aws:s3:::stumps-and-studs
 
 Next I clicked Add Statement and then Generate Policy.  I copied the policy into the bucket policy editor.  I modified the Resource value by adding '/*' onto the end.  Then I clicked Save Changes.
