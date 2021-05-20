@@ -4,7 +4,9 @@ A fictional ecommerce website selling sports equipment and clothing.  Built usin
 
 ## Demo
 
-The final project is hosted on Heroku and can be found **TBC**
+The final project is hosted on Heroku and can be found [here](https://stumps-and-studs.herokuapp.com/).
+
+My GitHub repository can be found [here](https://github.com/LukeGarnham/Stumps-and-Studs-MS4).
 
 ## Contents
 
@@ -28,7 +30,7 @@ The final project is hosted on Heroku and can be found **TBC**
 
 5. [**Languages**](#languages)
 
-6. [**Services Used**](#services-used)
+6. [**Technologies & Services Used**](#technologies-&-services-used)
 
 7. [**Testing**](#testing)
     * [**Bugs Encountered During Development**](#bugs-encountered-during-development)
@@ -53,6 +55,8 @@ The final project is hosted on Heroku and can be found **TBC**
     * [**Acknowledgements**](#acknowledgements)
 
 ## UX
+
+[**Back to Contents**](#Contents)
 
 ### Project Aim
 
@@ -101,7 +105,7 @@ The aim of this project was to produce an enticing and fully-functioning e-comme
 
 #### Fonts
 
-The fonts used throughout the website is Crimson Text for headers and Open Sans for all other elements.  I searched Google for some goo font pairings for ecommerce websites.  I came across [this website](https://www.builderfly.com/7-perfect-font-pairing-for-your-ecommerce-website/) and was enticed by the pairing of Crimson Text and Source Sans Pro.  However, whilst I was developing the header and navbar, I decided that Source Sans Pro font wasn't quite right for my website.  I turned to [Google Fonts](https://fonts.google.com/) to identify other fonts which make good partners to Crimson Text.  I ended up choosing Open Sans as the font to partner Crimson Text.
+The fonts used throughout the website is Crimson Text for headers and Open Sans for all other elements.  I searched Google for some good font pairings for ecommerce websites.  I came across [this website](https://www.builderfly.com/7-perfect-font-pairing-for-your-ecommerce-website/) and was enticed by the pairing of Crimson Text and Source Sans Pro.  However, whilst I was developing the header and navbar, I decided that Source Sans Pro font wasn't quite right for my website.  I turned to [Google Fonts](https://fonts.google.com/) to identify other fonts which make good partners to Crimson Text.  I ended up choosing Open Sans as the font to partner Crimson Text.
 
 #### Colour Scheme
 
@@ -109,11 +113,11 @@ I visited a number of popular ecommerce websites for inspiration in the colour p
 
 #### Inspiration
 
-I often find that ecommerce websites are very busy.  The amount of content visible on screen can detract focus away from the product images.  For example, navigation bars, filters and product details (price, description, ratings, etc) all lead to a lot of text on screen at any one time while searching for products.  Although some product information is useful, product images, name and cost are the most essential things a user is looking for in my opinion.  Further product details can be accessed by clicking on a product and viewing all of its information so there is no need to show it all on the main navigation page.  When researching ecommerce website for inspiration, I came across [this website](https://www.hardgraft.com/collections/footwear) which has a very stripped back layout, ensuring the product images take center stage.  This example really appealed to me.  For these reasons, I wanted to keep the real estate of the header and filters to a minimum and ensure the images were not cluttered with additional product information.
+I often find that ecommerce websites are very busy.  The amount of content visible on screen can detract focus away from the products.  For example, navigation bars, filters and product details (price, description, ratings, etc) all lead to a lot of text on screen at any one time while searching for products.  Although some product information is useful, product images, name and cost are the most essential things a user is looking for in my opinion.  Further product details can be accessed by clicking on a product and viewing all of its information so there is no need to show it all on the main navigation page.  When researching ecommerce websites for inspiration, I came across [this website](https://www.hardgraft.com/collections/footwear) which has a very stripped back layout, ensuring the product images take center stage.  This example really appealed to me.  For these reasons, I wanted to keep the real estate of the header and filters to a minimum and ensure the images were not cluttered with additional product information.
 
 #### Home Page Images & Header
 
-On the home page, I utilise jQuery to make the header transparent and remove the margin from the top of the body so that the images take center stage.  I ensured that the images I selected provide a good contrast for the white font color used on the header items.  Furthermore, I chose images which still looked good on screens with a smaller width.  Here is a comparison between the header on the home page (left) and how the header appear throughout the rest of the site on mobile:
+On the home page, I utilise jQuery to make the header transparent and remove the margin from the top of the body so that the images take center stage.  I ensured that the images I selected provide a good contrast for the white font color used on the header items.  Furthermore, I chose images which still looked good on screens with a smaller width.  Here is a comparison between the header on the home page (left) and how the header appears throughout the rest of the site on mobile:
 
 ![Header on home page vs header on rest of site](media/readme/images/header-mob.png)
 
@@ -123,7 +127,7 @@ On the home page, when the user starts scrolling down, the header remains at the
 
 #### Navbar
 
-Utilising jQuery, I added a feature which hides the navigation bar when users scroll down but makes it dropdown (reappear) as soon as they begin scrolling up.  This effect is only applied to medium screens upwards since on small screens, the navigation options can be accessed using a menu toggle.  As outlined above, I wanted to maximise the amount of space on screen for the products to take center stage.  I feel this solution offers good user experience since it means they do not need to scroll up to the very top of the page to access the navigation elements.
+Utilising jQuery, I added a feature which hides the navigation bar when users scroll down but makes it dropdown (reappear) as soon as they begin scrolling up.  This effect is only applied to medium screens upwards since on small screens, the navigation options are hidden (collapsed) behind the menu button and can be accessed by toggling this button.  As outlined above, I wanted to maximise the amount of space on screen for the products to take center stage.  I feel this solution offers good user experience since it means they do not need to scroll up to the very top of the page to access the navigation elements.
 
 However, I did decide that there are some navigation elements which should always be visible to the user and hence I included them in the header which is fixed to the top of the screen throughout the website.  The navigation links I wanted visible at all times are the search form, basket, registration, login and account.  These all feature prominently in my user stories hence wanted to ensure visitors to my website can see them at all times and never have to hunt around for them.
 
@@ -135,11 +139,15 @@ I decided that for warning, info and error messages, it was not necessary to sho
 
 ![Toasts basket preview shows except from when on the basket page already](media/readme/gifs/toasts.gif)
 
-NB: In the GIF above, the cricket stumps have a size and gender.  These attributes were added to the product so I could test the messages and basket quantities updated as desited.  In the final project, cricket stumps will not have size or gender attributes.
+NB: In the GIF above, the cricket stumps have a size and gender.  These attributes were added to the product so I could test the messages and basket quantities updated as desired.  In the final project, cricket stumps do not have size or gender attributes.
 
 ### Wireframes
 
+Prior to coding anything, I created wireframes for my prject using Balsamiq.  A PDF version of my wireframe can be found [here](media/readme/ms4-project-wireframe.pdf).
+
 ## Code
+
+[**Back to Contents**](#Contents)
 
 ### Settings
 
@@ -175,6 +183,8 @@ For example, I wrote some custom JavaScript in the basket app to allow users to 
 All static folders are collected (by collectstatic) when the project is pushed to Heroku and they are stored in my AWS S3 bucket.
 
 ## Database Schema
+
+[**Back to Contents**](#Contents)
 
 ### Data Scheme
 
@@ -226,6 +236,8 @@ The data structure allows for product details, quanities and where applicable, a
 
 ## Features
 
+[**Back to Contents**](#Contents)
+
 ### Existing Features
 
 ### Features Left To Implement / Known Bugs
@@ -241,12 +253,16 @@ The data structure allows for product details, quanities and where applicable, a
 
 ## Languages
 
+[**Back to Contents**](#Contents)
+
 * HTML
 * CSS
 * JavaScript
 * Python
 
 ## Technologies & Services Used
+
+[**Back to Contents**](#Contents)
 
  - [Django](https://www.djangoproject.com/)
  - [Bootstrap5](https://getbootstrap.com/)
@@ -265,6 +281,8 @@ The data structure allows for product details, quanities and where applicable, a
  - [Gmail](https://mail.google.com/mail/)
 
 ## Testing
+
+[**Back to Contents**](#Contents)
 
 ### Bugs Encountered During Development
 
@@ -400,6 +418,8 @@ Try using different Stripe payment card numbers.
 
 ## Deployment
 
+[**Back to Contents**](#Contents)
+
 *Fully document the deployment procedure in a section in a README file.  Explain all steps taken to deploy project on both GitPod and Heroku.*
 
 ### GitPod Environment
@@ -531,6 +551,8 @@ In my gmail account, I created a new app called ms4-stumps-and-studs.  A new pas
 In the global settings, I created an if statement so that when in the development environment, the default Django email configuration is used meaning emails are printed out in the console.  If not in the devleopment environment (i.e. in the deployed Heroku environment), I use the gmail configuration so that emails are actually issued to the user.  The password for the app (EMAIL_HOST_PASS) as well as the gmail email address (EMAIL_HOST_USER) are retrieved from the Heroku environment.
 
 ## Credits
+
+[**Back to Contents**](#Contents)
 
 ### Inspiration
 
