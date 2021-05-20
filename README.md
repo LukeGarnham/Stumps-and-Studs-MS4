@@ -145,19 +145,34 @@ NB: In the GIF above, the cricket stumps have a size and gender.  These attribut
 
 The settings.py file is where the global settings for the project are configured.  Django creates a lot of these by default but there were some changes/additions which needed to be made as I developed the project.
 
-*   **Installed Apps**:  For each new Django app I created, the app name needed to be added to the list of installed apps (INSTALLED_APPS).
+*   **Installed Apps**:  For each new Django app I created, the app name needed to be added to the list of installed apps (INSTALLED_APPS).  Other apps such as Crispy Forms and Django Storages have also been added to the list so Django knows they are trusted apps which can be used.
 *   **Django AllAuth**:  AllAuth can be configured in the global settings.py file.  Installation instructions for AllAuth can be found [here](https://django-allauth.readthedocs.io/en/latest/installation.html) and configuration instructions can be found [here](https://django-allauth.readthedocs.io/en/latest/configuration.html).
+*   **Stripe**:  I followed the [Stripe documentatin](https://stripe.com/docs/payments/accept-a-payment) and the detailed [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/90cda137ebaa461894ba8c89cd83291a/) instructional videos to set up the payment system.  This is a test set up (rather than live) so cards will not actually be charged.  There are a variety of test payment card numbers provided in [Stripe's documentation](https://stripe.com/docs/testing#international-cards) which can be used to simulate a successful payment.  A STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY & STRIPE_WH_SECRET are required to connect to Stripe but these are all stored as environment variables in both GitPod and Heroku as I don't want to share these publicly.
+*   **AWS**:  I use Amazon Web Services (AWS) to host my static and media files for the deployed site (on Heroku).  I have configured my global settings to enable my app to connect to it when deployed.  In Heroku, I have created a number of environment variables including USE_AWS which is set to True.  An 'if' statement in my global settings checks if this exists in the environment and if so, configures my app to use AWS.  I closely followed the videos in the Deployment section of the [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/d90bfac64e564b41a177b65c34a63502/) to set this configuration up - more detailed steps are explained in my deployment section below.
+*   **Gmail Email Account**:  In order to actually send emails to users, I have configured the global settings to connect to my Gmail account.  The email address (EMAIL_HOST_USER) and gmail app password (EMAIL_HOST_PASS) enable my app to connect to my gmail account and these are set up as variables which are retireved from the Heroku environment so as to keep them private.  They are only required in the Heroku environment since I have configured the global settings to use the default Django email confifuration if in a development environment such as GitPod.
 
 ### File Structure
 
 The project is split into apps.  Each app has files (such as forms, models, urls and html files) which are specific to that app.  However, there are some common files which we want apps to inherit from or which don't necessarily belong within one of the apps.  These are stored in the templates folder.
 
-Each HTML file extends from the base.html file which is saved in the templates folder.
+Each HTML file extends from the base.html file which is saved in the templates folder.  Toast templates are also stored within the templates folder.
 
 The templates folder contains an 'allauth' subfolder which contains a number of the allauth template html files.  These were copied from the AllAuth site-packages directory using the following command before I then deleted the AllAuth openid and tests templates:
 *   *cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth*
 
+I subsequently modified the base.html AllAuth template so that the style of my website is inherited through all of the AllAuth templates.  I further modified some of the individual AllAuth templates to ensure my desired styling on all pages.
+
 ### Static Files
+
+I have an app (folder) called static which stores the base.css and base.js files as well as some media files for the home page and a loading gif which is used when the checkout form is submitted.
+
+I could have created a static folder within each app and created a CSS and JavaScript file within it, specifically targetting each app.  For the CSS, I try to re-use rules and class names and thus found it easier to contain all of my custom CSS in the base.css file within the static app.  I have used comments to partition the base.css file so that I can easily identify rules which are specific to each app.  Whilst I could have split this out across multiple lines, it was my personal preference not to do this.
+
+However, for the JavaScript I found it easier to partition this between each app.  There are a couple of ways I have done this; sometimes I have included a script within the html which extends the postload_js block from the base HTML template whilst in other apps, I have created a static folder within the app containing JavaScript files.
+
+For example, I wrote some custom JavaScript in the basket app to allow users to update quantities or remove items from their basket.  This is included in the postload_js block within the basket.html file.  However, for the checkout app, there is a bit more custom JavaScript to control the checkout form buttons (which enables users to click through the various tabs) and to process the Stripe elements of the form.  Since there is a considerable amount of JavaScript, I opted to include this in two files housed within a static folder in the checkout app.
+
+All static folders are collected (by collectstatic) when the project is pushed to Heroku and they are stored in my AWS S3 bucket.
 
 ## Database Schema
 
@@ -231,7 +246,7 @@ The data structure allows for product details, quanities and where applicable, a
 * JavaScript
 * Python
 
-## Technologies Used
+## Technologies & Services Used
 
  - [Django](https://www.djangoproject.com/)
  - [Bootstrap5](https://getbootstrap.com/)
@@ -248,8 +263,6 @@ The data structure allows for product details, quanities and where applicable, a
  - [Heroku](https://heroku.com/)
  - [Postgresql](https://www.postgresql.org/)
  - [Gmail](https://mail.google.com/mail/)
-
-## Services Used
 
 ## Testing
 
@@ -513,9 +526,9 @@ Lastly, I manually created a media folder in the S3 bucket and uploaded all of t
 
 ### Connecting To Gmail For Email
 
-In my gmail account, I created a new app called ms4-stumps-and-studs.  A new password was generated for the app which I saved as a value in the Heroku environment for the variable EMAIL_HOST_PASS.  I also created a variable called EMAIL_HOST_USER to which I assigned my gmail account lgarnham2@gmail.com.
+In my gmail account, I created a new app called ms4-stumps-and-studs.  A new password was generated for the app which I saved as a value in the Heroku environment for the variable EMAIL_HOST_PASS.  I also created a variable called EMAIL_HOST_USER to which I assigned my gmail account.
 
-In the global settings, 
+In the global settings, I created an if statement so that when in the development environment, the default Django email configuration is used meaning emails are printed out in the console.  If not in the devleopment environment (i.e. in the deployed Heroku environment), I use the gmail configuration so that emails are actually issued to the user.  The password for the app (EMAIL_HOST_PASS) as well as the gmail email address (EMAIL_HOST_USER) are retrieved from the Heroku environment.
 
 ## Credits
 
