@@ -26,7 +26,7 @@ My GitHub repository can be found [here](https://github.com/LukeGarnham/Stumps-a
 
 4. [**Features**](#features)
     * [**Existing Features**](#existing-features)
-    * [**Features Left To Implement**](#features-left-to-implement)
+    * [**Features Left To Implement / Known Bugs**](#features-left-to-implement-/-known-bugs)
 
 5. [**Languages**](#languages)
 
@@ -189,15 +189,15 @@ All static folders are collected (by collectstatic) when the project is pushed t
 
 ### Data Scheme
 
-![Navbar search functionality](media/readme/images/ms4-db-plan.png)
+![Database Schema](media/readme/images/ms4-db-plan.png)
 
 #### Basket Variable in Session Memory
 
-The products my website sells includes sports equipment and clothing.  lothing items typically have sizes and there are some sports equipment which are specific to male or female.  Furthermore, some equipment is taylored for either right-handed or left-handed users; golf clubs for example.  As such, the products in my database have 3 booleans properties; has_sizes, has_side, has_gender.  These indicate whether or not that product has that attribute.  The attributes determine the options users have on the product details page when shopping for products.  Products can have none of these attributes, some of them or all of them.
+The products my website sells includes sports equipment and clothing.  Clothing items typically have sizes and there are some sports equipment which are specific to male or female.  Furthermore, some equipment is taylored for either right-handed or left-handed users; golf clubs for example.  As such, the products in my database have 3 booleans properties; has_sizes, has_side, has_gender.  These indicate whether or not that product has that attribute.  The attributes determine the options users have on the product details page when shopping for products.  Products can have none of these attributes, some of them or all of them.
 
-The items a user adds to their basket need to retain the properties they have selected.  To do this, I needed to come up with a structure for storing basket items within a variable called basket which is saved in session memory.  The basket variable is a dictionary where the keys are the unique product ID's.  For items without any attributes, the value is simply the quanity that the user has added to their basket {product_id: quantity}.
+The items a user adds to their basket need to retain the properties they have selected.  To do this, I needed to come up with a structure for storing basket items within a variable called basket which is saved in session memory.  The basket variable is a dictionary where the keys are the unique product ID's.  For items without any attributes, the value is simply the quantity that the user has added to their basket {product_id: quantity}.
 
-For items which do have at least one of the three aforementioned attributes (size, side, gender), a different structure is needed.  Since each item a user adds of the same product could have different attributes and be of varying quantities, I opted to store all of these attributes within a dictionary which in turn is within a list.  This list is the value to the product ID key in the basket dictionary {product_id: [{'size': size, 'side': side, 'gender': gender, 'quantity': quantity},]}.
+For items which do have at least one of the three aforementioned attributes (size, side, gender), a different structure is needed.  Since each item a user adds of the same product could have different attributes and be of varying quantities, I opted to store all of these attributes within a dictionary which in turn is within a list.  This list is the value to the product ID key in the basket dictionary: {product_id: [{'size': size, 'side': side, 'gender': gender, 'quantity': quantity},]}.
 
 When adding these attributes to the dictionary, I don't distinguish between products which only have some of these attributes and those which have all.  If a product doesn't have one of the 3 attributes, I asign it the None object.
 
@@ -225,7 +225,7 @@ The gender options users can select from are:
 
 Within the basket app, there is a contexts.py file which is added to the list of context_processors within the global settings.  This makes the variables within it available throughout my website.  Within it, I create variables for the total cost of the items in the basket (total), total number of items in the basket (product_count), cost of delivery (delivery) and the total cost of the items in the basket plus delivery (grand_total).  There is also a list (basket_items) of products which uses the basket variable in session memory to unpack details of the products the user has added to their basket.
 
-The basket_items varable stores the unique product id, the product object from the Products model and a details list.  The details list consists of dictionary's.  If the product has at least of the size, side or gender attributes, the dictionary's will contain all of these attributes.  If the product doesn't have any of these attributes, the details list will only have one dictionary which will be the quantity.
+The basket_items varable stores the unique product id, the product object from the Products model and a details list.  The details list consists of dictionary's.  If the product has at least one of the size, side or gender attributes, the dictionaries will contain all of these attributes.  If the product doesn't have any of these attributes, the details list will only have one dictionary which will be the quantity.
 
 So for products with no size, side or gender, the structure in the basket_items list is:
 
@@ -243,16 +243,42 @@ The data structure allows for product details, quanities and where applicable, a
 
 ### Existing Features
 
+- Admin:  There are two levels of users for my website; superusers and active (standard) users.  Superusers are administrators for the site who have access to the Django Admin panel.  Superusers can access this from the Account dropdown in the header through a link labelled Site Admin but this will not be visible for active users (or anyone who is not logged in to an account).  From the Admin panel, superusers can:
+    - Add new Products, amend or delete existing Products.
+    - Amend the status of other users and/or delete them.
+    - Verify and/or delete email addresses.
+    - View all orders as well as delete them or modify them including amending or removing items and adjusting quantities.
+    - View and delete messages (submitted via the contact app).
+    - View, amend and/or delete User Profiles.
+
+- Search:  In the Header, there is a search form which allows users to search for items my Stumps & Studs business sells.  The search returns any products which contain the search string in either the product name or description.  For example, entering 'bat' in the search form will return 4 results including Cricket Pads since they contain the phrase 'Batting Pads' within their description, and the Football Pump because its description contains the word 'batteries':
+
+![Screenshot showing results when user searches for bat](media/readme/images/bat-search.png)
+
+- Stripe:  I have used Stripe to implement a payment processor so users can complete a checkout process.  I have not implemented a live payment system, only a test one meaning cards will not be charged.  To mimic a successful payment, users can enter any of the [Stripe test card numbers](https://stripe.com/docs/testing#international-cards) - the card number for the UK is 4000008260000000.  The expiration date can be any future date while the CVC and postcode can be anything.
+
+- Stripe Webhook:  A Stripe webhook handler has been developed so that if the checkout process is interrupted for any reason, situations where a users payment is processed but their order isn't placed are avoided.  When a successful payment is received by Stripe, a webhook is sent.  I capture this and check the Orders model to see if the order is stored there, in which case the order was placed before any interruption.  If the order is not in the Orders model, this means successful payment was received by Stripe but then an interruption prevented the order from being added to the Orders model.  Fortunately, the Stripe webhook provides details of the order meaning in these such scenarios, the order can still be added to the Orders model.
+
+- My Account:  Logged in users can access My Account through the Account dropdown in the header.  In the Account page, users can view their default delivery address and phone number, view previous (historic) orders and also reset their password.
+
+- Contact Us:  Users can contact Stumps and Studs by completing a form.  The email address the user provides then receives an automatic email notification confirming that the message has been received.  This notification includes a copy of the message.  For an actual business case, I would configure this so that the company mailbox (e.g. contactus@stumpsandstuds.com) also receive a copy of the message via email which would enable a member of staff to then reply to the customer (user).
+
 ### Features Left To Implement / Known Bugs
 
-- Add products which are specifically male/female and provide filter i.e. Clothing -> Men, Clothing -> Women.
-- Stock levels including out of stock message 'if stock count == 0'.
-- Subscribe to mailing list feature.
-- On Products page in large screens, users can switch between a width of 2 or 3 products per row.  When refreshing or using any of the sort by methods, the width reverts to the default which is 3 products per row.
-- Make the Account and Sports Dropdowns smooth i.e. reveal like a jQuery blind.
-- On the Products page, the sort-options are styled to look like the other dropdowns except the hover effect is different.  This is because *<option>*'s cannot be styled in CSS.
-- On the Product Details page, I would have liked to have the dropdown start with 'Please Select' rather than a default selection such as Medium for size.
-- On the Home page on small screens, the header turns black when the user clicks the menu button when the navbar is at the top of the page.  If the user scrolls down, clicks the menu button and then scrolls up, the header goes transparent again.
+- I would like to add more products to the project, for example there is a limited amount of footwear and clothing.  I would also like to add items of clothing which are spefically for male or female customers.
+- If I were to add items which were just for males or females, I would add another field into the Products model called gender, which for items which have a gender, there is a choice of male, female or both.  A womens t-shirt would have the value of female however golf clubs which can be male or female would have the value of both.  In the frontend, I would then like to enable users to filter products by gender.  I would have a drop down on the navigation bar where users can select male or female and return any products which are specific to that gender plus any that can be either (e.g golf clubs).
+- Another future development would be to add a stock count field to the Product model.  In a real-world scenario, a business would want to prevent customers from ordering products when they are out of stock and possibly warn users when stock is low.  Each time an item is bought, the stock count would need to be reduced by the quantity.  Once the stock count is 0, I would then either prevent the product appearing in the frontend or amend the display so users can see it is out of stock and prevent them from adding it to their basket.
+- Another feature I didn't have time to implement is to give users the option to subscribe to a mailing list.  Many businesses wish to frequently contact customers with marketing emails so this would be a useful feature.
+- One bug I encountered and haven't had time to resolve is on the Products page.  On large screens, the products are laid out in 3 columns by default but users have the option to switch to 2 columns wide - this makes the images larger.  However, whenever the user refreshes the page or uses the Sort By dropdown, the page reverts back to the default layout.
+- On small and medium screens, the navbar and search form both appear as dropdowns which users can toggle with buttons on the header.  These both reveal smoothly.  However, the dropdow menu for the Account, Sports and Sort By (on the Products page) all just appear with no smooth visual effect.  Given more time, I would have explored ways to make these have the same effect as the navbar and search form.
+- On the Products page, the Sort By dropdown has a different hover effect than the Account and Sports dropdown.  The dropdowns on the Product Details pages also have this same problem.  This is a because both utilise a *select* input with *options* which cannot be styled in CSS.  There may be a solution which utilises JavaScript but given the deadline for this project, I was not able to explore it.
+- On the Product Details page, I would have liked to have the dropdowns start with 'Please Select' rather than a default selection such as Medium for size.
+- On the Home page on small and medium screens, the header is transparent when scrolled to the top of the page.  I implemented a JavScript solution so that when the user clicks the menu buttom and the navbar is revealed, the header loses it's transparency and then gains it again when they close the menu bar.  However, if the user scrolls down the page, then clicks the navbar to reveal the menu and then scrolls to the top of the page (with the navbar still expanded), the header regains its transparency.  This is something else I ran out of time to fix:
+
+![Navbar header regains transparency when user scrolls to the top of the page on small screens with the navbar expanded.](media/readme/gifs/home-navbar-bug.gif)
+
+- In my project, administrators (superusers) can update the Products model through the admin panel.  Given more time, I would have liked to enable superusers to have full CRUD functionality over the Product models through the frontend.
+- On the Contact page, I wanted to utilise an API to show the a location for Stumps & Studs head office.  I would have added this if I had more time before my deadline.
 
 ## Languages
 
