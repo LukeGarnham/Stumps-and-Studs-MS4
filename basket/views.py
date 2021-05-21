@@ -168,26 +168,38 @@ def adjust_basket(request, item_id):
                     item['side'] == side and item['gender'] == gender):
                 if qty > 0:
                     # If new quantity is greater than 0, update quantity.
-                    item['qty'] = qty
-                    messages.success(request, f'Updated {size_str}{side_str}'
-                                     f'{gender_str}{product.name} quantity to '
-                                     f'{item["qty"]}.')
+                    # First need to check if quantity exceeds the max of 99.
+                    if item['qty'] + qty > 99:
+                        item['qty'] = 99
+                        messages.info(request, f'{size_str}{side_str}\
+                            {gender_str}{product.name} quantity is \
+                                limited to {item["qty"]}.')
+                    else:
+                        item['qty'] = qty
+                        messages.success(request, f'Updated {size_str}{side_str}\
+                            {gender_str}{product.name} quantity to \
+                                {item["qty"]}.')
                 else:
                     # Otherwise, remove (delete) the item (dict).
                     basket[item_id].remove(item)
                     # If the list is empty, remove product from basket.
                     if basket[item_id] == []:
                         basket.pop(item_id)
-                    messages.success(request, f'Removed {size_str}'
-                                     f'{side_str}{gender_str}'
-                                     f'{product.name} from your basket.')
+                    messages.success(request, f'Removed {size_str}{side_str}\
+                        {gender_str}{product.name} from your basket.')
     else:
         # If product has no size, side or gender, update quantity.
         if qty > 0:
             # If new quantity greater than 0, update quantity.
-            basket[item_id] = qty
-            messages.success(request, f'Updated {product.name}'
-                             f' quantity to {basket[item_id]}.')
+            # Check that quantity doesn't exceed the max of 99.
+            if basket[item_id] + qty > 99:
+                basket[item_id] = 99
+                messages.info(request, f'{product.name} quantity is \
+                    limited to {basket[item_id]}.')
+            else:
+                basket[item_id] = qty
+                messages.success(request, f'Updated {product.name} \
+                    quantity to {basket[item_id]}.')
         else:
             # Otherwise, remove (pop) item from list.
             basket.pop(item_id)
