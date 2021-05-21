@@ -1,3 +1,5 @@
+{% load basket_tools %}
+
 <div class="toast">
     <div class="row">
         <!-- Message and Close Button -->
@@ -11,4 +13,99 @@
             </button>
         </div>
     </div>
+    <!-- If toast_basket_preiew (from view) is True and if there are items in the basket, show basket preview. -->
+    {% if toast_basket_preview and grand_total %}
+        <div class="row px-5 py-2">
+            <div class="col-12 col-md-9 p-0">
+                <div class="container-fluid toast-basket overflow-auto pl-1">
+                    {% if basket_items %}
+                        {% for item in basket_items %}
+                        <hr class="hr-black my-1">
+                        <div class="row">
+                                <!-- Product image -->
+                                <div class="col-12 col-sm-3 text-center">
+                                    {% if item.product.image %}
+                                        <img class="toast-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    {% else %}
+                                        <img class="toast-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                    {% endif %}
+                                </div>
+                                <!-- Product details -->
+                                <div class="col-12 col-sm-9">
+                                    <div class="row">
+                                        <div class="col-12 my-1">
+                                            <h6 class="mb-1 d-inline">{{ item.product.name }}</h6>
+                                        </div>
+                                        {% for detail in item.details %}
+                                            <!-- Quantity -->
+                                            <div class="col-6 col-sm-3">
+                                                <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                                        Quantity:
+                                                        <span>{{ detail.qty }}</span>
+                                                </div>
+                                            </div>
+                                            <!-- Size -->
+                                            <div class="{% if not detail.size %} d-none {% endif %} col-6 col-sm-3 ">
+                                                <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                                    Size:
+                                                    <span>{{ detail.size|upper }}</span>
+                                                </div>
+                                            </div>
+                                            <!-- Side -->
+                                            <div class="{% if not detail.side %} d-none {% endif %} col-6 col-sm-3">
+                                                <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                                    Side:
+                                                    <span>{{ detail.side|capfirst }}</span>
+                                                </div>
+                                            </div>
+                                            <!-- Gender -->
+                                            <div class="{% if not detail.gender %} d-none {% endif %} col-6 col-sm-3">
+                                                <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                                        Gender:
+                                                        <span>{{ detail.gender|capfirst }}</span>
+                                                </div>
+                                            </div>
+                                            <!-- Subtotal -->
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center justify-content-between my-1 fs-small">
+                                                    <strong>Subtotal:
+                                                    <span>£{{ item.product.price | calc_subtotal:detail.qty }}</span></strong>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <!-- Grand Total -->
+                    <div class="row">
+                        <div class="col-12">
+                            <hr class="hr-black my-1">
+                            <div class="">
+                                <h6 class="d-inline">Basket Total</h6>
+                                <span class="float-end">£{{ total|floatformat:2 }}</span>
+                            </div>
+                            <div class="">
+                                <h6 class="d-inline">Delivery Total</h6>
+                                <span class="float-end">£{{ delivery|floatformat:2 }}</span>
+                            </div>
+                            <div class="">
+                                <h6 class="d-inline fw-bold">Grand Total</h6>
+                                <strong><span class="float-end">£{{ grand_total|floatformat:2 }}</span></strong>
+                            </div>
+                            <hr class="hr-black mb-0 mt-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Checkout button -->
+            <div class="col-12 col-md-3">
+                <a href="{% url 'view_basket' %}" class="btn btn-green py-2 my-3 w-100"><h5 class="mb-0">
+                    <i class="fas fa-lock pe-1"></i>
+                    Secure Checkout</h5>
+                </a>
+            </div>
+        </div>
+    {% endif %}
 </div>
