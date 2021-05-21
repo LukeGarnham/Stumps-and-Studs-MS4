@@ -573,6 +573,21 @@ Whilst testing the User Stories, I encountered a bug caused by the OrderLineItem
 
 ![Admin panel showing incorrect order info caused by bug with the line-item total](media/readme/images/line-item-total-before.png)
 
+I was able to successfully able to purchase 40 sets of golf clubs because the lineitem_total was £9,999.60.
+
+To fix this, I simply changed the maximum number of digits for the lineitem_total field from 6 to 10.  Since my project was deployed at this point, I first ran the migrations on the Django sqlite3 database and tested that I could now purchase 41 sets of golf clubs and the order was successfully created without an error.  I then temporarily amended the global settings in my GitPod environment to connect to the Postgres database and migrate the same change to it so the bug is resolved in my deployed site.
+
+This fixed the initial problem; users could now add more than £9,999 of one item to their basket and successfully purchase it.  However, all my fix so far has done is move the limit so that a lineitem cannot contain more than 10 digits (including 2 decimal places) meaning my website would still break if anyone tried to purchase more than £10,000,000.00.  Whilst the Products page limits users to adding a quantity beween 1-99 of any product to their basket, there is nothing stopping them from doing this repeatedly thus racking the costs up.  So whilst it is unlikely a user would exceed this lineitem total, it is not impossible.
+
+So to fully squash this bug, I modified the views.py file in the basket app so that when an item is added to the basket or updated in the basket, I check whether the quantity exceeds 99.  If it does, then I set the quantity to 99 and inform the customer that there is a limit to the quantity.
+
+I also amended the info toast so that, like the success toast, it also shows a preview of the basket when on the product details page:
+
+![Attempt to add more than 99 of one item to the basket from both the Product Details and the Basket page](media/readme/gifs/line-item-total-after.gif)
+
+Even if users purchased 99 of every item (including each permutation based around size, side and gender), their order would still only total circa £490,000 which is well below the limit of the maximum digits for the lineitem_total field.
+
+
 
 
 ## Deployment
