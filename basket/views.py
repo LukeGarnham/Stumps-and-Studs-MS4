@@ -169,7 +169,7 @@ def adjust_basket(request, item_id):
                 if qty > 0:
                     # If new quantity is greater than 0, update quantity.
                     # First need to check if quantity exceeds the max of 99.
-                    if item['qty'] + qty > 99:
+                    if qty > 99:
                         item['qty'] = 99
                         messages.info(request, f'{size_str}{side_str}\
                             {gender_str}{product.name} quantity is \
@@ -192,7 +192,7 @@ def adjust_basket(request, item_id):
         if qty > 0:
             # If new quantity greater than 0, update quantity.
             # Check that quantity doesn't exceed the max of 99.
-            if basket[item_id] + qty > 99:
+            if qty > 99:
                 basket[item_id] = 99
                 messages.info(request, f'{product.name} quantity is \
                     limited to {basket[item_id]}.')
