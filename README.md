@@ -73,6 +73,7 @@ The aim of this project was to produce an enticing and fully-functioning e-comme
     -	View the prices and details of each product.
     -	Select a size of product (where applicable).
     -	Select between right-handed and left-handed equipment (where applicable).
+    -   Select between male or female version of a product (where applicable).
     -	Add multiple products to a basket.
     -	View items in my basket.
     -	Adjust the quantities of items in my product including removing them from the basket entirely.
@@ -269,7 +270,8 @@ The data structure allows for product details, quanities and where applicable, a
 
 - I would like to add more products to the project, for example there is a limited amount of footwear and clothing.  I would also like to add items of clothing which are spefically for male or female customers.
 - If I were to add items which were just for males or females, I would add another field into the Products model called gender, which for items which have a gender, there is a choice of male, female or both.  A womens t-shirt would have the value of female however golf clubs which can be male or female would have the value of both.  In the frontend, I would then like to enable users to filter products by gender.  I would have a drop down on the navigation bar where users can select male or female and return any products which are specific to that gender plus any that can be either (e.g golf clubs).
-- Another future development would be to add a stock count field to the Product model.  In a real-world scenario, a business would want to prevent customers from ordering products when they are out of stock and possibly warn users when stock is low.  Each time an item is bought, the stock count would need to be reduced by the quantity.  Once the stock count is 0, I would then either prevent the product appearing in the frontend or amend the display so users can see it is out of stock and prevent them from adding it to their basket.
+- Products with sizes allow users to select from Junior, Extra Small, Small, Medium, Large or Extra Large.  While this is fine for most items of clothing, sizes for footwear are numbered.  A future development would be to add different sizing options for footwear.
+- Another future development would be to add a stock count field to the Product model.  In a real-world scenario, a business would want to prevent customers from ordering products when they are out of stock and possibly warn users when stock is low.  Each time an item is bought, the stock count would need to be reduced by the quantity, factoring in the size, side and/or gender accordingly.  Once the stock count is 0, I would then either prevent the product appearing in the frontend or amend the display so users can see it is out of stock and prevent them from adding it to their basket.
 - Another feature I didn't have time to implement is to give users the option to subscribe to a mailing list.  Many businesses wish to frequently contact customers with marketing emails so this would be a useful feature.
 - One bug I encountered and haven't had time to resolve is on the Products page.  On large screens, the products are laid out in 3 columns by default but users have the option to switch to 2 columns wide - this makes the images larger.  However, whenever the user refreshes the page or uses the Sort By dropdown, the page reverts back to the default layout.
 - On small and medium screens, the navbar and search form both appear as dropdowns which users can toggle with buttons on the header.  These both reveal smoothly.  However, the dropdow menu for the Account, Sports and Sort By (on the Products page) all just appear with no smooth visual effect.  Given more time, I would have explored ways to make these have the same effect as the navbar and search form.
@@ -281,6 +283,7 @@ The data structure allows for product details, quanities and where applicable, a
 
 - In my project, administrators (superusers) can update the Products model through the admin panel.  Given more time, I would have liked to enable superusers to have full CRUD functionality over the Product models through the frontend.
 - On the Contact page, I wanted to utilise an API to show the a location for Stumps & Studs head office.  I would have added this if I had more time before my deadline.
+- Users are prevented from adding quantities of a product to there basket which are less than 1 or greater than 99.  However, there is nothing currently preventing users from adding an item to their basket multiple times.  For example, a user is able to add 99 cricket balls to their basket and can then add another 99 cricket balls resulting in them having 198 cricket balls in their basket.  A future development would be to check the quantity of a product within the basket and restrict the number a user can add based on the quantity they already have in their basket.
 
 ## Languages
 
@@ -434,18 +437,143 @@ To resolve this, I needed to make the id of each input element unique.  Since ea
 
 ### Testing Process
 
-*Try to use an Aim, Methodology, Result layout. A user should be able to read the Testing document, carry out the same tests on the live site and get the same results.  Try testing the user stories comprehensively in terms of Features and Responsivity to get a better grade.  Include evaluation of bugs found and their fixes and explanation of any bugs that are left unfixed.  Test the UX thoroughly.*
+At the time of writing, I am about to start testing my project. Here are the manual test procedures to assess functionality, usability, responsiveness and data management that I plan to undertake:
 
-#### Responsive Design
+ - [**Links**](#links): Test all links and buttons in each webpage to ensure that they direct the user as expected.
+ - [**Access To Pages**](#access-to-pages): Can users access pages they're supposed to and prevented from accessing pages they're not supposed to access depending on whether they are signed in or not.
+ - [**Test User Stories**](#test-user-stories): Test each of my user stories i.e. does my finished project enable users to achieve what I set out for them to achieve?
+ - [**Forms**](#forms): Do forms behave as desired? Is data validated before being passed to the database? Is defensive design sufficient?
+ - [**Checkout Form**](#checkout-form): Does this behave as expected?  Is there a way to bipass the checkout to complete an order?  Are orders successfully created if the checkout process is interrupted?
+ - [**Login & Logout**](#login-&-logout):  Can users log in and out of their account?  Can users register for a new account?  Can users retrieve their forgotten passwords and change existing passwords?  Does AllAuth manage the entire account handling as expected/desired?
+ - [**Responsive Design**](#responsive-design):  Does each page function well on all screen sizes?  Are layouts adjusted according to maintain strong UX design across all screen sizes?
+ - [**Valid Code**](#valid-code): I will run my code through validators to check for any issues.
+ - [**Google Lighthouse Tool**](#google-lighthouse-tool): I will use the Google Lighthouse tool to check for any improvements that can be made.
 
-* Basket page is responsive but the quantity buttons begin to misalign when the screen width is reduced down to 332px wide.  However, I believe this is not an issue since [modern mobiles](http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml#:~:text=Most%20mobile%20phones%20have%20a,CSS%20pixel%20on%20the%20screen.) are wider than this.
+All tests will be conducted on the deployed version of the website hosted by Heroku rather than within the GitHub environment. This is because the final deployed site is what users will see and so it is important to ensure the behaviour of this is as desired.
+
+I will attempt to test each section using an 'Aim, Methodology, Result' process.  I will explain what my aim is, how I am testing it and the results I get so that others can perform the same test and can expect to receive the same results.  I will detail any bugs I discover and explain corrective action taken or reasons why the bug has not been fixed.
+
+#### Links
+
+Aim:  I will test all links on each page throughout my website to ensure they all work and direct users to the correct page.  I also need to ensure that links which direct users to external websites open in a new window.
+
+Methodology:  I will test the links in the header and footer since these are inherited by every page from the base.html file.  In the header, I will test the links on small-medium screen sizes and +large screen sizes and also as a logged in user and non-logged in user since the header links will change depending on the screen size and logged in status.  The toasts only have one link; the success toast has a link to the basket page which I will test.  I will then test the links on the body of each page to ensure they all work as expected.
+
+Results:
+ - **Header**:  All links work correctly across the various screen sizes and whether users are logged in or not.
+ - **Footer**:  All links work correctly.  The social media links correctly open in a new window.
+ - **Toasts**:  The link in the success toast correctly directs users to the basket page.
+ - **Home**:  There are 4 links, one on each carousel which open the Products page but with various filters applied.  All work correctly.
+ - **Products**: I first tested the Sort By button where I discovered a bug which I was able to resolve.  I have explained this in the [Bugs Encountered During Testing](#sort-by-on-the-products-page) section below.  Each product is a link to it's Product Details page and they work correctly.
+ - **Product Details**:  All links work as expected.
+ - **Basket**:  The buttons to update quantities or remove items from the basket work as expected.  The links to the Checkout and Product page both work.  Each product image and product name are also links, both directing users back the Product Details page - they both work correctly.
+ - **Checkout**:  The tabs on the checkout form and the next buttons are disabled unless there is a value in each required form field in that fieldset.  These all work as expected.  One thing to note is that the Complete Order button is disabled until the required card details for has a value - the button is enabled as soon as any value is entered into the card details field.  Stripe handles the validation of the card details, the enabling of the Complete Order button is only dependent on a value being entered and not whether the value entered is valid.
+ - **Checkout Success**:  There are two links on this page but only one is visible depending on whether the user has reached the page having completed the checkout form (process) or if they're viewing a previous order from the Account page.  If they've completed the checkout process, the button will be to direct them back to the Products page - this works correctly.  If they are viewing a historic order, the button returns them back to their Account page - this link works correctly too.
+ - **Account**:  The Update button successfully saves the default delivery information field.  The Change Password form correctly directs users to an AllAuth template to change their password.  In the order history section, the order number is a link which takes users to the Checkout Success - this works correctly.
+ - **Contact Us**:  The Send Message button successfully submits the contact form.  The email address link has the correct href so that a blank email is opened in the default email application (e.g. Outlook).  Similarly, the phone number link opens a phone call in the devices default application.
+
+#### Access To Pages
+
+Aim:  I must ensure users cannot access pages they are not authorised to access including viewing other users account and/or order details.
+
+Methodology:  I will test each of these scenarios which could see a user access a page they should be able to.  Users should not be able to:
+ - Navigate to the Checkout page while having no items in the basket.
+ - Navigate to the Account page while not logged in.  I will copy the URL when logged in, then log out and then copy and paste the URL to ensure I am not directed to the Account page.
+ - Navigate to the admin panel when not logged in as a superuser.
+
+Results:
+ - If there are no items in the basket, users are unable to access the Checkout page.  Instead they are redirected to the Products page and an error message (toast) is presented explaining that 'There's nothing in your basket at the moment'.
+ - When trying to access the Account page when not logged in, users are redirected to the Login page.  The link to the Account page sits in the Account dropdown in the header - this link is not visible to users who are not logged in.
+ - If users are not logged in, they can manually enter the URL for the admin panel but will see the admin login page so they cannot reach the admin panel.  If a user is logged in but is not a superuser, they will also see the admin login page along with a message advising them they are not authenticated to access the page:
+
+ ![Admin login message a non-superuser sees when trying to access the admin panel](media/readme/images/admin-login.png)
+
+NB:  Users are able to navigate to the Checkout Success page for an order that isn't theirs.  Using the order number, anyone can access the Checkout Success page to view the order details.  Since users do not need to be signed in to place an order, there is no authorisation required to access this page.  However, in order to view someone else's order, the 32 character long order number is required.  This is sent to the email address provided when a user completes the checkout process so unless they pass this on to someone else, no one is likely to view the order but them.  Order numbers are not sequential.  Guessing a 32 character string which matches an order number in the Orders models is extremely unlikely.  If this was done, the order cannot be modified through the Checkout Success page though address details are visible which could constitute a breach of GDPR.  One solution that I might look to implement in future is to add some authentication around accessing this page or perhaps only show the delivery address details if the user is logged in and the order belongs to them.
+
+#### Test User Stories
+
+Aim:  Assess each of the user stories and ensure that my project delivers on them all.
+
+Methodology:  I will test each of the user stories in turn.  I will ensure that users are able to complete each story I set out at the start of this project.  The user stories are numbered below and I will refer to the numbers in the Results section beneath them:
+
+    1   As a shopper/visitor to the website, I want to:
+    a)  Immediately understand the range of products the website sells.
+    b)  Easily navigate categories and search for products.
+    c)  View images of the products available to purchase.
+    d)	View the prices and details of each product.
+    e)	Select a size of product (where applicable).
+    f)	Select between right-handed and left-handed equipment (where applicable).
+    g)	Select between male or female version of a product (where applicable).
+    h)	Add multiple products to a basket.
+    i)	View items in my basket.
+    j)	Adjust the quantities of items in my product including removing them from the basket entirely.
+    k)	View the total cost of the items in my basket.
+    l)	View any delivery cost applicable and understand how much more cost I need to add to my basket in order to qualify for free delivery.
+    m)	Easily navigate to a checkout page.
+    n)  Contact the company.
+
+    2   As a shopper/visitor who has decided to purchase one or more products, I want to:
+    a)	Exit the checkout process and return to the store so I can amend the products in my basket.
+    b)	Be able to provide personal details such as name and email address.
+    c)	Provide a delivery address for my products to be shipped to.
+    d)	Enter payment card details to complete a secure checkout.
+    e)	View my order and the total cost of it including delivery throughout the checkout process.
+    f)	See a confirmation message confirming that the order has been placed.
+    g)	Receive an email confirmation that the order has been placed.
+
+    3   As a shopper/visitor who intends to return to the website in future, I want to:
+    a)	Create an account.
+    b)	Store my personal and default delivery address details.
+    c)	Update my account details.
+    d)	View my past orders.
+    e)  Sign in and out of my account.
+
+    4   As an administrator of the website, I want to be able to:
+    a)	Use the admin panel to add products.
+    b)	Use the admin panel to update the details of products.
+    c)	Use the admin panel to delete products.
+    d)	Use the admin panel to delete users.
+
+Results:
+
+    1a) On my Home page, there is a Shop Now front and center so users know immediately that the website has products to sekk.  I have a carousel containing pictures of sports equipment, clothing and footwear along with links to the products for sale and descriptions of each so users can quickly learn about the range of products available on my site.  The carousel automatically cycles through each but can be controlled by the user.
+    1b) As well as the links on the Home page, the navbar contains links to the Products available.  Users can view all products or select products belonging to a specific category or specific sport.  On small and medium screens, the navbar is collapsed behind a menu button in the header but since the header is fixed to the top of the page, users can quickly navigate to the products they are looking for with 2 or 3 clicks.  On +large screens, the navbar is hidden when users scroll down but appears again as soon as they scroll up.  This avoids users having to scroll right to the top of the page whilst saving screen real estate.  Users can navigate to the products they are looking for with a slight up scroll and 1 or 2 clicks.
+    1c & 1d) On the Products page, I have ensured product images take center stage.  I have only included the product name and price so as not to detract from the images or clutter the page with too much information.
+    1e) Products which have sizes (such as a cricket shirt) have a dropdown list so users can select the size they require.  Medium is selected by default on the Product Details page.
+    1f) On the Product Details page, products which have sides (such as golf clubs) have a dropdown list enabling users to select either a right-handed or left-handed version of the product.  Right-handed is selected by default.
+    1g)  Products which have a gender options (such as golf clubs), users have the option to select between Male or Female on the Product Details page.  Male is selected by default.
+    1h) Users can add multiple products to their basket.  More than 1 of each product can be added (e.g. 5 cricket balls can be added) and for products with sizes, sides or gender, the product can be added to the basket multiple times with different details (e.g. 2 male, right handed golf clubs and 1 female, left-handed set of golf clubs can be added to the basket).  As I was testing this, I encountered a bug which I have addressed below in the [Bugs Encountered During Testing](#basket-totals) section.
+
+#### Forms
 
 #### Checkout Form
 
 Test what happens if users refresh or closes page after clicking Complete Order (submitting form).
 Try using different Stripe payment card numbers.
 
+#### Login & Logout
+
+#### Responsive Design
+
+* Basket page is responsive but the quantity buttons begin to misalign when the screen width is reduced down to 332px wide.  However, I believe this is not an issue since [modern mobiles](http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml#:~:text=Most%20mobile%20phones%20have%20a,CSS%20pixel%20on%20the%20screen.) are wider than this.
+
+#### Valid Code
+
+#### Google Lighthouse Tool
+
 ### Bugs Encountered During Testing
+
+#### Sort By On The Products Page
+
+When testing the Sort By button on the Products page, I noticed that the sort by Sport was not working correctly.  My website only sells products for 4 sports; Cricket, Football, Golf and Tennis.  When sorting by Sport (A-Z), the Cricket products were returned first, followed by Golf, Football and then Tennis; golf and football were the wrong way round so something was not working correctly.  Looking at the views.py file in the Products app, I saw that I had not defined the field to sort on if the sortkey is sport.  This was a straightforward bug to fix.  I ensured that when the sortkey is sport, the products are sorted by the field 'sport__name'.  After adding this step into the views.py file, the Products page now successfully sorts products by Sport (A-Z) in the order of Cricket, Football, Golf then Tennis.  Sorting by Sport (Z-A) also now works with the sports reversed.
+
+#### Basket Totals
+
+Whilst testing the User Stories, I encountered a bug caused by the OrderLineItem model.  I set up the lineitem_total field to have a maximum of 6 digits.  However, in the basket view.py file there is no check of the total cost for each item.  Therefore, during testing I was able to add 41 sets of golf clubs at £249.99 each into my basket.  This meant the total for this particular line item came to £10249.59 so when I went through the checkout process, when the order was saved an error occurred.  The order was added to the Orders model but the information was not correctly captured:
+
+![Admin panel showing incorrect order info caused by bug with the line-item total](media/readme/images/line-item-total-before.png)
+
+
 
 ## Deployment
 
