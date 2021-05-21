@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
-{% block head_title %}| Thank You!{% endblock %}
+{% block head_title %}| {% if from_profile %}Order Summary{% else %}Thank You!{% endif %}{% endblock %}
 
 {% block content %}
     <div class="container-fluid px-3 px-sm-5 py-5">
         <div class="row">
             <div class="col-12 px-3">
-                <h2 class="mb-4">Thank You</h2>
+                <h2 class="mb-4">
+                    {% if from_profile %}Order Summary{% else %}Thank You!{% endif %}
+                </h2>
             </div>
         </div>
         <div class="row">
