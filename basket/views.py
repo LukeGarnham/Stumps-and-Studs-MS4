@@ -57,13 +57,27 @@ def add_to_basket(request, item_id):
                         item['side'] == side and item['gender'] == gender):
                     # If there is a product with same size, side & gender
                     # increment quantity and break out of loop.
-                    item['qty'] += qty
-                    messages.success(request, f'Updated {size_str}{side_str}'
-                                     f'{gender_str}{product.name} quantity to '
-                                     f'{item["qty"]}.')
+                    # Check quantity doesn't exceed 99 before adding.
+                    print(item['qty'])
+                    print(qty)
+                    if item['qty'] + qty > 99:
+                        print('option 1')
+                        item['qty'] = 99
+                        messages.info(request, f'{size_str}{side_str}\
+                            {gender_str}{product.name} quantity is \
+                                limited to {item["qty"]}.')
+                    else:
+                        item['qty'] += qty
+                        messages.success(request, f'Updated {size_str}{side_str}\
+                            {gender_str}{product.name} quantity to \
+                                {item["qty"]}.')
                     break
             else:
                 # If no match found, apend the product details to the dict.
+                # Add check to ensure frontend not bipassed.
+                # Limit quantity to max of 99.
+                if qty > 99:
+                    qty = 99
                 basket[item_id].append({
                     'size': size,
                     'side': side,
@@ -75,6 +89,10 @@ def add_to_basket(request, item_id):
         else:
             # If product is not already in basket, add value to product key.
             # Create a list of dicts with one dict containing product details.
+            # Add check to ensure frontend not bipassed.
+            # Limit quantity to max of 99.
+            if qty > 99:
+                qty = 99
             basket[item_id] = [{
                 'size': size,
                 'side': side,
@@ -88,10 +106,20 @@ def add_to_basket(request, item_id):
         # first check if the product is already in the basket.
         if item_id in list(basket.keys()):
             # If so, then we increase the quantity
-            basket[item_id] += qty
-            messages.success(request, f'Updated {product.name}'
-                             f' quantity to {basket[item_id]}.')
+            # Check quantity doesn't exceed 99 before adding.
+            if basket[item_id] + qty > 99:
+                basket[item_id] = 99
+                messages.info(request, f'{product.name} quantity is \
+                    limited to {basket[item_id]}.')
+            else:
+                basket[item_id] += qty
+                messages.success(request, f'Updated {product.name} \
+                                quantity to {basket[item_id]}.')
         else:
+            # Add check to ensure frontend not bipassed.
+            # Limit quantity to max of 99.
+            if qty > 99:
+                qty = 99
             basket[item_id] = qty
             messages.success(request, f'Added {product.name} to your basket.')
 
