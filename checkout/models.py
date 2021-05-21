@@ -99,7 +99,7 @@ class OrderLineItem(models.Model):
         default=None, blank=True, null=True)  # "", male, female
     qty = models.IntegerField(null=False, blank=False, default=0)
     lineitem_total = models.DecimalField(
-        max_digits=6, decimal_places=2, null=False,
+        max_digits=10, decimal_places=2, null=False,
         blank=False, editable=False)
 
     def save(self, *args, **kwargs):
