@@ -16,9 +16,22 @@ def add_to_basket(request, item_id):
 
     # Get the product from the Product model.
     product = get_object_or_404(Product, pk=item_id)
-    # Get quantity and redirect_url from the submitted (POST) form.
-    qty = int(request.POST.get('qty'))
+    # Get the redirect_url from the submitted (POST) form.
     redirect_url = request.POST.get('redirect_url')
+    # Get quantity from the submitted (POST) form and validate it.
+    try:
+        qty = int(request.POST.get('qty'))
+    # If POSTed quantity is not an integer, display error message.
+    # Do not add item to basket.
+    except Exception:
+        messages.error(request, f'Error adding {product.name} to basket. \
+            {product.name} not added to your basket - please try again.')
+        return redirect(redirect_url)
+    # Check that the POSTed quantity is between 1-99.
+    if qty < 1 or qty > 99:
+        messages.error(request, f'Quantity must be between 1-99. \
+            {product.name} not added to your basket - please try again.')
+        return redirect(redirect_url)
 
     size = None
     side = None
@@ -133,8 +146,16 @@ def adjust_basket(request, item_id):
 
     # Get the product from the Product model.
     product = get_object_or_404(Product, pk=item_id)
-    # Get quantity and redirect_url from the submitted (POST) form.
-    qty = int(request.POST.get('qty'))
+
+    # Get quantity from the submitted (POST) form and validate it.
+    try:
+        qty = int(request.POST.get('qty'))
+    # If POSTed quantity is not an integer, display error message.
+    # Do not add item to basket.
+    except Exception:
+        messages.error(request, f'Error updating {product.name} in your basket. \
+            {product.name} quantity is unchanged.')
+        return redirect(reverse('view_basket'))
 
     size = None
     side = None
