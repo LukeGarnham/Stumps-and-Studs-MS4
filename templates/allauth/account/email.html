@@ -6,21 +6,21 @@
 
 {% block inner_content %}
 
-  <div class="row">
-    <div class="col-12 px-3">
+  <div class="row px-4">
+    <div class="col-md-6 col-lg-4 px-3">
       <h2>{% trans "E-mail Addresses" %}</h2>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 p-3 fs-small">
+  <div class="row px-4">
+    <div class="col-md-6 col-lg-4 p-3 fs-small">
         <a href="{% url 'home' %}">
             <i class="fas fa-arrow-left"></i>
             <strong class="text-decoration-underline">Home</strong>
         </a>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
+  <div class="row px-4">
+    <div class="col-md-8 col-lg-6 col-xl-4">
 
       {% if user.emailaddress_set.all %}
         <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
@@ -31,7 +31,7 @@
 
           {% for emailaddress in user.emailaddress_set.all %}
             <div class="ctrlHolder">
-              <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%} d-flex flex-column flex-sm-row flex-wrap justify-content-between align-items-center py-2">
+              <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%} d-flex flex-column flex-md-row flex-wrap justify-content-between align-items-center py-2">
                 <span class="py-1">
                   <input id="email_radio_{{forloop.counter}}"type="radio" name="email" {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
                   {{ emailaddress.email }}
@@ -50,10 +50,10 @@
             </div>
           {% endfor %}
 
-          <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
-            <button class="btn btn-green my-2 mx-3" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-            <button class="btn btn-green my-2 mx-3" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-            <button class="btn btn-orange my-2 mx-3" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+          <div class="d-flex flex-wrap align-items-center py-3">
+            <button class="btn btn-green my-2 mx-3 w-100" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
+            <button class="btn btn-green my-2 mx-3 w-100" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+            <button class="btn btn-orange my-2 mx-3 w-100" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
           </div>
 
         </fieldset>
@@ -71,7 +71,7 @@
             {% csrf_token %}
             {{ form|crispy }}
             <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
-              <button class="btn btn-green my-2 mx-3" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
+              <button class="btn btn-green my-2 mx-3 w-100" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
             </div>
         </form>
       {% endif %}
