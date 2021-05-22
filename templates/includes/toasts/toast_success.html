@@ -1,4 +1,5 @@
 {% load basket_tools %}
+{% load static %}
 
 <div class="toast">
     <div class="row">
@@ -27,7 +28,7 @@
                                     {% if item.product.image %}
                                         <img class="toast-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                                     {% else %}
-                                        <img class="toast-image" src="{% static 'media/noimage.png' %}" alt="{{ item.product.name }}">
+                                        <img class="toast-image" src="{% static 'media/noimage.png' %}" alt="{{ product.name }}">
                                     {% endif %}
                                 </div>
                                 <!-- Product details -->
