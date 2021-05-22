@@ -561,11 +561,50 @@ Results:
     3d)  From the Account page, users can view their previous orders.  Under the Order History section, users can do one of two things.  Firstly, each previous order is listed with some high level information - clicking the down arrow on each will expand the order revealing each item and quanity.  Alternatively, clicking the order number will direct them to the Checkout Success template which lists all details of the order including product images.  The second option contains all of the order details whereas the first lacks product images, line item totals, total cost and delivery cost.  However, I feel both of these options satisfy this user story.
     3e)  Users can log in and log out of their account.  Users who are not signed in will see a Login button on the header at all times.  They will then be asked to provided their login credentials.  Users can login via 2 clicks and completing a form with their login credentials.  Furthermore, using the AllAuth templates, users who have forgotten their password are able to reset it from the Login page.  Users who are logged in can log out via the Logout button on the Account dropdown which is visible on the page header at all times.  Before being logged out, users are asked to confirm that they definitely wish to proceed.  This means users can logout with 3 clicks.
 
-    4a)  Superusers can access the admin panel - in the Account dropdown in the header, there is a link (Site Admin) which directs them to the admin panel.  From there, 
+    4a & 4b & 4c)  Superusers can access the admin panel - in the Account dropdown in the header, there is a link (Site Admin) which directs them to the admin panel.  From there, users can add, amend and products.  The below gif demonstrates a superuser creating a new product, updating the details and then deleting the product.  The effects of each action can be seen immediately in the frontend:
 
+![Using the admin panel to add, update and delete a product](media/readme/gifs/crud-new-product.gif)
 
+    4d)  Superusers can access the admin panel and from the Users model, they can delete a user.  The user the superuser chooses to delete will also have their email address and user profile deleted automatically from the Email Addresses and User Profiles models.  Any orders they have placed will not be deleted but there will be no user profile associated with the order.
 
 #### Forms
+
+Aim:  I will test every form throughout my site to ensure they prevent invalid data from being entered.
+
+Methodology:  I will test each field in each form with a variety of inputs such as text strings, numbers, special characters and code.  I will ensure that the form cannot be submitted without a value in any of the required fields.  There are a number of forms throughout my project:
+ - Register (AllAuth)
+ - Login (AllAuth)
+ - Reset Password (AllAuth)
+ - Change Password (AllAuth)
+ - Add to Basket
+ - Update Basket
+ - Contact Us
+
+I will test the checkout form separately in the below section.
+
+Results:
+ - Register:  All fields are required.  The form cannot be submitted unless there is a value in each.  When the form is submittted with values that pass the frontend validation, there is backend validation to prevent invalid data entries.
+    - Email:  This must contain an @ symbol with text either side of it.  After the @ symbol, there must be a full stop followed by more text.  Whilst it is relatively easy to enter an email address which satisfies this, to ensure the email is a real one, an authentication is emailed to the address provided so only genuine email accounts can be verified.  If a user tries to login without having verified their email address, another verification email is issued to them and they cannot complete the login process.  Users cannot register with an email address that already has an account.
+    - Username:  This can only contain letters, numbers, and @/./+/-/_ characters.  There isn't any minimum or maximum length.
+    - Password & Password (again):  Both fields must have matching values and contain a minimum of 8 characters.  There are some sophisticated validation rules applied to these fields by AllAuth such as preventing common passwords such as 'password' or using a password which is similar to the email address.  Passwords cannot be entirely numeric.
+ - Login:  The credentials entered here must match those provided by a user.  I haven't set up a limit to the number of attempts that a user can make to login.
+    - Email:  This must contain an @ symbol with text either side of it.  After the @ symbol, there must be a full stop followed by more text.
+    - Password:  There doesn't appear to be any validation rules preventing users from entering what they want but of course, the real validation comes when checking whether the password matches the one provided by the user when registering for an account.
+ - Reset Password:
+ - Change Password:
+    - Email:  Only email addresses that have been registered are valid.  There are some frontend validation rules too which mirror the Register and Login forms.
+ - Add to Basket:
+    - Quantity:  The increment and decrement buttons aim to prevent users from entering a number above 99 or below 1, however users can manually type into the cell and then click the 'Add to Basket' button.  Users are prevented from entering any letters or special character into the field - only numbers can be entered.  If a user enters a number outside of the range 1-99, there is frontend validation preventing the user from doing so - see screenshot below.  However, users can remove values from the field and click the 'Add to Basket' button - at this point I discovered a bug which I have addressed in the [Bugs Encountered During Testing](#product-quantities) section below.
+
+![Frontend validation preventing users entering a quantity outside of the range 1-99](media/readme/images/quantity-outside-range.png)
+
+ - Update Basket:
+    - Quantity:  The fix deployed for the bug mentioned abovefor the add to basket form was also deployed to the adjust_basket function in the basket views.py file.  Users can only enter numerical values into this field but if they enter a blank value, there is error handling built into the backend to warn the user and the quantity in the basket is not updated.  If a number greater than 99 is entered, the quantity is capped at 99 while if a number less than 1 is submitted, the item is removed from the basket.
+
+ - Contact Us:  All 3 fields are required.
+    - Name:  There is no restriction on the characters entered but there is a maximum length of 50 characters imposed.
+    - Email Address:  This must contain an @ symbol with text either side of it.  After the @ symbol, there must be a full stop followed by more text.  A fake email address (such as !5%Hg@kdfsdsf.com) can be entered into this field which is not ideal.  Since the email address provided will be how my fictional company responds to any messages submitted, providing a fake email address providers little benefit to anyone.  I also think the risk is pretty low.  However, a future implementation would be to only allow logged in users to access and use the Contact form.  I could then remove this field since the users email address is already in the database.  Since their email address has been verified when creating the account, it would always be a valid one.
+    - Message:  This textfield has no validation rules applied or limits to the length of text or restrictions on the characters users can use.
 
 #### Checkout Form
 
@@ -607,6 +646,20 @@ I also amended the info toast so that, like the success toast, it also shows a p
 ![Attempt to add more than 99 of one item to the basket from both the Product Details and the Basket page](media/readme/gifs/line-item-total-after.gif)
 
 Even if users purchased 99 of every item (including each permutation based around size, side and gender), their order would still only total circa £490,000 which is well below the limit of the maximum digits for the lineitem_total field.
+
+#### Product Quantities
+
+As I was testing the quantity input field on the Product Detail page, I uncovered a bug.  There is frontend validation preventing users from entering in a number outside of the range of 1-99.  Users cannot type letters or special characters but they can submit the field without any value which causes an error to occur:
+
+![Gif showing the error caused when entering a blank value as the product quantity](media/readme/gifs/product-quantity-before.gif)
+
+In the views.py file within the basket app, in the add_to_basket function, I asign the value from the form to the variable and make it an integer.  I decided to add some backend validation to the posted quantity to handle scenarios where users enter no value and also scenarios where the frontend validation is bypassed and the value is outside of the range 1-99.
+
+I added a try except block around the assignment of the posted quantity so that if assigning the quantity to the variable 'qty' throws an error, the user is redirected back to the same page but with an error message explaining that the product was not added to their basket.  Assuming the quantity is asigned to the 'qty' variable as an integer, I then check if the quantity is less than 1 or greater than 99.  If so, I also redirect the user back to the same page with an error message advising them that the quantity must be between 1-99 and stating that the product has not been added to their basket:
+
+I realised that the same bug existed on the Basket page so implemented the first solution above.  Now when a user submits an emply/blank quantity when attempting to update the quantity of an item in their basket, an error message appears and the basket quantity is unchanged.  If a user submits a number outside of the range of 1-99, the adjust_basket function already handles this.  If the quantity entered is greater than 99, the quantity gets capped at 99 but if they enter a new quantity below 1, the item is removed from their basket entirely.
+
+![Gif showing the error-handling when users enter a blank value as the product quantity or try to add a value greater than 99 or below 1](media/readme/gifs/product-quantity-after.gif)
 
 
 
