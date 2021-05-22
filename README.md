@@ -78,7 +78,7 @@ The aim of this project was to produce an enticing and fully-functioning e-comme
     -	View items in my basket.
     -	Adjust the quantities of items in my product including removing them from the basket entirely.
     -	View the total cost of the items in my basket.
-    -	View any delivery cost applicable and understand how much more cost I need to add to my basket in order to qualify for free delivery.
+    -	View any delivery cost applicable.
     -	Easily navigate to a checkout page.
     -	Contact the company.
 
@@ -283,7 +283,7 @@ The data structure allows for product details, quanities and where applicable, a
 
 - In my project, administrators (superusers) can update the Products model through the admin panel.  Given more time, I would have liked to enable superusers to have full CRUD functionality over the Product models through the frontend.
 - On the Contact page, I wanted to utilise an API to show the a location for Stumps & Studs head office.  I would have added this if I had more time before my deadline.
-- Users are prevented from adding quantities of a product to there basket which are less than 1 or greater than 99.  However, there is nothing currently preventing users from adding an item to their basket multiple times.  For example, a user is able to add 99 cricket balls to their basket and can then add another 99 cricket balls resulting in them having 198 cricket balls in their basket.  A future development would be to check the quantity of a product within the basket and restrict the number a user can add based on the quantity they already have in their basket.
+- The navbar contains links to each of the 3 categories (equipment, clothing, footwear).  Similarly, the various sports are listed in a dropdown on the navbar too.  The Categories and Sports models appear in the admin panel so superusers can add more if they wish to do so.  However, any more that are added in the admin panel do not automatically get created in the navbar - they would need to manually be added.  A future development would be to explore ways in which I could pull the data from the Categories and Sports models and then inject the results into the navbar to create a dynamic navbar which updates automatically.  For example, if a superuser adds Basketball as a sport in the Sports model, this gets added automatically into the sports dropdown list in the navbar.
 
 ## Languages
 
@@ -508,7 +508,7 @@ Methodology:  I will test each of the user stories in turn.  I will ensure that 
     i)	View items in my basket.
     j)	Adjust the quantities of items in my product including removing them from the basket entirely.
     k)	View the total cost of the items in my basket.
-    l)	View any delivery cost applicable and understand how much more cost I need to add to my basket in order to qualify for free delivery.
+    l)	View any delivery cost applicable.
     m)	Easily navigate to a checkout page.
     n)  Contact the company.
 
@@ -543,6 +543,27 @@ Results:
     1f) On the Product Details page, products which have sides (such as golf clubs) have a dropdown list enabling users to select either a right-handed or left-handed version of the product.  Right-handed is selected by default.
     1g)  Products which have a gender options (such as golf clubs), users have the option to select between Male or Female on the Product Details page.  Male is selected by default.
     1h) Users can add multiple products to their basket.  More than 1 of each product can be added (e.g. 5 cricket balls can be added) and for products with sizes, sides or gender, the product can be added to the basket multiple times with different details (e.g. 2 male, right handed golf clubs and 1 female, left-handed set of golf clubs can be added to the basket).  As I was testing this, I encountered a bug which I have addressed below in the [Bugs Encountered During Testing](#basket-totals) section.
+    1i & 1j)  The Basket page enables users to view the items in their basket.  Users are also able to update the quantity of each item in their basket and/or remove items from their basket entirely.  To improve UX, the Basket link in the header includes the  number of items in the basket and their grand total cost so users always have a high level summary of their basket.
+    1k & 1l)  The Basket and Checkout pages both display the total cost of the items in the basket, the delivery cost and the grand total (items plus delivery cost).
+    1m)  I have ensured that the link to the Basket page is visible on screen at all times.  This means users can always access their basket with just one click.  From the Basket page, once users are happy with the items they have in their basket, they can proceed to the Checkout page with one click.  This means that users can reach the Checkout page from anywhere on my site with just 2 clicks.  Furthermore, when users add a product to their basket, I give them a preview of the basket in the toast message along with a link to the Basket page to further entice them into completing their purchase.
+    1n)  I have added a Contact page which users can reach from both the navbar and quick links section in the footer meaning the page can be reached from anywhere in the site with just 1 click.  Users can write a message in the textbox meaning their is no character limit.
+
+    2a) From the Checkout page, users can click either the link to the Basket page in the header or the 'Adjust Basket' link meaning there are two ways for them to back out of the checkout process and amend their basket further.
+    2b & 2c & 2d)  The checkout form has 3 fieldsets; one for each of these user stories.  Users must first provide their name, email address and phone number - these are all required fields.  They must then provide a delivery address - the street address 1, town/city and country fields are all required.  Finally, utilising Stripe, users have a payment field in which to enter their payment details in order to complete the secure checkout process.
+    2e)  The basket total, delivery cost and grand total are visible in both the Basket and Checkout pages.  Both pages also detail the contents of the basket; the Basket page lists all items out down the page while this is more compressed preview on the Checkout page though all of the basket details can be scolled through.  The grand total is also visible below the basket button in the header.  So users have multiple opportunities to view what they are purchasing and the total cost of it throughout the checkout process.
+    2f)  After successfully completing the secure checkout process, users are redirected to the Checkout Success page which thanks them for placing the order.  A success toast also confirms that the order has successfully been placed.
+    2g)  As well as the above, a confirmation email also gets sent to the user (to the email address provided during the checkout process) confirming that the order has been placed:
+
+![Email confirmation received when order has been successfully placed](media/readme/images/checkout-success-email.png)
+
+    3a)  Users are able to register for an account.  If users are not already signed in, a link enticing them to register appears in the header and is visible throughout.  Furthermore, on the Checkout page, users not already logged in will see a Register button below the checkout form again enticing them to register for an account.  An account can be created by providing an email address, username and password.  A verification email is sent to the email address provided to ensure users own the email address they provide.  AllAuth handles the email account verification process.
+    3b & 3c)  On the Account page, users have the ability to complete a form to save their default delivery address and phone number.  This can be updated any time they log in.  Whether they choose to do this or not, users also have the option to save (or update) their default delivery address and phone number during the checkout process.  On the Checkout page under the checkout form, loggin users will see a checkbox which is selected by default which will save the delivery address and phone number for that order as their defaults.
+    3d)  From the Account page, users can view their previous orders.  Under the Order History section, users can do one of two things.  Firstly, each previous order is listed with some high level information - clicking the down arrow on each will expand the order revealing each item and quanity.  Alternatively, clicking the order number will direct them to the Checkout Success template which lists all details of the order including product images.  The second option contains all of the order details whereas the first lacks product images, line item totals, total cost and delivery cost.  However, I feel both of these options satisfy this user story.
+    3e)  Users can log in and log out of their account.  Users who are not signed in will see a Login button on the header at all times.  They will then be asked to provided their login credentials.  Users can login via 2 clicks and completing a form with their login credentials.  Furthermore, using the AllAuth templates, users who have forgotten their password are able to reset it from the Login page.  Users who are logged in can log out via the Logout button on the Account dropdown which is visible on the page header at all times.  Before being logged out, users are asked to confirm that they definitely wish to proceed.  This means users can logout with 3 clicks.
+
+    4a)  Superusers can access the admin panel - in the Account dropdown in the header, there is a link (Site Admin) which directs them to the admin panel.  From there, 
+
+
 
 #### Forms
 
@@ -737,7 +758,7 @@ For the About Us section in the footer, I referenced the text on [JD Sports webs
 
 ### Products
 
-Whilst I would idealy have been able to use high resolution images for my products, I struggled to find suitable images for them.  I sourced the product images from a variety of other ecommerce websites such as [Amazon](https://www.amazon.co.uk/), [American Golf](https://www.americangolf.co.uk/) and [Decathlon](https://www.decathlon.co.uk/).  This [Excel spreadsheet](media/readme/products-source.xlsx) contains the list of products included in my project along with the source of them.
+Whilst I would idealy have been able to use high resolution images for my products, I struggled to find suitable images for them.  I sourced the product images from a variety of other ecommerce websites such as [Amazon](https://www.amazon.co.uk/), [American Golf](https://www.americangolf.co.uk/) and [Decathlon](https://www.decathlon.co.uk/).  This [Excel spreadsheet](media/readme/products-source.xlsx) contains the list of products included in my project along with the source of them.  The sources are also listed in this [PDF document](media/readme/products-source.pdf).
 
 For the product descriptions, I generally copied the text that I found on the websites where I downloaded the images although in some cases I edited the text to a shorter length.  The descriptions I copied from the source websites are in the spreadsheet above.
 
