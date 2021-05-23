@@ -225,7 +225,8 @@ footer p, footer li {
     z-index: 1;
 }
 
-/* Make add to basket submit button same height as the anchor buttons. */
+/* Make add to basket submit and update default buttons same height as the anchor buttons. */
+#update-defaults,
 #add-to-basket {
     line-height: 1.2;
 }
@@ -426,6 +427,11 @@ footer p, footer li {
 .view-order .fa-caret-up {
     line-height: 0.3;
     font-size: xxx-large;
+}
+
+.hist-order-line {
+    border-top: 2px solid #04080F;
+    width: 100%;
 }
 
 /*----------------------------------------------------------------------------------------------------------AllAuth Pages*/

@@ -337,7 +337,7 @@ On medium screens upwards, the header contains a Stumps and Studs anchor link, t
 
 ![Navbar search functionality](media/readme/images/header-layout-before.png)
 
-The container for the links is a flex box utilising [Bootstrap's flex classes](https://getbootstrap.com/docs/5.0/utilities/flex/#justify-content).  I use the class 'justify-content-between' to space the links out.  When they are logged out, the 3 links are evenly spread out but when users are logged in, I felt that the Account link was spaced too closely to the search bar.  I considered adding some margin to the left of the Account link but this didn't create the desired effect.  I wanted to center the Account link between the search bar and Basket link.  The simple solution I utilised was to create an empty div before the Account link which means the flex box evenly spaces 3 elements out thus pushing the Account link into the center.  To ensure the layout on small screens isn't effected, I used Bootstrap classes 'd-none d-md-block' to ensure it doesn't displace any links on small screens.  The end result is below with the change being seen in the header when users are logged:
+The container for the links is a flex box utilising [Bootstrap's flex classes](https://getbootstrap.com/docs/5.0/utilities/flex/#justify-content).  I use the class 'justify-content-between' to space the links out.  When they are logged out, the 3 links are evenly spread out but when users are logged in, I felt that the Account link was spaced too closely to the search bar.  I considered adding some margin to the left of the Account link but this didn't create the desired effect.  I wanted to center the Account link between the search bar and Basket link.  The simple solution I utilised was to create an empty list item before the Account link which means the flex box evenly spaces 3 elements out thus pushing the Account link into the center.  To ensure the layout on small screens isn't effected, I used Bootstrap classes 'd-none d-md-block' to ensure it doesn't displace any links on small screens.  The end result is below with the change being seen in the header when users are logged:
 
 ![Navbar search functionality](media/readme/images/header-layout-after.png)
 
@@ -677,6 +677,27 @@ There is no way the checkout form can be bypassed to create an order.  The check
 * Basket page is responsive but the quantity buttons begin to misalign when the screen width is reduced down to 332px wide.  However, I believe this is not an issue since [modern mobiles](http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml#:~:text=Most%20mobile%20phones%20have%20a,CSS%20pixel%20on%20the%20screen.) are wider than this.
 
 #### Valid Code
+
+#### HTML
+
+Aim:  To ensure all HTML code is valid.
+
+Methodology:  I will work through each page within my project in my Chrome browser, right click and View Page Source.  I will copy and paste the code into [this HTML validator tool](https://validator.w3.org/).  If there are any errors, I will either correct them or explain the reason for ignoring them and leaving them in my code.
+
+Results:
+
+ - **All**:  The validator flags the meta tag '<meta charset="UTF-8">' as an error.  According to [W3Schools.com](https://www.w3schools.com/html/html_charset.asp), this is required to inform the browser which character set the page uses so I have ignored this error.
+ - **Header**:  None
+ - **Footer**:  None
+ - **Toasts**:  None
+ - **Home**:  None
+ - **Products**:  None
+ - **Product Details**:  None
+ - **Basket**:  None
+ - **Checkout**:  None
+ - **Checkout Success**:  None
+ - **Account**:  
+ - **Contact Us**:  
 
 #### Google Lighthouse Tool
 
