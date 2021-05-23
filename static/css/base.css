@@ -213,12 +213,14 @@ footer p, footer li {
 .product-image {
     object-fit: scale-down;
     height: 350px;
+    width: 100%
 }
 
 .product-image-small {
     object-fit: scale-down;
     height: auto;
     max-height: 200px;
+    width: 100%
 }
 
 #sort-options {
