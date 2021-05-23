@@ -368,7 +368,7 @@ footer p, footer li {
     border: 1px solid #04080F;
     border-radius: 0;
     background-color: #fff;
-    box-shadow: 0 1px 3ox 0 #04080F;
+    box-shadow: 0 1px 3px 0 #04080F;
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
 }
@@ -422,15 +422,14 @@ footer p, footer li {
 
 .view-order .fa-caret-down {
     line-height: 0.25;
-    font-size: xxx-large;
+    font-size: 50px;
+    border-top: 2px solid #04080F;
+    width: 100%;
 }
 
 .view-order .fa-caret-up {
     line-height: 0.3;
-    font-size: xxx-large;
-}
-
-.hist-order-line {
+    font-size: 50px;
     border-top: 2px solid #04080F;
     width: 100%;
 }
@@ -449,7 +448,7 @@ footer p, footer li {
     border: 1px solid #04080F;
     border-radius: 0;
     background-color: #fff;
-    box-shadow: 0 1px 3ox 0 #04080F;
+    box-shadow: 0 1px 3px 0 #04080F;
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
 }
