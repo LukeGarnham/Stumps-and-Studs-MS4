@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head_title %}| Page Not Found{% endblock %}
+
+{% block content %}
+    <div class="container-fluid px-3 px-sm-5 py-5">
+        <div class="row px-4">
+            <div class="col-md-6 col-lg-4 px-3">
+                <h2>Page Not Found</h2>
+            </div>
+        </div>
+        <div class="row px-4">
+            <div class="col-md-6 col-lg-4 p-3 fs-small">
+                <p>This page doesn't exist.  Please check your URL and try again or use the links below:</p>
+                <ul class="list-unstyled">
+                    <li class="py-2">
+                        <i class="fas fa-arrow-left pe-3"></i>
+                        <a href="{% url 'home' %}">
+                            <i class="fas fa-home pe-1"></i>
+                            <strong class="text-decoration-underline">Home Page</strong>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <i class="fas fa-arrow-left pe-3"></i>
+                        <a href="{% url 'products' %}">
+                            <i class="fas fa-tag pe-1"></i>
+                            <strong class="text-decoration-underline">Continue Shopping</strong>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <i class="fas fa-arrow-left pe-3"></i>
+                        <a href="{% url 'view_basket' %}">
+                            <i class="fas fa-lock pe-1"></i>
+                            <strong class="text-decoration-underline">Basket & Checkout</strong>
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <i class="fas fa-arrow-left pe-3"></i>
+                        <a href="{% url 'profile' %}">
+                            <i class="fas fa-user pe-1"></i>
+                            <strong class="text-decoration-underline">Account</strong>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
