@@ -129,22 +129,22 @@
     {{ block.super }}
     <script type="text/javascript">
         // Correct the placeholder (font) colour in the default country input.
-        let countrySelected = $('#id_default_country').val();
+        var countrySelected = $('#id_default_country').val();
         if(!countrySelected) {
             $('#id_default_country').css('color', '#aab7c4');
-        };
+        }
         $('#id_default_country').change(function() {
             countrySelected = $(this).val();
             if(!countrySelected) {
                 $(this).css('color', '#aab7c4');
             } else {
                 $(this).css('color', '#04080F');
-            };
+            }
         });
 
         // Toggle the up/down arrows visibility in the Order History.
         $('.view-order').click(function() {
             $(this).children('i').toggleClass('d-none');
-        })
+        });
     </script>
 {% endblock %}

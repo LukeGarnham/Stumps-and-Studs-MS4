@@ -10,7 +10,7 @@ $('#personal :input[required]').on('input', function() {
         $('#delivery-tab').addClass('disabled');
         $('#delivery-to-pay').prop('disabled', true);
         $('#pay-tab').addClass('disabled');
-    };
+    }
 });
 
 // Move to delivery tab when next button on personal tab is clicked.
@@ -23,7 +23,7 @@ $('#personal-to-delivery').click(function(e) {
     if (($('#id_street_address1').val() != "") && ($('#id_town_or_city').val() != "") && ($('#id_country').val() != "")) {
         $('#delivery-to-pay').prop('disabled', false);
         $('#pay-tab').removeClass('disabled');
-    };
+    }
 });
 
 // Move to personal tab when prev button on delivery tab is clicked.
@@ -43,7 +43,7 @@ $('#delivery :input[required]').on('load', function() {
     } else {
         $('#delivery-to-pay').prop('disabled', true);
         $('#pay-tab').addClass('disabled');
-    };
+    }
 });
 
 // Check the required input fields on the delivery tab are complete when there is an input on any one of them and enable/disable pay.
@@ -54,7 +54,7 @@ $('#delivery :input[required]').on('input', function() {
     } else {
         $('#delivery-to-pay').prop('disabled', true);
         $('#pay-tab').addClass('disabled');
-    };
+    }
 });
 
 // Move to pay tab when next button on delivery tab is clicked.

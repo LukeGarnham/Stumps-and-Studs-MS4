@@ -86,15 +86,15 @@
     <script type="text/javascript">
         // Adjust Bootstrap grid on large screens, alternate between 2 or 3 columns
         $( '#two-wide' ).click(function() {
-            $( '.product-container' ).removeClass( 'col-lg-4', 1000 )
-            $( '#three-wide' ).removeClass( 'd-none' )
-            $( '#two-wide' ).addClass( 'd-none' )
-        })
+            $( '.product-container' ).removeClass( 'col-lg-4', 1000 );
+            $( '#three-wide' ).removeClass( 'd-none' );
+            $( '#two-wide' ).addClass( 'd-none' );
+        });
         $( '#three-wide' ).click(function() {
-            $( '.product-container' ).addClass( 'col-lg-4', 1000 )
-            $( '#two-wide' ).removeClass( 'd-none' )
-            $( '#three-wide' ).addClass( 'd-none' )
-        })
+            $( '.product-container' ).addClass( 'col-lg-4', 1000 );
+            $( '#two-wide' ).removeClass( 'd-none' );
+            $( '#three-wide' ).addClass( 'd-none' );
+        });
         
         // Update the URL when the sort-options selector changes to enable sort & direction options.
         $('#sort-options').change(function() {
@@ -114,7 +114,7 @@
                 currentUrl.searchParams.delete("sort");
                 currentUrl.searchParams.delete("direction");
 
-                window.location.replace(currentUrl)
+                window.location.replace(currentUrl);
             }
         });
 

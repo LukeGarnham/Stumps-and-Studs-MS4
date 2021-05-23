@@ -37,7 +37,7 @@ card.addEventListener('change', function(e) {
     } else {
         errorDiv.textContent = '';
         $('#submit-button').prop('disabled', false);
-    };
+    }
 });
 
 // Handle Stripe payment when form is submitted.
@@ -62,7 +62,7 @@ form.addEventListener('submit', function(ev) {
         'csrfmiddlewaretoken': csrfToken,
         'client_secret': clientSecret,
         'save_info': saveInfo,
-    }
+    };
     var url = '/checkout/cache_checkout_data/';
     $.post(url, postData).done(function() {
         // Call the Stripe confirmCardPayment function, passing the client secret and card details.
