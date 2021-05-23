@@ -461,6 +461,7 @@ Aim:  I will test all links on each page throughout my website to ensure they al
 Methodology:  I will test the links in the header and footer since these are inherited by every page from the base.html file.  In the header, I will test the links on small-medium screen sizes and +large screen sizes and also as a logged in user and non-logged in user since the header links will change depending on the screen size and logged in status.  The toasts only have one link; the success toast has a link to the basket page which I will test.  I will then test the links on the body of each page to ensure they all work as expected.
 
 Results:
+
  - **Header**:  All links work correctly across the various screen sizes and whether users are logged in or not.
  - **Footer**:  All links work correctly.  The social media links correctly open in a new window.
  - **Toasts**:  The link in the success toast correctly directs users to the basket page.
@@ -483,6 +484,7 @@ Methodology:  I will test each of these scenarios which could see a user access 
  - Navigate to the admin panel when not logged in as a superuser.
 
 Results:
+
  - If there are no items in the basket, users are unable to access the Checkout page.  Instead they are redirected to the Products page and an error message (toast) is presented explaining that 'There's nothing in your basket at the moment'.
  - When trying to access the Account page when not logged in, users are redirected to the Login page.  The link to the Account page sits in the Account dropdown in the header - this link is not visible to users who are not logged in.
  - If users are not logged in, they can manually enter the URL for the admin panel but will see the admin login page so they cannot reach the admin panel.  If a user is logged in but is not a superuser, they will also see the admin login page along with a message advising them they are not authenticated to access the page:
@@ -592,8 +594,10 @@ Results:
     - Email:  This must contain an @ symbol with text either side of it.  After the @ symbol, there must be a full stop followed by more text.
     - Password:  There doesn't appear to be any validation rules preventing users from entering what they want but of course, the real validation comes when checking whether the password matches the one provided by the user when registering for an account.
  - Reset Password:
- - Change Password:
     - Email:  Only email addresses that have been registered are valid.  There are some frontend validation rules too which mirror the Register and Login forms.
+ - Change Password:
+    - Current Password:  This must match the password the user uses to login.
+    - New Password and New Password Again:  The same validation that applies to the password field in when registering apply - see Register above.
  - Add to Basket:
     - Quantity:  The increment and decrement buttons aim to prevent users from entering a number above 99 or below 1, however users can manually type into the cell and then click the 'Add to Basket' button.  Users are prevented from entering any letters or special character into the field - only numbers can be entered.  If a user enters a number outside of the range 1-99, there is frontend validation preventing the user from doing so - see screenshot below.  However, users can remove values from the field and click the 'Add to Basket' button - at this point I discovered a bug which I have addressed in the [Bugs Encountered During Testing](#product-quantities) section below.
 
@@ -674,7 +678,27 @@ There is no way the checkout form can be bypassed to create an order.  The check
 
 #### Responsive Design
 
-* Basket page is responsive but the quantity buttons begin to misalign when the screen width is reduced down to 332px wide.  However, I believe this is not an issue since [modern mobiles](http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml#:~:text=Most%20mobile%20phones%20have%20a,CSS%20pixel%20on%20the%20screen.) are wider than this.
+Aim:  To ensure all webpages are responsive and layouts adjust as screen width changes.
+
+Methodology:  I will adjust the width of each page from full width (which on my screen is 1920px) to the width of a mobile phone.  The minimum screen width for [modern mobiles](http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml#:~:text=Most%20mobile%20phones%20have%20a,CSS%20pixel%20on%20the%20screen) phones is typically 320px.  There will come a point where the screen width will become so narrow that the layout of elements on each page will start to spillover or wrap around other elements and good UX design will be lost.  I will note the point at which this happens and so long as this is less than 320px, I will be satisfied that the page meets the responsive design requirements.  I will also review each page on my own mobile (which is a Samsung Galaxy S10) to ensure they all look correct.
+
+Results:  Below are the points at which each page (or element) starts to overflow at.  
+ - **Header**:  Header menu icons start to overflow at circa 260px.
+ - **Footer**:  Text in the Footer starts to look untidy and squashed at circa 200px.
+ - **Toasts**:  The success and info toasts can include a basket preview.  The totals at the bottom of this preview start to wrap onto a new row at circa 280px.
+ - **Home**:  circa 180px
+ - **Products**:  circa 180px
+ - **Product Details**:  I spotted a minor error with my CSS which prevented the product images shrinking down as the screen width adjusted.  by adding 'width: 100%' as an attribute to the product-image class, I fixed this.  Images scale down now.  However the quantity increment and decrement start to wrap when the screen size reaches circa 260px.
+ - **Basket**:  The quantity increment and decrement start to wrap when the screen size reaches circa 270px.
+ - **Checkout**:  The Stripe payment form and Complete Order buttons both start look squashed at circa 325px when I reduce the screen width down in my browser.  However, when I preview this on an iPhone in Chrome with a width of 320px, the layout is fine.  The below screenshots show the checkout page in my browser with a width of 325px and then on the mobile preview with a width of 320px.  I have reviewed it on my own mobile as well and am happy that the layout looks fine on mobile or tablet devices:
+ 
+ ![The checkout form on a small screen and on a mobile device](media/readme/images/checkout-screen-and-phone.png)
+
+ - **Checkout Success**:  circa 295px
+ - **Account**:  circa 270px
+ - **Contact Us**:  circa 300px
+
+All of the above are greater than the 320px minimum mentioned in the methodology above.  Having gone through and tested each page on my mobile, there were no issues with the layout of elements.  Therefore, I am satisfied they meet the responsive design requirements.
 
 #### Valid Code
 
@@ -745,6 +769,13 @@ Results:
 All code has been validated through validation tools.  Some minor changes were made as I went along but nothing worth commenting on greater detail than the points listed above.
 
 #### Google Lighthouse Tool
+
+Aim:  Identify improvements that can be made to my site.
+
+Methodology:  I will run the Google Lighthouse Tool on my website.  This tool runs a range of checks and makes recommendations to improve performance, accessability, SEO and best practices.
+
+Results:  
+
 
 ### Bugs Encountered During Testing
 
