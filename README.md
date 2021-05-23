@@ -828,6 +828,12 @@ I used Google to find a 'no image' image.  The one I chose was sourced from [thi
 
 The loading gif used when users submit the checkout form was sourced from [icons8.com](https://icons8.com/preloaders/en/search/sport).
 
+The image for the favicon was sourced from [Pixabay.com](https://pixabay.com/vectors/cricket-ball-cricket-ball-sports-295206/).
+
+I used [FavIcon-Generator.org](https://www.favicon-generator.org/)  to create the favicons.
+
+I used [TinyJPG.com](https://tinyjpg.com/) to reduce the file size of my images to improve loading times.
+
 ### Acknowledgements
 
 I closely followed the [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/d3188bf68530497aa5fba55d07a9d7d7/) tutorial in order to complete this project.  The guidance and instructions throughout enabled me to complete this project.
