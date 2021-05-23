@@ -285,6 +285,8 @@ The data structure allows for product details, quanities and where applicable, a
 - On the Contact page, I wanted to utilise an API to show the a location for Stumps & Studs head office.  I would have added this if I had more time before my deadline.
 - The navbar contains links to each of the 3 categories (equipment, clothing, footwear).  Similarly, the various sports are listed in a dropdown on the navbar too.  The Categories and Sports models appear in the admin panel so superusers can add more if they wish to do so.  However, any more that are added in the admin panel do not automatically get created in the navbar - they would need to manually be added.  A future development would be to explore ways in which I could pull the data from the Categories and Sports models and then inject the results into the navbar to create a dynamic navbar which updates automatically.  For example, if a superuser adds Basketball as a sport in the Sports model, this gets added automatically into the sports dropdown list in the navbar.
 - The Contact page contains a form allowing users to submit a message.  This is confiugured using the Django TextField class.  There are no validation rules applied to this field meaning users can enter any string of characters (letters, numbers, special characters).  Whilst the form functions as desired, there could be a security vulnerability here - my mentor mentioned somthing called SQL injection whereby data from databases is extracted by malicious users sending a SQL command into the database.  Without knowing too much about this, one solution would be to prevent certain special characters from being used, possibly limiting the input to only letters, numbers and full stops.  I ran out of time to explore this properly but there are some methods in the [Django documentation](https://docs.djangoproject.com/en/3.2/ref/validators/).
+- The Checkout form is split into 3 fieldsets with each one on a tab of its own.  This enables users to enter each section of information separately.  If the information they enter into any field is invalid (such as an email address containing special characters like asdasds@@!"£"$".com), there is frontend validation which prevents the form from being submitted.  However, if this error occurs on either the Personal Details or Delivery Address tabs, the frontend validation error message is not visible.  The user cannot submit the form but there is no visible message explaining why.  There may be a solution in JavaScript to ensure that these messages are visible or alternatively, I could change the layout to remove the tabbed layout and instead have all fields visible on the page at one time.  I ran out of time to explore these solutions possible solutions.
+- On the checkout form, the phone number field allows users to enter letters and special characters as well as numbers.  Ideally this would only allow numbers to be entered so this is another future improvement I would make given more time.
 
 ## Languages
 
@@ -637,14 +639,11 @@ Methodology:  I will perform a number of tests in turn to ensure that the form w
     c)  Use an blank, incomplete and incorrect CVV number.
     d)  Use an blank, incomplete and postcode.
 
- 4)  Use the Stripe test card numbers.  Do the various test card numbers produce the expected results?
-    a)  
-
- 5)  What happens if a user enters their actual card details?
+ 4)  What happens if a user enters their actual card details?
 
     a)  The users card should not be charged since Stripe is only configured in test mode.
 
- 6)  How does the checkout page handle interruptions following submission?:
+ 5)  How does the checkout page handle interruptions following submission?:
 
     a)  Is the payment processed and order completed if the user closes the browser or navigates to another website after submitting the form?
 
@@ -652,8 +651,15 @@ Results:
 
 The numbers entered in brackets represent inputs tested and underscores represent no value/blanks.
 
- 1a)  Payment Postcode:  It is not possible to enter a special character into this field (even using copy paste).  This field is hidden until a card number is required.  There is a maximum length of 5 characters.
- 1b)
+ 1a)
+    - Full Name:  Any characters can be entered but there is a maximum length of 50 characters.
+    - Email Address:  There is a maximum length of 254 characters.  The validation rules are the same as for the Register page (see above).  If a user is already logged in, this field will already be populated with a valid email address which will eliminate some users from entering invalid information into this field.
+    - Phone Number:  There is a maximum length of 20 characters.  There is nothing stopping a user entering letters or special characters as well as numbers.  I have added this to the list of [Features Left To Implement**](#features-left-to-implement-/-known-bugs) above.
+    - Street Address 1 and 2 and County:  There are no restrictions on what characters can be entered into these fields but there is a limit of 80 characters.  The Street Address 1 field is required.
+    - Town or City:  There is no restrictions on what characters can be entered into these fields but there is a limit of 40 characters.
+    - Postcode:  There is no restrictions on what characters can be entered into these fields but there is a limit of 20 characters.
+    - Payment card details:  I test these separately in section 3 below.
+ 1b)  No.  The custom JavaScript which controls access to the tabs and next buttons is effectively frontend validation which prevents users from accessing the submit form (Complete Order) button.  Stripe also has frontend features which disable the Complete Order button.  Even if these are bypassed, there is backend validation which checks if the form data submitted is valid.
 
  2a)  On the Personal Details tab, the full name is not populated.  The Email Address will be pre-populated if the user has an account and is logged in.  The Phone Number field will only be pre-populated if the user has saved a default one.  All 3 fields are required so the Delivery Address tab and Next button are disabled.  They remain disabled until a value is entered into all 3 fields.  Once the last of the 3 fields has a value, they are enabled.  When a value is removed from any one of the 3 fields, they are disabled again.  The Summary & Pay is disabled throughout.  On the Delivery Address tab, the Street Address 1, Town/City and Country fields are all required.  These will already be pre-populated if the user is logged in and has previously saved their default delivery details.  Otherwise they will be blank.  In the instance of a user who is either not logged in or is logged in but hasn't saved their default details, the required fields will be blank.  The Summary & Pay tab and Next button are disabled but the Personal Details tab and Previous button are enabled.  When all 3 required fields have a value, the Summary & Pay tab and Next button are enabled.  When a value is removed (including resetting the Country field), they are disabled again.  When
  2b)  The form is pre-populated with the users default phone number and default delivery details.
@@ -664,13 +670,11 @@ The numbers entered in brackets represent inputs tested and underscores represen
  3a)  If the card number is blank when the form is submitted, Stripe returns a message 'Your card number is incomplete' and the form is not submitted.  If the card number is incomplete (424242424242____), when tabbing or clicking to another field (i.e. the expiry date field), a Stripe error message appears to inform the user that 'Your card number is incomplete.'  The Complete Order button gets disabled.  Entering an incorrect card number results in one of two things happening; either Stripe provides a notification such as 'Your card number is invalid' and the Complete Order button gets disabled (9999999999999999), OR the form can be submitted and then Stripe validates the card number and the same notification appears on screen to inform users that 'Your card number is invalid' (0000000000000000).
  3b)  If the expiry date is blank when the form is submitted, Stripe returns a message 'Your card's expiration date is incomplete' and the form is not submitted.  If the expiry date is not completed (12/__), tabbing or clicking to another field results in an error message from Stripe: 'Your card's expiration date is incomplete.'  The Complete Order button gets disabled.  An incorrect expiry date constitutes either a date which doesn't exist (13/21) or a date in the past (01/21).  It is not possible to enter a date which doesn't exist.  If a date in the past is enter (01/21), an error message from Stripe informs the user 'Your card's expiration date is in the past.'  The Complete Order button gets disabled.
  3c)  If the CVV number is blank when the form is submitted, Stripe returns a message 'Your card's security code is incomplete' and the form is not submitted.  If the CVV number is incomplete (12_), a Stripe message appears on screen informing users that 'Your card's security code is incomplete.'  The Complete Order button gets disabled.  I am unsure what constitutes an incorrect CVV number since it is simply a 3 digit number.  It is not possible to enter any character other than numbers.  Using the test card number (4242424242424242), I was able to successfully complete the checkout process using both 000 and 999 as the CVV. 
- 3d) If the postcode is blank when the form is submitted, Stripe returns a message 'Your postal code is incomplete' and the form is not submitted.  Assuming that the test card number is used (4242 4242 4242 4242), the form expects a postcode of up to 5 numbers - letters and special characters cannot be entered.  Entering 1 number (1____) results in the same message from Stripe; 'Your postal code is incomplete.'  Any number less than 5 digits long is rejected by Stripe (12___, 123__, 1234_) with the same error message.  If this project was to be deployed as a fully functioning service with Stripe no longer in test mode, further testing may be required to ensure users can input more than just number, for example, can users in the UK enter a UK postcode?  When entering my own card number, the postcode field does allow letters and special characters as well as numbers and there appears to be no limit on how many characters a user can enter.  Whether this is still the case in the live Stripe configuration would need to be tested.  But for the purposes of this project, I am satisfied that this field functions as desired.
+ 3d) It is not possible to enter a special character into this field (even using copy paste).  This field is hidden until a card number is required.  If the postcode is blank when the form is submitted, Stripe returns a message 'Your postal code is incomplete' and the form is not submitted.  Assuming that the test card number is used (4242 4242 4242 4242), the form expects a postcode of up to 5 numbers - letters and special characters cannot be entered.  Entering 1 number (1____) results in the same message from Stripe; 'Your postal code is incomplete.'  Any number less than 5 digits long is rejected by Stripe (12___, 123__, 1234_) with the same error message.  If this project was to be deployed as a fully functioning service with Stripe no longer in test mode, further testing may be required to ensure users can input more than just number, for example, can users in the UK enter a UK postcode?  When entering my own card number, the postcode field does allow letters and special characters as well as numbers and there appears to be no limit on how many characters a user can enter.  Whether this is still the case in the live Stripe configuration would need to be tested.  But for the purposes of this project, I am satisfied that this field functions as desired.
 
- 4a)
+ 4a)  I entered my own card details.  The form does not get submitted and the checkout process is not completed.  I receive the following message on screen from Stripe:  'Your card was declined. Your request was in test mode, but used a non test card. For a list of valid test cards, visit: https://stripe.com/docs/testing.'  This works as expected.
 
- 5a)  I entered my own card details.  The form does not get submitted and the checkout process is not completed.  I receive the following message on screen from Stripe:  'Your card was declined. Your request was in test mode, but used a non test card. For a list of valid test cards, visit: https://stripe.com/docs/testing.'  This works as expected.
-
- 6a)
+ 5a)
 
 There is no way the checkout form can be bypassed to create an order.  The checkout works as expected and has passed all of the tests detailed above in this section.
 
@@ -772,9 +776,11 @@ All code has been validated through validation tools.  Some minor changes were m
 
 Aim:  Identify improvements that can be made to my site.
 
-Methodology:  I will run the Google Lighthouse Tool on my website.  This tool runs a range of checks and makes recommendations to improve performance, accessability, SEO and best practices.
+Methodology:  I will run the Google Lighthouse Tool on my website.  This tool runs a range of checks and makes recommendations to improve performance, accessability, SEO and best practices.  I will then try to implement some of the recommendations and re-run the Lighthouse Tool to see if I have managed to improve my score.
 
 Results:  
+
+
 
 
 ### Bugs Encountered During Testing
