@@ -225,8 +225,9 @@ footer p, footer li {
     z-index: 1;
 }
 
-/* Make add to basket submit and update default buttons same height as the anchor buttons. */
+/* Adjust input buttons so they have the same height as anchor buttons. */
 #update-defaults,
+#send-message,
 #add-to-basket {
     line-height: 1.2;
 }

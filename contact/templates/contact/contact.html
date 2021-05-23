@@ -16,7 +16,7 @@
                     {% csrf_token %}
                     {{ form|crispy }}
                     <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
-                        <button class="btn btn-green my-2 mx-3 w-100" type="submit">Send Message</button>
+                        <input type="submit" id="send-message" class="btn btn-green py-2 w-100 border-0 mt-3 ms-0" value="Send Message">
                     </div>
                 </form>
             </div>
