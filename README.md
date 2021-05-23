@@ -696,8 +696,53 @@ Results:
  - **Basket**:  None
  - **Checkout**:  None
  - **Checkout Success**:  None
- - **Account**:  
- - **Contact Us**:  
+ - **Account**:  None
+ - **Contact Us**:  None
+
+#### CSS
+
+Aim:  To ensure all CSS code is valid.
+
+Methodology:  I will copy and paste my base CSS code into [this CSS validator tool](https://jigsaw.w3.org/css-validator/).  If there are any errors, I will either correct them or explain the reason for ignoring them and leaving them in my code.
+
+Results:  There were a couple of minor issues the validator highlighted which I corrected.  One example was that the number of pixels for a box shadow effect had been typed as 3ox rather than 3px.
+
+#### JavaScript
+
+Aim:  To ensure all JavaScript code is valid.
+
+Methodology:  I will run the base JavaScript code through [this JavaScript validator tool](https://jshint.com/).  I have a few other JavaScript files within each app and some JavaScript within HTML files.  I will run each of these sections of JavaScript through the same validator to ensure there are no errors.
+
+Results:
+
+ - **Base**:  A few semi-colons were missing which I have added.  No other errors.
+ - **Basket - basket.html**:  The JavaScript in the basket.html file threw up one error which I have decided to ignore as it relates to older browser versions:  'template literal syntax' is only available in ES6 (use 'esversion: 6').  There are no other errors.
+ - **Checkout - checkout_form_buttons.js**:  None
+ - **Checkout - stripe-elements.js**:  As per the JavaScript in the basket page, this JavaSCript contains template literals so once again I decided to ignore this error.  There are no other errors.
+ - **Home - index.html**:  None
+ - **Products - products.html**:  None
+ - **Products - qty_input_script.html**:  This also contains template literals (3) which I have chosen to ignore.
+ - **Profile - profile.html**:  None
+ - **Templates - base.html**:  None
+
+#### Python
+
+Aim:  To ensure all Python code is PEP8 compliant and valid.
+
+Methodology:  I will cycle through each python file I have created and copy and paste the code into  [this Python validator tool](http://pep8online.com/).
+
+Results:
+
+ - **Basket**:  None
+ - **Checkout**:  All passed except for webhooks.py which had one line of code above the limit for one row (79 characters) so I split this over two rows to resolve the problem.
+ - **Contact**:  None
+ - **Home**:  None
+ - **Products**:  None
+ - **Profiles**:  The models file had 4 errors but each one was due to a row being more than 79 characters long.  This was easily resolved by splitting each one across two rows.
+ - **settings.py**:  None
+ - **urls.py**:  None
+ 
+All code has been validated through validation tools.  Some minor changes were made as I went along but nothing worth commenting on greater detail than the points listed above.
 
 #### Google Lighthouse Tool
 
