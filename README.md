@@ -827,7 +827,27 @@ I realised that the same bug existed on the Basket page so implemented the first
 
 During testing, I discovered that the users default information (phone number and delivery address) were being saved regardless of whether the user had ticked the save information (#id-save-info) checkbox input or not.
 
+It took me a while to figure this out but managed to find a solution to the exact issue I was having on the full-stack-frameworks channel in Slack posted 12th November 2020 by a user called Philipp.  Since I followed the Boutique Ado mini-project, the same bug encountered by Philipp found its way into my MS4.
 
+This issue was 2 fold.  When a user submits the checkout form, there are two checks to see whether the user wants to save their default delivery information.  The first check is the checkout_success function within the checkout views.py file.  This was working correctly since the save_info value is retrieved directly from the POST data.  However, there is also a backup check performed with the handle_payment_intent_succeeded function in the webhook_handler.py file.  This uses data from the Stripe payment intent to determine if an order has successfully been created in the database and also checks whether the user wants to save their default information.  This is a backup in case the normal payment flow is interrupted.  The route cause of the bug was that the Stripe payment intent always stated that the user did want to save their default delivery information ("save_info": "true",) even when the checkbox was unticked when it was submitted.
+
+The first issue was that the JavaScript used to retrieve the value was always resulting in a true value being passed to the cache_checkout_data function in the checkout views.py file.  I changed the original code from this:
+
+var saveInfo = Boolean($('#id-save-info').attr('checked'));
+
+To this:
+
+var saveInfo = $('#id-save-info').is(':checked');
+
+The second part of the solution was to change the if statement in the handle_payment_intent_succeeded which checks whether the save_info value is True.  Since the value is now a string containing either "true" or "false", I amended the original code:
+
+if save_info
+
+To this:
+
+if save_info == "true":
+
+The original code would be satisfied so long as save_info existed and had a value which is always did.  Now it only runs when the value is "true" meaning the default delivery is always saved.
 
 ## Deployment
 

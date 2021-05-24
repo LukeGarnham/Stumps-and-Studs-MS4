@@ -91,7 +91,7 @@
                                     <label class="form-check-label fs-small" for="id-save-info">
                                         Save delivery information to my profile?:
                                     </label>
-                                    <input class="form-check-input ms-1" type="checkbox" id="id-save-info" name="save-info" checked>
+                                    <input class="form-check-input ms-1" type="checkbox" id="id-save-info" name="save-info" value="true" checked>
                                 </div>
                             {% else %}
                                 <!-- Regist and Login -->
@@ -218,5 +218,18 @@
     {{ client_secret|json_script:"id_client_secret" }}
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
     <script src="{% static 'checkout/js/checkout_form_buttons.js' %}"></script>
+
+    <script>
+        $('#id-save-info').on('change', function() {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+            } else {
+                $(this).attr('value', 'false');
+            }
+            var saveInfo = $('#id-save-info').val();
+        });
+
+    </script>
+
 
 {% endblock %}
