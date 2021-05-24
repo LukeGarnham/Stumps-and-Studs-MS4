@@ -2,6 +2,11 @@
 {% load static %}
 {% load basket_tools %}
 
+{% block extra_meta %}
+    <meta name="Stumps & Studs - buy our range of the latest sports equipment, clothing and footwear.">
+{% endblock %}
+
+
 {% block head_title %}| Basket{% endblock %}
 
 {% block content %}
@@ -76,13 +81,14 @@
                                             {% csrf_token %}
                                             <div class="input-group black-border">
                                                 <div class="input-group-prepend black-border">
-                                                    <button class="dec-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}_{{ forloop.counter }}" id="dec-qty_{{ item.item_id }}_{{ forloop.counter }}">
+                                                    <button class="dec-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}_{{ forloop.counter }}" id="dec-qty_{{ item.item_id }}_{{ forloop.counter }}" aria-label="Decrease product quantity by 1.">
                                                         <i class="fas fa-minus"></i>
                                                     </button>
                                                 </div>
                                                 <input class="qty_input border-top-0 border-bottom-0 text-center" type="number" name="qty" value="{{ detail.qty }}" min="1" max="99" data-item_id="{{ item.item_id }}_{{ forloop.counter }}" id="id_qty_{{ item.item_id }}_{{ forloop.counter }}">
+                                                <label for="id_qty_{{ item.item_id }}_{{ forloop.counter }}" class="visually-hidden">Quantity of {{ item.product.name }} in basket.</label>
                                                 <div class="input-group-append black-border">
-                                                    <button class="inc-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}_{{ forloop.counter }}" id="inc-qty_{{ item.item_id }}_{{ forloop.counter }}">
+                                                    <button class="inc-qty border-0 qty-btn purple-hover" data-item_id="{{ item.item_id }}_{{ forloop.counter }}" id="inc-qty_{{ item.item_id }}_{{ forloop.counter }}" aria-label="Increase product quantity by 1.">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
                                                 </div>
