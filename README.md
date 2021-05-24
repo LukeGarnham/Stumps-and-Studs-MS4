@@ -795,7 +795,11 @@ This page scores well generally but I wanted to imrpove the Performance score a 
 
 This pages scores highly across all sections.  I have added a meta description to hopefully improve the SEO score.
 
+
+
 **Product Details**:
+
+
 **Basket**:
 **Checkout**:
 **Checkout Success**:
@@ -870,6 +874,8 @@ To this:
 if save_info == "true":
 
 The original code would be satisfied so long as save_info existed and had a value which is always did.  Now it only runs when the value is "true" meaning the default delivery is always saved.
+
+This resolved the bug in the GitPod environment yet when I pushed the above changes to Heroku, the bug persisted.  After trying several approaches, I contacted student support.  After nearly 4 hours of chat with them, one solution was suggested which was to move the link to the stripe_elements.js to the head of the checkout page and add the defer tag.  This worked and the solution detailed above now works in the deployed Heroku version.
 
 ## Deployment
 

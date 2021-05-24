@@ -48,8 +48,6 @@ class StripeWH_Handler:
         pid = intent.id
         basket = intent.metadata.basket
         save_info = intent.metadata.save_info
-        print('handle_payment_intent_succeeded')
-        print(save_info)
 
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
