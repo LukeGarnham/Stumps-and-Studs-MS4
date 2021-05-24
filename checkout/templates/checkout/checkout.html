@@ -3,6 +3,11 @@
 {% load basket_tools %}
 {% block head_title %}| Checkout{% endblock %}
 
+{% block extra_meta %}
+    <meta name="Stumps & Studs - buy our range of the latest sports equipment, clothing and footwear.">
+{% endblock %}
+
+
 {% block extra_js %}
     <!-- Moved this to the top of the page to resolve a bug preventing the save_info from working correctly in the deployed site -->
     <script defer src="{% static 'checkout/js/stripe_elements.js' %}"></script>
