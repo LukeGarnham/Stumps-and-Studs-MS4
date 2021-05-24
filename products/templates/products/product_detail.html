@@ -2,6 +2,9 @@
 {% load static %}
 {% block head_title %}| {{ product.name }}{% endblock %}
 
+{% block extra_meta %}
+    <meta name="Stumps & Studs - view our range of the latest sports equipment, clothing and footwear.">
+{% endblock %}
 
 {% block content %}
     <div class="container-fluid px-3 px-sm-5 py-3">
@@ -93,13 +96,14 @@
                                 <div>
                                     <div class="input-group black-border">
                                         <div class="input-group-prepend black-border">
-                                            <button class="dec-qty border-0 qty-btn purple-hover" data-item_id="{{ product.id }}" id="dec-qty_{{ product.id }}">
+                                            <button class="dec-qty border-0 qty-btn purple-hover" data-item_id="{{ product.id }}" id="dec-qty_{{ product.id }}" aria-label="Decrease product quantity by 1.">
                                                 <i class="fas fa-minus"></i>
                                             </button>
                                         </div>
                                         <input class="qty_input border-top-0 border-bottom-0 text-center" type="number" name="qty" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                        <label for="id_qty_{{ product.id }}" class="visually-hidden">Quantity of {{ product.name }} in basket.</label>
                                         <div class="input-group-append black-border">
-                                            <button class="inc-qty border-0 qty-btn purple-hover" data-item_id="{{ product.id }}" id="inc-qty_{{ product.id }}">
+                                            <button class="inc-qty border-0 qty-btn purple-hover" data-item_id="{{ product.id }}" id="inc-qty_{{ product.id }}" aria-label="Increase product quantity by 1.">
                                                 <i class="fas fa-plus"></i>
                                             </button>
                                         </div>
