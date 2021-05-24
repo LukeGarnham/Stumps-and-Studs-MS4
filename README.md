@@ -787,7 +787,7 @@ Results:  Below are links to the Lighthouse reports for each page of my website 
 
 ![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-home-before.pdf)
 
-This page scores well generally but I wanted to imrpove the Performance score a little bit.  One of the issues detailed in the report is that the images do not have explicit width and height.  The carousel images have a height of 100vh so that they always fill the viewport and I did not want to change this.  The width is 100% but it was inherited from the Bootstrap class 'w-100' so I removed this and added 'width: 100%;' as an attribute in the base.css file.  There is no change in the page but hopefully this will improve the Performance score.  I added an aria-label to the search button in the Header to improve accessibility.  I also added a meta description to improve SEO.
+This page scores well generally but I wanted to imrpove the Performance score a little bit.  One of the issues detailed in the report is that the images do not have explicit width and height.  The carousel images have a height of 100vh so that they always fill the viewport and I did not want to change this.  The width is 100% but it was inherited from the Bootstrap class 'w-100' so I removed this and added 'width: 100%;' as an attribute in the base.css file.  There is no change in the page but hopefully this will improve the Performance score.  I added an aria-label to the search button in the Header to improve accessibility.  I also added a meta description to improve SEO.  Lastly, I added 'rel="noreferrer"' to the anchor elements in the footer which opens social media pages in a new window.
 
 **Products**:
 
@@ -795,16 +795,43 @@ This page scores well generally but I wanted to imrpove the Performance score a 
 
 This pages scores highly across all sections.  I have added a meta description to hopefully improve the SEO score.
 
-
-
 **Product Details**:
+
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-details-before.pdf)
+
+This page scores pretty well already.  I have added an aria label to the increment and decrement buttons and added a meta description.  I also added a hidden label for the quantity input field.  Finally, I added 'rel="noreferrer"' to the anchor element which opens product images in a new window.
 
 
 **Basket**:
+
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-basket-before.pdf)
+
+This page scores poorly for accessibility.  I have added aria-labels to the  increment and decrement buttons.  I have also added a hidden label for the quantity input field.
+
+
 **Checkout**:
+
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-before.pdf)
+
+The performance of this page scores poorly due to the loading time.  There is a lot of JavaScript running on this page for the Stripe payment system as well as some custom JavaSCript to control the tab and prev/next behaviour.  There is nothing I can to do reduce this.  All I have done here is added a meta description.
+
 **Checkout Success**:
+
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-success-before.pdf)
+
+This scores pretty well across the board but I have added a meta description.
+
 **Account**:
+
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-account-before.pdf)
+
+I added a meta description and an aria-label to the buttons which expand and collapse the historic order details.
+
 **Contact Us**:
+
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-contact-before.pdf)
+
+The page scores well apart from SEO so I added a meta description.
 
 
 
