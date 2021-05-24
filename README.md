@@ -501,76 +501,76 @@ Aim:  Assess each of the user stories and ensure that my project delivers on the
 
 Methodology:  I will test each of the user stories in turn.  I will ensure that users are able to complete each story I set out at the start of this project.  The user stories are numbered below and I will refer to the numbers in the Results section beneath them:
 
-    1   As a shopper/visitor to the website, I want to:
-    a)  Immediately understand the range of products the website sells.
-    b)  Easily navigate categories and search for products.
-    c)  View images of the products available to purchase.
-    d)	View the prices and details of each product.
-    e)	Select a size of product (where applicable).
-    f)	Select between right-handed and left-handed equipment (where applicable).
-    g)	Select between male or female version of a product (where applicable).
-    h)	Add multiple products to a basket.
-    i)	View items in my basket.
-    j)	Adjust the quantities of items in my product including removing them from the basket entirely.
-    k)	View the total cost of the items in my basket.
-    l)	View any delivery cost applicable.
-    m)	Easily navigate to a checkout page.
-    n)  Contact the company.
+ 1   As a shopper/visitor to the website, I want to:
+ a)  Immediately understand the range of products the website sells.
+ b)  Easily navigate categories and search for products.
+ c)  View images of the products available to purchase.
+ d)	View the prices and details of each product.
+ e)	Select a size of product (where applicable).
+ f)	Select between right-handed and left-handed equipment (where applicable).
+ g)	Select between male or female version of a product (where applicable).
+ h)	Add multiple products to a basket.
+ i)	View items in my basket.
+ j)	Adjust the quantities of items in my product including removing them from the basket entirely.
+ k)	View the total cost of the items in my basket.
+ l)	View any delivery cost applicable.
+ m)	Easily navigate to a checkout page.
+ n)  Contact the company.
 
-    2   As a shopper/visitor who has decided to purchase one or more products, I want to:
-    a)	Exit the checkout process and return to the store so I can amend the products in my basket.
-    b)	Be able to provide personal details such as name and email address.
-    c)	Provide a delivery address for my products to be shipped to.
-    d)	Enter payment card details to complete a secure checkout.
-    e)	View my order and the total cost of it including delivery throughout the checkout process.
-    f)	See a confirmation message confirming that the order has been placed.
-    g)	Receive an email confirmation that the order has been placed.
+ 2   As a shopper/visitor who has decided to purchase one or more products, I want to:
+ a)	Exit the checkout process and return to the store so I can amend the products in my basket.
+ b)	Be able to provide personal details such as name and email address.
+ c)	Provide a delivery address for my products to be shipped to.
+ d)	Enter payment card details to complete a secure checkout.
+ e)	View my order and the total cost of it including delivery throughout the checkout process.
+ f)	See a confirmation message confirming that the order has been placed.
+ g)	Receive an email confirmation that the order has been placed.
 
-    3   As a shopper/visitor who intends to return to the website in future, I want to:
-    a)	Create an account.
-    b)	Store my personal and default delivery address details.
-    c)	Update my account details.
-    d)	View my past orders.
-    e)  Sign in and out of my account.
+ 3   As a shopper/visitor who intends to return to the website in future, I want to:
+ a)	Create an account.
+ b)	Store my personal and default delivery address details.
+ c)	Update my account details.
+ d)	View my past orders.
+ e)  Sign in and out of my account.
 
-    4   As an administrator of the website, I want to be able to:
-    a)	Use the admin panel to add products.
-    b)	Use the admin panel to update the details of products.
-    c)	Use the admin panel to delete products.
-    d)	Use the admin panel to delete users.
+ 4   As an administrator of the website, I want to be able to:
+ a)	Use the admin panel to add products.
+ b)	Use the admin panel to update the details of products.
+ c)	Use the admin panel to delete products.
+ d)	Use the admin panel to delete users.
 
 Results:
 
-    1a) On my Home page, there is a Shop Now front and center so users know immediately that the website has products to sekk.  I have a carousel containing pictures of sports equipment, clothing and footwear along with links to the products for sale and descriptions of each so users can quickly learn about the range of products available on my site.  The carousel automatically cycles through each but can be controlled by the user.
-    1b) As well as the links on the Home page, the navbar contains links to the Products available.  Users can view all products or select products belonging to a specific category or specific sport.  On small and medium screens, the navbar is collapsed behind a menu button in the header but since the header is fixed to the top of the page, users can quickly navigate to the products they are looking for with 2 or 3 clicks.  On +large screens, the navbar is hidden when users scroll down but appears again as soon as they scroll up.  This avoids users having to scroll right to the top of the page whilst saving screen real estate.  Users can navigate to the products they are looking for with a slight up scroll and 1 or 2 clicks.
-    1c & 1d) On the Products page, I have ensured product images take center stage.  I have only included the product name and price so as not to detract from the images or clutter the page with too much information.
-    1e) Products which have sizes (such as a cricket shirt) have a dropdown list so users can select the size they require.  Medium is selected by default on the Product Details page.
-    1f) On the Product Details page, products which have sides (such as golf clubs) have a dropdown list enabling users to select either a right-handed or left-handed version of the product.  Right-handed is selected by default.
-    1g)  Products which have a gender options (such as golf clubs), users have the option to select between Male or Female on the Product Details page.  Male is selected by default.
-    1h) Users can add multiple products to their basket.  More than 1 of each product can be added (e.g. 5 cricket balls can be added) and for products with sizes, sides or gender, the product can be added to the basket multiple times with different details (e.g. 2 male, right handed golf clubs and 1 female, left-handed set of golf clubs can be added to the basket).  As I was testing this, I encountered a bug which I have addressed below in the [Bugs Encountered During Testing](#basket-totals) section.
-    1i & 1j)  The Basket page enables users to view the items in their basket.  Users are also able to update the quantity of each item in their basket and/or remove items from their basket entirely.  To improve UX, the Basket link in the header includes the  number of items in the basket and their grand total cost so users always have a high level summary of their basket.
-    1k & 1l)  The Basket and Checkout pages both display the total cost of the items in the basket, the delivery cost and the grand total (items plus delivery cost).
-    1m)  I have ensured that the link to the Basket page is visible on screen at all times.  This means users can always access their basket with just one click.  From the Basket page, once users are happy with the items they have in their basket, they can proceed to the Checkout page with one click.  This means that users can reach the Checkout page from anywhere on my site with just 2 clicks.  Furthermore, when users add a product to their basket, I give them a preview of the basket in the toast message along with a link to the Basket page to further entice them into completing their purchase.
-    1n)  I have added a Contact page which users can reach from both the navbar and quick links section in the footer meaning the page can be reached from anywhere in the site with just 1 click.  Users can write a message in the textbox meaning their is no character limit.
+ 1a) On my Home page, there is a Shop Now front and center so users know immediately that the website has products to sekk.  I have a carousel containing pictures of sports equipment, clothing and footwear along with links to the products for sale and descriptions of each so users can quickly learn about the range of products available on my site.  The carousel automatically cycles through each but can be controlled by the user.
+ 1b) As well as the links on the Home page, the navbar contains links to the Products available.  Users can view all products or select products belonging to a specific category or specific sport.  On small and medium screens, the navbar is collapsed behind a menu button in the header but since the header is fixed to the top of the page, users can quickly navigate to the products they are looking for with 2 or 3 clicks.  On +large screens, the navbar is hidden when users scroll down but appears again as soon as they scroll up.  This avoids users having to scroll right to the top of the page whilst saving screen real estate.  Users can navigate to the products they are looking for with a slight up scroll and 1 or 2 clicks.
+ 1c & 1d) On the Products page, I have ensured product images take center stage.  I have only included the product name and price so as not to detract from the images or clutter the page with too much information.
+ 1e) Products which have sizes (such as a cricket shirt) have a dropdown list so users can select the size they require.  Medium is selected by default on the Product Details page.
+ 1f) On the Product Details page, products which have sides (such as golf clubs) have a dropdown list enabling users to select either a right-handed or left-handed version of the product.  Right-handed is selected by default.
+ 1g)  Products which have a gender options (such as golf clubs), users have the option to select between Male or Female on the Product Details page.  Male is selected by default.
+ 1h) Users can add multiple products to their basket.  More than 1 of each product can be added (e.g. 5 cricket balls can be added) and for products with sizes, sides or gender, the product can be added to the basket multiple times with different details (e.g. 2 male, right handed golf clubs and 1 female, left-handed set of golf clubs can be added to the basket).  As I was testing this, I encountered a bug which I have addressed below in the [Bugs Encountered During Testing](#basket-totals) section.
+ 1i & 1j)  The Basket page enables users to view the items in their basket.  Users are also able to update the quantity of each item in their basket and/or remove items from their basket entirely.  To improve UX, the Basket link in the header includes the  number of items in the basket and their grand total cost so users always have a high level summary of their basket.
+ 1k & 1l)  The Basket and Checkout pages both display the total cost of the items in the basket, the delivery cost and the grand total (items plus delivery cost).
+ 1m)  I have ensured that the link to the Basket page is visible on screen at all times.  This means users can always access their basket with just one click.  From the Basket page, once users are happy with the items they have in their basket, they can proceed to the Checkout page with one click.  This means that users can reach the Checkout page from anywhere on my site with just 2 clicks.  Furthermore, when users add a product to their basket, I give them a preview of the basket in the toast message along with a link to the Basket page to further entice them into completing their purchase.
+ 1n)  I have added a Contact page which users can reach from both the navbar and quick links section in the footer meaning the page can be reached from anywhere in the site with just 1 click.  Users can write a message in the textbox meaning their is no character limit.
 
-    2a) From the Checkout page, users can click either the link to the Basket page in the header or the 'Adjust Basket' link meaning there are two ways for them to back out of the checkout process and amend their basket further.
-    2b & 2c & 2d)  The checkout form has 3 fieldsets; one for each of these user stories.  Users must first provide their name, email address and phone number - these are all required fields.  They must then provide a delivery address - the street address 1, town/city and country fields are all required.  Finally, utilising Stripe, users have a payment field in which to enter their payment details in order to complete the secure checkout process.
-    2e)  The basket total, delivery cost and grand total are visible in both the Basket and Checkout pages.  Both pages also detail the contents of the basket; the Basket page lists all items out down the page while this is more compressed preview on the Checkout page though all of the basket details can be scolled through.  The grand total is also visible below the basket button in the header.  So users have multiple opportunities to view what they are purchasing and the total cost of it throughout the checkout process.
-    2f)  After successfully completing the secure checkout process, users are redirected to the Checkout Success page which thanks them for placing the order.  A success toast also confirms that the order has successfully been placed.
-    2g)  As well as the above, a confirmation email also gets sent to the user (to the email address provided during the checkout process) confirming that the order has been placed:
+ 2a) From the Checkout page, users can click either the link to the Basket page in the header or the 'Adjust Basket' link meaning there are two ways for them to back out of the checkout process and amend their basket further.
+ 2b & 2c & 2d)  The checkout form has 3 fieldsets; one for each of these user stories.  Users must first provide their name, email address and phone number - these are all required fields.  They must then provide a delivery address - the street address 1, town/city and country fields are all required.  Finally, utilising Stripe, users have a payment field in which to enter their payment details in order to complete the secure checkout process.
+ 2e)  The basket total, delivery cost and grand total are visible in both the Basket and Checkout pages.  Both pages also detail the contents of the basket; the Basket page lists all items out down the page while this is more compressed preview on the Checkout page though all of the basket details can be scolled through.  The grand total is also visible below the basket button in the header.  So users have multiple opportunities to view what they are purchasing and the total cost of it throughout the checkout process.
+ 2f)  After successfully completing the secure checkout process, users are redirected to the Checkout Success page which thanks them for placing the order.  A success toast also confirms that the order has successfully been placed.
+ 2g)  As well as the above, a confirmation email also gets sent to the user (to the email address provided during the checkout process) confirming that the order has been placed:
 
 ![Email confirmation received when order has been successfully placed](media/readme/images/checkout-success-email.png)
 
-    3a)  Users are able to register for an account.  If users are not already signed in, a link enticing them to register appears in the header and is visible throughout.  Furthermore, on the Checkout page, users not already logged in will see a Register button below the checkout form again enticing them to register for an account.  An account can be created by providing an email address, username and password.  A verification email is sent to the email address provided to ensure users own the email address they provide.  AllAuth handles the email account verification process.
-    3b & 3c)  On the Account page, users have the ability to complete a form to save their default delivery address and phone number.  This can be updated any time they log in.  Whether they choose to do this or not, users also have the option to save (or update) their default delivery address and phone number during the checkout process.  On the Checkout page under the checkout form, loggin users will see a checkbox which is selected by default which will save the delivery address and phone number for that order as their defaults.
-    3d)  From the Account page, users can view their previous orders.  Under the Order History section, users can do one of two things.  Firstly, each previous order is listed with some high level information - clicking the down arrow on each will expand the order revealing each item and quanity.  Alternatively, clicking the order number will direct them to the Checkout Success template which lists all details of the order including product images.  The second option contains all of the order details whereas the first lacks product images, line item totals, total cost and delivery cost.  However, I feel both of these options satisfy this user story.
-    3e)  Users can log in and log out of their account.  Users who are not signed in will see a Login button on the header at all times.  They will then be asked to provided their login credentials.  Users can login via 2 clicks and completing a form with their login credentials.  Furthermore, using the AllAuth templates, users who have forgotten their password are able to reset it from the Login page.  Users who are logged in can log out via the Logout button on the Account dropdown which is visible on the page header at all times.  Before being logged out, users are asked to confirm that they definitely wish to proceed.  This means users can logout with 3 clicks.
+ 3a)  Users are able to register for an account.  If users are not already signed in, a link enticing them to register appears in the header and is visible throughout.  Furthermore, on the Checkout page, users not already logged in will see a Register button below the checkout form again enticing them to register for an account.  An account can be created by providing an email address, username and password.  A verification email is sent to the email address provided to ensure users own the email address they provide.  AllAuth handles the email account verification process.
+ 3b & 3c)  On the Account page, users have the ability to complete a form to save their default delivery address and phone number.  This can be updated any time they log in.  Whether they choose to do this or not, users also have the option to save (or update) their default delivery address and phone number during the checkout process.  On the Checkout page under the checkout form, loggin users will see a checkbox which is selected by default which will save the delivery address and phone number for that order as their defaults.
+ 3d)  From the Account page, users can view their previous orders.  Under the Order History section, users can do one of two things.  Firstly, each previous order is listed with some high level information - clicking the down arrow on each will expand the order revealing each item and quanity.  Alternatively, clicking the order number will direct them to the Checkout Success template which lists all details of the order including product images.  The second option contains all of the order details whereas the first lacks product images, line item totals, total cost and delivery cost.  However, I feel both of these options satisfy this user story.
+ 3e)  Users can log in and log out of their account.  Users who are not signed in will see a Login button on the header at all times.  They will then be asked to provided their login credentials.  Users can login via 2 clicks and completing a form with their login credentials.  Furthermore, using the AllAuth templates, users who have forgotten their password are able to reset it from the Login page.  Users who are logged in can log out via the Logout button on the Account dropdown which is visible on the page header at all times.  Before being logged out, users are asked to confirm that they definitely wish to proceed.  This means users can logout with 3 clicks.
 
-    4a & 4b & 4c)  Superusers can access the admin panel - in the Account dropdown in the header, there is a link (Site Admin) which directs them to the admin panel.  From there, users can add, amend and products.  The below gif demonstrates a superuser creating a new product, updating the details and then deleting the product.  The effects of each action can be seen immediately in the frontend:
+ 4a & 4b & 4c)  Superusers can access the admin panel - in the Account dropdown in the header, there is a link (Site Admin) which directs them to the admin panel.  From there, users can add, amend and products.  The below gif demonstrates a superuser creating a new product, updating the details and then deleting the product.  The effects of each action can be seen immediately in the frontend:
 
 ![Using the admin panel to add, update and delete a product](media/readme/gifs/crud-new-product.gif)
 
-    4d)  Superusers can access the admin panel and from the Users model, they can delete a user.  The user the superuser chooses to delete will also have their email address and user profile deleted automatically from the Email Addresses and User Profiles models.  Any orders they have placed will not be deleted but there will be no user profile associated with the order.
+ 4d)  Superusers can access the admin panel and from the Users model, they can delete a user.  The user the superuser chooses to delete will also have their email address and user profile deleted automatically from the Email Addresses and User Profiles models.  Any orders they have placed will not be deleted but there will be no user profile associated with the order.
 
 #### Forms
 
@@ -621,44 +621,45 @@ Methodology:  I will perform a number of tests in turn to ensure that the form w
 
  1)  What validation is applied to each field?:
 
-    a)  Test each input field with various inputs such as letters, numbers and special characters?
-    b)  Can the form be submitted without entering a value in every required field?
+ a)  Test each input field with various inputs such as letters, numbers and special characters?
+ b)  Can the form be submitted without entering a value in every required field?
 
  2)  Does the form behave as expected?:
 
-    a)  The previous & next buttons and tabs which enable users to navigate the form should enable when all required fields have a value and be disabled otherwise.  These buttons to do conduct any validation checks other than whether a value is entered into a required field.
-    b)  If the users has saved their default phone number and delivery details, the form should pre-populate with this information.
-    c)  If the save delivery checkbox is ticked, completing the form should update/save the details to their user profile.
-    d)  If the save delivery checkbox is unticked, the default information should stay as it was i.e. it is not overwritten.
-    e)  If the checkbox is ticked but the form is rejected, the default details should not be saved (or updated).
+ a)  The previous & next buttons and tabs which enable users to navigate the form should enable when all required fields have a value and be disabled otherwise.  These buttons to do conduct any validation checks other than whether a value is entered into a required field.
+ b)  If the users has saved their default phone number and delivery details, the form should pre-populate with this information.
+ c)  If the save delivery checkbox is ticked, completing the form should update/save the details to their user profile.
+ d)  If the save delivery checkbox is unticked, the default information should stay as it was i.e. it is not overwritten.
+ e)  If the checkbox is ticked but the form is rejected, the default details should not be saved (or updated).
 
  3)  These actions should result in the checkout process not being completed.  The users payment details should be rejected.
 
-    a)  Use an blank, incomplete and incorrect card number.
-    b)  Use an blank, incomplete and incorrect expiry date.
-    c)  Use an blank, incomplete and incorrect CVV number.
-    d)  Use an blank, incomplete and postcode.
+ a)  Use an blank, incomplete and incorrect card number.
+ b)  Use an blank, incomplete and incorrect expiry date.
+ c)  Use an blank, incomplete and incorrect CVV number.
+ d)  Use an blank, incomplete and postcode.
 
  4)  What happens if a user enters their actual card details?
 
-    a)  The users card should not be charged since Stripe is only configured in test mode.
+ a)  The users card should not be charged since Stripe is only configured in test mode.
 
  5)  How does the checkout page handle interruptions following submission?:
 
-    a)  Is the payment processed and order completed if the user closes the browser or navigates to another website after submitting the form?
+ a)  Is the payment processed and order completed if the user closes the browser or navigates to another website after submitting the form?
 
 Results:
 
 The numbers entered in brackets represent inputs tested and underscores represent no value/blanks.
 
  1a)
-    - Full Name:  Any characters can be entered but there is a maximum length of 50 characters.
-    - Email Address:  There is a maximum length of 254 characters.  The validation rules are the same as for the Register page (see above).  If a user is already logged in, this field will already be populated with a valid email address which will eliminate some users from entering invalid information into this field.
-    - Phone Number:  There is a maximum length of 20 characters.  There is nothing stopping a user entering letters or special characters as well as numbers.  I have added this to the list of [Features Left To Implement**](#features-left-to-implement-/-known-bugs) above.
-    - Street Address 1 and 2 and County:  There are no restrictions on what characters can be entered into these fields but there is a limit of 80 characters.  The Street Address 1 field is required.
-    - Town or City:  There is no restrictions on what characters can be entered into these fields but there is a limit of 40 characters.
-    - Postcode:  There is no restrictions on what characters can be entered into these fields but there is a limit of 20 characters.
-    - Payment card details:  I test these separately in section 3 below.
+
+ - Full Name:  Any characters can be entered but there is a maximum length of 50 characters.
+ - Email Address:  There is a maximum length of 254 characters.  The validation rules are the same as for the Register page (see above).  If a user is already logged in, this field will already be populated with a valid email address which will eliminate some users from entering invalid information into this field.
+ - Phone Number:  There is a maximum length of 20 characters.  There is nothing stopping a user entering letters or special characters as well as numbers.  I have added this to the list of [Features Left To Implement**](#features-left-to-implement-/-known-bugs) above.
+ - Street Address 1 and 2 and County:  There are no restrictions on what characters can be entered into these fields but there is a limit of 80 characters.  The Street Address 1 field is required.
+ - Town or City:  There is no restrictions on what characters can be entered into these fields but there is a limit of 40 characters.
+ - Postcode:  There is no restrictions on what characters can be entered into these fields but there is a limit of 20 characters.
+ - Payment card details:  I test these separately in section 3 below.
  1b)  No.  The custom JavaScript which controls access to the tabs and next buttons is effectively frontend validation which prevents users from accessing the submit form (Complete Order) button.  Stripe also has frontend features which disable the Complete Order button.  Even if these are bypassed, there is backend validation which checks if the form data submitted is valid.
 
  2a)  On the Personal Details tab, the full name is not populated.  The Email Address will be pre-populated if the user has an account and is logged in.  The Phone Number field will only be pre-populated if the user has saved a default one.  All 3 fields are required so the Delivery Address tab and Next button are disabled.  They remain disabled until a value is entered into all 3 fields.  Once the last of the 3 fields has a value, they are enabled.  When a value is removed from any one of the 3 fields, they are disabled again.  The Summary & Pay is disabled throughout.  On the Delivery Address tab, the Street Address 1, Town/City and Country fields are all required.  These will already be pre-populated if the user is logged in and has previously saved their default delivery details.  Otherwise they will be blank.  In the instance of a user who is either not logged in or is logged in but hasn't saved their default details, the required fields will be blank.  The Summary & Pay tab and Next button are disabled but the Personal Details tab and Previous button are enabled.  When all 3 required fields have a value, the Summary & Pay tab and Next button are enabled.  When a value is removed (including resetting the Country field), they are disabled again.  When
@@ -668,7 +669,7 @@ The numbers entered in brackets represent inputs tested and underscores represen
  2e)  If the form is not successfully submitted (i.e. an incorrect card number (0000000000000000) is used), then the default delivery details do not get saved (or updated).
 
  3a)  If the card number is blank when the form is submitted, Stripe returns a message 'Your card number is incomplete' and the form is not submitted.  If the card number is incomplete (424242424242____), when tabbing or clicking to another field (i.e. the expiry date field), a Stripe error message appears to inform the user that 'Your card number is incomplete.'  The Complete Order button gets disabled.  Entering an incorrect card number results in one of two things happening; either Stripe provides a notification such as 'Your card number is invalid' and the Complete Order button gets disabled (9999999999999999), OR the form can be submitted and then Stripe validates the card number and the same notification appears on screen to inform users that 'Your card number is invalid' (0000000000000000).
- 3b)  If the expiry date is blank when the form is submitted, Stripe returns a message 'Your card's expiration date is incomplete' and the form is not submitted.  If the expiry date is not completed (12/__), tabbing or clicking to another field results in an error message from Stripe: 'Your card's expiration date is incomplete.'  The Complete Order button gets disabled.  An incorrect expiry date constitutes either a date which doesn't exist (13/21) or a date in the past (01/21).  It is not possible to enter a date which doesn't exist.  If a date in the past is enter (01/21), an error message from Stripe informs the user 'Your card's expiration date is in the past.'  The Complete Order button gets disabled.
+ 3b)  If the expiry date is blank when the form is submitted, Stripe returns a message 'Your card's expiration date is incomplete' and the form is not submitted.  If the expiry date is not completed (12/__ ), tabbing or clicking to another field results in an error message from Stripe: 'Your card's expiration date is incomplete.'  The Complete Order button gets disabled.  An incorrect expiry date constitutes either a date which doesn't exist (13/21) or a date in the past (01/21).  It is not possible to enter a date which doesn't exist.  If a date in the past is enter (01/21), an error message from Stripe informs the user 'Your card's expiration date is in the past.'  The Complete Order button gets disabled.
  3c)  If the CVV number is blank when the form is submitted, Stripe returns a message 'Your card's security code is incomplete' and the form is not submitted.  If the CVV number is incomplete (12_), a Stripe message appears on screen informing users that 'Your card's security code is incomplete.'  The Complete Order button gets disabled.  I am unsure what constitutes an incorrect CVV number since it is simply a 3 digit number.  It is not possible to enter any character other than numbers.  Using the test card number (4242424242424242), I was able to successfully complete the checkout process using both 000 and 999 as the CVV. 
  3d) It is not possible to enter a special character into this field (even using copy paste).  This field is hidden until a card number is required.  If the postcode is blank when the form is submitted, Stripe returns a message 'Your postal code is incomplete' and the form is not submitted.  Assuming that the test card number is used (4242 4242 4242 4242), the form expects a postcode of up to 5 numbers - letters and special characters cannot be entered.  Entering 1 number (1____) results in the same message from Stripe; 'Your postal code is incomplete.'  Any number less than 5 digits long is rejected by Stripe (12___, 123__, 1234_) with the same error message.  If this project was to be deployed as a fully functioning service with Stripe no longer in test mode, further testing may be required to ensure users can input more than just number, for example, can users in the UK enter a UK postcode?  When entering my own card number, the postcode field does allow letters and special characters as well as numbers and there appears to be no limit on how many characters a user can enter.  Whether this is still the case in the live Stripe configuration would need to be tested.  But for the purposes of this project, I am satisfied that this field functions as desired.
 
@@ -785,81 +786,81 @@ Results:  Below are links to the Lighthouse reports for each page of my website 
 
 **Home**:
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-home-before.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-home-before.pdf)
 
 This page scores well generally but I wanted to imrpove the Performance score a little bit.  One of the issues detailed in the report is that the images do not have explicit width and height.  The carousel images have a height of 100vh so that they always fill the viewport and I did not want to change this.  The width is 100% but it was inherited from the Bootstrap class 'w-100' so I removed this and added 'width: 100%;' as an attribute in the base.css file.  There is no change in the page but hopefully this will improve the Performance score.  I added an aria-label to the search button in the Header to improve accessibility.  I also added a meta description to improve SEO.  Lastly, I added 'rel="noreferrer"' to the anchor elements in the footer which opens social media pages in a new window.
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-home-after.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-home-after.pdf)
 
 The scores have improved across all 4 categories.
 
 **Products**:
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-before.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-before.pdf)
 
 This pages scores highly across all sections.  I have added a meta description to hopefully improve the SEO score.
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-after.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-after.pdf)
 
 The Performance score has decreased which is odd given that I have not made any chages that would effect this.  The Best Practices and SEO both have improved to receive perfect scores.  Overall, there is an improvement on this page.
 
 **Product Details**:
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-details-before.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-details-before.pdf)
 
 This page scores pretty well already.  I have added an aria label to the increment and decrement buttons and added a meta description.  I also added a hidden label for the quantity input field.  Finally, I added 'rel="noreferrer"' to the anchor element which opens product images in a new window.
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-details-after.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-details-after.pdf)
 
 Again, the Performance score has dropped but the score for the other 3 categories have improved.
 
 **Basket**:
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-basket-before.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-basket-before.pdf)
 
 This page scores poorly for accessibility.  I have added aria-labels to the  increment and decrement buttons.  I have also added a hidden label for the quantity input field.
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-basket-after.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-basket-after.pdf)
 
 The Performance score has dropped a little but the others have all improved.
 
 **Checkout**:
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-before.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-before.pdf)
 
 The performance of this page scores poorly due to the loading time.  There is a lot of JavaScript running on this page for the Stripe payment system as well as some custom JavaSCript to control the tab and prev/next behaviour.  There is nothing I can to do reduce this.  All I have done here is added a meta description.
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-after.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-after.pdf)
 
 Accessibility scores the same but there are improved scores for the other 3 categories.
 
 **Checkout Success**:
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-success-before.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-success-before.pdf)
 
 This scores pretty well across the board but I have added a meta description.
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-success-after.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-success-after.pdf)
 
 Performance decreases slightly but Best Practices and SEO now get perfect scores.
 
 **Account**:
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-account-before.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-account-before.pdf)
 
 I added a meta description and an aria-label to the buttons which expand and collapse the historic order details.
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-account-after.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-account-after.pdf)
 
 The Performance score has decreased but the other 3 areas have improved, notably SEO.
 
 **Contact Us**:
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-contact-before.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-contact-before.pdf)
 
 The page scores well apart from SEO so I added a meta description.
 
-![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-contact-after.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-contact-after.pdf)
 
 Performance decreases marginally but Best Practices and SEO now get perfect scores.
 
