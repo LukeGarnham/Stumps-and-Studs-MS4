@@ -964,7 +964,7 @@ Lastly, I manually created a media folder in the S3 bucket and uploaded all of t
 
 In my gmail account, I created a new app called ms4-stumps-and-studs.  A new password was generated for the app which I saved as a value in the Heroku environment for the variable EMAIL_HOST_PASS.  I also created a variable called EMAIL_HOST_USER to which I assigned my gmail account.
 
-In the global settings, I created an if statement so that when in the development environment, the default Django email configuration is used meaning emails are printed out in the console.  If not in the devleopment environment (i.e. in the deployed Heroku environment), I use the gmail configuration so that emails are actually issued to the user.  The password for the app (EMAIL_HOST_PASS) as well as the gmail email address (EMAIL_HOST_USER) are retrieved from the Heroku environment.
+In the global settings, I created an if statement so that when the 'USE_AWS' variable is in the environment, I use the gmail configuration so that emails are actually issued to the user.  The 'USE_AWS' variable is only in the Heroku environment and is set to True - I am re-using this from the [Connecting To My Amazon S3 Bucket](#connecting-to-my-amazon-s3-bucket) section above.  If not in the Heroku environment (i.e. in the GitPod environment), the default Django email configuration is used meaning emails are printed out in the console.  The password for the app (EMAIL_HOST_PASS) as well as the gmail email address (EMAIL_HOST_USER) are retrieved from the Heroku environment.
 
 ## Credits
 
