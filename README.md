@@ -674,11 +674,14 @@ The numbers entered in brackets represent inputs tested and underscores represen
 
  4a)  I entered my own card details.  The form does not get submitted and the checkout process is not completed.  I receive the following message on screen from Stripe:  'Your card was declined. Your request was in test mode, but used a non test card. For a list of valid test cards, visit: https://stripe.com/docs/testing.'  This works as expected.
 
- 5a)
+ 5a)  The webhook handler captures any signals from Stripe.  If a payment is completed but the process is interrupted before the form is submitted (to the checkout function in checkout views.py), then the webhook handler will check if the order was created in the Orders models.  If not, then it creates it.
 
 There is no way the checkout form can be bypassed to create an order.  The checkout works as expected and has passed all of the tests detailed above in this section.
 
 #### Login & Logout
+
+
+
 
 #### Responsive Design
 
@@ -776,9 +779,28 @@ All code has been validated through validation tools.  Some minor changes were m
 
 Aim:  Identify improvements that can be made to my site.
 
-Methodology:  I will run the Google Lighthouse Tool on my website.  This tool runs a range of checks and makes recommendations to improve performance, accessability, SEO and best practices.  I will then try to implement some of the recommendations and re-run the Lighthouse Tool to see if I have managed to improve my score.
+Methodology:  I will run the Google Lighthouse Tool on each page of my website.  This tool runs a range of checks and makes recommendations to improve performance, accessability, SEO and best practices.  I will then try to implement some of the recommendations and re-run the Lighthouse Tool to see if I have managed to improve my score.
 
-Results:  
+Results:  Below are links to the Lighthouse reports for each page of my website along with comments of any changes I made as a result and then the subsequent Lighthouse report showing any improvements.
+
+**Home**:
+
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-home-before.pdf)
+
+This page scores well generally but I wanted to imrpove the Performance score a little bit.  One of the issues detailed in the report is that the images do not have explicit width and height.  The carousel images have a height of 100vh so that they always fill the viewport and I did not want to change this.  The width is 100% but it was inherited from the Bootstrap class 'w-100' so I removed this and added 'width: 100%;' as an attribute in the base.css file.  There is no change in the page but hopefully this will improve the Performance score.  I added an aria-label to the search button in the Header to improve accessibility.  I also added a meta description to improve SEO.
+
+**Products**:
+
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-before.pdf)
+
+This pages scores highly across all sections.  I have added a meta description to hopefully improve the SEO score.
+
+**Product Details**:
+**Basket**:
+**Checkout**:
+**Checkout Success**:
+**Account**:
+**Contact Us**:
 
 
 
