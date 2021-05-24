@@ -17,6 +17,8 @@ import json
 
 @require_POST
 def cache_checkout_data(request):
+    print('cache_checkout_data')
+    print(request.POST.get('save_info'))
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -93,6 +95,8 @@ def checkout(request):
                     return redirect(reverse('view_basket'))
 
             request.session['save_info'] = 'save-info' in request.POST
+            print('checkout')
+            print('save-info' in request.POST)
             return redirect(reverse('checkout_success',
                             args=[order.order_number]))
         else:
