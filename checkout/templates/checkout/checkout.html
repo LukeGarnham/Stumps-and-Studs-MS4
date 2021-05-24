@@ -219,17 +219,4 @@
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
     <script src="{% static 'checkout/js/checkout_form_buttons.js' %}"></script>
 
-    <script>
-        $('#id-save-info').on('change', function() {
-            if ($(this).is(':checked')) {
-                $(this).attr('value', 'true');
-            } else {
-                $(this).attr('value', 'false');
-            }
-            var saveInfo = $('#id-save-info').val();
-        });
-
-    </script>
-
-
 {% endblock %}

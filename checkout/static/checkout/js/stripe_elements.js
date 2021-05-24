@@ -55,8 +55,7 @@ form.addEventListener('submit', function(ev) {
     $('#loading-overlay').fadeToggle(100);
 
     // Create boolean variable for whether user has checked the save info box.
-    // var saveInfo = $('#id-save-info').is(':checked');
-    var saveInfo = $('#id-save-info').val();
+    var saveInfo = $('#id-save-info').is(':checked');
     // Get the csrf token from the form.
     var csrfToken = $('input[name="csrfmiddlewaretoken').val();
     var postData = {
