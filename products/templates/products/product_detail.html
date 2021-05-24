@@ -24,7 +24,7 @@
                 <h4 class="d-md-none">{{ product.name }}</h4>
                 <div class="card border-0 rounded-0">
                     {% if product.image %}
-                        <a class="text-center" href="{{ product.image.url }}" target="_blank">
+                        <a class="text-center" href="{{ product.image.url }}" target="_blank" rel="noreferrer">
                             <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
                         </a>
                     {% else %}
