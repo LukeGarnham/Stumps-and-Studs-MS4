@@ -215,7 +215,9 @@ STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_MS4_WH_SECRET', '')
 
+# Email configuration.
 if 'USE_AWS' in os.environ:
+    # If in Heroku environment, us Gmail configuration.
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST = 'smtp.gmail.com'
@@ -224,5 +226,6 @@ if 'USE_AWS' in os.environ:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
 else:
+    # Otherwise, print emails to
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DEFAULT_FROM_EMAIL = 'contactus@stumpsandstuds.com'

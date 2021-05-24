@@ -17,6 +17,9 @@ import json
 
 @require_POST
 def cache_checkout_data(request):
+    print('Cache')
+    print(request.POST)
+    print('save_info: ' + request.POST.get('save_info'))
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -169,7 +172,7 @@ def checkout_success(request, order_number):
 
         # If user has selected to save the order information to their
         # profile, then update their default details in their user profile.
-        if save_info:
+        if save_info is True:
             profile_data = {
                 'default_phone_number': order.phone_number,
                 'default_street_address1': order.street_address1,
