@@ -789,7 +789,9 @@ Results:  Below are links to the Lighthouse reports for each page of my website 
 
 This page scores well generally but I wanted to imrpove the Performance score a little bit.  One of the issues detailed in the report is that the images do not have explicit width and height.  The carousel images have a height of 100vh so that they always fill the viewport and I did not want to change this.  The width is 100% but it was inherited from the Bootstrap class 'w-100' so I removed this and added 'width: 100%;' as an attribute in the base.css file.  There is no change in the page but hopefully this will improve the Performance score.  I added an aria-label to the search button in the Header to improve accessibility.  I also added a meta description to improve SEO.  Lastly, I added 'rel="noreferrer"' to the anchor elements in the footer which opens social media pages in a new window.
 
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-home-after.pdf)
 
+The scores have improved across all 4 categories.
 
 **Products**:
 
@@ -797,12 +799,19 @@ This page scores well generally but I wanted to imrpove the Performance score a 
 
 This pages scores highly across all sections.  I have added a meta description to hopefully improve the SEO score.
 
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-after.pdf)
+
+The Performance score has decreased which is odd given that I have not made any chages that would effect this.  The Best Practices and SEO both have improved to receive perfect scores.  Overall, there is an improvement on this page.
+
 **Product Details**:
 
 ![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-details-before.pdf)
 
 This page scores pretty well already.  I have added an aria label to the increment and decrement buttons and added a meta description.  I also added a hidden label for the quantity input field.  Finally, I added 'rel="noreferrer"' to the anchor element which opens product images in a new window.
 
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-details-after.pdf)
+
+Again, the Performance score has dropped but the score for the other 3 categories have improved.
 
 **Basket**:
 
@@ -810,6 +819,9 @@ This page scores pretty well already.  I have added an aria label to the increme
 
 This page scores poorly for accessibility.  I have added aria-labels to the  increment and decrement buttons.  I have also added a hidden label for the quantity input field.
 
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-basket-after.pdf)
+
+The Performance score has dropped a little but the others have all improved.
 
 **Checkout**:
 
@@ -817,11 +829,19 @@ This page scores poorly for accessibility.  I have added aria-labels to the  inc
 
 The performance of this page scores poorly due to the loading time.  There is a lot of JavaScript running on this page for the Stripe payment system as well as some custom JavaSCript to control the tab and prev/next behaviour.  There is nothing I can to do reduce this.  All I have done here is added a meta description.
 
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-after.pdf)
+
+Accessibility scores the same but there are improved scores for the other 3 categories.
+
 **Checkout Success**:
 
 ![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-success-before.pdf)
 
 This scores pretty well across the board but I have added a meta description.
+
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-checkout-success-after.pdf)
+
+Performance decreases slightly but Best Practices and SEO now get perfect scores.
 
 **Account**:
 
@@ -829,14 +849,21 @@ This scores pretty well across the board but I have added a meta description.
 
 I added a meta description and an aria-label to the buttons which expand and collapse the historic order details.
 
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-account-after.pdf)
+
+The Performance score has decreased but the other 3 areas have improved, notably SEO.
+
 **Contact Us**:
 
 ![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-contact-before.pdf)
 
 The page scores well apart from SEO so I added a meta description.
 
+![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-contact-after.pdf)
 
+Performance decreases marginally but Best Practices and SEO now get perfect scores.
 
+Overall, the Performance scores decreased slightly.  I am not sure of the reason behind this.  There are a lot of images of products throughout many of the pages which could explain why this increases loading times leading to lower scores than the other 3 categories.  However, the Accessibility, Best Practices and SEO scores generally improved.
 
 ### Bugs Encountered During Testing
 
