@@ -789,6 +789,8 @@ Results:  Below are links to the Lighthouse reports for each page of my website 
 
 This page scores well generally but I wanted to imrpove the Performance score a little bit.  One of the issues detailed in the report is that the images do not have explicit width and height.  The carousel images have a height of 100vh so that they always fill the viewport and I did not want to change this.  The width is 100% but it was inherited from the Bootstrap class 'w-100' so I removed this and added 'width: 100%;' as an attribute in the base.css file.  There is no change in the page but hopefully this will improve the Performance score.  I added an aria-label to the search button in the Header to improve accessibility.  I also added a meta description to improve SEO.  Lastly, I added 'rel="noreferrer"' to the anchor elements in the footer which opens social media pages in a new window.
 
+
+
 **Products**:
 
 ![Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-before.pdf)
