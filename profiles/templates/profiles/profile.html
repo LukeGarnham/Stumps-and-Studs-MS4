@@ -2,6 +2,10 @@
 {% load static %}
 {% block head_title %}| My Account{% endblock %}
 
+{% block extra_meta %}
+    <meta name="Stumps & Studs - view your account details before buying our range of the latest sports equipment, clothing and footwear.">
+{% endblock %}
+
 {% block content %}
     <div class="container-fluid px-3 px-sm-5 py-5">
         <div class="row">
@@ -106,7 +110,7 @@
                                     </div>
                                 {% endfor %}
                             </div>
-                            <button class="view-order m-0 p-0 border-0 bg-white d-block w-100 purple-hover" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ order.order_number }}" aria-expanded="false" aria-controls="collapse_{{ order.order_number }}">
+                            <button class="view-order m-0 p-0 border-0 bg-white d-block w-100 purple-hover" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ order.order_number }}" aria-expanded="false" aria-controls="collapse_{{ order.order_number }}" aria-label="Button to toggle (expand and collapse) order details for historic order number {{ order.order_number }}">
                                 <i class="fas fa-caret-down"></i>
                                 <i class="fas fa-caret-up d-none"></i>
                             </button>
