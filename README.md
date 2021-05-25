@@ -399,15 +399,15 @@ When converting the delivery cost to a string and then a decimal this was the ou
 
 I decided it was best practice to convert the delivery cost to a string and and then a decimal.  With the delivery cost now the same variable type as the total cost, both decimal, I was able to successfully add the two variables together.
 
-#### Checkout Success
+#### Checkout Form Next/Prev Buttons
 
 In the Checkout page, I created tabs using [Bootstrap](https://getbootstrap.com/docs/5.0/components/navs-tabs/#javascript-behavior) so that users can enter personal, delivery and payment details on separate tabs.  I used JavaScript to enable functionality so users can click either the tabs or previous/next buttons to navigate through each step of the process.  This is housed in checkout_form_buttons.js within the static folder in the checkout app.  I prevent users from moving onto the next step unless there is a value in all required fields.  Originally, I created functions which were triggered when there is any input on a required field.  After I completed the profiles app, I noticed a bug with this.
 
-The profile app allows users to save the default delivery information which the checkout app can retrieve and pre-populate the form with.  This meant that the checkout app could be loaded with all of the required fields in the edlivery tab already populated.  Since the next button on the delivery tab and 'Summary & Pay' tab are both disabled by default when the page loads, users cannot move onto the final tab unless they input something (i.e. change the default value) in one of the required fields:
+The profile app allows users to save the default delivery information which the checkout app can retrieve and pre-populate the form with.  This meant that the checkout app could be loaded with all of the required fields in the delivery tab already populated.  Since the next button on the delivery tab and 'Summary & Pay' tab are both disabled by default when the page loads, users cannot move onto the final tab unless they input something (i.e. change the default value) in one of the required fields:
 
 ![Checkout page bug before fix](media/readme/gifs/checkout-bug-before.gif)
 
-To resolve this issue, I added another JavaScript function which checks the required fields on loading and updates the buttons and tabs accordingly.  This means that if the required fields in the delivery tab are already populated, the next button and 'Summary & Pay' tab are both enabled, thus improving the user experience:
+To resolve this issue, I modified the JavaScript so that when a user clicks either the next button or a tab header, not only does that tab become active but I also check the required fields on it.  This means that if the required fields in the tab arrived at are already populated, the next button and next tab header both get enabled.  So in the specific bug, when a user has populated the 3 required fields in the 'Personal Details' tab and they then click either the Next button or 'Delivery Details' tab, the required fields on the 'Delivery Details' section are immediately checked and the Next button and the 'Summary & Pay' tab are both enabled, thus improving the user experience:
 
 ![Checkout page bug after fix](media/readme/gifs/checkout-bug-after.gif)
 
@@ -482,29 +482,33 @@ Aim:  I must ensure users cannot access pages they are not authorised to access 
 
 Methodology:  I will test each of these scenarios which could see a user access a page they should be able to.  Users should not be able to:
  - Navigate to the Checkout page while having no items in the basket.
- - Navigate to the Account page while not logged in.  I will copy the URL when logged in, then log out and then copy and paste the URL to ensure I am not directed to the Account page.
+ - Navigate to the Account while not logged in.  I will copy the URL when logged in, then log out and then copy and paste the URL to ensure I am not directed to the Account page.
+ - Navigate to the Log Out while not logged in.  I will copy the URL when logged in, then log out and then copy and paste the URL to ensure I am not directed to the Log Out page.
+ - Navigate to the Log In page while already logged in.  I will copy the URL when logged out, then log in and then copy and paste the URL to ensure I am not directed to the Log In page.
  - Navigate to the admin panel when not logged in as a superuser.
 
 Results:
 
  - If there are no items in the basket, users are unable to access the Checkout page.  Instead they are redirected to the Products page and an error message (toast) is presented explaining that 'There's nothing in your basket at the moment'.
  - When trying to access the Account page when not logged in, users are redirected to the Login page.  The link to the Account page sits in the Account dropdown in the header - this link is not visible to users who are not logged in.
+ - When not logged in, users cannot access the Log In page.  Instead they are redirected to the Home page.
+ - When already logged in, users cannot access the Log In page.  They are instead redirected to the Home page.
  - If users are not logged in, they can manually enter the URL for the admin panel but will see the admin login page so they cannot reach the admin panel.  If a user is logged in but is not a superuser, they will also see the admin login page along with a message advising them they are not authenticated to access the page:
 
  ![Admin login message a non-superuser sees when trying to access the admin panel](media/readme/images/admin-login.png)
 
-NB:  Users are able to navigate to the Checkout Success page for an order that isn't theirs.  Using the order number, anyone can access the Checkout Success page to view the order details.  Since users do not need to be signed in to place an order, there is no authorisation required to access this page.  However, in order to view someone else's order, the 32 character long order number is required.  This is sent to the email address provided when a user completes the checkout process so unless they pass this on to someone else, no one is likely to view the order but them.  Order numbers are not sequential.  Guessing a 32 character string which matches an order number in the Orders models is extremely unlikely.  If this was done, the order cannot be modified through the Checkout Success page though address details are visible which could constitute a breach of GDPR.  One solution that I might look to implement in future is to add some authentication around accessing this page or perhaps only show the delivery address details if the user is logged in and the order belongs to them.
+NB:  Users are able to navigate to the Checkout Success page for an order that isn't theirs.  Using the order number, anyone can access the Checkout Success page to view the order details.  Since users do not need to be signed in to place an order, there is no authorisation required to access this page.  However, in order to view someone else's order, the 32 long aphanumeric order number is required.  This is sent to the email address provided when a user completes the checkout process so unless they pass this on to someone else, no one is likely to view the order but them.  Order numbers are not sequential.  Guessing a 32 character string which matches an order number in the Orders models is extremely unlikely.  If this was done, the order cannot be modified through the Checkout Success page though address details are visible which could constitute a breach of GDPR.  One future change I could make is to only show the delivery address details if the user is logged in and the order belongs to them and if not, only show them the ordered items without any personal or delivery information.
 
 #### Test User Stories
 
-Aim:  Assess each of the user stories and ensure that my project delivers on them all.
+Aim:  Assess each of the user stories to ensure that my project delivers on them all.
 
-Methodology:  I will test each of the user stories in turn.  I will ensure that users are able to complete each story I set out at the start of this project.  The user stories are numbered below and I will refer to the numbers in the Results section beneath them:
+Methodology:  I will test each of the user stories in turn.  I will ensure that users are able to complete each story I set out at the start of this project.  The user stories are numbered below and I will refer to the numbers in the Results section beneath them where I explain how each is fulfilled:
 
- 1   As a shopper/visitor to the website, I want to:
- a)  Immediately understand the range of products the website sells.
- b)  Easily navigate categories and search for products.
- c)  View images of the products available to purchase.
+ 1  As a shopper/visitor to the website, I want to:
+ a) Immediately understand the range of products the website sells.
+ b) Easily navigate categories and search for products.
+ c) View images of the products available to purchase.
  d)	View the prices and details of each product.
  e)	Select a size of product (where applicable).
  f)	Select between right-handed and left-handed equipment (where applicable).
@@ -515,9 +519,9 @@ Methodology:  I will test each of the user stories in turn.  I will ensure that 
  k)	View the total cost of the items in my basket.
  l)	View any delivery cost applicable.
  m)	Easily navigate to a checkout page.
- n)  Contact the company.
+ n) Contact the company.
 
- 2   As a shopper/visitor who has decided to purchase one or more products, I want to:
+ 2  As a shopper/visitor who has decided to purchase one or more products, I want to:
  a)	Exit the checkout process and return to the store so I can amend the products in my basket.
  b)	Be able to provide personal details such as name and email address.
  c)	Provide a delivery address for my products to be shipped to.
@@ -526,14 +530,14 @@ Methodology:  I will test each of the user stories in turn.  I will ensure that 
  f)	See a confirmation message confirming that the order has been placed.
  g)	Receive an email confirmation that the order has been placed.
 
- 3   As a shopper/visitor who intends to return to the website in future, I want to:
+ 3  As a shopper/visitor who intends to return to the website in future, I want to:
  a)	Create an account.
  b)	Store my personal and default delivery address details.
  c)	Update my account details.
  d)	View my past orders.
- e)  Sign in and out of my account.
+ e) Sign in and out of my account.
 
- 4   As an administrator of the website, I want to be able to:
+ 4  As an administrator of the website, I want to be able to:
  a)	Use the admin panel to add products.
  b)	Use the admin panel to update the details of products.
  c)	Use the admin panel to delete products.
@@ -541,16 +545,16 @@ Methodology:  I will test each of the user stories in turn.  I will ensure that 
 
 Results:
 
- 1a) On my Home page, there is a Shop Now front and center so users know immediately that the website has products to sekk.  I have a carousel containing pictures of sports equipment, clothing and footwear along with links to the products for sale and descriptions of each so users can quickly learn about the range of products available on my site.  The carousel automatically cycles through each but can be controlled by the user.
- 1b) As well as the links on the Home page, the navbar contains links to the Products available.  Users can view all products or select products belonging to a specific category or specific sport.  On small and medium screens, the navbar is collapsed behind a menu button in the header but since the header is fixed to the top of the page, users can quickly navigate to the products they are looking for with 2 or 3 clicks.  On +large screens, the navbar is hidden when users scroll down but appears again as soon as they scroll up.  This avoids users having to scroll right to the top of the page whilst saving screen real estate.  Users can navigate to the products they are looking for with a slight up scroll and 1 or 2 clicks.
- 1c & 1d) On the Products page, I have ensured product images take center stage.  I have only included the product name and price so as not to detract from the images or clutter the page with too much information.
+ 1a) On my Home page, there is a Shop Now button front and center so users know immediately that the website has products to sell.  I have a carousel containing pictures of sports equipment, clothing and footwear along with links to the products for sale and descriptions of each so users can quickly learn about the range of products available on my site.  The carousel automatically cycles through each image but users can cycle through them manually as well.
+ 1b) As well as the links on the Home page, the navbar contains links to the Products available.  Users can view all products or select products belonging to a specific category or specific sport.  On small and medium screens, the navbar is collapsed behind a menu button in the header but since the header is fixed to the top of the page, users can quickly navigate to the products they are looking for with 2 or 3 clicks.  On +large screens, the navbar is hidden when users scroll down but appears again as soon as they scroll up.  This avoids users having to scroll right to the top of the page whilst saving screen real estate.  Users can navigate to the products they are looking for with a slight up scroll and 1 or 2 clicks.  There are also links to products for each category in the quick links section in the footer.
+ 1c & 1d) On the Products page, I have ensured product images take center stage.  I have only included the product name and price so as not to detract from the images or clutter the page with too much information.  On the Product Details page, each product has a description explaining what it is.
  1e) Products which have sizes (such as a cricket shirt) have a dropdown list so users can select the size they require.  Medium is selected by default on the Product Details page.
  1f) On the Product Details page, products which have sides (such as golf clubs) have a dropdown list enabling users to select either a right-handed or left-handed version of the product.  Right-handed is selected by default.
- 1g)  Products which have a gender options (such as golf clubs), users have the option to select between Male or Female on the Product Details page.  Male is selected by default.
+ 1g)  For products which have gender options (such as golf clubs), users have the option to select between Male or Female on the Product Details page.  Male is selected by default.
  1h) Users can add multiple products to their basket.  More than 1 of each product can be added (e.g. 5 cricket balls can be added) and for products with sizes, sides or gender, the product can be added to the basket multiple times with different details (e.g. 2 male, right handed golf clubs and 1 female, left-handed set of golf clubs can be added to the basket).  As I was testing this, I encountered a bug which I have addressed below in the [Bugs Encountered During Testing](#basket-totals) section.
  1i & 1j)  The Basket page enables users to view the items in their basket.  Users are also able to update the quantity of each item in their basket and/or remove items from their basket entirely.  To improve UX, the Basket link in the header includes the  number of items in the basket and their grand total cost so users always have a high level summary of their basket.
  1k & 1l)  The Basket and Checkout pages both display the total cost of the items in the basket, the delivery cost and the grand total (items plus delivery cost).
- 1m)  I have ensured that the link to the Basket page is visible on screen at all times.  This means users can always access their basket with just one click.  From the Basket page, once users are happy with the items they have in their basket, they can proceed to the Checkout page with one click.  This means that users can reach the Checkout page from anywhere on my site with just 2 clicks.  Furthermore, when users add a product to their basket, I give them a preview of the basket in the toast message along with a link to the Basket page to further entice them into completing their purchase.
+ 1m)  I have ensured that the link to the Basket page is visible on screen at all times.  This means users can always access their basket with just one click.  From the Basket page, once users are happy with the items they have in their basket, they can proceed to the Checkout page with one click.  This means that users can reach the Checkout page from anywhere on my site with just 2 clicks.  Furthermore, when users add a product to their basket, I give them a preview of the basket in the toast message along with a link to the Basket page to further entice them into completing their purchase.  Users do not need to create an account or log in to purchase products.
  1n)  I have added a Contact page which users can reach from both the navbar and quick links section in the footer meaning the page can be reached from anywhere in the site with just 1 click.  Users can write a message in the textbox meaning their is no character limit.
 
  2a) From the Checkout page, users can click either the link to the Basket page in the header or the 'Adjust Basket' link meaning there are two ways for them to back out of the checkout process and amend their basket further.
@@ -561,16 +565,16 @@ Results:
 
 ![Email confirmation received when order has been successfully placed](media/readme/images/checkout-success-email.png)
 
- 3a)  Users are able to register for an account.  If users are not already signed in, a link enticing them to register appears in the header and is visible throughout.  Furthermore, on the Checkout page, users not already logged in will see a Register button below the checkout form again enticing them to register for an account.  An account can be created by providing an email address, username and password.  A verification email is sent to the email address provided to ensure users own the email address they provide.  AllAuth handles the email account verification process.
- 3b & 3c)  On the Account page, users have the ability to complete a form to save their default delivery address and phone number.  This can be updated any time they log in.  Whether they choose to do this or not, users also have the option to save (or update) their default delivery address and phone number during the checkout process.  On the Checkout page under the checkout form, loggin users will see a checkbox which is selected by default which will save the delivery address and phone number for that order as their defaults.
+ 3a)  Users are able to register for an account.  If users are not already signed in, a link enticing them to register appears in the header and is visible throughout the site.  Furthermore, on the Checkout page, users not already logged in will see a Register button below the checkout form again enticing them to register for an account.  An account can be created by providing an email address, username and password.  A verification email is sent to the email address provided to ensure users own the email address they provide.  AllAuth handles the email account verification process.
+ 3b & 3c)  On the Account page, users have the ability to complete a form to save their default delivery address and phone number.  This can be updated any time they log in.  Whether they choose to do this or not, users also have the option to save (or update) their default delivery address and phone number during the checkout process.  On the Checkout page under the checkout form, logged in users will see a checkbox which is selected by default which will save the delivery address and phone number for that order as their defaults.
  3d)  From the Account page, users can view their previous orders.  Under the Order History section, users can do one of two things.  Firstly, each previous order is listed with some high level information - clicking the down arrow on each will expand the order revealing each item and quanity.  Alternatively, clicking the order number will direct them to the Checkout Success template which lists all details of the order including product images.  The second option contains all of the order details whereas the first lacks product images, line item totals, total cost and delivery cost.  However, I feel both of these options satisfy this user story.
  3e)  Users can log in and log out of their account.  Users who are not signed in will see a Login button on the header at all times.  They will then be asked to provided their login credentials.  Users can login via 2 clicks and completing a form with their login credentials.  Furthermore, using the AllAuth templates, users who have forgotten their password are able to reset it from the Login page.  Users who are logged in can log out via the Logout button on the Account dropdown which is visible on the page header at all times.  Before being logged out, users are asked to confirm that they definitely wish to proceed.  This means users can logout with 3 clicks.
 
- 4a & 4b & 4c)  Superusers can access the admin panel - in the Account dropdown in the header, there is a link (Site Admin) which directs them to the admin panel.  From there, users can add, amend and products.  The below gif demonstrates a superuser creating a new product, updating the details and then deleting the product.  The effects of each action can be seen immediately in the frontend:
+ 4a & 4b & 4c)  Superusers can access the admin panel - in the Account dropdown in the header, there is a link (Site Admin) which directs them to the admin panel.  From there, users can add, amend and delete products.  The below gif demonstrates a superuser creating a new product, updating the details and then deleting the product.  The effects of each action can be seen immediately in the frontend:
 
 ![Using the admin panel to add, update and delete a product](media/readme/gifs/crud-new-product.gif)
 
- 4d)  Superusers can access the admin panel and from the Users model, they can delete a user.  The user the superuser chooses to delete will also have their email address and user profile deleted automatically from the Email Addresses and User Profiles models.  Any orders they have placed will not be deleted but there will be no user profile associated with the order.
+ 4d)  Superusers can access the admin panel and from the Users model, they can delete a user.  The user the superuser chooses to delete will also have their email address and user profile deleted automatically from the Email Addresses and User Profiles models.  Any orders they have placed will not be deleted but there will be no user profile associated with the order(s).
 
 #### Forms
 
@@ -592,21 +596,21 @@ Results:
     - Email:  This must contain an @ symbol with text either side of it.  After the @ symbol, there must be a full stop followed by more text.  Whilst it is relatively easy to enter an email address which satisfies this, to ensure the email is a real one, an authentication is emailed to the address provided so only genuine email accounts can be verified.  If a user tries to login without having verified their email address, another verification email is issued to them and they cannot complete the login process.  Users cannot register with an email address that already has an account.
     - Username:  This can only contain letters, numbers, and @/./+/-/_ characters.  There isn't any minimum or maximum length.
     - Password & Password (again):  Both fields must have matching values and contain a minimum of 8 characters.  There are some sophisticated validation rules applied to these fields by AllAuth such as preventing common passwords such as 'password' or using a password which is similar to the email address.  Passwords cannot be entirely numeric.
- - Login:  The credentials entered here must match those provided by a user.  I haven't set up a limit to the number of attempts that a user can make to login.
+ - Login:  An email address and password is required to login.  I chose to configure AllAuth to not accept a username for logging in.  The credentials entered here must match those provided by a user when they registered (unless they've since updated their password).  I haven't set up a limit to the number of attempts that a user can make to login.
     - Email:  This must contain an @ symbol with text either side of it.  After the @ symbol, there must be a full stop followed by more text.
-    - Password:  There doesn't appear to be any validation rules preventing users from entering what they want but of course, the real validation comes when checking whether the password matches the one provided by the user when registering for an account.
+    - Password:  There doesn't appear to be any validation rules preventing users from entering what they want but of course, the real validation comes when checking whether the password matches the hashed one in the database (whichwill either be the one provided by the user when registering for an account or the most recently updated one).
  - Reset Password:
     - Email:  Only email addresses that have been registered are valid.  There are some frontend validation rules too which mirror the Register and Login forms.
  - Change Password:
-    - Current Password:  This must match the password the user uses to login.
-    - New Password and New Password Again:  The same validation that applies to the password field in when registering apply - see Register above.
+    - Current Password:  This must match the hashed password in the database.
+    - New Password and New Password Again:  The same sophisticated AllAuth validation rules that apply to the password field when registering for an account apply to this field too - see Register above.
  - Add to Basket:
-    - Quantity:  The increment and decrement buttons aim to prevent users from entering a number above 99 or below 1, however users can manually type into the cell and then click the 'Add to Basket' button.  Users are prevented from entering any letters or special character into the field - only numbers can be entered.  If a user enters a number outside of the range 1-99, there is frontend validation preventing the user from doing so - see screenshot below.  However, users can remove values from the field and click the 'Add to Basket' button - at this point I discovered a bug which I have addressed in the [Bugs Encountered During Testing](#product-quantities) section below.
+    - Quantity:  The increment and decrement buttons aim to prevent users from entering a number above 99 or below 1, however users can manually type into the cell and then click the 'Add to Basket' button.  Users are prevented from entering any letters or special character into the field - only numbers can be entered.  If a user enters a number outside of the range 1-99, there is frontend validation preventing the user from doing so - see screenshot below.  However, users can remove values from the field and click the 'Add to Basket' button - at this point I discovered a bug which I have addressed in the [Bugs Encountered During Testing](#product-quantities) section below.  After fixing this bug, users receive an error message (toast) informing them that the product has not been added to their basket.
 
 ![Frontend validation preventing users entering a quantity outside of the range 1-99](media/readme/images/quantity-outside-range.png)
 
  - Update Basket:
-    - Quantity:  The fix deployed for the bug mentioned abovefor the add to basket form was also deployed to the adjust_basket function in the basket views.py file.  Users can only enter numerical values into this field but if they enter a blank value, there is error handling built into the backend to warn the user and the quantity in the basket is not updated.  If a number greater than 99 is entered, the quantity is capped at 99 while if a number less than 1 is submitted, the item is removed from the basket.
+    - Quantity:  The fix deployed for the bug mentioned above for the add to basket form was also deployed to the adjust_basket function in the basket views.py file.  Users can only enter numerical values into this field but if they enter a blank value, there is error handling built into the backend to warn the user and the quantity in the basket is not updated.  If a number greater than 99 is entered, the quantity is capped at 99 while if a number less than 1 is submitted, the item is removed from the basket.
 
  - Contact Us:  All 3 fields are required.
     - Name:  There is no restriction on the characters entered but there is a maximum length of 50 characters imposed.
@@ -615,7 +619,7 @@ Results:
 
 #### Checkout Form
 
-Aim:  Ensure that the checkout process works correctly, cannot be bipassed and still works even if the process is interrupted.
+Aim:  Ensure that the checkout process works correctly, cannot be bypassed and still works even if the process is interrupted.
 
 Methodology:  I will perform a number of tests in turn to ensure that the form works as desired.  There are a number of outcomes I would expect when certain actions are undertaken:
 
@@ -626,7 +630,7 @@ Methodology:  I will perform a number of tests in turn to ensure that the form w
 
  2)  Does the form behave as expected?:
 
- a)  The previous & next buttons and tabs which enable users to navigate the form should enable when all required fields have a value and be disabled otherwise.  These buttons to do conduct any validation checks other than whether a value is entered into a required field.
+ a)  The previous & next buttons and tabs which enable users to navigate the form should enable when all required fields have a value and be disabled otherwise.  These buttons do not conduct any validation checks other than whether a value is entered into a required field.
  b)  If the users has saved their default phone number and delivery details, the form should pre-populate with this information.
  c)  If the save delivery checkbox is ticked, completing the form should update/save the details to their user profile.
  d)  If the save delivery checkbox is unticked, the default information should stay as it was i.e. it is not overwritten.
@@ -634,10 +638,10 @@ Methodology:  I will perform a number of tests in turn to ensure that the form w
 
  3)  These actions should result in the checkout process not being completed.  The users payment details should be rejected.
 
- a)  Use an blank, incomplete and incorrect card number.
- b)  Use an blank, incomplete and incorrect expiry date.
- c)  Use an blank, incomplete and incorrect CVV number.
- d)  Use an blank, incomplete and postcode.
+ a)  Use a blank, incomplete and incorrect card number.
+ b)  Use a blank, incomplete and incorrect expiry date.
+ c)  Use a blank, incomplete and incorrect CVV number.
+ d)  Use a blank, incomplete and postcode.
 
  4)  What happens if a user enters their actual card details?
 
@@ -662,7 +666,7 @@ The numbers entered in brackets represent inputs tested and underscores represen
  - Payment card details:  I test these separately in section 3 below.
  1b)  No.  The custom JavaScript which controls access to the tabs and next buttons is effectively frontend validation which prevents users from accessing the submit form (Complete Order) button.  Stripe also has frontend features which disable the Complete Order button.  Even if these are bypassed, there is backend validation which checks if the form data submitted is valid.
 
- 2a)  On the Personal Details tab, the full name is not populated.  The Email Address will be pre-populated if the user has an account and is logged in.  The Phone Number field will only be pre-populated if the user has saved a default one.  All 3 fields are required so the Delivery Address tab and Next button are disabled.  They remain disabled until a value is entered into all 3 fields.  Once the last of the 3 fields has a value, they are enabled.  When a value is removed from any one of the 3 fields, they are disabled again.  The Summary & Pay is disabled throughout.  On the Delivery Address tab, the Street Address 1, Town/City and Country fields are all required.  These will already be pre-populated if the user is logged in and has previously saved their default delivery details.  Otherwise they will be blank.  In the instance of a user who is either not logged in or is logged in but hasn't saved their default details, the required fields will be blank.  The Summary & Pay tab and Next button are disabled but the Personal Details tab and Previous button are enabled.  When all 3 required fields have a value, the Summary & Pay tab and Next button are enabled.  When a value is removed (including resetting the Country field), they are disabled again.  When
+ 2a)  On the Personal Details tab, the full name is not populated.  The Email Address will be pre-populated if the user has an account and is logged in.  The Phone Number field will only be pre-populated if the user has saved a default one.  All 3 fields are required so the Delivery Address tab and Next button are disabled.  They remain disabled until a value is entered into all 3 fields.  Once the last of the 3 fields has a value, they are enabled.  When a value is removed from any one of the 3 fields, they are disabled again.  The Summary & Pay is disabled throughout.  On the Delivery Address tab, the Street Address 1, Town/City and Country fields are all required.  These will already be pre-populated if the user is logged in and has previously saved their default delivery details.  Otherwise they will be blank.  In the instance of a user who is either not logged in or is logged in but hasn't saved their default details, the required fields will be blank.  The Summary & Pay tab and Next button are disabled but the Personal Details tab and Previous button are enabled.  When all 3 required fields have a value, the Summary & Pay tab and Next button are enabled.  When a value is removed (including resetting the Country field), they are disabled again.  If a user has saved their default delivery details, the required fields on the Delivery Details tab are already populated - the Next button and Summary & Pay tabs are both enabled.
  2b)  The form is pre-populated with the users default phone number and default delivery details.
  2c)  When the checkout form is submitted, if the Save delivery checkbox is ticked, the default details are updated.  The new details can be seen in the Account page.
  2d)  When submitting the form with the Save delivery checkbox unticked, the default delivery information should not be saved/updated.  However, I uncovered a bug here during testing whereby the expected results was not achieved and instead, the default details were saved/updated regardless of whether the Save delivery checkbox was ticked or unticked.  I have addressed this bug in the [Bugs Encountered During Testing](#save-default-information) section below and have now managed to get this working as expected.
