@@ -800,7 +800,7 @@ Aim:  To ensure all CSS code is valid.
 
 Methodology:  I will copy and paste my base CSS code into [this CSS validator tool](https://jigsaw.w3.org/css-validator/).  If there are any errors, I will either correct them or explain the reason for ignoring them and leaving them in my code.
 
-Results:  There were a couple of minor issues the validator highlighted which I corrected.  One example was that the number of pixels for a box shadow effect had been typed as 3ox rather than 3px.
+Results:  There were a couple of minor issues the validator highlighted which I corrected.  One example was that the number of pixels for a box shadow effect had been typed as 3ox rather than 3px.  Having corrected the minor issues, there are no errors in the base CSS file.
 
 #### JavaScript
 
@@ -837,7 +837,7 @@ Results:
  - **settings.py**:  None
  - **urls.py**:  None
  
-All code has been validated through validation tools.  Some minor changes were made as I went along but nothing worth commenting on greater detail than the points listed above.
+All code has been validated through validation tools.  Some minor changes were made as I went along but nothing worth commenting on in greater detail than the points listed above.
 
 #### Google Lighthouse Tool
 
