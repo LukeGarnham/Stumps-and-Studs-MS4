@@ -651,6 +651,11 @@ Methodology:  I will perform a number of tests in turn to ensure that the form w
 
  a)  Is the payment processed and order completed if the user closes the browser or navigates to another website after submitting the form?
 
+ 6)  Use different [Stripe payment test cards](https://stripe.com/docs/testing) to check they achieve the expected results.
+
+ a)  Using the Stripe no authentication card number (4242 4242 4242 4242) should result in a successful payment.
+ b)  Using the Stripe authentication required card number (4000 0027 6000 3184) should ask the user to authenticate the payment.  If the authentication fails or is cancelled, users should be returned to the Checkout form with an error message.  If authentication passes, the checkout process should be completed and the user taken to the Checkout Success page.
+
 Results:
 
 The numbers entered in brackets represent inputs tested and underscores represent no value/blanks.
@@ -668,8 +673,8 @@ The numbers entered in brackets represent inputs tested and underscores represen
 
  2a)  On the Personal Details tab, the full name is not populated.  The Email Address will be pre-populated if the user has an account and is logged in.  The Phone Number field will only be pre-populated if the user has saved a default one.  All 3 fields are required so the Delivery Address tab and Next button are disabled.  They remain disabled until a value is entered into all 3 fields.  Once the last of the 3 fields has a value, they are enabled.  When a value is removed from any one of the 3 fields, they are disabled again.  The Summary & Pay is disabled throughout.  On the Delivery Address tab, the Street Address 1, Town/City and Country fields are all required.  These will already be pre-populated if the user is logged in and has previously saved their default delivery details.  Otherwise they will be blank.  In the instance of a user who is either not logged in or is logged in but hasn't saved their default details, the required fields will be blank.  The Summary & Pay tab and Next button are disabled but the Personal Details tab and Previous button are enabled.  When all 3 required fields have a value, the Summary & Pay tab and Next button are enabled.  When a value is removed (including resetting the Country field), they are disabled again.  If a user has saved their default delivery details, the required fields on the Delivery Details tab are already populated - the Next button and Summary & Pay tabs are both enabled.
  2b)  The form is pre-populated with the users default phone number and default delivery details.
- 2c)  When the checkout form is submitted, if the Save delivery checkbox is ticked, the default details are updated.  The new details can be seen in the Account page.
- 2d)  When submitting the form with the Save delivery checkbox unticked, the default delivery information should not be saved/updated.  However, I uncovered a bug here during testing whereby the expected results was not achieved and instead, the default details were saved/updated regardless of whether the Save delivery checkbox was ticked or unticked.  I have addressed this bug in the [Bugs Encountered During Testing](#save-default-information) section below and have now managed to get this working as expected.
+ 2c)  When the checkout form is submitted, if the save delivery checkbox is ticked, the default details are updated.  The new details can be seen in the Account page.
+ 2d)  When submitting the form with the save delivery checkbox unticked, the default delivery information should not be saved/updated.  However, I uncovered a bug here during testing whereby the expected result was not achieved and instead, the default details were saved/updated regardless of whether the save delivery checkbox was ticked or unticked.  I have addressed this bug in the [Bugs Encountered During Testing](#save-default-information) section below and have now managed to get this working as expected.
  2e)  If the form is not successfully submitted (i.e. an incorrect card number (0000000000000000) is used), then the default delivery details do not get saved (or updated).
 
  3a)  If the card number is blank when the form is submitted, Stripe returns a message 'Your card number is incomplete' and the form is not submitted.  If the card number is incomplete (424242424242____), when tabbing or clicking to another field (i.e. the expiry date field), a Stripe error message appears to inform the user that 'Your card number is incomplete.'  The Complete Order button gets disabled.  Entering an incorrect card number results in one of two things happening; either Stripe provides a notification such as 'Your card number is invalid' and the Complete Order button gets disabled (9999999999999999), OR the form can be submitted and then Stripe validates the card number and the same notification appears on screen to inform users that 'Your card number is invalid' (0000000000000000).
@@ -679,14 +684,68 @@ The numbers entered in brackets represent inputs tested and underscores represen
 
  4a)  I entered my own card details.  The form does not get submitted and the checkout process is not completed.  I receive the following message on screen from Stripe:  'Your card was declined. Your request was in test mode, but used a non test card. For a list of valid test cards, visit: https://stripe.com/docs/testing.'  This works as expected.
 
- 5a)  The webhook handler captures any signals from Stripe.  If a payment is completed but the process is interrupted before the form is submitted (to the checkout function in checkout views.py), then the webhook handler will check if the order was created in the Orders models.  If not, then it creates it.
+ 5a)  To test this, I commented out the 'form.submit();' code in row 118 of the stripe_elements.js to see what would happen if the form is never actually submitted to the checkout view.  Unlike the other tests, I only tested this in the GitPod environment rather than the live environment.  Despite not being completed in the view, the order is still completed.  The webhook handler captures any signals from Stripe.  If a payment is completed but the process is interrupted before the form is submitted (to the checkout function in checkout views.py), then the webhook handler will check if the order was created in the Orders models.  If not, then it creates it.  The order is created in the database, a confirmation email is received and in the Stripe webhook dashboard, we can see that the webhook payment intent succeeded with the message 'Created order in webhook':
+
+ ![Gif showing the payment process being interrupted but an order still being created](media/readme/gifs/payment-interrupted.gif)
+
+ 6a)  When users provide the Stripe no authentication card number (4242 4242 4242 4242), the checkout form is submitted, the order is created and they are redirected to the Checkout Success page which confirms the order.
+ 6b)  Using the authentication required test card number (4000 0027 6000 3184) results in an authentication box opening.  Is the user clicks either Fail Authentication or the Cancel buttons, they are returned to the Checkout page with an error message that reads "We are unable to authenticate your payment method. Please choose a different payment method and try again."  If the user clicks the Complete Authentication button, they are taken through to the Checkout Success page and the order is completed:
+
+ ![Authentication required pop-up](media/readme/images/stripe-payment-authentication-required.png)
 
 There is no way the checkout form can be bypassed to create an order.  The checkout works as expected and has passed all of the tests detailed above in this section.
 
 #### Login & Logout
 
+Can users log in and out of their account?  Can users register for a new account?  Can users retrieve their forgotten passwords and change existing passwords?  Does AllAuth manage the entire account handling as expected/desired?
 
+Aim:  Ensure the AllAuth login and logout features work as expected.
 
+Methodology:  I will conduct a number of tests to ensure the entire process works as desired:
+
+ 1)  Users can register for an account.
+
+ a)  Users can register by providing a valid email address, username and password.
+
+ b)  The user receives a verification email to the email address provided.
+
+ c)  Until the verification is provided, they cannot login to their account yet.
+
+ d)  Once the user clicks on the verification link in their email, they can login to their account.
+
+ 2)  Once logged in, from the Account page, users can:
+
+ a)  Change their password.
+
+ b)  Reset their password.
+
+ c)  Log out.
+
+3)  Users who have an account but are not logged in can:
+
+ a)  not register another account with the same email address.
+
+ b)  can reset their password.
+
+Results:  I have tested each of the above and the results are detailed below:
+
+ 1a)  Having provided an email address, username and password, users are advised that they need to verify their email address:  "We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes."
+
+ 1b)  An email is received is sent to the email address provided in the registration form:
+
+![Verification email received by users when they register for a new account](media/readme/images/verify-email.png)
+
+ 1c)  Users who have not verified their accounts cannot login.  When they attempt to do so, they are redirected to the confirm-email page and another email is sent to them asking them to verify their email address.
+ 1d)  Clicking the verify email link that has been emailed to them, users can then confirm that they did sign up for an account.  With their email verified, they can then log into their account.
+
+ 2a)  From the Account page, users can click the Change Password button.  From there, they can enter their current password and a new one before clicking the Change Password button.  A success message (toast) appears informing them that 'Password successfully changed.'  The user will now only be able to login using their new password.
+
+ 2b)  Whilst it is unlikely that a uer who has successfully logged into their account would forget their password, this is an AllAuth feature which I want to test.  From the Account page, users can click the Change Password button.  From there, they can click Forgot Password and enter their email address.  Only email addresses which have been registered for an account can be entered, however, this means a user can request a password reset for another user providing they know their email address.  However, the password reset email is only sent to the email address provided - not to the email address that the user is signed in with so this does not expose the security of other users.  Clicking the link in the reset password email directs users to a page where they can enter and confirm a new password.
+ 2c)  Logged in users can log out.  They can no longer access the Account page.
+
+ 3a)  If a user tries to register for an account with an email address that already has an account, they are rejected an error message displays on screen informing them "A user is already registered with this e-mail address."
+
+ 3b)  If a user forgets their password, they can click on the Login button and then the Forgotten Password button.  From there they can enter their email address.  As per 2b) above, only email address which been used to register an account can be entered - if a new email address is entered for which no account exists, then an error message displays on screen informing users that "The e-mail address is not assigned to any user account".  Entering an email address that does have an account registered to it results in a password reset email being sent to that address.  Clicking the link in the email directs users to a Change Password page where they can enter and confirm a new password for their account.
 
 #### Responsive Design
 
@@ -912,9 +971,9 @@ I realised that the same bug existed on the Basket page so implemented the first
 
 #### Save Default Information
 
-During testing, I discovered that the users default information (phone number and delivery address) were being saved regardless of whether the user had ticked the save information (#id-save-info) checkbox input or not.
+During testing, I discovered that the users default information (phone number and delivery address) were being saved regardless of whether the user had ticked the save delivery checkbox (#id-save-info) checkbox input or not.
 
-It took me a while to figure this out but managed to find a solution to the exact issue I was having on the full-stack-frameworks channel in Slack posted 12th November 2020 by a user called Philipp.  Since I followed the Boutique Ado mini-project, the same bug encountered by Philipp found its way into my MS4.
+It took me a while to figure this out but managed to find a solution to the exact issue I was having on the full-stack-frameworks channel in the Code Institute Slack posted 12th November 2020 by a user called Philipp.  Since I followed the Boutique Ado mini-project, the same bug encountered by Philipp found its way into my MS4.
 
 This issue was 2 fold.  When a user submits the checkout form, there are two checks to see whether the user wants to save their default delivery information.  The first check is the checkout_success function within the checkout views.py file.  This was working correctly since the save_info value is retrieved directly from the POST data.  However, there is also a backup check performed with the handle_payment_intent_succeeded function in the webhook_handler.py file.  This uses data from the Stripe payment intent to determine if an order has successfully been created in the database and also checks whether the user wants to save their default information.  This is a backup in case the normal payment flow is interrupted.  The route cause of the bug was that the Stripe payment intent always stated that the user did want to save their default delivery information ("save_info": "true",) even when the checkbox was unticked when it was submitted.
 
@@ -928,7 +987,7 @@ var saveInfo = $('#id-save-info').is(':checked');
 
 The second part of the solution was to change the if statement in the handle_payment_intent_succeeded which checks whether the save_info value is True.  Since the value is now a string containing either "true" or "false", I amended the original code:
 
-if save_info
+if save_info:
 
 To this:
 
