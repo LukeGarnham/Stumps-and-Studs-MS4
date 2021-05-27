@@ -26,11 +26,11 @@ My GitHub repository can be found [here](https://github.com/LukeGarnham/Stumps-a
 
 4. [**Features**](#features)
     * [**Existing Features**](#existing-features)
-    * [**Features Left To Implement / Known Bugs**](#features-left-to-implement-/-known-bugs)
+    * [**Features Left To Implement And Known Bugs**](#features-left-to-implement-and-known-bugs)
 
 5. [**Languages**](#languages)
 
-6. [**Technologies & Services Used**](#technologies-&-services-used)
+6. [**Technologies And Services Used**](#technologies-and-services-used)
 
 7. [**Testing**](#testing)
     * [**Bugs Encountered During Development**](#bugs-encountered-during-development)
@@ -51,8 +51,8 @@ My GitHub repository can be found [here](https://github.com/LukeGarnham/Stumps-a
     * [**Connecting To Gmail For Email**](#connecting-to-gmail-for-email)
 
 9. [**Credits**](#credits)
-    * [**Inspiration**](#inspiration)
     * [**Content**](#content)
+    * [**Products**](#products)
     * [**Media**](#media)
     * [**Acknowledgements**](#acknowledgements)
 
@@ -62,7 +62,7 @@ My GitHub repository can be found [here](https://github.com/LukeGarnham/Stumps-a
 
 ### Project Aim
 
-The aim of this project was to produce an enticing and fully-functioning e-commerce website.
+The aim of this project was to produce an enticing and fully-functioning e-commerce website which entices users to purchase sports equipment, clothing and footwear whilst following best practices for responsive design, HTML5 semantic markup, accessibility and UX principles.
 
 ### User Stories
 
@@ -108,11 +108,11 @@ The aim of this project was to produce an enticing and fully-functioning e-comme
 
 #### Fonts
 
-The fonts used throughout the website is Crimson Text for headers and Open Sans for all other elements.  I searched Google for some good font pairings for ecommerce websites.  I came across [this website](https://www.builderfly.com/7-perfect-font-pairing-for-your-ecommerce-website/) and was enticed by the pairing of Crimson Text and Source Sans Pro.  However, whilst I was developing the header and navbar, I decided that Source Sans Pro font wasn't quite right for my website.  I turned to [Google Fonts](https://fonts.google.com/) to identify other fonts which make good partners to Crimson Text.  I ended up choosing Open Sans as the font to partner Crimson Text.
+The fonts used throughout the website is Crimson Text for headers and buttons and Open Sans for all other elements.  I searched Google for some good font pairings for ecommerce websites.  I came across [this website](https://www.builderfly.com/7-perfect-font-pairing-for-your-ecommerce-website/) and was enticed by the pairing of Crimson Text and Source Sans Pro.  However, whilst I was developing the header and navbar, I decided that Source Sans Pro font wasn't quite right for my website.  I turned to [Google Fonts](https://fonts.google.com/) to identify other fonts which make good partners to Crimson Text.  I ended up choosing Open Sans as the font to partner Crimson Text.
 
 #### Colour Scheme
 
-I visited a number of popular ecommerce websites for inspiration in the colour palette and design.  [Asos.com](https://www.asos.com/men/), [Adidas](https://www.adidas.co.uk/), [New Look](https://www.newlook.com/uk/homepage) and also the [mini-project](https://mini-project-4-boutique-ado.herokuapp.com/) all demonstrate the simple use of predominantly black and white colour palettes with little colour used.  I think this helps ensure product images standout from the page and wanted to mirror this in my project.  I used [Coolors](https://coolors.co/) to help generate a colour scheme which incorporated a strong black but also other strong colours to help make certain sections and buttons of the website stand out.
+I visited a number of popular ecommerce websites for inspiration in the colour palette and design.  [Asos.com](https://www.asos.com/men/), [Adidas](https://www.adidas.co.uk/), [New Look](https://www.newlook.com/uk/homepage) and also the [Boutique Ado mini-project](https://mini-project-4-boutique-ado.herokuapp.com/) all demonstrate the simple use of predominantly black and white colour palettes with little colour used.  I think this helps ensure product images standout from the page and I wanted to mirror this in my project.  I used [Coolors](https://coolors.co/) to help generate a colour scheme which incorporated a strong black but also other strong colours to help make certain sections and buttons of the website stand out.
 
 #### Inspiration
 
@@ -132,21 +132,21 @@ On the home page, when the user starts scrolling down, the header remains at the
 
 Utilising jQuery, I added a feature which hides the navigation bar when users scroll down but makes it dropdown (reappear) as soon as they begin scrolling up.  This effect is only applied to medium screens upwards since on small screens, the navigation options are hidden (collapsed) behind the menu button and can be accessed by toggling this button.  As outlined above, I wanted to maximise the amount of space on screen for the products to take center stage.  I feel this solution offers good user experience since it means they do not need to scroll up to the very top of the page to access the navigation elements.
 
-However, I did decide that there are some navigation elements which should always be visible to the user and hence I included them in the header which is fixed to the top of the screen throughout the website.  The navigation links I wanted visible at all times are the search form, basket, registration, login and account.  These all feature prominently in my user stories hence wanted to ensure visitors to my website can see them at all times and never have to hunt around for them.
+However, I did decide that there are some navigation elements which should always be visible to the user and hence I included them in the header which is fixed to the top of the screen throughout the website.  The navigation links I wanted visible at all times are the search form, basket, registration, login and account.  These all feature prominently in my user stories hence I wanted to ensure visitors to my website can see them at all times and never have to hunt around for them.
 
 #### Toasts
 
 The toast success message includes a preview of the basket and a link to the basket page for users to quickly checkout.  I fixed the height of the toast basket and gave it the Bootstrap overflow-auto class.  This means users have a preview of their basket they can scroll through without too much screen real estate being used up.  I used Bootstrap's grid layout to make the basket preview responsive.  The success message is used to show users when an item has been added to their basket, a quantity amended or an item has been removed from their basket.
 
-I decided that for warning, info and error messages, it was not necessary to show users the contents of their basket.  Furthermore, I also chose to only display the basket preview in the success toast to users when they are on a Product page.  When amending basket items from within the Checkout, there is no need to display a basket preview in the toast as it is already displayed in the Checkout page.  Elsewhere, success messages are generated when users update details related to their account and though they may have items in their basket, I decided it was not appropriate to show a preview within the toast.  Instead, the success messages displays according to the action they've successfully undertaken:
+I decided that for warning and error messages, it was not necessary to show users the contents of their basket.  Furthermore, I also chose to only display the basket preview in the success and info toast to users when they are on a Product page.  When amending basket items from within the Checkout, there is no need to display a basket preview in the toast as it is already displayed in the Checkout page.  Elsewhere, success messages are generated when users update details related to their account and though they may have items in their basket, I decided it was not relevant to their actions to show a basket preview within the toast.  Instead, the success messages displays according to the action they've successfully undertaken:
 
 ![Toasts basket preview shows except from when on the basket page already](media/readme/gifs/toasts.gif)
 
-NB: In the GIF above, the cricket stumps have a size and gender.  These attributes were added to the product so I could test the messages and basket quantities updated as desired.  In the final project, cricket stumps do not have size or gender attributes.
+NB: In the GIF above, the cricket stumps have a size and gender.  These attributes were added to the product so I could perform tests.  In the final project, cricket stumps do not have size or gender attributes.
 
 ### Wireframes
 
-Prior to coding anything, I created wireframes for my prject using Balsamiq.  A PDF version of my wireframe can be found [here](media/readme/ms4-project-wireframe.pdf).
+Prior to coding anything, I created wireframes for my prject using Balsamiq.  A PDF version of my wireframe can be found [here](media/readme/ms4-project-wireframe.pdf).  These gave me the basis to start developing each page of my project however I took some decisions to improve designs as I was coding so some pages differ slightly from the wireframes.
 
 ## Code
 
@@ -158,21 +158,21 @@ The settings.py file is where the global settings for the project are configured
 
 *   **Installed Apps**:  For each new Django app I created, the app name needed to be added to the list of installed apps (INSTALLED_APPS).  Other apps such as Crispy Forms and Django Storages have also been added to the list so Django knows they are trusted apps which can be used.
 *   **Django AllAuth**:  AllAuth can be configured in the global settings.py file.  Installation instructions for AllAuth can be found [here](https://django-allauth.readthedocs.io/en/latest/installation.html) and configuration instructions can be found [here](https://django-allauth.readthedocs.io/en/latest/configuration.html).
-*   **Stripe**:  I followed the [Stripe documentatin](https://stripe.com/docs/payments/accept-a-payment) and the detailed [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/90cda137ebaa461894ba8c89cd83291a/) instructional videos to set up the payment system.  This is a test set up (rather than live) so cards will not actually be charged.  There are a variety of test payment card numbers provided in [Stripe's documentation](https://stripe.com/docs/testing#international-cards) which can be used to simulate a successful payment.  A Stripe public key (STRIPE_PUBLIC_KEY), Stripe secret key (STRIPE_SECRET_KEY) & Stripe webhook secret (STRIPE_WH_SECRET) are required to connect to Stripe but these are all stored as environment variables in both GitPod and Heroku as I don't want to share these publicly.
+*   **Stripe**:  I followed the [Stripe documentation](https://stripe.com/docs/payments/accept-a-payment) and the detailed [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/90cda137ebaa461894ba8c89cd83291a/) instructional videos to set up the payment system.  This is a test set up (rather than live) so actual cards cannot be used.  There are a variety of test payment card numbers provided in [Stripe's documentation](https://stripe.com/docs/testing#international-cards) which can be used to simulate a successful payment.  A Stripe public key (STRIPE_PUBLIC_KEY), Stripe secret key (STRIPE_SECRET_KEY) & Stripe webhook secret (STRIPE_WH_SECRET) are required to connect to Stripe but these are all stored as environment variables in both GitPod and Heroku as I don't want to share these publicly.
 *   **AWS**:  I use Amazon Web Services (AWS) to host my static and media files for the deployed site (on Heroku) in an S3 bucket.  I have configured my global settings to enable my app to connect to it when deployed.  In Heroku, I have created a number of environment variables including USE_AWS which is set to True.  An 'if' statement in my global settings checks if this exists in the environment and if so, configures my app to use the AWS S3 bucket for static and media files.  I closely followed the videos in the Deployment section of the [Code Institute Boutique Ado mini-project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FSF_102+Q1_2020/courseware/4201818c00aa4ba3a0dae243725f6e32/d90bfac64e564b41a177b65c34a63502/) to set this configuration up - more detailed steps are explained in my [Deployment](#deployment) section below.
-*   **Gmail Email Account**:  In order to actually send emails to users, I have configured the global settings to connect to my Gmail account.  The email address (EMAIL_HOST_USER) and Gmail app password (EMAIL_HOST_PASS) enable my app to connect to my Gmail account and these are set up as variables which are retireved from the Heroku environment so as to keep them private.  They are only required in the Heroku environment since I have configured the global settings to use the default Django email confifuration if in a development environment such as GitPod, otherwise the Gmail settings are used.
+*   **Gmail Email Account**:  In order to actually send emails to users, I have configured the global settings to connect to my Gmail account.  The email address (EMAIL_HOST_USER) and Gmail app password (EMAIL_HOST_PASS) enable my app to connect to my Gmail account and these are set up as variables which are retrieved from the Heroku environment so as to keep them private.  They are only required in the Heroku environment since I have configured the global settings to use the default Django email configuration if in a development environment such as GitPod, otherwise the Gmail settings are used.
 
 ### File Structure
 
 The project is split into apps.  Each app has files (such as forms, models, urls and html files) which are specific to that app.  However, there are some common files which we want apps to inherit from or which don't necessarily belong within one of the apps.  These are stored in the templates folder.
 
-Each HTML file extends from the base.html file which is saved in the templates folder.  Toast templates are also stored within the templates folder.
+Each HTML file extends from the base.html file which is saved in the templates folder.  Toast templates are stored within an includes folder which is also stored within the templates folder.
 
 The templates folder contains an 'allauth' subfolder which contains a number of the allauth template html files.  These were copied from the AllAuth site-packages directory using the following command before I then deleted the AllAuth openid and tests templates:
 
 *cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth*
 
-I subsequently modified the base.html AllAuth template so that the style of my website is inherited through all of the AllAuth templates.  I further modified some of the individual AllAuth templates to ensure my desired styling on all pages.
+I decided not to delete the social account templates as I might look to utilise them in a future iteration of this site as I look to continue learning beyond the end of the course.  In the AllAuth account folder, I modified the base.html template so that the style of my website is inherited through all of the AllAuth templates.  I further modified some of the individual AllAuth templates to ensure my desired styling is applied to all pages.
 
 ### Static Files
 
@@ -228,7 +228,7 @@ The gender options users can select from are:
 
 Within the basket app, there is a contexts.py file which is added to the list of context_processors within the global settings.  This makes the variables within it available throughout my website.  Within it, I create variables for the total cost of the items in the basket (total), total number of items in the basket (product_count), cost of delivery (delivery) and the total cost of the items in the basket plus delivery (grand_total).  There is also a list (basket_items) of products which uses the basket variable in session memory to unpack details of the products the user has added to their basket.
 
-The basket_items varable stores the unique product id, the product object from the Products model and a details list.  The details list consists of dictionary's.  If the product has at least one of the size, side or gender attributes, the dictionaries will contain all of these attributes.  If the product doesn't have any of these attributes, the details list will only have one dictionary which will be the quantity.
+The basket_items variable stores the unique product id, the product object from the Products model and a details list.  The details list consists of dictionary's.  If the product has at least one of the size, side or gender attributes, the dictionaries will contain all of these attributes.  If the product doesn't have any of these attributes, the details list will only have one dictionary which will be the quantity.
 
 So for products with no size, side or gender, the structure in the basket_items list is:
 
@@ -249,24 +249,23 @@ The data structure allows for product details, quanities and where applicable, a
 - Admin:  There are two levels of users for my website; superusers and active (standard) users.  Superusers are administrators for the site who have access to the Django Admin panel.  Superusers can access this from the Account dropdown in the header through a link labelled Site Admin but this will not be visible for active users (or anyone who is not logged in to an account).  From the Admin panel, superusers can:
     - Add new Products, amend or delete existing Products.
     - Amend the status of other users and/or delete them.
-    - Verify and/or delete email addresses.
+    - Verify other users email addresses and grant them superuser status.
     - View all orders as well as delete them or modify them including amending or removing items and adjusting quantities.
     - View and delete messages (submitted via the contact app).
-    - View, amend and/or delete User Profiles.
 
 - Search:  In the Header, there is a search form which allows users to search for items my Stumps & Studs business sells.  The search returns any products which contain the search string in either the product name or description.  For example, entering 'bat' in the search form will return 4 results including Cricket Pads since they contain the phrase 'Batting Pads' within their description, and the Football Pump because its description contains the word 'batteries':
 
 ![Screenshot showing results when user searches for bat](media/readme/images/bat-search.png)
 
-- Stripe:  I have used Stripe to implement a payment processor so users can complete a checkout process.  I have not implemented a live payment system, only a test one meaning cards will not be charged.  To mimic a successful payment, users can enter any of the [Stripe test card numbers](https://stripe.com/docs/testing#international-cards) - the card number for the UK is 4000008260000000.  The expiration date can be any future date while the CVC and postcode can be anything.
+- Stripe:  I have used Stripe to implement a payment processor so users can complete a checkout process.  I have not implemented a live payment system, only a test one meaning cards will not be charged.  To mimic a successful payment, users can enter any of the [Stripe test card numbers](https://stripe.com/docs/testing#international-cards) - the card number for the US is 4242424242424242 and the test card number for the UK is 4000008260000000.  The expiration date can be any future date while the CVC and postcode can be anything.
 
-- Stripe Webhook:  A Stripe webhook handler has been developed so that if the checkout process is interrupted for any reason, situations where a users payment is processed but their order isn't placed are avoided.  When a successful payment is received by Stripe, a webhook is sent.  I capture this and check the Orders model to see if the order is stored there, in which case the order was placed before any interruption.  If the order is not in the Orders model, this means successful payment was received by Stripe but then an interruption prevented the order from being added to the Orders model.  Fortunately, the Stripe webhook provides details of the order meaning in these such scenarios, the order can still be added to the Orders model.
+- Stripe Webhook:  A Stripe webhook handler has been developed so that if the checkout process is interrupted for any reason, situations where a users payment is processed but their order isn't placed are avoided.  When a successful payment is received by Stripe, a webhook is sent.  I capture this and check the Orders model to see if the order is stored there, in which case the order was placed before any interruption.  If the order is not in the Orders model, this means successful payment was received by Stripe but then an interruption prevented the order from being added to the Orders model.  The Stripe webhook provides details of the order meaning in these such scenarios, the order is still be added to the Orders model.
 
-- My Account:  Logged in users can access My Account through the Account dropdown in the header.  In the Account page, users can view their default delivery address and phone number, view previous (historic) orders and also reset their password.
+- My Account:  Logged in users can access My Account through the Account dropdown in the header.  In the Account page, users can view and amend their default delivery address and phone number, view previous (historic) orders and also reset their password.
 
 - Contact Us:  Users can contact Stumps and Studs by completing a form.  The email address the user provides then receives an automatic email notification confirming that the message has been received.  This notification includes a copy of the message.  For an actual business case, I would configure this so that the company mailbox (e.g. contactus@stumpsandstuds.com) also receive a copy of the message via email which would enable a member of staff to then reply to the customer (user).
 
-### Features Left To Implement / Known Bugs
+### Features Left To Implement And Known Bugs
 
 - I would like to add more products to the project, for example there is a limited amount of footwear and clothing.  I would also like to add items of clothing which are spefically for male or female customers.
 - If I were to add items which were just for males or females, I would add another field into the Products model called gender, which for items which have a gender, there is a choice of male, female or both.  A womens t-shirt would have the value of female however golf clubs which can be male or female would have the value of both.  In the frontend, I would then like to enable users to filter products by gender.  I would have a drop down on the navigation bar where users can select male or female and return any products which are specific to that gender plus any that can be either (e.g golf clubs).
@@ -297,7 +296,7 @@ The data structure allows for product details, quanities and where applicable, a
 * JavaScript
 * Python
 
-## Technologies & Services Used
+## Technologies And Services Used
 
 [**Back to Contents**](#Contents)
 
@@ -325,11 +324,11 @@ The data structure allows for product details, quanities and where applicable, a
 
 #### Search Placement
 
-Whilst building the header and navbar, I wanted the search box to be appear and disapear via a toggle button.  However, I only wanted this to apply to small screens; on medium screens (768px) upwards, I wanted the search box to remain visible in the header.  I initially tried to achieve this with jQuery applying jQuery UI effects to achieve a smooth dropdown transition.  The problem I encountered here was getting the search box to not be visible by default on small screens but always be visible on large screens.
+Whilst building the header and navbar, I wanted the search box to appear and disapear via a toggle button.  However, I only wanted this to apply to small screens; on medium screens (768px) upwards, I wanted the search box to remain visible in the header.  I initially tried to achieve this with jQuery applying jQuery UI effects to achieve a smooth dropdown transition.  The problem I encountered here was getting the search box to not be visible by default on small screens but always be visible on large screens.
 
 I added the classes "d-none" and "d-md-block" to the #nav-search element.  This ensure that the elements initial state was correct.  However, getting jQuery to override the "d-none" class on small screens was a challenge.  I tried chaining toggle effects with toggling classes too to add/remove the "d-none" class.  However, this meant the transition was not smooth; the element would show after the effect had been applied or be hidden before the effect had been applied.
 
-I ended up utilising [Bootstrap's collapse](https://getbootstrap.com/docs/5.0/components/collapse/) component to reach a solution.  Applying the "collapse" class to the #nav-search meant I could control have it hidden by default but toggle it's visibility using the #search-button element in the header.  I changed the #search-button to a button rather than a div to ensure semantic rules were followed and then applied some Bootstrap classes and custom CSS to achieve the desired styling.  Finally, I after the "collapse" class, I added the class "d-md-block" to the #nav-search element.  The reason for this is to ensure that it is always visible on medium screens upwards.  Whilst the visibility of this can still be toggled by the #search-button, this element is hidden on medium screens upwards so it cannot be clicked.
+I ended up utilising [Bootstrap's collapse](https://getbootstrap.com/docs/5.0/components/collapse/) component to reach a solution.  Applying the "collapse" class to the #nav-search meant I could have it hidden by default but toggle it's visibility using the #search-button element in the header.  I changed the #search-button to a button rather than a div to ensure semantic rules were followed and then applied some Bootstrap classes and custom CSS to achieve the desired styling.  Finally, after the "collapse" class, I added the class "d-md-block" to the #nav-search element.  The reason for this is to ensure that it is always visible on medium screens upwards.  Whilst the visibility of this can still be toggled by the #search-button, this element is hidden on medium screens upwards so it cannot be clicked.
 
 ![Navbar search functionality](media/readme/gifs/navbar-search.gif)
 
@@ -359,17 +358,17 @@ To resolve this, I searched Google and found another function I could use to res
 
 To remove items from the basket in the Basket page, JavaScript is utilised to post data and remove an item from the basket.  Using if statements, hidden data is included in the post data for the items size, side and gender as applicable.  The remove_from_basket function in the bag app views.py file is called to handle the request.  Within the function, I check whether any size, side or gender has been provided.  If not, I remove (pop) the item from the basket variable stored in session memory.  If it does have any one of these variables, then the product must have details so the value in the basket dictionary will be a list.
 
-I cycle through the list of dictionary's and search for the item with the corresponding details to delete.  To achieve this, I check each dictionary to compare the size, side and gender variables.  When I find a match for all 3, I remove the dictionary from the list.  The issue I encountered when building this function is that where there is no such variable, rather than the None object being passed to the function and None string is passed.
+I cycle through the list of dictionary's and search for the item with the corresponding details to delete.  To achieve this, I check each dictionary to compare the size, side and gender variables.  When I find a match for all 3, I remove the dictionary from the list.  The issue I encountered when building this function is that where there is no such variable, rather than the None object being passed to the function a None string is passed.
 
 As an example, if I had cricket gloves in my basket which have a size and side but no gender, the size and side passed to the remove_from_basket function were correct but the gender was a None string.  When cycling through the dictionary's in the basket, any cricket gloves in there will have a size and side but the gender is a None object.
 
 When comparing each detail to check for a match, I never achieved one since the gender None string is not equal to the gender None object in the basket.  To overcome this, I inserted a series of if statements at the start of the function.  Once the size, side and gender variables have been retrieved from the request, I check each of them in turn to see whether any of them are equal to a None string (e.g. if size == 'None':), and if so, make the variable equal to the None object (size = None).  This meant that when checking the dictionarys for an item which matched the one the user is trying to delete, a match was found and the dictionary could then be removed.
 
-Finally, to ensure that no empty lists are left in the basket, I check see if there are any of that product left in the basket and if not (e.g. the list is empty), I remove it from basket.
+Finally, to ensure that no empty lists are left in the basket, I check to see if there are any of that product left in the basket and if not (e.g. the list is empty), I remove it from basket.
 
 #### Toasts - Positioning
 
-When creating the toast messages, I decided I wanted them to appear beneath the header but with a fixed position on top of existing content.  To achieve this, I gave the toast box a fixed position and z-index of 9999999 to ensure it overlays all other content.  Setting the position relative to the top of the page was a little tricky though.  The header height varies; on small and medium screens it is 53 pixels while on larger screens it varies between 53 pixels and 93 pixels depending on if the navbar is visible.  By setting the position to the top at 93 pixels, there would occasionally be white space between the header and the toast which I don't think looks very good:
+When creating the toast messages, I decided I wanted them to appear beneath the header but with a fixed position on top of existing content.  To achieve this, I gave the toast box a fixed position and z-index of 99 to ensure it overlays all other content.  Setting the position relative to the top of the page was a little tricky though.  The header height varies; on small and medium screens it is 53 pixels while on larger screens it varies between 53 pixels and 93 pixels depending on if the navbar is visible.  By setting the position to the top at 93 pixels, there would occasionally be white space between the header and the toast which I don't think looks very good:
 
 ![Toast messages with a gap between the header and the toast](media/readme/images/toasts-gap.png)
 
@@ -379,7 +378,7 @@ To resolve this, I utilised jQuery and CSS.  Within my base.css file, I set the 
 
 #### Toasts - Display Basket Preview
 
-As mentioned above in the Design Decisions section, I opted to only display the basket preview in the success toasts but only when the user is on a Products page.  To achieve this, I added a new variable to the product views context called 'toast_basket_preview' which is set to True.  Then within the toast_success.html file, I added a Jinja if statement which checks to see if this variable is true and whether there are any items in the basket.  If this criteria is satisfied, then the basket preview displays in the toast success message.  Otherwise, only the message appears and the basket preview does not.
+As mentioned above in the Design Decisions section, I opted to only display the basket preview in the success and info toasts but only when the user is on a Product Details page.  To achieve this, I added a new variable to the product views context called 'toast_basket_preview' which is set to True.  Then within the toast_success.html and toast_info.html file, I added a Jinja 'if' statement which checks to see if this variable is true and whether there are any items in the basket.  If this criteria is satisfied, then the basket preview displays in the toast message.  Otherwise, only the message appears and the basket preview does not.
 
 If I choose to include the basket preview on other pages in future, it is quite a simple solution.  All that needs to be done is pass the 'toast_basket_preview' variable to the context and set its value to True.
 
@@ -431,7 +430,7 @@ The quantity of each item can be increased or decreased from the Basket page thr
 
 ![Basket page with decrement buttons not working correctly.](media/readme/images/checkout-quanity-before.png)
 
-Upon closer inspection, I identified that the cause of the issue was the id of each quantity input (with class .qty_input).  The id was *id_qty_* followed by the product id number.  This meant that where multiple items for the same product were in the basket, there would be multiple inputs with the same id.  Since the JavaScript utilised the id to target the element and enable/disable the decrement and increment buttons, only the first instance had the proper functionality applied, hence the result in the above screenshot.  Since the Products page only have only product on them, this wasn't an issue on that page but in the Basket page, this needed addressing.
+Upon closer inspection, I identified that the cause of the issue was the id of each quantity input (with class .qty_input).  The id was *id_qty_* followed by the product id number.  This meant that where multiple items for the same product were in the basket, there would be multiple inputs with the same id.  Since the JavaScript utilised the id to target the element and enable/disable the decrement and increment buttons, only the first instance had the proper functionality applied, hence the result in the above screenshot.  Since the Products page only have one product on them, this wasn't an issue on that page but in the Basket page, this needed addressing.
 
 To resolve this, I needed to make the id of each input element unique.  Since each item it displayed to the Basket page using a Jinja for loop, I found a [solution online](https://stackoverflow.com/questions/35343881/jinja-loop-index-does-not-print) which enabled me to easily add the loops iteration number to the end of the id such that each one is now unique (*id_qty_{{ item.item_id }}_{{ forloop.counter }}*).  I needed to amend the data-item_id attribute of the input.  Having made these changes to the input, I replicated them on the decrement and increment button to ensure each had a unique id and the correct element is targetted by JavaScript.  This enabled me to get the desired end result:
 
@@ -446,32 +445,32 @@ At the time of writing, I am about to start testing my project. Here are the man
  - [**Access To Pages**](#access-to-pages): Can users access pages they're supposed to and prevented from accessing pages they're not supposed to access depending on whether they are signed in or not.
  - [**Test User Stories**](#test-user-stories): Test each of my user stories i.e. does my finished project enable users to achieve what I set out for them to achieve?
  - [**Forms**](#forms): Do forms behave as desired? Is data validated before being passed to the database? Is defensive design sufficient?
- - [**Checkout Form**](#checkout-form): Does this behave as expected?  Is there a way to bipass the checkout to complete an order?  Are orders successfully created if the checkout process is interrupted?
- - [**Login & Logout**](#login-&-logout):  Can users log in and out of their account?  Can users register for a new account?  Can users retrieve their forgotten passwords and change existing passwords?  Does AllAuth manage the entire account handling as expected/desired?
- - [**Responsive Design**](#responsive-design):  Does each page function well on all screen sizes?  Are layouts adjusted according to maintain strong UX design across all screen sizes?
+ - [**Checkout Form**](#checkout-form): Does this behave as expected?  Is there a way to bypass the checkout to complete an order?  Are orders successfully created if the checkout process is interrupted?
+ - [**Login And Logout**](#login-and-logout):  Can users log in and out of their account?  Can users register for a new account?  Can users retrieve their forgotten passwords and change existing passwords?  Does AllAuth manage the entire account handling as expected/desired?
+ - [**Responsive Design**](#responsive-design):  Does each page function well on all screen sizes?  Are layouts adjusted accordingly to maintain strong UX design across all screen sizes?
  - [**Valid Code**](#valid-code): I will run my code through validators to check for any issues.
  - [**Google Lighthouse Tool**](#google-lighthouse-tool): I will use the Google Lighthouse tool to check for any improvements that can be made.
 
 All tests will be conducted on the deployed version of the website hosted by Heroku rather than within the GitHub environment. This is because the final deployed site is what users will see and so it is important to ensure the behaviour of this is as desired.
 
-I will attempt to test each section using an 'Aim, Methodology, Result' process.  I will explain what my aim is, how I am testing it and the results I get so that others can perform the same test and can expect to receive the same results.  I will detail any bugs I discover and explain corrective action taken or reasons why the bug has not been fixed.
+I will attempt to test each section using an 'Aim, Methodology, Result' process.  I will explain what my aim is, how I am testing it and the results I get so that others can perform the same test and can expect to receive the same results.  I will detail any bugs I discover and explain corrective action taken in the [**Bugs Encountered During Testing**](#bugs-encountered-during-testing) section below this one.
 
 #### Links
 
 Aim:  I will test all links on each page throughout my website to ensure they all work and direct users to the correct page.  I also need to ensure that links which direct users to external websites open in a new window.
 
-Methodology:  I will test the links in the header and footer since these are inherited by every page from the base.html file.  In the header, I will test the links on small-medium screen sizes and +large screen sizes and also as a logged in user and non-logged in user since the header links will change depending on the screen size and logged in status.  The toasts only have one link; the success toast has a link to the basket page which I will test.  I will then test the links on the body of each page to ensure they all work as expected.
+Methodology:  I will test the links in the header and footer since these are inherited by every page from the base.html file.  In the header, I will test the links on small-medium screen sizes and +large screen sizes and also as a logged in user and non-logged in user since the header links will change depending on the screen size and logged in status.  The toasts only have one link; the success and info toasts have a link to the basket page which I will test.  I will then test the links on the body of each page to ensure they all work as expected.
 
 Results:
 
  - **Header**:  All links work correctly across the various screen sizes and whether users are logged in or not.
  - **Footer**:  All links work correctly.  The social media links correctly open in a new window.
- - **Toasts**:  The link in the success toast correctly directs users to the basket page.
+ - **Toasts**:  The link in the success and info toasts correctly directs users to the basket page.
  - **Home**:  There are 4 links, one on each carousel which open the Products page but with various filters applied.  All work correctly.
  - **Products**: I first tested the Sort By button where I discovered a bug which I was able to resolve.  I have explained this in the [Bugs Encountered During Testing](#sort-by-on-the-products-page) section below.  Each product is a link to it's Product Details page and they work correctly.
- - **Product Details**:  All links work as expected.
+ - **Product Details**:  Clicking on the product image opens the image in a new window.  All links work as expected.
  - **Basket**:  The buttons to update quantities or remove items from the basket work as expected.  The links to the Checkout and Product page both work.  Each product image and product name are also links, both directing users back the Product Details page - they both work correctly.
- - **Checkout**:  The tabs on the checkout form and the next buttons are disabled unless there is a value in each required form field in that fieldset.  These all work as expected.  One thing to note is that the Complete Order button is disabled until the required card details for has a value - the button is enabled as soon as any value is entered into the card details field.  Stripe handles the validation of the card details, the enabling of the Complete Order button is only dependent on a value being entered and not whether the value entered is valid.
+ - **Checkout**:  The tabs on the checkout form and the next buttons are disabled unless there is a value in each required form field in that fieldset.  These all work as expected.  One thing to note is that the Complete Order button is disabled until the required card details field has a value - the button is enabled as soon as any value is entered into the card details field.  Stripe handles the validation of the card details, the initial enabling of the Complete Order button is only dependent on a value being entered and not whether the value entered is valid.  There are some further validation rules applied by Stripe which I will cover specifically below.
  - **Checkout Success**:  There are two links on this page but only one is visible depending on whether the user has reached the page having completed the checkout form (process) or if they're viewing a previous order from the Account page.  If they've completed the checkout process, the button will be to direct them back to the Products page - this works correctly.  If they are viewing a historic order, the button returns them back to their Account page - this link works correctly too.
  - **Account**:  The Update button successfully saves the default delivery information field.  The Change Password form correctly directs users to an AllAuth template to change their password.  In the order history section, the order number is a link which takes users to the Checkout Success - this works correctly.
  - **Contact Us**:  The Send Message button successfully submits the contact form.  The email address link has the correct href so that a blank email is opened in the default email application (e.g. Outlook).  Similarly, the phone number link opens a phone call in the devices default application.
@@ -481,19 +480,19 @@ Results:
 Aim:  I must ensure users cannot access pages they are not authorised to access including viewing other users account and/or order details.
 
 Methodology:  I will test each of these scenarios which could see a user access a page they should be able to.  Users should not be able to:
- - Navigate to the Checkout page while having no items in the basket.
- - Navigate to the Account while not logged in.  I will copy the URL when logged in, then log out and then copy and paste the URL to ensure I am not directed to the Account page.
- - Navigate to the Log Out while not logged in.  I will copy the URL when logged in, then log out and then copy and paste the URL to ensure I am not directed to the Log Out page.
- - Navigate to the Log In page while already logged in.  I will copy the URL when logged out, then log in and then copy and paste the URL to ensure I am not directed to the Log In page.
- - Navigate to the admin panel when not logged in as a superuser.
+ 1) Navigate to the Checkout page while having no items in the basket.
+ 2) Navigate to the Account while not logged in.  I will copy the URL when logged in, then log out and then copy and paste the URL to ensure I am not directed to the Account page.
+ 3) Navigate to the Log Out while not logged in.  I will copy the URL when logged in, then log out and then copy and paste the URL to ensure I am not directed to the Log Out page.
+ 4) Navigate to the Log In page while already logged in.  I will copy the URL when logged out, then log in and then copy and paste the URL to ensure I am not directed to the Log In page.
+ 5) Navigate to the admin panel when not logged in as a superuser.
 
 Results:
 
- - If there are no items in the basket, users are unable to access the Checkout page.  Instead they are redirected to the Products page and an error message (toast) is presented explaining that 'There's nothing in your basket at the moment'.
- - When trying to access the Account page when not logged in, users are redirected to the Login page.  The link to the Account page sits in the Account dropdown in the header - this link is not visible to users who are not logged in.
- - When not logged in, users cannot access the Log In page.  Instead they are redirected to the Home page.
- - When already logged in, users cannot access the Log In page.  They are instead redirected to the Home page.
- - If users are not logged in, they can manually enter the URL for the admin panel but will see the admin login page so they cannot reach the admin panel.  If a user is logged in but is not a superuser, they will also see the admin login page along with a message advising them they are not authenticated to access the page:
+ 1) If there are no items in the basket, users are unable to access the Checkout page.  Instead they are redirected to the Products page and an error message (toast) is presented explaining that 'There's nothing in your basket at the moment'.
+ 2) When trying to access the Account page when not logged in, users are redirected to the Login page.  The link to the Account page sits in the Account dropdown in the header - this link is not visible to users who are not logged in.
+ 3) When not logged in, users cannot access the Log In page.  Instead they are redirected to the Home page.
+ 4) When already logged in, users cannot access the Log In page.  They are instead redirected to the Home page.
+ 5) If users are not logged in, they can manually enter the URL for the admin panel but will see the admin login page so they cannot reach the admin panel.  If a user is logged in but is not a superuser, they will also see the admin login page along with a message advising them they are not authenticated to access the page:
 
  ![Admin login message a non-superuser sees when trying to access the admin panel](media/readme/images/admin-login.png)
 
@@ -505,69 +504,114 @@ Aim:  Assess each of the user stories to ensure that my project delivers on them
 
 Methodology:  I will test each of the user stories in turn.  I will ensure that users are able to complete each story I set out at the start of this project.  The user stories are numbered below and I will refer to the numbers in the Results section beneath them where I explain how each is fulfilled:
 
- 1  As a shopper/visitor to the website, I want to:
+ 1)  As a shopper/visitor to the website, I want to:
+
  a) Immediately understand the range of products the website sells.
+
  b) Easily navigate categories and search for products.
+
  c) View images of the products available to purchase.
+
  d)	View the prices and details of each product.
+
+
  e)	Select a size of product (where applicable).
+
  f)	Select between right-handed and left-handed equipment (where applicable).
+
  g)	Select between male or female version of a product (where applicable).
+
  h)	Add multiple products to a basket.
+
  i)	View items in my basket.
+
  j)	Adjust the quantities of items in my product including removing them from the basket entirely.
+ 
  k)	View the total cost of the items in my basket.
+
  l)	View any delivery cost applicable.
+
  m)	Easily navigate to a checkout page.
+
  n) Contact the company.
 
- 2  As a shopper/visitor who has decided to purchase one or more products, I want to:
+ 2)  As a shopper/visitor who has decided to purchase one or more products, I want to:
+
  a)	Exit the checkout process and return to the store so I can amend the products in my basket.
+
  b)	Be able to provide personal details such as name and email address.
+
  c)	Provide a delivery address for my products to be shipped to.
+
  d)	Enter payment card details to complete a secure checkout.
+
  e)	View my order and the total cost of it including delivery throughout the checkout process.
+
  f)	See a confirmation message confirming that the order has been placed.
+
  g)	Receive an email confirmation that the order has been placed.
 
- 3  As a shopper/visitor who intends to return to the website in future, I want to:
+ 3)  As a shopper/visitor who intends to return to the website in future, I want to:
  a)	Create an account.
- b)	Store my personal and default delivery address details.
- c)	Update my account details.
- d)	View my past orders.
- e) Sign in and out of my account.
 
- 4  As an administrator of the website, I want to be able to:
+ b)	Store my personal and default delivery address details.
+
+ c)	Update my account details.
+
+ d)	View my past orders.
+
+ e) Sign in and out of my account.
+ 
+ 4)  As an administrator of the website, I want to be able to:
+
  a)	Use the admin panel to add products.
+
  b)	Use the admin panel to update the details of products.
+
  c)	Use the admin panel to delete products.
+
  d)	Use the admin panel to delete users.
 
 Results:
 
  1a) On my Home page, there is a Shop Now button front and center so users know immediately that the website has products to sell.  I have a carousel containing pictures of sports equipment, clothing and footwear along with links to the products for sale and descriptions of each so users can quickly learn about the range of products available on my site.  The carousel automatically cycles through each image but users can cycle through them manually as well.
+
  1b) As well as the links on the Home page, the navbar contains links to the Products available.  Users can view all products or select products belonging to a specific category or specific sport.  On small and medium screens, the navbar is collapsed behind a menu button in the header but since the header is fixed to the top of the page, users can quickly navigate to the products they are looking for with 2 or 3 clicks.  On +large screens, the navbar is hidden when users scroll down but appears again as soon as they scroll up.  This avoids users having to scroll right to the top of the page whilst saving screen real estate.  Users can navigate to the products they are looking for with a slight up scroll and 1 or 2 clicks.  There are also links to products for each category in the quick links section in the footer.
+
  1c & 1d) On the Products page, I have ensured product images take center stage.  I have only included the product name and price so as not to detract from the images or clutter the page with too much information.  On the Product Details page, each product has a description explaining what it is.
+
  1e) Products which have sizes (such as a cricket shirt) have a dropdown list so users can select the size they require.  Medium is selected by default on the Product Details page.
+
  1f) On the Product Details page, products which have sides (such as golf clubs) have a dropdown list enabling users to select either a right-handed or left-handed version of the product.  Right-handed is selected by default.
  1g)  For products which have gender options (such as golf clubs), users have the option to select between Male or Female on the Product Details page.  Male is selected by default.
+
  1h) Users can add multiple products to their basket.  More than 1 of each product can be added (e.g. 5 cricket balls can be added) and for products with sizes, sides or gender, the product can be added to the basket multiple times with different details (e.g. 2 male, right handed golf clubs and 1 female, left-handed set of golf clubs can be added to the basket).  As I was testing this, I encountered a bug which I have addressed below in the [Bugs Encountered During Testing](#basket-totals) section.
+
  1i & 1j)  The Basket page enables users to view the items in their basket.  Users are also able to update the quantity of each item in their basket and/or remove items from their basket entirely.  To improve UX, the Basket link in the header includes the  number of items in the basket and their grand total cost so users always have a high level summary of their basket.
  1k & 1l)  The Basket and Checkout pages both display the total cost of the items in the basket, the delivery cost and the grand total (items plus delivery cost).
+
  1m)  I have ensured that the link to the Basket page is visible on screen at all times.  This means users can always access their basket with just one click.  From the Basket page, once users are happy with the items they have in their basket, they can proceed to the Checkout page with one click.  This means that users can reach the Checkout page from anywhere on my site with just 2 clicks.  Furthermore, when users add a product to their basket, I give them a preview of the basket in the toast message along with a link to the Basket page to further entice them into completing their purchase.  Users do not need to create an account or log in to purchase products.
+
  1n)  I have added a Contact page which users can reach from both the navbar and quick links section in the footer meaning the page can be reached from anywhere in the site with just 1 click.  Users can write a message in the textbox meaning their is no character limit.
 
  2a) From the Checkout page, users can click either the link to the Basket page in the header or the 'Adjust Basket' link meaning there are two ways for them to back out of the checkout process and amend their basket further.
+
  2b & 2c & 2d)  The checkout form has 3 fieldsets; one for each of these user stories.  Users must first provide their name, email address and phone number - these are all required fields.  They must then provide a delivery address - the street address 1, town/city and country fields are all required.  Finally, utilising Stripe, users have a payment field in which to enter their payment details in order to complete the secure checkout process.
+
  2e)  The basket total, delivery cost and grand total are visible in both the Basket and Checkout pages.  Both pages also detail the contents of the basket; the Basket page lists all items out down the page while this is more compressed preview on the Checkout page though all of the basket details can be scolled through.  The grand total is also visible below the basket button in the header.  So users have multiple opportunities to view what they are purchasing and the total cost of it throughout the checkout process.
+
  2f)  After successfully completing the secure checkout process, users are redirected to the Checkout Success page which thanks them for placing the order.  A success toast also confirms that the order has successfully been placed.
+
  2g)  As well as the above, a confirmation email also gets sent to the user (to the email address provided during the checkout process) confirming that the order has been placed:
 
 ![Email confirmation received when order has been successfully placed](media/readme/images/checkout-success-email.png)
 
  3a)  Users are able to register for an account.  If users are not already signed in, a link enticing them to register appears in the header and is visible throughout the site.  Furthermore, on the Checkout page, users not already logged in will see a Register button below the checkout form again enticing them to register for an account.  An account can be created by providing an email address, username and password.  A verification email is sent to the email address provided to ensure users own the email address they provide.  AllAuth handles the email account verification process.
+
  3b & 3c)  On the Account page, users have the ability to complete a form to save their default delivery address and phone number.  This can be updated any time they log in.  Whether they choose to do this or not, users also have the option to save (or update) their default delivery address and phone number during the checkout process.  On the Checkout page under the checkout form, logged in users will see a checkbox which is selected by default which will save the delivery address and phone number for that order as their defaults.
+
  3d)  From the Account page, users can view their previous orders.  Under the Order History section, users can do one of two things.  Firstly, each previous order is listed with some high level information - clicking the down arrow on each will expand the order revealing each item and quanity.  Alternatively, clicking the order number will direct them to the Checkout Success template which lists all details of the order including product images.  The second option contains all of the order details whereas the first lacks product images, line item totals, total cost and delivery cost.  However, I feel both of these options satisfy this user story.
+
  3e)  Users can log in and log out of their account.  Users who are not signed in will see a Login button on the header at all times.  They will then be asked to provided their login credentials.  Users can login via 2 clicks and completing a form with their login credentials.  Furthermore, using the AllAuth templates, users who have forgotten their password are able to reset it from the Login page.  Users who are logged in can log out via the Logout button on the Account dropdown which is visible on the page header at all times.  Before being logged out, users are asked to confirm that they definitely wish to proceed.  This means users can logout with 3 clicks.
 
  4a & 4b & 4c)  Superusers can access the admin panel - in the Account dropdown in the header, there is a link (Site Admin) which directs them to the admin panel.  From there, users can add, amend and delete products.  The below gif demonstrates a superuser creating a new product, updating the details and then deleting the product.  The effects of each action can be seen immediately in the frontend:
@@ -615,7 +659,7 @@ Results:
  - Contact Us:  All 3 fields are required.
     - Name:  There is no restriction on the characters entered but there is a maximum length of 50 characters imposed.
     - Email Address:  This must contain an @ symbol with text either side of it.  After the @ symbol, there must be a full stop followed by more text.  A fake email address (such as !5%Hg@kdfsdsf.com) can be entered into this field which is not ideal.  Since the email address provided will be how my fictional company responds to any messages submitted, providing a fake email address providers little benefit to anyone.  I also think the risk is pretty low.  However, a future implementation would be to only allow logged in users to access and use the Contact form.  I could then remove this field since the users email address is already in the database.  Since their email address has been verified when creating the account, it would always be a valid one.
-    - Message:  This textfield has no validation rules applied or limits to the length of text or restrictions on the characters users can use.  As mentioned above in the [Features Left To Implement / Known Bugs](#features-left-to-implement-/-known-bugs) section, I would have liked to explore adding some validation rules to this field if I had more time.
+    - Message:  This textfield has no validation rules applied or limits to the length of text or restrictions on the characters users can use.  As mentioned above in the [Features Left To Implement And Known Bugs](#features-left-to-implement-and-known-bugs) section, I would have liked to explore adding some validation rules to this field if I had more time.
 
 #### Checkout Form
 
@@ -626,21 +670,29 @@ Methodology:  I will perform a number of tests in turn to ensure that the form w
  1)  What validation is applied to each field?:
 
  a)  Test each input field with various inputs such as letters, numbers and special characters?
+
  b)  Can the form be submitted without entering a value in every required field?
 
  2)  Does the form behave as expected?:
 
  a)  The previous & next buttons and tabs which enable users to navigate the form should enable when all required fields have a value and be disabled otherwise.  These buttons do not conduct any validation checks other than whether a value is entered into a required field.
+
  b)  If the users has saved their default phone number and delivery details, the form should pre-populate with this information.
+
  c)  If the save delivery checkbox is ticked, completing the form should update/save the details to their user profile.
+
  d)  If the save delivery checkbox is unticked, the default information should stay as it was i.e. it is not overwritten.
+
  e)  If the checkbox is ticked but the form is rejected, the default details should not be saved (or updated).
 
  3)  These actions should result in the checkout process not being completed.  The users payment details should be rejected.
 
  a)  Use a blank, incomplete and incorrect card number.
+
  b)  Use a blank, incomplete and incorrect expiry date.
+
  c)  Use a blank, incomplete and incorrect CVV number.
+
  d)  Use a blank, incomplete and postcode.
 
  4)  What happens if a user enters their actual card details?
@@ -654,6 +706,7 @@ Methodology:  I will perform a number of tests in turn to ensure that the form w
  6)  Use different [Stripe payment test cards](https://stripe.com/docs/testing) to check they achieve the expected results.
 
  a)  Using the Stripe no authentication card number (4242 4242 4242 4242) should result in a successful payment.
+
  b)  Using the Stripe authentication required card number (4000 0027 6000 3184) should ask the user to authenticate the payment.  If the authentication fails or is cancelled, users should be returned to the Checkout form with an error message.  If authentication passes, the checkout process should be completed and the user taken to the Checkout Success page.
 
 Results:
@@ -664,22 +717,30 @@ The numbers entered in brackets represent inputs tested and underscores represen
 
  - Full Name:  Any characters can be entered but there is a maximum length of 50 characters.
  - Email Address:  There is a maximum length of 254 characters.  The validation rules are the same as for the Register page (see above).  If a user is already logged in, this field will already be populated with a valid email address which will eliminate some users from entering invalid information into this field.
- - Phone Number:  There is a maximum length of 20 characters.  There is nothing stopping a user entering letters or special characters as well as numbers.  I have added this to the list of [Features Left To Implement**](#features-left-to-implement-/-known-bugs) above.
+ - Phone Number:  There is a maximum length of 20 characters.  There is nothing stopping a user entering letters or special characters as well as numbers.  I have added this to the list of [Features Left To Implement**](#features-left-to-implement-and-known-bugs) above.
  - Street Address 1 and 2 and County:  There are no restrictions on what characters can be entered into these fields but there is a limit of 80 characters.  The Street Address 1 field is required.
  - Town or City:  There is no restrictions on what characters can be entered into these fields but there is a limit of 40 characters.
  - Postcode:  There is no restrictions on what characters can be entered into these fields but there is a limit of 20 characters.
  - Payment card details:  I test these separately in section 3 below.
+
  1b)  No.  The custom JavaScript which controls access to the tabs and next buttons is effectively frontend validation which prevents users from accessing the submit form (Complete Order) button.  Stripe also has frontend features which disable the Complete Order button.  Even if these are bypassed, there is backend validation which checks if the form data submitted is valid.
 
  2a)  On the Personal Details tab, the full name is not populated.  The Email Address will be pre-populated if the user has an account and is logged in.  The Phone Number field will only be pre-populated if the user has saved a default one.  All 3 fields are required so the Delivery Address tab and Next button are disabled.  They remain disabled until a value is entered into all 3 fields.  Once the last of the 3 fields has a value, they are enabled.  When a value is removed from any one of the 3 fields, they are disabled again.  The Summary & Pay is disabled throughout.  On the Delivery Address tab, the Street Address 1, Town/City and Country fields are all required.  These will already be pre-populated if the user is logged in and has previously saved their default delivery details.  Otherwise they will be blank.  In the instance of a user who is either not logged in or is logged in but hasn't saved their default details, the required fields will be blank.  The Summary & Pay tab and Next button are disabled but the Personal Details tab and Previous button are enabled.  When all 3 required fields have a value, the Summary & Pay tab and Next button are enabled.  When a value is removed (including resetting the Country field), they are disabled again.  If a user has saved their default delivery details, the required fields on the Delivery Details tab are already populated - the Next button and Summary & Pay tabs are both enabled.
+
  2b)  The form is pre-populated with the users default phone number and default delivery details.
+
  2c)  When the checkout form is submitted, if the save delivery checkbox is ticked, the default details are updated.  The new details can be seen in the Account page.
+
  2d)  When submitting the form with the save delivery checkbox unticked, the default delivery information should not be saved/updated.  However, I uncovered a bug here during testing whereby the expected result was not achieved and instead, the default details were saved/updated regardless of whether the save delivery checkbox was ticked or unticked.  I have addressed this bug in the [Bugs Encountered During Testing](#save-default-information) section below and have now managed to get this working as expected.
+
  2e)  If the form is not successfully submitted (i.e. an incorrect card number (0000000000000000) is used), then the default delivery details do not get saved (or updated).
 
  3a)  If the card number is blank when the form is submitted, Stripe returns a message 'Your card number is incomplete' and the form is not submitted.  If the card number is incomplete (424242424242____), when tabbing or clicking to another field (i.e. the expiry date field), a Stripe error message appears to inform the user that 'Your card number is incomplete.'  The Complete Order button gets disabled.  Entering an incorrect card number results in one of two things happening; either Stripe provides a notification such as 'Your card number is invalid' and the Complete Order button gets disabled (9999999999999999), OR the form can be submitted and then Stripe validates the card number and the same notification appears on screen to inform users that 'Your card number is invalid' (0000000000000000).
+
  3b)  If the expiry date is blank when the form is submitted, Stripe returns a message 'Your card's expiration date is incomplete' and the form is not submitted.  If the expiry date is not completed (12/__ ), tabbing or clicking to another field results in an error message from Stripe: 'Your card's expiration date is incomplete.'  The Complete Order button gets disabled.  An incorrect expiry date constitutes either a date which doesn't exist (13/21) or a date in the past (01/21).  It is not possible to enter a date which doesn't exist.  If a date in the past is enter (01/21), an error message from Stripe informs the user 'Your card's expiration date is in the past.'  The Complete Order button gets disabled.
+
  3c)  If the CVV number is blank when the form is submitted, Stripe returns a message 'Your card's security code is incomplete' and the form is not submitted.  If the CVV number is incomplete (12_), a Stripe message appears on screen informing users that 'Your card's security code is incomplete.'  The Complete Order button gets disabled.  I am unsure what constitutes an incorrect CVV number since it is simply a 3 digit number.  It is not possible to enter any character other than numbers.  Using the test card number (4242424242424242), I was able to successfully complete the checkout process using both 000 and 999 as the CVV. 
+
  3d) It is not possible to enter a special character into this field (even using copy paste).  This field is hidden until a card number is required.  If the postcode is blank when the form is submitted, Stripe returns a message 'Your postal code is incomplete' and the form is not submitted.  Assuming that the test card number is used (4242 4242 4242 4242), the form expects a postcode of up to 5 numbers - letters and special characters cannot be entered.  Entering 1 number (1____) results in the same message from Stripe; 'Your postal code is incomplete.'  Any number less than 5 digits long is rejected by Stripe (12___, 123__, 1234_) with the same error message.  If this project was to be deployed as a fully functioning service with Stripe no longer in test mode, further testing may be required to ensure users can input more than just number, for example, can users in the UK enter a UK postcode?  When entering my own card number, the postcode field does allow letters and special characters as well as numbers and there appears to be no limit on how many characters a user can enter.  Whether this is still the case in the live Stripe configuration would need to be tested.  But for the purposes of this project, I am satisfied that this field functions as desired.
 
  4a)  I entered my own card details.  The form does not get submitted and the checkout process is not completed.  I receive the following message on screen from Stripe:  'Your card was declined. Your request was in test mode, but used a non test card. For a list of valid test cards, visit: https://stripe.com/docs/testing.'  This works as expected.
@@ -689,13 +750,14 @@ The numbers entered in brackets represent inputs tested and underscores represen
  ![Gif showing the payment process being interrupted but an order still being created](media/readme/gifs/payment-interrupted.gif)
 
  6a)  When users provide the Stripe no authentication card number (4242 4242 4242 4242), the checkout form is submitted, the order is created and they are redirected to the Checkout Success page which confirms the order.
+
  6b)  Using the authentication required test card number (4000 0027 6000 3184) results in an authentication box opening.  Is the user clicks either Fail Authentication or the Cancel buttons, they are returned to the Checkout page with an error message that reads "We are unable to authenticate your payment method. Please choose a different payment method and try again."  If the user clicks the Complete Authentication button, they are taken through to the Checkout Success page and the order is completed:
 
  ![Authentication required pop-up](media/readme/images/stripe-payment-authentication-required.png)
 
 There is no way the checkout form can be bypassed to create an order.  The checkout works as expected and has passed all of the tests detailed above in this section.
 
-#### Login & Logout
+#### Login And Logout
 
 Can users log in and out of their account?  Can users register for a new account?  Can users retrieve their forgotten passwords and change existing passwords?  Does AllAuth manage the entire account handling as expected/desired?
 
@@ -781,7 +843,7 @@ Methodology:  I will work through each page within my project in my Chrome brows
 
 Results:
 
- - **All**:  The validator flags the meta tag '<meta charset="UTF-8">' as an error.  According to [W3Schools.com](https://www.w3schools.com/html/html_charset.asp), this is required to inform the browser which character set the page uses so I have ignored this error.
+ - **All**:  The validator flags the meta tag (*meta charset="UTF-8"*) as an error.  According to [W3Schools.com](https://www.w3schools.com/html/html_charset.asp), this is required to inform the browser which character set the page uses so I have ignored this error.
  - **Header**:  None
  - **Footer**:  None
  - **Toasts**:  None
@@ -843,7 +905,7 @@ All code has been validated through validation tools.  Some minor changes were m
 
 Aim:  Identify improvements that can be made to my site.
 
-Methodology:  I will run the Google Lighthouse Tool on each page of my website.  This tool runs a range of checks and makes recommendations to improve performance, accessability, SEO and best practices.  I will then try to implement some of the recommendations and re-run the Lighthouse Tool to see if I have managed to improve my score.
+Methodology:  I will run the Google Lighthouse Tool on each page of my website.  This tool runs a range of checks and makes recommendations to improve performance, accessability, SEO and best practices.  I will then try to implement some of the recommendations and re-run the Lighthouse Tool to see if I have managed to improve the score.
 
 Results:  Below are links to the Lighthouse reports for each page of my website along with comments of any changes I made as a result and then the subsequent Lighthouse report showing any improvements.
 
@@ -851,7 +913,7 @@ Results:  Below are links to the Lighthouse reports for each page of my website 
 
 [Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-home-before.pdf)
 
-This page scores well generally but I wanted to imrpove the Performance score a little bit.  One of the issues detailed in the report is that the images do not have explicit width and height.  The carousel images have a height of 100vh so that they always fill the viewport and I did not want to change this.  The width is 100% but it was inherited from the Bootstrap class 'w-100' so I removed this and added 'width: 100%;' as an attribute in the base.css file.  There is no change in the page but hopefully this will improve the Performance score.  I added an aria-label to the search button in the Header to improve accessibility.  I also added a meta description to improve SEO.  Lastly, I added 'rel="noreferrer"' to the anchor elements in the footer which opens social media pages in a new window.
+This page scores well generally but I wanted to improve the Performance score a little bit.  One of the issues detailed in the report is that the images do not have explicit width and height.  The carousel images have a height of 100vh so that they always fill the viewport and I did not want to change this.  The width is 100% but it was inherited from the Bootstrap class 'w-100' so I removed this and added 'width: 100%;' as an attribute in the base.css file.  There is no change in the page but hopefully this will improve the Performance score.  I added an aria-label to the search button in the Header to improve accessibility.  I also added a meta description to improve SEO.  Lastly, I added 'rel="noreferrer"' to the anchor elements in the footer which opens social media pages in a new window.
 
 [Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-home-after.pdf)
 
@@ -869,11 +931,11 @@ The Performance score has decreased which is odd given that I have not made any 
 
 **Product Details**:
 
-[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-details-before.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-product-details-before.pdf)
 
 This page scores pretty well already.  I have added an aria label to the increment and decrement buttons and added a meta description.  I also added a hidden label for the quantity input field.  Finally, I added 'rel="noreferrer"' to the anchor element which opens product images in a new window.
 
-[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-products-details-after.pdf)
+[Lighthouse Report - Before](media/readme/lighthouse/lighthouse-report-product-details-after.pdf)
 
 Again, the Performance score has dropped but the score for the other 3 categories have improved.
 
@@ -927,7 +989,7 @@ The page scores well apart from SEO so I added a meta description.
 
 Performance decreases marginally but Best Practices and SEO now get perfect scores.
 
-Overall, the Performance scores decreased slightly.  I am not sure of the reason behind this.  There are a lot of images of products throughout many of the pages which could explain why this increases loading times leading to lower scores than the other 3 categories.  However, the Accessibility, Best Practices and SEO scores generally improved.
+On some pages, the Performance scores decreased slightly.  I am not sure of the reason behind this.  There are a lot of images of products throughout many of the pages which could explain why this increases loading times leading to lower scores than the other 3 categories.  However, the Accessibility, Best Practices and SEO scores generally improved.
 
 ### Bugs Encountered During Testing
 
@@ -941,19 +1003,21 @@ Whilst testing the User Stories, I encountered a bug caused by the OrderLineItem
 
 ![Admin panel showing incorrect order info caused by bug with the line-item total](media/readme/images/line-item-total-before.png)
 
-I was able to successfully able to purchase 40 sets of golf clubs because the lineitem_total was £9,999.60.
+I was able to successfully purchase 40 sets of golf clubs because the lineitem_total was £9,999.60.
 
 To fix this, I simply changed the maximum number of digits for the lineitem_total field from 6 to 10.  Since my project was deployed at this point, I first ran the migrations on the Django sqlite3 database and tested that I could now purchase 41 sets of golf clubs and the order was successfully created without an error.  I then temporarily amended the global settings in my GitPod environment to connect to the Postgres database and migrate the same change to it so the bug is resolved in my deployed site.
 
-This fixed the initial problem; users could now add more than £9,999 of one item to their basket and successfully purchase it.  However, all my fix so far has done is move the limit so that a lineitem cannot contain more than 10 digits (including 2 decimal places) meaning my website would still break if anyone tried to purchase more than £10,000,000.00.  Whilst the Products page limits users to adding a quantity beween 1-99 of any product to their basket, there is nothing stopping them from doing this repeatedly thus racking the costs up.  So whilst it is unlikely a user would exceed this lineitem total, it is not impossible.
+This fixed the initial problem; users could now add more than £9,999 of one item to their basket and successfully purchase it.  However, all my fix so far has done is move the limit so that a lineitem cannot contain more than 10 digits (including 2 decimal places) meaning my website would still break if anyone tried to make a purchase more than £99,999,999.99.  Whilst the Products page limits users to adding a quantity beween 1-99 of any product to their basket, there is nothing stopping them from doing this repeatedly thus racking the costs up.  So whilst it is unlikely a user would exceed this lineitem total, it is not impossible.
 
 So to fully squash this bug, I modified the views.py file in the basket app so that when an item is added to the basket or updated in the basket, I check whether the quantity exceeds 99.  If it does, then I set the quantity to 99 and inform the customer that there is a limit to the quantity.
 
-I also amended the info toast so that, like the success toast, it also shows a preview of the basket when on the product details page:
+I utilise the info toast so that, like the success toast, it also shows a preview of the basket when on the product details page:
 
 ![Attempt to add more than 99 of one item to the basket from both the Product Details and the Basket page](media/readme/gifs/line-item-total-after.gif)
 
-Even if users purchased 99 of every item (including each permutation based around size, side and gender), their order would still only total circa £490,000 which is well below the limit of the maximum digits for the lineitem_total field.
+At £249.99, the golf clubs are the most expensive item for sale on my website.  So even if a user purchased the maximum quantity (99), the maximum value a lineitem_total would be is £24,749.01 which is well below the 10 digit limit (£99,999,999.99).
+
+In the Orders model, the order_total and grand_total fields also have a limit of 10 digits so these cannot exceed £99,999,999.99.  Even if users purchased 99 of every item (including each permutation based around size, side and gender), their order would still only total circa £490,000 which is well below the limit of the limit for both the order_total and grand_total.
 
 #### Product Quantities
 
@@ -961,7 +1025,7 @@ As I was testing the quantity input field on the Product Detail page, I uncovere
 
 ![Gif showing the error caused when entering a blank value as the product quantity](media/readme/gifs/product-quantity-before.gif)
 
-In the views.py file within the basket app, in the add_to_basket function, I asign the value from the form to the variable and make it an integer.  I decided to add some backend validation to the posted quantity to handle scenarios where users enter no value and also scenarios where the frontend validation is bypassed and the value is outside of the range 1-99.
+In the views.py file within the basket app, in the add_to_basket function, I asign the value from the form to the variable qty and make it an integer.  I decided to add some backend validation to the posted quantity to handle scenarios where users enter no value and also scenarios where the frontend validation is bypassed and the value is outside of the range 1-99.
 
 I added a try except block around the assignment of the posted quantity so that if assigning the quantity to the variable 'qty' throws an error, the user is redirected back to the same page but with an error message explaining that the product was not added to their basket.  Assuming the quantity is asigned to the 'qty' variable as an integer, I then check if the quantity is less than 1 or greater than 99.  If so, I also redirect the user back to the same page with an error message advising them that the quantity must be between 1-99 and stating that the product has not been added to their basket:
 
@@ -973,7 +1037,7 @@ I realised that the same bug existed on the Basket page so implemented the first
 
 During testing, I discovered that the users default information (phone number and delivery address) were being saved regardless of whether the user had ticked the save delivery checkbox (#id-save-info) checkbox input or not.
 
-It took me a while to figure this out but managed to find a solution to the exact issue I was having on the full-stack-frameworks channel in the Code Institute Slack posted 12th November 2020 by a user called Philipp.  Since I followed the Boutique Ado mini-project, the same bug encountered by Philipp found its way into my MS4.
+It took me a while to figure this out but I managed to find a solution to the exact issue I was having on the full-stack-frameworks channel in the Code Institute Slack posted 12th November 2020 by a user called Philipp.  Since I followed the Boutique Ado mini-project, the same bug encountered by Philipp found its way into my MS4.
 
 This issue was 2 fold.  When a user submits the checkout form, there are two checks to see whether the user wants to save their default delivery information.  The first check is the checkout_success function within the checkout views.py file.  This was working correctly since the save_info value is retrieved directly from the POST data.  However, there is also a backup check performed with the handle_payment_intent_succeeded function in the webhook_handler.py file.  This uses data from the Stripe payment intent to determine if an order has successfully been created in the database and also checks whether the user wants to save their default information.  This is a backup in case the normal payment flow is interrupted.  The route cause of the bug was that the Stripe payment intent always stated that the user did want to save their default delivery information ("save_info": "true",) even when the checkbox was unticked when it was submitted.
 
@@ -1150,7 +1214,7 @@ For the product descriptions, I generally copied the text that I found on the we
 
 ### Media
 
-I wanted prominent images to be high resolution so sourced them from sites such as [Pexels](https://www.pexels.com/) and [Unsplash](https://unsplash.com/):
+I wanted prominent images on my Home page and I wanted them to be high resolution so sourced them from sites such as [Pexels](https://www.pexels.com/) and [Unsplash](https://unsplash.com/):
 
 *   [Home Page Cricketers](https://www.pexels.com/photo/man-people-stadium-game-3718433/)
 *   [Home Page Golfer](https://www.pexels.com/photo/man-walking-carrying-black-and-red-golf-bag-on-green-grass-field-1325681/)
